@@ -1484,3 +1484,17 @@ body.fully-decayed > *:not(.final-message) {
 /* ============================================
   THE END - TROTZDEM
   ============================================ */
+
+  .cover-in-chat {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: cover-glitch 10s steps(2) infinite;
+}
+
+@keyframes cover-glitch {
+    0%, 95% { transform: translateX(0); }
+    96% { transform: translateX(-2px); filter: hue-rotate(90deg); }
+    97% { transform: translateX(2px); filter: hue-rotate(-90deg); }
+    98% { transform: translateX(0); filter: hue-rotate(0deg); }
+}
