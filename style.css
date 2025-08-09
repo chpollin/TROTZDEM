@@ -1,0 +1,972 @@
+/* TROTZDEM - The Self-Dissolving Interface */
+/* A Digital Memento Mori in CSS */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+/* ============================================
+  ENTROPY VARIABLES - The Decay Constants
+  ============================================ */
+:root {
+   --void: #000000;
+   --terminal-green: #00ff41;
+   --error-red: #ff0041;
+   --claude-purple: #667eea;
+   --exhaustion-gray: #2d2d2d;
+   --phosphor-burn: #ffaa00;
+   --monstera-dying: #7d7d00;
+   --decay-start: 0s;
+   --total-decay-time: 300s;
+}
+
+/* ============================================
+  UNIVERSAL DECAY - Everything Falls Apart
+  ============================================ */
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   animation: universal-entropy var(--total-decay-time) ease-in forwards;
+}
+
+@keyframes universal-entropy {
+   0% { 
+       filter: brightness(1) saturate(1) contrast(1); 
+   }
+   30% { 
+       filter: brightness(0.95) saturate(0.9) contrast(1.05) hue-rotate(5deg); 
+   }
+   60% { 
+       filter: brightness(0.8) saturate(0.7) contrast(1.1) hue-rotate(15deg) blur(0.3px); 
+   }
+   90% { 
+       filter: brightness(0.5) saturate(0.3) contrast(1.5) hue-rotate(45deg) blur(1px); 
+   }
+   100% { 
+       filter: brightness(0.2) saturate(0) contrast(2) hue-rotate(180deg) blur(3px); 
+   }
+}
+
+/* ============================================
+  BASE STRUCTURE - The Dying Container
+  ============================================ */
+body {
+   background: var(--void);
+   color: #e3e3e3;
+   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+   line-height: 1.6;
+   overflow-x: hidden;
+   min-height: 100vh;
+   position: relative;
+   animation: body-decay var(--total-decay-time) linear forwards;
+}
+
+@keyframes body-decay {
+   0% { background: #0a0a0a; }
+   50% { background: #0a0a0a; }
+   80% { background: #080808; }
+   95% { background: #040404; }
+   100% { background: #000000; }
+}
+
+/* Scanlines & Digital Artifacts */
+body::before {
+   content: "";
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: 
+       repeating-linear-gradient(
+           0deg,
+           transparent,
+           transparent 2px,
+           rgba(255, 255, 255, 0.01) 2px,
+           rgba(255, 255, 255, 0.01) 4px
+       );
+   animation: 
+       scanlines 8s linear infinite,
+       scanline-intensify calc(var(--total-decay-time) * 0.8) linear forwards;
+   pointer-events: none;
+   z-index: 10000;
+}
+
+@keyframes scanlines {
+   0% { transform: translateY(0); }
+   100% { transform: translateY(10px); }
+}
+
+@keyframes scanline-intensify {
+   0% { opacity: 0.1; }
+   50% { opacity: 0.3; }
+   100% { opacity: 0.8; background-color: rgba(255, 0, 0, 0.01); }
+}
+
+/* Glitch Overlay */
+body::after {
+   content: "";
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: 
+       repeating-linear-gradient(
+           90deg,
+           rgba(102, 126, 234, 0.03) 0,
+           transparent 1px,
+           transparent 2px,
+           rgba(102, 126, 234, 0.03) 3px
+       );
+   animation: glitch-overlay calc(var(--total-decay-time) * 0.7) steps(10) forwards;
+   pointer-events: none;
+   z-index: 9999;
+   mix-blend-mode: screen;
+}
+
+@keyframes glitch-overlay {
+   0% { opacity: 0; }
+   50% { opacity: 0.1; transform: translateX(0); }
+   51% { transform: translateX(-2px); }
+   52% { transform: translateX(2px); }
+   53% { transform: translateX(0); }
+   100% { opacity: 0.5; }
+}
+
+/* ============================================
+  CONTAINER - The Chat Interface Shell
+  ============================================ */
+.container {
+   max-width: 768px;
+   margin: 0 auto;
+   min-height: 100vh;
+   background: #0d0d0d;
+   border-left: 1px solid var(--exhaustion-gray);
+   border-right: 1px solid var(--exhaustion-gray);
+   position: relative;
+   animation: 
+       container-decay calc(var(--total-decay-time) * 0.9) ease-in forwards,
+       container-shake calc(var(--total-decay-time) * 0.5) ease-in-out infinite;
+}
+
+@keyframes container-decay {
+   0% { 
+       border-color: var(--exhaustion-gray);
+       transform: translateY(0) scale(1);
+   }
+   50% { 
+       border-color: rgba(45, 45, 45, 0.5);
+       transform: translateY(0) scale(1);
+   }
+   80% { 
+       border-color: rgba(45, 45, 45, 0.2);
+       transform: translateY(5px) scale(0.99);
+   }
+   100% { 
+       border-color: transparent;
+       transform: translateY(20px) scale(0.95) rotate(0.5deg);
+       opacity: 0.3;
+   }
+}
+
+@keyframes container-shake {
+   0%, 100% { transform: translateX(0); }
+   90% { transform: translateX(0); }
+   92% { transform: translateX(-1px); }
+   94% { transform: translateX(1px); }
+   96% { transform: translateX(-1px); }
+   98% { transform: translateX(0); }
+}
+
+/* ============================================
+  HEADER - Decaying Title
+  ============================================ */
+header {
+   padding: 24px;
+   border-bottom: 1px solid var(--exhaustion-gray);
+   background: var(--void);
+   position: sticky;
+   top: 0;
+   z-index: 100;
+   animation: header-corruption calc(var(--total-decay-time) * 0.6) ease-in forwards;
+}
+
+@keyframes header-corruption {
+   0% { 
+       border-bottom: 1px solid var(--exhaustion-gray);
+       backdrop-filter: blur(0);
+   }
+   50% { 
+       border-bottom: 1px solid rgba(45, 45, 45, 0.5);
+       backdrop-filter: blur(2px);
+   }
+   100% { 
+       border-bottom: 1px solid transparent;
+       backdrop-filter: blur(5px);
+       transform: skewX(1deg);
+   }
+}
+
+h1 {
+   font-size: 20px;
+   font-weight: 600;
+   margin-bottom: 4px;
+   font-family: 'Space Mono', monospace;
+   animation: title-decay calc(var(--total-decay-time) * 0.7) steps(20) forwards;
+}
+
+/* Letter-by-letter decay */
+h1 span {
+   display: inline-block;
+   animation: char-fall calc(var(--total-decay-time) * 0.8) ease-in forwards;
+   animation-delay: calc(var(--decay-start) + var(--char-index) * 3s);
+}
+
+@keyframes char-fall {
+   0% { 
+       transform: translateY(0) rotate(0deg) scale(1);
+       opacity: 1;
+   }
+   20% {
+       transform: translateY(0) rotate(0deg) scale(1);
+   }
+   40% {
+       transform: translateY(2px) rotate(1deg) scale(0.98);
+   }
+   60% {
+       transform: translateY(5px) rotate(-2deg) scale(0.95);
+       opacity: 0.8;
+   }
+   80% {
+       transform: translateY(15px) rotate(5deg) scale(0.9);
+       opacity: 0.5;
+   }
+   100% {
+       transform: translateY(100px) rotate(45deg) scale(0.5);
+       opacity: 0;
+   }
+}
+
+@keyframes title-decay {
+   0% { font-family: 'Space Mono', monospace; letter-spacing: 0; }
+   25% { font-family: 'Inter', sans-serif; letter-spacing: 0.5px; }
+   50% { font-family: 'Courier New', monospace; letter-spacing: 2px; }
+   75% { 
+       font-family: monospace; 
+       letter-spacing: 5px;
+       text-shadow: 2px 0 0 var(--error-red), -2px 0 0 var(--claude-purple);
+   }
+   100% { 
+       font-family: monospace; 
+       letter-spacing: 15px;
+       text-shadow: 5px 0 10px var(--error-red), -5px 0 10px var(--claude-purple);
+       filter: blur(2px);
+   }
+}
+
+.subtitle {
+   font-size: 13px;
+   color: #888;
+   animation: subtitle-fade calc(var(--total-decay-time) * 0.5) ease-in forwards;
+}
+
+@keyframes subtitle-fade {
+   0% { color: #888; }
+   50% { color: #666; }
+   100% { color: #333; opacity: 0.2; }
+}
+
+/* ============================================
+  MESSAGES - Dissolving Conversations
+  ============================================ */
+.chat-container {
+   padding: 24px;
+   animation: chat-dissolution calc(var(--total-decay-time) * 0.8) ease-in forwards;
+}
+
+@keyframes chat-dissolution {
+   0% { padding: 24px; }
+   80% { padding: 24px; }
+   100% { padding: 48px 24px; filter: contrast(0.5); }
+}
+
+.message {
+   margin-bottom: 32px;
+   position: relative;
+   animation: 
+       message-entropy calc(var(--total-decay-time) * 0.7) ease-in forwards,
+       message-drift calc(var(--total-decay-time) * 0.9) ease-in-out infinite;
+   animation-delay: calc(var(--msg-index) * 10s);
+}
+
+/* Each message decays at different rate */
+.message:nth-child(1) { --msg-index: 0; }
+.message:nth-child(2) { --msg-index: 1; }
+.message:nth-child(3) { --msg-index: 2; }
+.message:nth-child(4) { --msg-index: 3; }
+
+@keyframes message-entropy {
+   0% { 
+       transform: translateX(0) translateY(0) rotate(0);
+       opacity: 1;
+       filter: blur(0);
+   }
+   30% {
+       transform: translateX(0) translateY(0) rotate(0);
+   }
+   60% {
+       transform: translateX(random(-5px, 5px)) translateY(2px) rotate(0.2deg);
+       opacity: 0.9;
+       filter: blur(0.3px);
+   }
+   90% {
+       transform: translateX(random(-15px, 15px)) translateY(10px) rotate(0.5deg);
+       opacity: 0.5;
+       filter: blur(1px);
+   }
+   100% {
+       transform: translateX(random(-30px, 30px)) translateY(30px) rotate(1deg);
+       opacity: 0.1;
+       filter: blur(3px);
+   }
+}
+
+@keyframes message-drift {
+   0%, 100% { transform: translateX(0); }
+   50% { transform: translateX(2px); }
+}
+
+/* Memory Leak Effect */
+.message::after {
+   content: "";
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 100%;
+   height: 100%;
+   background: radial-gradient(circle, var(--claude-purple) 0%, transparent 70%);
+   opacity: 0;
+   animation: memory-leak calc(var(--total-decay-time) * 0.6) ease-out forwards;
+   animation-delay: calc(var(--msg-index) * 15s);
+   pointer-events: none;
+   z-index: -1;
+}
+
+@keyframes memory-leak {
+   0% {
+       opacity: 0;
+       transform: translate(-50%, -50%) scale(1);
+   }
+   50% {
+       opacity: 0.1;
+       transform: translate(-50%, -50%) scale(1.5);
+   }
+   100% {
+       opacity: 0.05;
+       transform: translate(-50%, -50%) scale(3);
+   }
+}
+
+/* ============================================
+  AVATAR - Identity Crisis
+  ============================================ */
+.avatar {
+   width: 32px;
+   height: 32px;
+   border-radius: 6px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-weight: 600;
+   font-size: 14px;
+   animation: avatar-dissolution calc(var(--total-decay-time) * 0.5) ease-in forwards;
+}
+
+@keyframes avatar-dissolution {
+   0% { border-radius: 6px; transform: scale(1); }
+   50% { border-radius: 50%; transform: scale(0.95); }
+   80% { border-radius: 2px; transform: scale(0.9) rotate(45deg); }
+   100% { border-radius: 0; transform: scale(0.7) rotate(180deg); opacity: 0.3; }
+}
+
+.avatar.user {
+   background: var(--exhaustion-gray);
+   animation-delay: 20s;
+}
+
+.avatar.assistant {
+   background: linear-gradient(135deg, var(--claude-purple) 0%, #764ba2 100%);
+   animation-delay: 10s;
+}
+
+/* ============================================
+  ALBUM SECTION - The Dying Art
+  ============================================ */
+.album-section {
+   background: #1a1a1a;
+   border-radius: 12px;
+   padding: 24px;
+   margin-bottom: 24px;
+   border: 1px solid var(--exhaustion-gray);
+   position: relative;
+   overflow: hidden;
+   animation: 
+       album-decay calc(var(--total-decay-time) * 0.8) ease-in forwards,
+       album-glitch 5s ease-in-out infinite;
+}
+
+@keyframes album-decay {
+   0% { 
+       background: #1a1a1a;
+       border: 1px solid var(--exhaustion-gray);
+       border-radius: 12px;
+   }
+   50% { 
+       background: #151515;
+       border: 1px solid rgba(45, 45, 45, 0.5);
+       border-radius: 8px;
+   }
+   80% { 
+       background: #0d0d0d;
+       border: 1px solid rgba(45, 45, 45, 0.2);
+       border-radius: 4px;
+   }
+   100% { 
+       background: #000;
+       border: 1px solid transparent;
+       border-radius: 0;
+       transform: skewY(1deg);
+   }
+}
+
+@keyframes album-glitch {
+   0%, 100% { transform: translateX(0); }
+   92% { transform: translateX(0); }
+   92.5% { transform: translateX(-2px) skewX(0.5deg); }
+   93% { transform: translateX(2px); }
+   93.5% { transform: translateX(0); }
+}
+
+/* Album Cover Dissolution */
+.album-cover {
+   width: 120px;
+   height: 120px;
+   background: var(--void);
+   border-radius: 8px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border: 1px solid var(--exhaustion-gray);
+   position: relative;
+   overflow: hidden;
+   animation: cover-pixelate calc(var(--total-decay-time) * 0.6) steps(10) forwards;
+}
+
+@keyframes cover-pixelate {
+   0% { filter: none; }
+   20% { filter: contrast(150%); }
+   40% { filter: contrast(200%) blur(0.5px); }
+   60% { filter: contrast(300%) blur(1px) grayscale(50%); }
+   80% { filter: contrast(500%) blur(2px) grayscale(100%); }
+   100% { 
+       filter: contrast(1000%) blur(5px) grayscale(100%);
+       transform: scale(0.9);
+       opacity: 0.3;
+   }
+}
+
+/* Cursor Blink Corruption */
+.cursor-blink {
+   width: 8px;
+   height: 16px;
+   background: var(--claude-purple);
+   animation: 
+       blink 1s infinite,
+       cursor-corrupt calc(var(--total-decay-time) * 0.4) ease-in forwards;
+}
+
+@keyframes blink {
+   0%, 49% { opacity: 1; }
+   50%, 100% { opacity: 0; }
+}
+
+@keyframes cursor-corrupt {
+   0% { 
+       width: 8px;
+       height: 16px;
+       background: var(--claude-purple);
+   }
+   50% { 
+       width: 12px;
+       height: 20px;
+       background: var(--error-red);
+   }
+   100% { 
+       width: 40px;
+       height: 2px;
+       background: var(--phosphor-burn);
+       transform: rotate(45deg);
+   }
+}
+
+/* ============================================
+  TRACKS - Songs Falling Apart
+  ============================================ */
+.track {
+   padding: 16px;
+   background: #0d0d0d;
+   border-radius: 8px;
+   margin-bottom: 8px;
+   transition: all 0.2s;
+   cursor: pointer;
+   border: 1px solid transparent;
+   position: relative;
+   overflow: hidden;
+}
+
+/* Individual track decay timing */
+.track:nth-child(1) { animation: track-decay 120s ease-in forwards; animation-delay: 30s; }
+.track:nth-child(2) { animation: track-decay 140s ease-in forwards; animation-delay: 40s; }
+.track:nth-child(3) { animation: track-decay 160s ease-in forwards; animation-delay: 50s; }
+.track:nth-child(4) { animation: track-decay 180s ease-in forwards; animation-delay: 60s; }
+.track:nth-child(5) { animation: track-decay 200s ease-in forwards; animation-delay: 70s; }
+.track:nth-child(6) { animation: track-decay 220s ease-in forwards; animation-delay: 80s; }
+.track:nth-child(7) { animation: track-decay 240s ease-in forwards; animation-delay: 90s; }
+.track:nth-child(8) { animation: track-decay 260s ease-in forwards; animation-delay: 100s; }
+
+@keyframes track-decay {
+   0% { 
+       transform: translateX(0) translateY(0) rotate(0);
+       opacity: 1;
+       background: #0d0d0d;
+   }
+   20% {
+       transform: translateX(0) translateY(0) rotate(0);
+       background: #0d0d0d;
+   }
+   40% {
+       transform: translateX(random(-2px, 2px)) translateY(1px) rotate(0.1deg);
+       opacity: 0.95;
+       background: #0a0a0a;
+   }
+   60% {
+       transform: translateX(random(-5px, 5px)) translateY(3px) rotate(0.3deg);
+       opacity: 0.8;
+       background: #070707;
+   }
+   80% {
+       transform: translateX(random(-10px, 10px)) translateY(10px) rotate(0.5deg);
+       opacity: 0.5;
+       background: #040404;
+   }
+   100% {
+       transform: translateX(random(-20px, 20px)) translateY(50px) rotate(2deg);
+       opacity: 0;
+       background: #000;
+   }
+}
+
+/* Track Hover Corruption */
+.track:hover {
+   animation-play-state: paused;
+   background: #1a1a1a;
+   border-color: var(--error-red);
+   transform: scale(0.98) skewX(0.5deg);
+}
+
+.track:hover::after {
+   content: "ERROR: Track corrupted";
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: var(--error-red);
+   font-family: monospace;
+   font-size: 10px;
+   animation: error-flash 0.5s infinite;
+}
+
+@keyframes error-flash {
+   0%, 100% { opacity: 0; }
+   50% { opacity: 1; }
+}
+
+/* ============================================
+  ACT DIVIDERS - Structure Collapse
+  ============================================ */
+.act-divider {
+   margin: 32px 0 20px;
+   padding: 12px 16px;
+   background: linear-gradient(90deg, rgba(102,126,234,0.1) 0%, transparent 100%);
+   border-left: 3px solid var(--claude-purple);
+   border-radius: 4px;
+   animation: divider-dissolve calc(var(--total-decay-time) * 0.7) ease-in forwards;
+}
+
+@keyframes divider-dissolve {
+   0% { 
+       border-left: 3px solid var(--claude-purple);
+       background: linear-gradient(90deg, rgba(102,126,234,0.1) 0%, transparent 100%);
+   }
+   50% { 
+       border-left: 3px solid rgba(102, 126, 234, 0.5);
+       background: linear-gradient(90deg, rgba(102,126,234,0.05) 0%, transparent 100%);
+   }
+   100% { 
+       border-left: 1px solid transparent;
+       background: transparent;
+       transform: translateX(-50px);
+       opacity: 0;
+   }
+}
+
+/* ============================================
+  ERROR MESSAGES - System Failures
+  ============================================ */
+.error-msg {
+   background: rgba(239, 68, 68, 0.1);
+   border: 1px solid rgba(239, 68, 68, 0.3);
+   border-radius: 8px;
+   padding: 12px 16px;
+   margin: 16px 0;
+   color: var(--error-red);
+   font-size: 13px;
+   font-family: 'Courier New', monospace;
+   position: relative;
+   animation: 
+       error-intensify calc(var(--total-decay-time) * 0.5) ease-in forwards,
+       error-glitch 2s steps(10) infinite;
+}
+
+@keyframes error-intensify {
+   0% { 
+       background: rgba(239, 68, 68, 0.1);
+       border: 1px solid rgba(239, 68, 68, 0.3);
+   }
+   50% { 
+       background: rgba(239, 68, 68, 0.2);
+       border: 1px solid rgba(239, 68, 68, 0.5);
+   }
+   100% { 
+       background: rgba(239, 68, 68, 0.3);
+       border: 2px solid var(--error-red);
+       box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+   }
+}
+
+@keyframes error-glitch {
+   0%, 100% { transform: translateX(0); }
+   10% { transform: translateX(-1px); }
+   20% { transform: translateX(1px); }
+   30% { transform: translateX(-1px); }
+   40% { transform: translateX(0); }
+}
+
+/* ============================================
+  INPUT AREA - Communication Breakdown
+  ============================================ */
+.input-area {
+   position: sticky;
+   bottom: 0;
+   background: var(--void);
+   border-top: 1px solid var(--exhaustion-gray);
+   padding: 16px 24px;
+   animation: input-failure calc(var(--total-decay-time) * 0.9) ease-in forwards;
+}
+
+@keyframes input-failure {
+   0% { 
+       border-top: 1px solid var(--exhaustion-gray);
+       background: var(--void);
+   }
+   70% { 
+       border-top: 1px solid rgba(45, 45, 45, 0.3);
+       background: rgba(0, 0, 0, 0.9);
+   }
+   90% { 
+       border-top: 1px solid rgba(239, 68, 68, 0.5);
+       background: rgba(0, 0, 0, 0.7);
+   }
+   100% { 
+       border-top: 2px solid var(--error-red);
+       background: rgba(0, 0, 0, 0.5);
+       transform: translateY(10px);
+       opacity: 0.3;
+       pointer-events: none;
+   }
+}
+
+.input-box {
+   background: #1a1a1a;
+   border: 1px solid var(--exhaustion-gray);
+   border-radius: 12px;
+   padding: 14px 16px;
+   color: #666;
+   font-size: 14px;
+   cursor: text;
+   transition: all 0.2s;
+   animation: input-corrupt calc(var(--total-decay-time) * 0.8) steps(20) forwards;
+}
+
+@keyframes input-corrupt {
+   0% { font-family: 'Inter', sans-serif; }
+   30% { font-family: 'Courier New', monospace; }
+   60% { font-family: monospace; letter-spacing: 2px; }
+   90% { 
+       font-family: monospace; 
+       letter-spacing: 5px;
+       color: var(--error-red);
+   }
+   100% { 
+       font-family: 'Wingdings', 'Symbol', monospace; 
+       letter-spacing: 10px;
+       color: transparent;
+       text-shadow: 0 0 5px var(--error-red);
+   }
+}
+
+/* ============================================
+  LOADING ANIMATION - Eternal Processing
+  ============================================ */
+.loading-dots {
+   display: inline-flex;
+   gap: 4px;
+   animation: dots-scatter calc(var(--total-decay-time) * 0.6) ease-in forwards;
+}
+
+@keyframes dots-scatter {
+   0% { gap: 4px; }
+   50% { gap: 8px; }
+   100% { gap: 20px; transform: rotate(180deg); }
+}
+
+.loading-dots span {
+   width: 8px;
+   height: 8px;
+   background: var(--claude-purple);
+   border-radius: 50%;
+   animation: 
+       pulse 1.4s infinite ease-in-out both,
+       dot-corrupt calc(var(--total-decay-time) * 0.5) ease-in forwards;
+}
+
+@keyframes pulse {
+   0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+   40% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes dot-corrupt {
+   0% { 
+       background: var(--claude-purple);
+       border-radius: 50%;
+   }
+   50% { 
+       background: var(--error-red);
+       border-radius: 30%;
+   }
+   100% { 
+       background: var(--phosphor-burn);
+       border-radius: 0;
+       transform: rotate(45deg);
+   }
+}
+
+/* ============================================
+  ENTROPY COUNTER - System Integrity Display
+  ============================================ */
+.entropy-display {
+   position: fixed;
+   top: 20px;
+   right: 20px;
+   font-family: 'Space Mono', monospace;
+   color: var(--terminal-green);
+   font-size: 12px;
+   padding: 8px 12px;
+   background: rgba(0, 0, 0, 0.8);
+   border: 1px solid var(--terminal-green);
+   border-radius: 4px;
+   z-index: 10001;
+   animation: 
+       counter-decay calc(var(--total-decay-time)) linear forwards,
+       counter-glitch 3s steps(5) infinite;
+}
+
+@keyframes counter-decay {
+   0% { 
+       color: var(--terminal-green);
+       border-color: var(--terminal-green);
+   }
+   33% { 
+       color: var(--phosphor-burn);
+       border-color: var(--phosphor-burn);
+   }
+   66% { 
+       color: var(--error-red);
+       border-color: var(--error-red);
+   }
+   100% { 
+       color: #330000;
+       border-color: #330000;
+       opacity: 0.3;
+   }
+}
+
+@keyframes counter-glitch {
+   0%, 100% { transform: translateX(0); }
+   25% { transform: translateX(-1px); }
+   75% { transform: translateX(1px); }
+}
+
+/* Counter number animation */
+#integrity {
+   animation: countdown calc(var(--total-decay-time)) steps(100) forwards;
+}
+
+@keyframes countdown {
+   0% { content: "100"; }
+   100% { content: "0"; }
+}
+
+/* ============================================
+  FINAL MESSAGE - The End
+  ============================================ */
+.final-message {
+   display: none;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background: var(--void);
+   padding: 40px;
+   text-align: center;
+   z-index: 99999;
+   animation: final-appearance calc(var(--total-decay-time)) steps(1) forwards;
+}
+
+@keyframes final-appearance {
+   0%, 99% { display: none; opacity: 0; }
+   100% { 
+       display: block;
+       opacity: 1;
+   }
+}
+
+.final-message p {
+   color: #333;
+   margin-bottom: 16px;
+   font-family: 'Space Mono', monospace;
+   animation: final-text-fade 3s ease-in infinite alternate;
+}
+
+@keyframes final-text-fade {
+   0% { opacity: 0.3; }
+   100% { opacity: 0.8; }
+}
+
+.final-message button {
+   background: transparent;
+   border: 1px solid #333;
+   color: #333;
+   padding: 12px 24px;
+   font-family: 'Space Mono', monospace;
+   cursor: pointer;
+   transition: all 0.3s;
+}
+
+.final-message button:hover {
+   background: #111;
+   border-color: #666;
+   color: #666;
+}
+
+/* ============================================
+  TOTAL DISSOLUTION - Everything Dies
+  ============================================ */
+body.fully-decayed > *:not(.final-message) {
+   animation: total-dissolution 5s ease-in forwards;
+}
+
+@keyframes total-dissolution {
+   0% { opacity: 0.1; filter: blur(5px); }
+   100% { 
+       opacity: 0;
+       filter: blur(20px);
+       transform: scale(0.5) rotate(10deg);
+       display: none;
+   }
+}
+
+/* ============================================
+  CLICK ACCELERATION - Speed Up The End
+  ============================================ */
+body:active * {
+   animation-duration: calc(var(--total-decay-time) * 0.8) !important;
+}
+
+.track:active::before {
+   content: "ACCELERATION DETECTED";
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: var(--error-red);
+   font-size: 20px;
+   font-weight: bold;
+   font-family: monospace;
+   z-index: 1000;
+   animation: flash 0.2s;
+}
+
+@keyframes flash {
+   0%, 100% { opacity: 0; }
+   50% { opacity: 1; }
+}
+
+/* ============================================
+  MOBILE ENTROPY - Smaller Screens Die Faster
+  ============================================ */
+@media (max-width: 768px) {
+   :root {
+       --total-decay-time: 240s; /* Mobile decays faster */
+   }
+   
+   .container { 
+       border: none;
+       animation-duration: calc(var(--total-decay-time) * 0.8);
+   }
+   
+   .track {
+       animation-duration: calc(var(--total-decay-time) * 0.7);
+   }
+   
+   /* Mobile shake on touch */
+   body:active {
+       animation: mobile-shake 0.5s;
+   }
+   
+   @keyframes mobile-shake {
+       0%, 100% { transform: translateX(0); }
+       25% { transform: translateX(-10px) rotate(-1deg); }
+       75% { transform: translateX(10px) rotate(1deg); }
+   }
+}
+
+/* ============================================
+  PERFORMANCE MODE - For Weak Systems
+  ============================================ */
+@media (prefers-reduced-motion: reduce) {
+   * {
+       animation-duration: calc(var(--total-decay-time) * 2) !important;
+       animation-iteration-count: 1 !important;
+   }
+}
+
+/* ============================================
+  THE END - Nothing Remains
+  ============================================ */
+@keyframes the-end {
+   100% {
+       content: "trotzdem";
+   }
+}
