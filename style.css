@@ -58,11 +58,6 @@
 /* ============================================
   BODY - The Dying Canvas
   ============================================ */
-html {
-   font-size: 16px;
-   overflow-x: hidden;
-   height: 100%;
-}
 
 body {
    background: #0a0a0a;
@@ -71,7 +66,6 @@ body {
    line-height: 1.6;
    min-height: 100vh;
    position: relative;
-   overflow-x: hidden;
    animation: body-decay var(--total-decay-time) cubic-bezier(0.4, 0.0, 0.6, 1) forwards;
 }
 
