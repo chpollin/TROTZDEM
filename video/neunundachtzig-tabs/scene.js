@@ -38,8 +38,11 @@ const TITLES = [null,
   "Neuer Tab", "Neuer Tab", "Neuer Tab", "Neuer Tab", "Neuer Tab", "Neuer Tab", "Neuer Tab", "Neuer Tab", "Neuer Tab",
 ];
 const N_TABS = 89;
-// Tab 1 is an empty tab until the voice names it.
-const titleOf = (k, t) => k === 1 && t < TL.verse[0].t ? "Neuer Tab" : TITLES[k];
+// A sung tab is an empty tab until the voice names it.
+const titleOf = (k, t) => {
+  const line = TL.verse.find(v => v.n === k);
+  return line && t < line.t ? "Neuer Tab" : TITLES[k];
+};
 
 function mulberry32(a) {
   return () => {
@@ -85,7 +88,8 @@ for (let k = 1; k <= N_TABS; k++) {
 // How many tabs are open at time t. Keyframes pin the sung numbers: when the
 // voice says "Tab siebzehn", tab 17 has just opened. During "Tab achtzig" nothing opens.
 const COUNT_KEYS = () => [
-  [0, 1], [TL.bandIn, 1], [TL.verse[0].t, 16], [TL.verse[2].t, 17], [TL.verse[3].t, 30],
+  // some tabs are kept back for the silence after "müde", so that gap is not static
+  [0, 1], [TL.bandIn, 1], [TL.verse[0].t, 9], [TL.verse[1].b, 9], [TL.verse[2].t, 17], [TL.verse[3].t, 30],
   [TL.verse[4].t, 50], [TL.verse[5].t, 80], [TL.chorus[0].t, 80], [TL.chorus[2].t, 89],
 ];
 const OPEN = (() => {
@@ -116,8 +120,12 @@ function lineAt(lines, t) {
   for (const l of lines) if (t >= l.t) cur = l;
   return cur;
 }
-function typed(text, t0, t1, t) { return text.slice(0, Math.round(text.length * span(t, t0, t1))); }
-const typeEnd = (lines, i) => lines[i].t + Math.min(1.5, 0.65 * ((lines[i + 1] ? lines[i + 1].t : lines[i].t + 3) - lines[i].t));
+function typed(text, t0, t1, t) {
+  if (t1 <= t0) return t >= t0 ? text : "";
+  return text.slice(0, Math.round(text.length * span(t, t0, t1)));
+}
+// a line is typed while its words are sung
+const typedLine = (text, line, t) => typed(text, line.a, line.b, t);
 
 const isStill = t => t >= TL.verse[5].t && t < TL.chorus[0].t;
 
@@ -252,7 +260,9 @@ function drawMosaic(ctx, t, o) {
       ctx.font = '400 12px "Space Mono"';
       ctx.fillStyle = mix(C.textHi, C.dim, o.titleDim || 0);
       ctx.shadowColor = "#000"; ctx.shadowBlur = 6;
+      ctx.save(); ctx.beginPath(); ctx.rect(cx, cy, cw, chh); ctx.clip();
       wrapWords(ctx, TITLES[k], cw - 14).slice(0, 3).forEach((r, i) => ctx.fillText(r, cx + 7, cy + 18 + i * 15));
+      ctx.restore();
       ctx.shadowBlur = 0;
     }
   }
@@ -368,9 +378,12 @@ function sceneWindow(ctx, t) {
   let query = "", active = newest;
   if (vs) {
     active = vs.line.n;
-    query = still ? vs.line.q : typed(vs.line.q, vs.line.t, typeEnd(TL.verse, vs.i), t);
+    query = typedLine(vs.line.q, vs.line, t);
   }
-  if (cl) query = cl.q;
+  if (cl) query = typedLine(cl.q, cl, t);
+  // between sung lines the newest tab announces itself again
+  const next = vs ? (TL.verse[vs.i + 1] || TL.chorus[0]).t : 0;
+  const resting = vs && !still && t > vs.line.b + 0.6 && next - t > 0.8;
 
   // last second of the chorus: fall into one corridor, which becomes the Droste
   const dive = inCubic(span(t, TL.chorus[3].t - 1.0, TL.chorus[3].t));
@@ -384,18 +397,18 @@ function sceneWindow(ctx, t) {
   placeWindow(ctx);
   drawBrowser(ctx, {
     t, active, query, accent: !still, muted: still,
-    caret: !still && !chorus && (vs ? t < typeEnd(TL.verse, vs.i) || blink : blink),
+    caret: !still && (chorus ? cl && t < cl.b : vs ? t < vs.line.b || blink : blink),
     content: c => {
       if (still) {
         // Stillest moment of the piece: no colour, no motion, no number, no
         // results; the worst sentence in the cleanest type of the whole video.
-        lyric(c, vs.line.q, 64, 800, 104, 0);
+        if (t >= vs.line.a) lyric(c, vs.line.q, 64, 800, 104, 0);
         return;
       }
       const loud = audioAt(AUDIO_RMS, t);
       if (!chorus) {
         drawMosaic(c, t, { alpha: 0.3 + 0.08 * loud });
-        if (!vs) {
+        if (!vs || resting) {
           // instrumental: each new tab announces itself, one title card per opening
           const k = newest, a = smooth(span(t, OPEN[k], OPEN[k] + 0.1));
           c.globalAlpha = a; c.font = '400 56px "Space Mono"'; c.fillStyle = C.text;
@@ -411,18 +424,21 @@ function sceneWindow(ctx, t) {
           corridorsFrom: TL.chorus[2].t,
         });
       }
-      if (vs) {
+      if (vs && !resting) {
         const grade = vs.i < 2 ? 0 : vs.i < 4 ? 1 : 2;
         c.font = '700 150px "Space Mono"'; c.fillStyle = C.dim; c.fillText(String(vs.line.n), 64, 640);
-        lyric(c, typed(vs.line.q, vs.line.t, typeEnd(TL.verse, vs.i), t), 64, 800, 104, grade);
-      }
-      if (cl) {
-        const i = TL.chorus.indexOf(cl), g = i < 2 ? 3 : 4;
-        lyric(c, typed(cl.q, cl.t, typeEnd(TL.chorus, i), t), 40, 846, fitSize(c, cl.q, g, 92, WIN.w - 80), g);
+        lyric(c, typedLine(vs.line.q, vs.line, t), 64, 800, 104, grade);
       }
     },
   });
   ctx.restore();
+  // the chorus line stays in screen space and fades while the camera dives
+  if (cl) {
+    const i = TL.chorus.indexOf(cl), g = i < 2 ? 3 : 4;
+    ctx.save(); ctx.globalAlpha = 1 - dive;
+    lyric(ctx, typedLine(cl.q, cl, t), WIN.x + 40, WIN.y + 846, fitSize(ctx, cl.q, g, 92, WIN.w - 80), g);
+    ctx.restore();
+  }
 }
 
 // "Keiner führt hier raus, nur tiefer rein": the window contains itself (Droste),
@@ -443,9 +459,9 @@ function sceneDroste(ctx, t) {
   ctx.translate(WIN.x + DROSTE.fx + shake, WIN.y + DROSTE.fy);
   ctx.scale(z, z);
   ctx.translate(-DROSTE.fx, -DROSTE.fy);
-  // start one level outside the frame, so the void never shows at the edges
-  ctx.scale(1 / DROSTE.k, 1 / DROSTE.k); ctx.translate(-DROSTE.ix, -DROSTE.iy);
-  for (let level = -1; level < 7; level++) {
+  // start two levels outside the frame, so the void never shows at the edges
+  for (let out = 0; out < 2; out++) { ctx.scale(1 / DROSTE.k, 1 / DROSTE.k); ctx.translate(-DROSTE.ix, -DROSTE.iy); }
+  for (let level = -2; level < 7; level++) {
     const a = ((base + level) % N_TABS + N_TABS) % N_TABS;
     drawBrowser(ctx, {
       t, active: N_TABS, accent: true,
@@ -459,7 +475,7 @@ function sceneDroste(ctx, t) {
   ctx.save();
   ctx.globalAlpha = 1 - span(t, t1 - 0.56, t1);
   ctx.shadowColor = "#000"; ctx.shadowBlur = 50;
-  lyric(ctx, typed(TL.chorus[3].q, t0, typeEnd(TL.chorus, 3), t), 184, 900, fitSize(ctx, TL.chorus[3].q, 5, 96, W - 368), 5);
+  lyric(ctx, typedLine(TL.chorus[3].q, TL.chorus[3], t), 184, 900, fitSize(ctx, TL.chorus[3].q, 5, 96, W - 368), 5);
   ctx.restore();
 }
 
@@ -483,6 +499,15 @@ const FALL = (() => {
   return out;
 })();
 const HEAP_Y = 200;
+// The lower storeys drip off in the quiet part; the rest fall in one beat on the loud return.
+const dropStart = k => k > 34 ? TL.quiet + 0.8 + (N_TABS - k) * 0.11 + FALL[k].delay * 0.6 : TL.loudReturn + k * 0.01;
+const dropDur = k => k > 34 ? 1.4 : 0.5;
+// a stacked pile, not a menu: every storey sits slightly off
+const JITTER = (() => {
+  const r = mulberry32(99), out = [null];
+  for (let k = 1; k <= N_TABS + 3; k++) out.push({ dx: (r() - 0.5) * 16, rot: (r() - 0.5) * 0.021 });
+  return out;
+})();
 const SELF_Y = 40;  // where the shrunken window stays, just under the base
 const FULL = { top: EXTRA[2].top - 40, bottom: HEAP_Y + 80 };
 
@@ -517,9 +542,10 @@ function storey(ctx, w, h, fill, num, label, s) {
   if (num === "90") ctx.fillText("×", w / 2 - 26, h - 10);
 }
 
-function drawTowerWorld(ctx, t, cam, withWindow, standing = 1) {
+function drawTowerWorld(ctx, t, cam, withWindow) {
+  const axis = cam.x === undefined ? ST.x : cam.x;
   const toScreen = () => {
-    ctx.translate(ST.x, H / 2); ctx.scale(cam.s, cam.s); ctx.translate(0, -cam.cy);
+    ctx.translate(axis, H / 2); ctx.scale(cam.s, cam.s); ctx.translate(0, -cam.cy);
   };
   ctx.save(); toScreen();
 
@@ -529,7 +555,7 @@ function drawTowerWorld(ctx, t, cam, withWindow, standing = 1) {
     if (e < 1) {
       ctx.restore(); ctx.save();
       // screen-space interpolation from the frontal window into world space
-      const wx = ST.x, wy = H / 2 + (SELF_Y - cam.cy) * cam.s, ws = 0.15 * cam.s;
+      const wx = axis, wy = H / 2 + (SELF_Y - cam.cy) * cam.s, ws = 0.15 * cam.s;
       placeWindow(ctx, lerp(1, ws, e), lerp(WIN.x + WIN.w / 2, wx, e), lerp(WIN.y + WIN.h / 2, wy, e));
       drawBrowser(ctx, { t, active: N_TABS, accent: true, content: c => drawMosaic(c, t, { alpha: 0.5, grey: 0.85 }) });
       ctx.restore(); ctx.save(); toScreen();
@@ -541,14 +567,15 @@ function drawTowerWorld(ctx, t, cam, withWindow, standing = 1) {
   }
 
   // drips from the lowest storey that stays, behind everything that still hangs
-  const drip = span(t, TL.quiet, TL.quiet + 7);
-  ctx.globalAlpha = standing;
+  const drip = span(t, TL.quiet, TL.quiet + 7) * (1 - span(t, TL.loudReturn, TL.loudReturn + 0.3));
   if (drip > 0) {
+    let low = 34;
+    for (let k = N_TABS; k > 34; k--) if (t < dropStart(k)) { low = k; break; }
     const r = mulberry32(7);
     for (let d = 0; d < 11; d++) {
       const dx = (r() - 0.5) * ST.w * 0.85, len = drip * (300 + r() * 1100);
       ctx.fillStyle = mix(C.yellow, "#000000", 0.1 + r() * 0.4);
-      ctx.fillRect(dx, storeyTop(34) + ST.h, 6 + r() * 10, len);
+      ctx.fillRect(dx, storeyTop(low) + ST.h, 6 + r() * 10, len);
     }
   }
 
@@ -557,26 +584,27 @@ function drawTowerWorld(ctx, t, cam, withWindow, standing = 1) {
     const fly = outCubic(span(t, b - 0.5, b));
     if (fly <= 0) continue;
     // each storey drops onto the one below it
-    let x = 0, y = lerp(storeyTop(k) - 260, storeyTop(k), fly), rot = 0;
-    const sc = 1;
-    const f = FALL[k], dropStart = TL.quiet + 0.8 + (N_TABS - k) * 0.11 + f.delay * 0.6;
-    const falling = k > 34 ? span(t, dropStart, dropStart + 1.4) : 0;
+    let x = JITTER[k].dx, y = lerp(storeyTop(k) - 260, storeyTop(k), fly), rot = JITTER[k].rot;
+    const f = FALL[k], falling = span(t, dropStart(k), dropStart(k) + dropDur(k));
     if (falling > 0) {
       const g = inCubic(falling);
-      y = lerp(y, HEAP_Y - f.delay * 70, g); x = f.dx * outCubic(falling); rot = f.rot * g;
+      y = lerp(y, HEAP_Y - f.delay * 70, g); x += f.dx * outCubic(falling); rot += f.rot * g;
     }
-    ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(sc, sc);
-    ctx.globalAlpha = (falling > 0 ? 1 : standing) * Math.min(1, fly * 3);
+    ctx.save(); ctx.translate(x, y); ctx.rotate(rot);
+    ctx.globalAlpha = Math.min(1, fly * 3);
     storey(ctx, ST.w, ST.h, stackColor(k), String(k).padStart(2, "0"), TITLES[k], cam.s);
     ctx.restore();
   }
-  for (const e of EXTRA) {
+  EXTRA.forEach((e, i) => {
     const a = outCubic(span(t, e.t(), e.t() + 0.5));
-    if (a <= 0) continue;
-    ctx.save(); ctx.globalAlpha = a * standing; ctx.translate(0, e.top);
+    if (a <= 0) return;
+    const f = FALL[i + 1], j = JITTER[N_TABS + 1 + i];
+    const g = inCubic(span(t, TL.loudReturn, TL.loudReturn + 0.5));
+    ctx.save(); ctx.globalAlpha = a;
+    ctx.translate(j.dx + f.dx * 0.6 * g, lerp(e.top, HEAP_Y - 60 - i * 30, g)); ctx.rotate(j.rot + f.rot * g);
     storey(ctx, ST.w, ST.h, e.n === 90 ? C.violet : mix(C.violet, "#ffffff", 0.45), String(e.n), e.label, cam.s);
     ctx.restore();
-  }
+  });
   ctx.restore();
 }
 
@@ -601,12 +629,13 @@ function sceneTower(ctx, t) {
 
   const bl = lineAt(TL.bridgeLines, t);
   if (bl) {
-    const i = TL.bridgeLines.indexOf(bl), end = typeEnd(TL.bridgeLines, i);
-    const full = bl.rows.join(" "), shown = typed(full, bl.t, end, t);
+    const full = bl.rows.join(" "), shown = typedLine(full, bl, t);
+    // the column ends well before the tower
+    const size = Math.min(...bl.rows.map(r => fitSize(ctx, r, bl.grade, 92, ST.x - ST.w / 2 - 320)));
     let used = 0;
     bl.rows.forEach((row, r) => {
       const part = shown.slice(used, used + row.length); used += row.length + 1;
-      lyric(ctx, part, 140, 430 + r * 104, 92, bl.grade, bl.quiet ? C.text : C.textHi);
+      lyric(ctx, part, 140, 430 + r * size * 1.13, size, bl.grade, bl.quiet ? C.text : C.textHi);
     });
   }
 }
@@ -620,20 +649,23 @@ const ROW0 = 985;  // baseline of the first sentence row, just above the heap
 function sceneSpoken(ctx, t) {
   const { downbeat, period } = TL.endBeat;
   const rowStart = downbeat + 8 * period;            // third bar after the return
-  // the standing tower fades out and the sentence takes its place; the heap stays
-  ctx.save(); ctx.globalAlpha = 0.4;
-  drawTowerWorld(ctx, t, towerCam(TL.loudReturn), false, 1 - span(t, TL.loudReturn, rowStart));
+  // on the loud return the rest of the tower falls in one beat; the world then
+  // slides to the centre, the heap dims, and the sentence takes the tower's place
+  const centre = smooth(span(t, TL.loudReturn, TL.spoken[0].t));
+  ctx.save(); ctx.globalAlpha = lerp(1, 0.4, span(t, TL.loudReturn + 0.6, TL.spoken[0].t));
+  drawTowerWorld(ctx, t, { ...towerCam(TL.loudReturn), x: lerp(ST.x, W / 2, centre) }, false);
   ctx.restore();
 
   const a = TL.spoken[0].q, b = TL.spoken[1].q, full = a + b;
   const settle = smooth(span(t, rowStart - period, rowStart));
-  const beatPhase = ((t - downbeat) / period) % 1;
-  const relapse = t > downbeat && beatPhase < 0.12 ? 1 : 0;   // one grade worse on every beat
+  // two grades worse for three frames on every bar downbeat
+  const sinceBar = (t - downbeat) % (4 * period);
+  const relapse = t > downbeat && sinceBar < 0.1 ? 2 : 0;
 
   if (settle < 1 && t >= TL.spoken[0].t) {
     const size = lerp(118, 44, settle);
     ctx.font = gradeFont(6, size);
-    const x = lerp(W / 2, ST.x, settle) - ctx.measureText(full).width / 2;
+    const x = (W - ctx.measureText(full).width) / 2;
     const y = lerp(575, ROW0, settle);
     lyric(ctx, typed(a, TL.spoken[0].t, TL.spoken[0].t + 0.5, t), x, y, size, 6);
     if (t >= TL.spoken[1].t) lyric(ctx, typed(b, TL.spoken[1].t, TL.spoken[1].t + 0.6, t), x + ctx.measureText(a).width, y, size, 6);
@@ -647,7 +679,7 @@ function sceneSpoken(ctx, t) {
     const appear = smooth(span(t, rowStart + r * 2 * period, rowStart + r * 2 * period + 0.12));
     ctx.font = gradeFont(grade, 44);
     ctx.globalAlpha = appear;
-    lyric(ctx, full, ST.x, y, 44, grade, stackColor(k, 0.1), "center");
+    lyric(ctx, full, W / 2, y, 44, grade, stackColor(k, 0.1), "center");
   }
   ctx.globalAlpha = 1;
 }
@@ -655,7 +687,7 @@ function sceneSpoken(ctx, t) {
 // Wording and numbers checked against the services' own sites; see README.
 const HELP = [
   ["Österreich", "Telefonseelsorge 142"],
-  ["für Junge", "Rat auf Draht 147"],
+  ["Kinder und Jugendliche", "Rat auf Draht 147"],
   ["Steiermark", "PsyNot 0800 44 99 33"],
   ["Deutschland", "TelefonSeelsorge 0800 111 0 111"],
   ["Schweiz", "Die Dargebotene Hand 143"],
