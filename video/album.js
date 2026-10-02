@@ -1,5 +1,5 @@
 /**
- * @typedef {{ slug: string, title: string, duration: number, video: string, poster: string, accent: string, note?: string, style: string, making: string, lyrics: string, live?: string }} Song
+ * @typedef {{ slug: string, title: string, duration: number, video: string, poster: string, thumb?: string, accent: string, note?: string, style: string, making: string, lyrics: string, live?: string }} Song
  * @typedef {{ rate: number, envelope: number[], cues: [number, number][] }} Live
  */
 
@@ -20,7 +20,6 @@ const CODE_URL = "https://github.com/chpollin/TROTZDEM/blob/main/video/";
 const base = new URL("./", import.meta.url);
 const resolve = path => new URL(path, base).href;
 
-const root = document.documentElement;
 const calm = matchMedia("(prefers-reduced-motion: reduce)");
 
 /** @type {Map<string, Live>} */
@@ -31,7 +30,18 @@ let live = null;
 let lineEls = [];
 let currentLine = -1;
 let glow = 0;
+let glowText = "0.000";
 let lastPaint = 0;
+let ticking = false;
+/** @type {HTMLAnchorElement | null} */
+let currentLink = null;
+
+// lyrics as a native captions track for fullscreen and assistive technology; most scenes draw
+// the sung line themselves, so the track starts hidden and the viewer switches it on in the controls
+const captions = player.addTextTrack("captions", "Liedtext", "de");
+captions.mode = "hidden";
+// instrumental gaps run up to a minute, so a line leaves the screen after this many seconds
+const CAPTION_MAX = 7;
 
 const pad = n => String(n).padStart(2, "0");
 const minutes = s => { const r = Math.round(s); return `${Math.floor(r / 60)}:${pad(r % 60)}`; };
@@ -46,7 +56,7 @@ function renderList(songs) {
     no.className = "track-no";
     no.textContent = pad(i + 1);
     const img = document.createElement("img");
-    img.src = resolve(song.poster);
+    img.src = resolve(song.thumb ?? song.poster);
     img.alt = "";
     img.loading = "lazy";
     const title = document.createElement("span");
@@ -77,10 +87,19 @@ function renderLyrics(text) {
 /** @param {Song} song */
 async function loadLive(song) {
   live = null;
+  for (const cue of [...(captions.cues ?? [])]) captions.removeCue(cue);
   if (!song.live) return;
   let data = liveCache.get(song.slug);
   if (!data) {
-    data = /** @type {Live} */ (await (await fetch(resolve(song.live))).json());
+    try {
+      const res = await fetch(resolve(song.live));
+      if (!res.ok) throw new Error(`${res.status} ${res.url}`);
+      data = /** @type {Live} */ (await res.json());
+    } catch (error) {
+      // without live data the lyrics stay plain text, which is enough to read along
+      console.warn("live data unavailable", error);
+      return;
+    }
     liveCache.set(song.slug, data);
   }
   // another title may have been chosen while this one loaded
@@ -99,6 +118,12 @@ async function loadLive(song) {
     lineEls[index] = button;
   }
   lyrics.classList.toggle("is-live", data.cues.length > 0);
+  data.cues.forEach(([time, index], k) => {
+    const text = lineEls[index]?.textContent.trim();
+    if (!text) return;
+    const next = data.cues[k + 1]?.[0] ?? song.duration;
+    captions.addCue(new VTTCue(time, Math.min(next, time + CAPTION_MAX), text));
+  });
   update();
 }
 
@@ -110,13 +135,16 @@ function scrollToLine() {
 
 function update() {
   const t = player.currentTime;
-  const current = /** @type {HTMLElement | null} */ (tracks.querySelector('a[aria-current="true"]'));
-  if (current && player.duration) current.style.setProperty("--progress", (t / player.duration).toFixed(4));
+  if (currentLink && player.duration) currentLink.style.setProperty("--progress", (t / player.duration).toFixed(4));
   if (!live) return;
   const level = player.paused || calm.matches ? 0 : (live.envelope[Math.floor(t * live.rate)] ?? 0) / 99;
   // smoothing keeps single drum hits from flickering the page
   glow += (level - glow) * 0.3;
-  root.style.setProperty("--glow", glow.toFixed(3));
+  const text = glow.toFixed(3);
+  if (text !== glowText) {
+    glowText = text;
+    document.body.style.setProperty("--glow", text);
+  }
   let index = -1;
   for (const [time, line] of live.cues) {
     if (time > t + 0.1) break;
@@ -132,6 +160,7 @@ function update() {
 /** @param {number} now */
 function tick(now) {
   if (player.paused || player.ended) {
+    ticking = false;
     update();
     return;
   }
@@ -165,8 +194,10 @@ function show(songs, play) {
   renderLyrics(song.lyrics);
   loadLive(song);
   tracks.querySelectorAll("a").forEach((a, j) => {
-    if (j === i) a.setAttribute("aria-current", "true");
-    else {
+    if (j === i) {
+      a.setAttribute("aria-current", "true");
+      currentLink = a;
+    } else {
       a.removeAttribute("aria-current");
       a.style.removeProperty("--progress");
     }
@@ -175,16 +206,58 @@ function show(songs, play) {
   if (play) player.play().catch(() => {});
 }
 
-async function main() {
+/** @returns {Promise<Song[]>} */
+async function loadSongs() {
   const res = await fetch(resolve("album.json"));
+  if (!res.ok) throw new Error(`${res.status} ${res.url}`);
   /** @type {{ songs: Song[] }} */
   const album = await res.json();
-  const songs = album.songs;
+  if (!album.songs?.length) throw new Error("album.json lists no songs");
+  return album.songs;
+}
+
+/** @param {unknown} error */
+function showLoadError(error) {
+  console.error(error);
+  const stage = /** @type {HTMLElement} */ (player.closest(".stage"));
+  const message = document.createElement("p");
+  message.className = "load-error";
+  message.setAttribute("role", "alert");
+  message.textContent = "Die Titel konnten nicht geladen werden. Bitte die Seite später neu laden.";
+  stage.removeAttribute("aria-labelledby");
+  stage.replaceChildren(message);
+  /** @type {HTMLElement} */ (tracks.closest("nav")).hidden = true;
+}
+
+/** on a phone the list sits below the player, so a chosen title would otherwise play out of view */
+function revealPlayer() {
+  const { top, bottom } = player.getBoundingClientRect();
+  if (top > -1 && bottom < innerHeight + 1) return;
+  player.scrollIntoView({ block: "nearest", behavior: calm.matches ? "auto" : "smooth" });
+}
+
+async function main() {
+  /** @type {Song[]} */
+  let songs;
+  try {
+    songs = await loadSongs();
+  } catch (error) {
+    showLoadError(error);
+    return;
+  }
   renderList(songs);
   show(songs, false);
   // choosing a title is a gesture, so playback may start; loading a URL is not
   addEventListener("hashchange", () => show(songs, true));
-  player.addEventListener("play", () => requestAnimationFrame(tick));
+  tracks.addEventListener("click", event => {
+    if (/** @type {HTMLElement} */ (event.target).closest("a")) revealPlayer();
+  });
+  // play can fire twice within one frame, and a second loop would double the work
+  player.addEventListener("play", () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(tick);
+  });
   player.addEventListener("seeked", update);
   player.addEventListener("pause", update);
   lyricsPanel.addEventListener("toggle", scrollToLine);
