@@ -16,7 +16,7 @@ generated-with: Claude Code (Claude Opus 5.5)
 
 # Handoff
 
-- The videos for "The Bitter Lesson", "Bin ich noch der Expert", "Sycophancy" and "The Bitter Lesson (Remix)" are prepared (timing report and analysis) and are built one after another, each by its own build agent, then published with `build_album.py --release videos` and a release upload.
+- The operator removed "The Bitter Lesson" from the album on 2026-10-02; its scene stays in `video/the-bitter-lesson/`. The videos for "Bin ich noch der Expert", "Sycophancy" and "The Bitter Lesson (Remix)" are prepared (timing report and analysis) and are built one after another, each by its own build agent, then published with `build_album.py --release videos` and a release upload.
 - In "Ich predicte dich" at 1:38 the video shows "Doch sie spricht!", where the sung line may be "Doch dieses Mal". The operator's confirmation is open.
 - A compact technical paragraph on how the videos are made was offered as a replacement for the second colophon paragraph on the album page. The operator's decision is open.
 - Suno's terms allow public use only of the official download on a paid plan. The audio currently comes from the public clip videos. Replacing `source/audio.wav` with the official download and rendering again is the route before any use beyond sharing.
