@@ -42,16 +42,19 @@
 }
 
 @layer layout {
-  .masthead { padding-block: var(--gap) 0; padding-inline: var(--gutter); }
+  /* masthead, album and colophon share one measure */
+  .masthead, .album, .colophon { max-inline-size: 110rem; margin-inline: auto; padding-inline: var(--gutter); }
+  .masthead {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+    gap: 0.5rem 2rem; padding-block: var(--gap) 0;
+  }
   /* the page is the container, so the album grid can switch columns */
   body { container-type: inline-size; }
   .album {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: var(--gap);
-    padding: var(--gap) var(--gutter) calc(var(--gap) * 2);
-    max-inline-size: 110rem;
-    margin-inline: auto;
+    padding-block: var(--gap) calc(var(--gap) * 2);
   }
 }
 
@@ -65,6 +68,7 @@
   }
 
   .stage { display: grid; gap: var(--gap); align-content: start; }
+  .stage > .now { margin-block-start: calc(var(--gap) * -0.4); }
   #player { inline-size: 100%; aspect-ratio: 16 / 9; background: var(--void); }
 
   .now h2 { font-weight: 400; font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.75rem); line-height: 1.15; }
@@ -76,10 +80,14 @@
   }
 
   .making { max-inline-size: 70ch; }
-  .making h3 { font-family: var(--font-ui); font-weight: 400; font-size: 0.85rem; color: var(--violet); margin: 0 0 0.4rem; }
+  .making h3, .more summary {
+    font-family: var(--font-ui); font-weight: 400; font-size: 0.8rem;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--violet);
+  }
+  .making h3 { margin: 0 0 0.5rem; }
   .making p { margin: 0; color: var(--text); }
 
-  .provenance { font-family: var(--font-ui); font-size: 0.85rem; margin-block-start: 0.6rem; }
+  .provenance { font-family: var(--font-ui); font-size: 0.85rem; }
   .provenance a { color: var(--text-dim); text-decoration-color: var(--violet); text-underline-offset: 0.2em; }
 
   .now-style {
@@ -87,45 +95,41 @@
     max-inline-size: 70ch; margin: 0;
   }
 
-  .more summary {
-    font-family: var(--font-ui); font-size: 0.85rem; color: var(--violet);
-    cursor: pointer; padding-block: 0.4rem; inline-size: fit-content;
-  }
+  .more summary { cursor: pointer; padding-block: 0.3rem; inline-size: fit-content; }
+  .more + .more { margin-block-start: calc(var(--gap) * -0.6); }
   .more[open] summary { margin-block-end: 0.6rem; }
 
-  .colophon {
-    padding: var(--gap) var(--gutter) calc(var(--gap) * 2);
-    max-inline-size: 110rem; margin-inline: auto;
-    color: var(--text-dim);
-  }
+  .colophon { padding-block: var(--gap) calc(var(--gap) * 2); color: var(--text-dim); }
   .colophon h2 { font-weight: 400; font-size: 1.5rem; color: var(--text); margin-block-end: 0.75rem; }
   .colophon p { max-inline-size: 70ch; margin-block-end: 0.75rem; }
   .colophon a { color: var(--text); text-decoration-color: var(--violet); text-underline-offset: 0.2em; }
 
   .lyrics { white-space: pre-line; max-inline-size: 60ch; color: var(--text); }
 
-  .tracklist ol { list-style: none; padding: 0; display: grid; gap: 0.25rem; }
   /* list-style none removes list semantics in Safari; the role restores it */
+  .tracklist ol { list-style: none; padding: 0; display: grid; gap: 0.1rem; }
+  /* a quiet list: only the playing title gets a surface and the accent */
   .tracklist a {
     display: grid;
-    grid-template-columns: 2rem 5.5rem minmax(0, 1fr) auto;
+    grid-template-columns: 1.75rem 6rem minmax(0, 1fr) auto;
     align-items: center;
-    gap: 0.9rem;
-    padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+    gap: 0.85rem;
+    padding: 0.45rem 0.6rem 0.45rem 0.4rem;
     min-block-size: 3rem;
     text-decoration: none;
-    background: var(--surface);
-    border-inline-start: 3px solid transparent;
+    border-inline-start: 2px solid transparent;
   }
-  .tracklist a:hover { background: var(--surface-hover); }
-  .tracklist a[aria-current="true"] { border-inline-start-color: var(--violet); background: var(--surface-hover); }
-  .tracklist img { inline-size: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .tracklist img { inline-size: 100%; aspect-ratio: 16 / 9; object-fit: cover; opacity: 0.6; }
+  .tracklist a:hover { background: var(--surface); }
+  .tracklist a:hover img, .tracklist a[aria-current="true"] img { opacity: 1; }
+  .tracklist a[aria-current="true"] { border-inline-start-color: var(--violet); background: var(--surface); }
   .track-no, .track-duration {
     font-family: var(--font-ui); font-size: 0.85rem; color: var(--text-dim);
     font-variant-numeric: tabular-nums;
   }
   .track-no { text-align: end; }
-  .track-title { line-height: 1.25; font-size: 1rem; overflow-wrap: anywhere; }
+  .track-title { line-height: 1.25; font-size: 1rem; overflow-wrap: anywhere; color: var(--text-dim); }
+  .tracklist a:hover .track-title, .tracklist a[aria-current="true"] .track-title { color: var(--text); }
   .tracklist a[aria-current="true"] .track-no { color: var(--violet); }
 }
 
@@ -142,6 +146,9 @@
   }
   @container (width < 30rem) {
     .tracklist a { grid-template-columns: 1.75rem 4.5rem minmax(0, 1fr) auto; gap: 0.6rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .tracklist a, .tracklist img, .track-title { transition: background-color 0.15s, opacity 0.15s, color 0.15s; }
   }
   @media (prefers-reduced-motion: reduce) {
     * { scroll-behavior: auto !important; }

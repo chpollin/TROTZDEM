@@ -93,7 +93,8 @@ def main():
             "duration": round(dur, 2),
             "video": f"{slug}/out/{slug}.mp4",
             "poster": f"posters/{slug}.jpg",
-            "style": " ".join(meta.get("tags", "").split()),
+            # Suno prompts may span lines; each line is its own clause
+            "style": ", ".join(" ".join(l.split()).strip(" ,") for l in meta.get("tags", "").splitlines() if l.strip()),
             "lyrics": lyrics,
         })
         making = VIDEO / slug / "making.txt"
