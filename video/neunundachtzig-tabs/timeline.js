@@ -40,3 +40,4 @@ const TL = {
   cut: 113.2,
 };
 const SCENE_END = 114.5;  // end of the audio
+const SCENE_TITLE = "Neunundachtzig Tabs";

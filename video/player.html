@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Neunundachtzig Tabs</title>
+<title>TROTZDEM Videos</title>
 <style>
   @font-face { font-family: "Space Mono"; src: url("fonts/SpaceMono-Regular.ttf"); font-weight: 400; }
   @font-face { font-family: "Space Mono"; src: url("fonts/SpaceMono-Bold.ttf"); font-weight: 700; }
@@ -26,36 +26,51 @@
 </style>
 </head>
 <body>
-<canvas id="c" width="1920" height="1080" aria-label="Musikvideo Neunundachtzig Tabs"></canvas>
+<canvas id="c" width="1920" height="1080" aria-label="Musikvideo"></canvas>
 <div id="bar"></div>
 <div id="time"></div>
-<audio id="a" data-src="source/audio.wav"></audio>
-<script src="analysis.js"></script>
-<script src="timeline.js"></script>
-<script src="scene.js"></script>
+<audio id="a"></audio>
 <script>
-  const canvas = document.getElementById("c");
-  const ctx = canvas.getContext("2d");
-  const render = new URLSearchParams(location.search).has("render");
+  // One player for every song: ?song=<folder> loads that folder's analysis.js,
+  // timeline.js and scene.js. A scene defines drawScene(ctx, t) and SCENE_END and
+  // may declare extra fonts from its own folder as SCENE_FONT_FACES.
+  const params = new URLSearchParams(location.search);
+  const song = params.get("song") || "neunundachtzig-tabs";
+  const render = params.has("render");
+  const SHARED_FONTS = ['400 40px "Space Mono"', '700 40px "Space Mono"', ...[
+    "Redaction", "Redaction10", "Redaction20", "Redaction35", "Redaction50", "Redaction70", "Redaction100",
+  ].map(f => `40px "${f}"`)];
 
-  // Fonts must be resolved before the first frame, otherwise text metrics differ between frames.
-  const fontsLoaded = Promise.all(
-    ['400 40px "Space Mono"', '700 40px "Space Mono"']
-      .concat(REDACTION_GRADES.map(g => `40px "${g}"`))
-      .map(f => document.fonts.load(f))
-  );
+  const loadScript = src => new Promise((ok, fail) => {
+    const s = document.createElement("script");
+    s.src = src; s.onload = ok; s.onerror = () => fail(new Error("cannot load " + src));
+    document.body.appendChild(s);
+  });
 
-  if (render) {
-    document.body.classList.add("render");
-    window.renderFrame = t => { drawScene(ctx, t); return canvas.toDataURL("image/png"); };
-    fontsLoaded.then(() => { window.sceneReady = true; });
-  } else {
+  (async () => {
+    for (const f of ["analysis.js", "timeline.js", "scene.js"]) await loadScript(`${song}/${f}`);
+    const faces = (typeof SCENE_FONT_FACES === "undefined" ? [] : SCENE_FONT_FACES)
+      .map(f => new FontFace(f.family, `url("${song}/${f.url}")`, f.descriptors || {}));
+    for (const f of faces) document.fonts.add(f);
+    // fonts must be resolved before the first frame, otherwise text metrics differ between frames
+    await Promise.all([...SHARED_FONTS.map(f => document.fonts.load(f)), ...faces.map(f => f.load())]);
+
+    const canvas = document.getElementById("c");
+    const ctx = canvas.getContext("2d");
+    document.title = typeof SCENE_TITLE === "undefined" ? song : SCENE_TITLE;
+
+    if (render) {
+      document.body.classList.add("render");
+      window.renderFrame = t => { drawScene(ctx, t); return canvas.toDataURL("image/png"); };
+      window.sceneReady = true;
+      return;
+    }
     const audio = document.getElementById("a");
     const bar = document.getElementById("bar");
     const time = document.getElementById("time");
-    const start = parseFloat(new URLSearchParams(location.search).get("t") || "0");
-    // http.server answers without byte ranges, so seeking only works on an in-memory copy.
-    fetch(audio.dataset.src).then(r => r.blob()).then(b => {
+    const start = parseFloat(params.get("t") || "0");
+    // http.server answers without byte ranges, so seeking only works on an in-memory copy
+    fetch(`${song}/source/audio.wav`).then(r => r.blob()).then(b => {
       audio.src = URL.createObjectURL(b);
       audio.addEventListener("loadedmetadata", () => { audio.currentTime = start; }, { once: true });
     });
@@ -73,8 +88,8 @@
       if (e.code === "ArrowLeft") audio.currentTime = Math.max(0, audio.currentTime - (e.shiftKey ? 0.1 : 2));
       if (e.code === "ArrowRight") audio.currentTime += e.shiftKey ? 0.1 : 2;
     });
-    fontsLoaded.then(() => requestAnimationFrame(tick));
-  }
+    requestAnimationFrame(tick);
+  })().catch(e => { window.sceneError = String(e); console.error(e); });
 </script>
 </body>
 </html>
