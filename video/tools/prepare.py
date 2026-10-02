@@ -92,7 +92,7 @@ def tempo_windows(instrumental, tag_bpm, win=16.0):
         for bpm in cands:
             p = 60 / bpm
             for ph in np.arange(0, p, 0.01):
-                idx = (np.arange(a + ph, b, p) / dt).astype(int)
+                idx = np.minimum((np.arange(a + ph, b, p) / dt).astype(int), len(flux) - 1)
                 sc = flux[idx].mean() / (flux[int(a / dt):int(b / dt)].mean() + 1e-9)
                 if sc > best[0]:
                     best = (sc, bpm, a + ph)
