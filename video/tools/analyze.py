@@ -41,7 +41,8 @@ def flux_frames(x):
 def analyze(song_dir):
     src = song_dir / "source"
     x = load(src / "audio.wav")
-    r = np.clip(rms_frames(x) / np.percentile(rms_frames(x), 99), 0, 1)
+    rms = rms_frames(x)
+    r = np.clip(rms / np.percentile(rms, 99), 0, 1)
     flux = flux_frames(x)
     f = np.clip(flux / np.percentile(flux, 99), 0, 1)
     n = len(r)
@@ -61,7 +62,7 @@ def analyze(song_dir):
     if (src / "vocals.wav").exists():
         v = rms_frames(load(src / "vocals.wav"))[:n]
         lines.append(f"const AUDIO_VOX = [{q(np.clip(v / np.percentile(v, 99), 0, 1))}];")
-    (song_dir / "analysis.js").write_text("\n".join(lines) + "\n")
+    (song_dir / "analysis.js").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return n, len(onsets)
 
 

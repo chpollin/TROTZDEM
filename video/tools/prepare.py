@@ -15,6 +15,7 @@ the vocal phrase starts before they go into timeline.js.
 
 import json
 import re
+import subprocess
 import sys
 import urllib.request
 from pathlib import Path
@@ -28,15 +29,22 @@ VIDEO = Path(__file__).resolve().parent.parent
 API = "https://studio-api.prod.suno.com/api/playlist/{}/?page={}"
 # Suno's API and CDN refuse Python's default user agent
 UA = {"User-Agent": "Mozilla/5.0"}
+# tempo search range when the Suno prompt names no BPM, shared with prepare_local.py; a slower
+# song still shows up at its double tempo, so the range need not reach below 70
+BPM_RANGE = (70, 190)
 
 
 def get(url):
     return urllib.request.urlopen(urllib.request.Request(url, headers=UA))
 
 
-def download(url, path):
+def download(url: str, path: Path) -> None:
+    # write a temporary sibling and replace on success: the caller skips existing files, so a
+    # partial download under the final name would never be fetched again
+    part = path.with_name(path.name + ".part")
     with get(url) as r:
-        path.write_bytes(r.read())
+        part.write_bytes(r.read())
+    part.replace(path)
 
 
 def fetch_playlist(pid):
@@ -84,7 +92,7 @@ def tempo_windows(instrumental, tag_bpm, win=16.0):
     if tag_bpm:
         cands = np.unique(np.r_[np.arange(tag_bpm - 6, tag_bpm + 6.01, 0.1), np.arange(tag_bpm * 2 - 8, tag_bpm * 2 + 8.01, 0.2)])
     else:
-        cands = np.arange(70, 190.01, 0.25)
+        cands = np.arange(BPM_RANGE[0], BPM_RANGE[1] + 0.01, 0.25)
     rows = []
     for a in np.arange(0, dur - 4, win):
         b = min(dur, a + win)
@@ -111,13 +119,14 @@ def prepare(slug, clip, models):
     lyrics = clip["metadata"].get("prompt", "")
     (src / "lyrics.txt").write_text(lyrics, encoding="utf-8")
 
-    if not (src / "suno.mp4").exists():
-        download(clip["video_url"], src / "suno.mp4")
-        download(clip["image_large_url"], src / "cover.jpeg")
-    import subprocess
+    for key, name in (("video_url", "suno.mp4"), ("image_large_url", "cover.jpeg")):
+        if not (src / name).exists():
+            download(clip[key], src / name)
     if not (src / "audio.wav").exists():
+        part = src / "audio.wav.part"
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src / "suno.mp4"), "-vn", "-ac", "2", "-ar", "48000",
-                        str(src / "audio.wav")], check=True)
+                        "-f", "wav", str(part)], check=True)
+        part.replace(src / "audio.wav")
 
     if not (src / "vocals.wav").exists():
         sep = models["separator"]()

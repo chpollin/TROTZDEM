@@ -22,7 +22,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from analyze import HOP, SR, analyze, flux_frames, load, rms_frames  # noqa: E402
-from prepare import phrase_starts, sung_lines  # noqa: E402
+from prepare import BPM_RANGE, phrase_starts, sung_lines  # noqa: E402
 
 VIDEO = Path(__file__).resolve().parent.parent
 
@@ -35,7 +35,7 @@ def tempo_windows(instrumental, win=16.0):
     for a in np.arange(0, len(flux) * dt - 4, win):
         b = min(len(flux) * dt, a + win)
         best = (-1, 0, 0)
-        for bpm in np.arange(60, 190.01, 0.25):
+        for bpm in np.arange(BPM_RANGE[0], BPM_RANGE[1] + 0.01, 0.25):
             p = 60 / bpm
             for ph in np.arange(0, p, 0.01):
                 idx = np.minimum((np.arange(a + ph, b, p) / dt).astype(int), len(flux) - 1)

@@ -26,8 +26,10 @@ class RangeHandler(SimpleHTTPRequestHandler):
         start, end = m.group(1), m.group(2)
         if start:
             first, last = int(start), min(int(end) if end else size - 1, size - 1)
-        else:
+        elif end:
             first, last = max(0, size - int(end)), size - 1
+        else:
+            first, last = 0, -1  # "bytes=-" names no range at all
         if first > last:
             self.send_error(416, "Range Not Satisfiable")
             return None
@@ -35,7 +37,7 @@ class RangeHandler(SimpleHTTPRequestHandler):
         f.seek(first)
         self.send_response(206)
         self.send_header("Content-Type", self.guess_type(path))
-        self.send_header("Accept-Ranges", "bytes")
+        # Accept-Ranges comes from end_headers, which adds it to every response
         self.send_header("Content-Range", f"bytes {first}-{last}/{size}")
         self.send_header("Content-Length", str(last - first + 1))
         self.end_headers()

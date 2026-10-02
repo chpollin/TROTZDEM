@@ -1,16 +1,21 @@
 """Collect every song with a rendered video into album.json for the album page.
 
-Reads songs.json (order and optional poster times), each song's source/meta.json
-and source/lyrics.txt, probes the rendered MP4 and grabs a poster frame into
-posters/<song>.jpg. Songs without a rendered video are left out, so running
-this again after a new render adds that song.
+Reads songs.json (order, optional title override and poster times), each
+song's source/meta.json and source/lyrics.txt, probes the rendered MP4, grabs a
+poster frame into posters/<song>.jpg and a small thumbnail for the track list
+into posters/thumbs/<song>.webp (JPG where ffmpeg lacks libwebp). Songs without
+a rendered video are left out, so running this again after a new render adds
+that song.
 
 Videos are too large for the Pages repository, so for publishing they are
-encoded smaller into web/ (unversioned) and attached to a GitHub release; with
---release the page points at that release instead of the local renders.
+encoded smaller into web/ (unversioned) and attached to the GitHub release
+`videos`, and album.json points at that release. --local points the page at
+the local renders instead, for a preview with tools/serve.py only; an
+album.json built that way must not be committed, because Pages has no renders.
 
-    python tools/build_album.py                    # local renders
-    python tools/build_album.py --release videos   # web encodes, release URLs
+    python tools/build_album.py                  # web encodes, release URLs (release "videos")
+    python tools/build_album.py --release other  # another release tag
+    python tools/build_album.py --local          # local renders, preview only
 """
 
 import argparse
@@ -22,18 +27,32 @@ from pathlib import Path
 
 VIDEO = Path(__file__).resolve().parent.parent
 RELEASE_URL = "https://github.com/chpollin/TROTZDEM/releases/download/{tag}/{slug}.mp4"
+# the track list shows posters about 96 px wide; four times that stays sharp on high-density screens
+THUMB_WIDTH = 384
 
 
-def web_encode(src, dst):
+def web_encode(src: Path, dst: Path) -> None:
     if dst.exists() and dst.stat().st_mtime > src.stat().st_mtime:
         return
     dst.parent.mkdir(exist_ok=True)
+    # encode into a temporary sibling and replace on success, so an interrupted encode never
+    # leaves a truncated video that the mtime check above would then keep forever
+    part = dst.with_name(dst.name + ".part")
     subprocess.run(
         # four threads, so encoding leaves room for renders running alongside
         ["ffmpeg", "-v", "error", "-y", "-i", str(src), "-c:v", "libx264", "-threads", "4", "-preset", "slow", "-crf", "28",
-         "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(dst)],
+         "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-f", "mp4", str(part)],
         check=True,
     )
+    part.replace(dst)
+
+
+def thumb_codec() -> tuple[str, list[str]]:
+    """File extension and ffmpeg codec options for thumbnails, WebP where ffmpeg has libwebp."""
+    encoders = subprocess.run(["ffmpeg", "-hide_banner", "-encoders"], capture_output=True, text=True, check=True).stdout
+    if re.search(r"\slibwebp\s", encoders):
+        return "webp", ["-c:v", "libwebp", "-quality", "80"]
+    return "jpg", ["-q:v", "4"]
 
 
 def duration(path):
@@ -62,10 +81,12 @@ def display_lyrics(text):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--release", metavar="TAG", help="encode web versions and use this release's URLs")
+    ap.add_argument("--release", metavar="TAG", default="videos", help="release whose URLs the page plays (default: videos)")
+    ap.add_argument("--local", action="store_true", help="play the local renders instead, preview only, never commit the result")
     ap.add_argument("--skip", nargs="*", default=[], help="songs whose render is still a draft")
     args = ap.parse_args()
-    (VIDEO / "posters").mkdir(exist_ok=True)
+    (VIDEO / "posters" / "thumbs").mkdir(parents=True, exist_ok=True)
+    thumb_ext, thumb_opts = thumb_codec()
     cfg = json.loads((VIDEO / "songs.json").read_text(encoding="utf-8"))
     songs = []
     for s in cfg["songs"]:
@@ -82,10 +103,17 @@ def main():
              "-frames:v", "1", "-vf", "scale=1280:-1", "-q:v", "3", str(poster)],
             check=True,
         )
+        thumb = VIDEO / "posters" / "thumbs" / f"{slug}.{thumb_ext}"
+        subprocess.run(
+            ["ffmpeg", "-v", "error", "-y", "-i", str(poster), "-vf", f"scale={THUMB_WIDTH}:-1", *thumb_opts, str(thumb)],
+            check=True,
+        )
         lyrics = (VIDEO / slug / "source" / "lyrics.txt").read_text(encoding="utf-8")
-        title = meta["title"]
+        # songs.json may override Suno's title, e.g. to drop a "(Remastered)" the video does not show
+        title = s.get("title", meta["title"])
         lyrics = display_lyrics(lyrics)
-        if lyrics.splitlines() and lyrics.splitlines()[0].strip('"„“ ').lower() == title.lower():
+        # Suno lyrics sometimes open with the title; either spelling counts
+        if lyrics.splitlines() and lyrics.splitlines()[0].strip('"„“ ').lower() in {title.lower(), meta["title"].lower()}:
             lyrics = "\n".join(lyrics.splitlines()[1:]).lstrip("\n")
         songs.append({
             "slug": slug,
@@ -93,6 +121,7 @@ def main():
             "duration": round(dur, 2),
             "video": f"{slug}/out/{slug}.mp4",
             "poster": f"posters/{slug}.jpg",
+            "thumb": f"posters/thumbs/{slug}.{thumb_ext}",
             # the colour that carries meaning inside this video; the page takes it over
             "accent": s.get("accent", "#a77bff"),
             # Suno prompts may span lines; each line is its own clause
@@ -103,7 +132,7 @@ def main():
         })
         making = VIDEO / slug / "making.txt"
         songs[-1]["making"] = making.read_text(encoding="utf-8").strip() if making.exists() else ""
-        if args.release:
+        if not args.local:
             web_encode(mp4, VIDEO / "web" / f"{slug}.mp4")
             songs[-1]["video"] = RELEASE_URL.format(tag=args.release, slug=slug)
     (VIDEO / "album.json").write_text(json.dumps({"album": "TROTZDEM", "songs": songs}, ensure_ascii=False, indent=2) + "\n",
