@@ -17,6 +17,7 @@ generated-with: Claude Code (Claude Opus 5.5)
 # Handoff
 
 - The branch `dynamic-ui` lets the page follow the music (loudness glow, live lyrics with seeking, track progress). It waits for the operator's review before it is merged into `main`.
+- The branch `album-versions` holds three page variants that tell the album as one narrative, described in [album-versions.md](album-versions.md). The operator's choice of a variant, the act order and the provenance line are open.
 - In "Ich predicte dich" at 1:38 the video shows "Doch sie spricht!", where the sung line may be "Doch dieses Mal". The operator's confirmation is open.
 - The build agent for "The Bitter Lesson" suggested 52.5 s as poster time instead of the current 82 s. The operator's decision is open.
 - A compact technical paragraph on how the videos are made was offered as a replacement for the second colophon paragraph on the album page. The operator's decision is open.
