@@ -4,52 +4,62 @@
     {
       "slug": "system-prompt",
       "clip": "2aee63b3-b76c-4e27-a882-c7ed7fb1b62e",
-      "poster": 43.5
+      "poster": 43.5,
+      "accent": "#a77bff"
     },
     {
       "slug": "prompt-engineer",
       "clip": "f2a688cd-879d-45f1-9735-a0c5aad1a11d",
-      "poster": 72
+      "poster": 72,
+      "accent": "#e2c64a"
     },
     {
       "slug": "lost-in-the-vault",
       "clip": "7e467fc8-841d-45a2-ba4e-3540da04c2de",
-      "poster": 176
+      "poster": 176,
+      "accent": "#ffb23e"
     },
     {
       "slug": "hallelujah-the-god-machine",
       "clip": "afe07bb7-ff84-4d22-855e-5776774e3ae4",
-      "poster": 40
+      "poster": 40,
+      "accent": "#e9b552"
     },
     {
       "slug": "empire-of-ai",
       "clip": "70d12136-58bc-40e1-8ed4-2af4a632372f",
-      "poster": 120
+      "poster": 120,
+      "accent": "#ff4332"
     },
     {
       "slug": "ich-predicte-dich",
       "clip": "548c2b54-a37f-4d50-88f0-18672988bcfb",
-      "poster": 99
+      "poster": 99,
+      "accent": "#ff6a55"
     },
     {
       "slug": "machine-of-loving-grace",
       "clip": "eb0a51a7-dfe1-48e6-b6cc-3fd4c9450235",
-      "poster": 96
+      "poster": 96,
+      "accent": "#d9b866"
     },
     {
       "slug": "good-morning-claude",
       "clip": "898973f8-f5e0-488b-81d8-eedeca33ab45",
-      "poster": 40
+      "poster": 40,
+      "accent": "#ff5a36"
     },
     {
       "slug": "neunundachtzig-tabs",
       "clip": "fd6027fc-f986-464c-81b3-5fc76d8f9e92",
-      "poster": 72
+      "poster": 72,
+      "accent": "#a77bff"
     },
     {
       "slug": "im-addicted-to-claude-code",
       "clip": "741daac1-5404-4246-932b-84e4dbf971f4",
-      "poster": 92
+      "poster": 92,
+      "accent": "#6eeaff"
     },
     {
       "slug": "the-bitter-lesson",

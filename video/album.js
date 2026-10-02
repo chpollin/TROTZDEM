@@ -1,5 +1,5 @@
 /**
- * @typedef {{ slug: string, title: string, duration: number, video: string, poster: string, style: string, making: string, lyrics: string }} Song
+ * @typedef {{ slug: string, title: string, duration: number, video: string, poster: string, accent: string, style: string, making: string, lyrics: string }} Song
  */
 
 const player = /** @type {HTMLVideoElement} */ (document.getElementById("player"));
@@ -52,6 +52,7 @@ function show(songs, play) {
     player.poster = resolve(song.poster);
     player.src = resolve(song.video);
   }
+  document.documentElement.style.setProperty("--accent", song.accent);
   document.title = `${song.title} – TROTZDEM`;
   nowTitle.textContent = song.title;
   nowTrack.textContent = `Titel ${pad(i + 1)}`;
