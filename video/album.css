@@ -7,6 +7,8 @@
 
 /* registered so the accent can glide between songs; unregistered it just switches */
 @property --accent { syntax: "<color>"; inherits: true; initial-value: #a77bff; }
+/* loudness of the playing song, 0 to 1, set by album.js; registered so it can be eased */
+@property --glow { syntax: "<number>"; inherits: true; initial-value: 0; }
 
 @layer reset {
   *, *::before, *::after { box-sizing: border-box; }
@@ -36,7 +38,8 @@
   body {
     /* a faint glow of the current song's accent behind the player */
     background:
-      radial-gradient(ellipse 70% 45% at 30% 0%, color-mix(in oklch, var(--accent) 10%, transparent), transparent 70%)
+      radial-gradient(ellipse calc(70% + var(--glow) * 25%) calc(45% + var(--glow) * 30%) at 30% 0%,
+        color-mix(in oklch, var(--accent) calc(10% + var(--glow) * 16%), transparent), transparent 70%)
       no-repeat,
       var(--void);
     color: var(--text);
@@ -135,7 +138,18 @@
     background: var(--surface); border-inline-start: 2px solid var(--accent);
   }
 
-  .lyrics { white-space: pre-line; max-inline-size: 60ch; color: var(--text); }
+  .lyrics { max-inline-size: 60ch; color: var(--text); }
+  .lyrics .line { display: block; min-block-size: 1lh; }
+  /* with cues the panel scrolls itself, so the sung line stays in view without moving the page */
+  .lyrics.is-live { position: relative; max-block-size: 24rem; overflow-y: auto; overscroll-behavior: contain; padding-inline: 0.75rem 1rem; }
+  .lyrics.is-live .line { color: color-mix(in oklch, var(--text-dim) 70%, transparent); }
+  .lyrics .cue {
+    font: inherit; color: inherit; text-align: start; background: none; border: 0; cursor: pointer;
+    inline-size: 100%; padding: 0 0 0 0.75rem; margin-inline-start: -0.75rem;
+    border-inline-start: 2px solid transparent;
+  }
+  .lyrics .cue:hover { color: var(--text); }
+  .lyrics .line.is-current { color: var(--text); border-inline-start-color: var(--accent); }
 
   /* list-style none removes list semantics in Safari; the role restores it */
   .tracklist ol { list-style: none; padding: 0; display: grid; gap: 0.1rem; }
@@ -149,6 +163,12 @@
     min-block-size: 3rem;
     text-decoration: none;
     border-inline-start: 2px solid transparent;
+    position: relative;
+  }
+  /* playback progress of the current title, set by album.js */
+  .tracklist a[aria-current="true"]::after {
+    content: ""; position: absolute; inset-inline-start: 0; inset-block-end: 0;
+    block-size: 2px; inline-size: calc(var(--progress, 0) * 100%); background: var(--accent);
   }
   .tracklist img { inline-size: 100%; aspect-ratio: 16 / 9; object-fit: cover; opacity: 0.6; }
   .tracklist a:hover { background: var(--surface); }
@@ -179,7 +199,8 @@
     .tracklist a { grid-template-columns: 1.75rem 4.5rem minmax(0, 1fr) auto; gap: 0.6rem; }
   }
   @media (prefers-reduced-motion: no-preference) {
-    :root { transition: --accent 0.8s ease; }
+    :root { transition: --accent 0.8s ease, --glow 0.12s linear; }
+    .lyrics .line { transition: color 0.2s, border-color 0.2s; }
     .tracklist a, .tracklist img, .track-title { transition: background-color 0.15s, opacity 0.15s, color 0.15s; }
   }
   @media (prefers-reduced-motion: reduce) {

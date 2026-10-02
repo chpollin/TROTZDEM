@@ -60,6 +60,39 @@ def display_lyrics(text):
     return "\n".join(lines)
 
 
+def norm(text):
+    return re.sub(r"[^\w]", "", text.lower())
+
+
+def live_data(song_dir, display):
+    """Loudness at 10 Hz and line cues for the page, so it can follow the music and the singing.
+
+    The cues map the forced alignment (source/align.json) onto the display lyrics in order.
+    The aligner tends to stretch a line's first word back into the pause before it, so a
+    long gap after the first word moves the cue to just before the second word.
+    """
+    m = re.search(r"const AUDIO_RMS = \[([^\]]*)\]", (song_dir / "analysis.js").read_text(encoding="utf-8"))
+    rms = [int(v) for v in m.group(1).split(",") if v] if m else []
+    envelope = [round(sum(rms[i:i + 5]) / len(rms[i:i + 5])) for i in range(0, len(rms), 5)]
+    cues = []
+    align = song_dir / "source" / "align.json"
+    if align.exists():
+        lines = [norm(l) for l in display.splitlines()]
+        i = 0
+        for seg in json.loads(align.read_text(encoding="utf-8"))["segments"]:
+            key = norm(seg["text"])
+            j = next((k for k in range(i, len(lines)) if key and lines[k] and (key in lines[k] or lines[k] in key)), None)
+            if j is None:
+                continue
+            words = seg.get("words") or []
+            start = seg["start"]
+            if len(words) > 1 and words[1]["start"] - words[0]["start"] > 1.0:
+                start = words[1]["start"] - 0.3
+            cues.append([round(start, 2), j])
+            i = j + 1
+    return {"rate": 10, "envelope": envelope, "cues": cues}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--release", metavar="TAG", help="encode web versions and use this release's URLs")
@@ -101,6 +134,9 @@ def main():
             # context the page shows above the making paragraph, e.g. for a deliberately provocative text
             "note": s.get("note", ""),
         })
+        (VIDEO / "live").mkdir(exist_ok=True)
+        (VIDEO / "live" / f"{slug}.json").write_text(json.dumps(live_data(VIDEO / slug, lyrics), separators=(",", ":")), encoding="utf-8")
+        songs[-1]["live"] = f"live/{slug}.json"
         making = VIDEO / slug / "making.txt"
         songs[-1]["making"] = making.read_text(encoding="utf-8").strip() if making.exists() else ""
         if args.release:
