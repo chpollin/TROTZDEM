@@ -1,0 +1,4 @@
+# Suno downloads and renders are reproducible, see README
+source/
+out/
+.venv/

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neunundachtzig Tabs</title>
+<style>
+  @font-face { font-family: "Space Mono"; src: url("fonts/SpaceMono-Regular.ttf"); font-weight: 400; }
+  @font-face { font-family: "Space Mono"; src: url("fonts/SpaceMono-Bold.ttf"); font-weight: 700; }
+  @font-face { font-family: "Redaction"; src: url("fonts/Redaction-Regular.ttf"); }
+  @font-face { font-family: "Redaction10"; src: url("fonts/Redaction10-Regular.ttf"); }
+  @font-face { font-family: "Redaction20"; src: url("fonts/Redaction20-Regular.ttf"); }
+  @font-face { font-family: "Redaction35"; src: url("fonts/Redaction35-Regular.ttf"); }
+  @font-face { font-family: "Redaction50"; src: url("fonts/Redaction50-Regular.ttf"); }
+  @font-face { font-family: "Redaction70"; src: url("fonts/Redaction70-Regular.ttf"); }
+  @font-face { font-family: "Redaction100"; src: url("fonts/Redaction100-Regular.ttf"); }
+  :root { --void: #000; --bar: #3a3a3a; --fg: #bbb; }
+  html, body { margin: 0; height: 100%; background: var(--void); overflow: hidden; }
+  canvas { display: block; width: 100vw; height: 56.25vw; max-height: 100vh; max-width: 177.78vh;
+           position: absolute; inset: 0; margin: auto; cursor: pointer; }
+  .render canvas { width: 1920px; height: 1080px; max-width: none; max-height: none; cursor: default; }
+  #bar { position: fixed; left: 0; bottom: 0; height: 3px; background: var(--bar); width: 0; }
+  #time { position: fixed; right: 12px; bottom: 10px; font: 12px "Space Mono", monospace; color: var(--fg);
+          opacity: .5; }
+  .render #bar, .render #time { display: none; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080" aria-label="Musikvideo Neunundachtzig Tabs"></canvas>
+<div id="bar"></div>
+<div id="time"></div>
+<audio id="a" data-src="source/audio.wav"></audio>
+<script src="analysis.js"></script>
+<script src="timeline.js"></script>
+<script src="scene.js"></script>
+<script>
+  const canvas = document.getElementById("c");
+  const ctx = canvas.getContext("2d");
+  const render = new URLSearchParams(location.search).has("render");
+
+  // Fonts must be resolved before the first frame, otherwise text metrics differ between frames.
+  const fontsLoaded = Promise.all(
+    ['400 40px "Space Mono"', '700 40px "Space Mono"']
+      .concat(REDACTION_GRADES.map(g => `40px "${g}"`))
+      .map(f => document.fonts.load(f))
+  );
+
+  if (render) {
+    document.body.classList.add("render");
+    window.renderFrame = t => { drawScene(ctx, t); return canvas.toDataURL("image/png"); };
+    fontsLoaded.then(() => { window.sceneReady = true; });
+  } else {
+    const audio = document.getElementById("a");
+    const bar = document.getElementById("bar");
+    const time = document.getElementById("time");
+    const start = parseFloat(new URLSearchParams(location.search).get("t") || "0");
+    // http.server answers without byte ranges, so seeking only works on an in-memory copy.
+    fetch(audio.dataset.src).then(r => r.blob()).then(b => {
+      audio.src = URL.createObjectURL(b);
+      audio.addEventListener("loadedmetadata", () => { audio.currentTime = start; }, { once: true });
+    });
+    // the help card runs past the end of the song, so the clock keeps going after it
+    let endedAt = null;
+    audio.addEventListener("ended", () => { endedAt = performance.now(); });
+    audio.addEventListener("seeking", () => { endedAt = null; });
+    const tick = () => {
+      const t = endedAt === null ? audio.currentTime
+        : Math.min(SCENE_END, audio.duration + (performance.now() - endedAt) / 1000);
+      drawScene(ctx, t);
+      bar.style.width = (t / (audio.duration || SCENE_END) * 100) + "%";
+      time.textContent = t.toFixed(2);
+      requestAnimationFrame(tick);
+    };
+    const toggle = () => audio.paused ? audio.play() : audio.pause();
+    canvas.addEventListener("click", toggle);
+    addEventListener("keydown", e => {
+      if (e.code === "Space") { e.preventDefault(); toggle(); }
+      if (e.code === "ArrowLeft") audio.currentTime = Math.max(0, audio.currentTime - (e.shiftKey ? 0.1 : 2));
+      if (e.code === "ArrowRight") audio.currentTime += e.shiftKey ? 0.1 : 2;
+    });
+    fontsLoaded.then(() => requestAnimationFrame(tick));
+  }
+</script>
+</body>
+</html>
