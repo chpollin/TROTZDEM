@@ -101,8 +101,12 @@
   .code-link a { color: var(--text-dim); text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
   .code-link a:hover { color: var(--text); }
 
-  .provenance { font-family: var(--font-ui); font-size: 0.85rem; }
-  .provenance a + a { margin-inline-start: 1.5rem; }
+  /* list-style none removes list semantics in Safari; the role restores it */
+  .provenance {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 0.25rem 2rem;
+    font-family: var(--font-ui); font-size: 0.85rem; color: var(--text-dim);
+  }
   .provenance a { color: var(--text-dim); text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
 
   .now-style {
