@@ -16,7 +16,7 @@ generated-with: Claude Code (Claude Opus 5.5)
 
 # Index
 
-TROTZDEM is an album of personal songs generated with Suno, with lyrics by Claude Opus, and a series of music videos rendered entirely from code, published at https://chpollin.github.io/TROTZDEM/. The action layer is `CLAUDE.md` in the repository root.
+TROTZDEM is an experiment with generative AI, an album of songs generated with Suno, with lyrics by Claude Opus, and a series of music videos rendered entirely from code, published at https://chpollin.github.io/TROTZDEM/. The action layer is `CLAUDE.md` in the repository root.
 
 ## Documents
 

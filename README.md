@@ -1,6 +1,6 @@
 # TROTZDEM
 
-TROTZDEM is an album of personal songs written over the last two years, together with a series of music videos rendered entirely from code. The album page is published at https://chpollin.github.io/TROTZDEM/.
+TROTZDEM is an experiment with generative and agentic AI from the last two years, an album of AI-generated songs that deliberately exaggerate experiences of working with AI agents, together with a series of music videos rendered entirely from code. The album page is published at https://chpollin.github.io/TROTZDEM/.
 
 The songs are AI-generated. The music comes from Suno (model v5), the lyrics from Claude Opus, based on prompts, reflections and deep-research results selected and assembled by Christopher Pollin. The videos and the website were written by Claude Opus 5.5 in Claude Code. Each video is a JavaScript program that draws every frame as a function of time, without any image or video model.
 
