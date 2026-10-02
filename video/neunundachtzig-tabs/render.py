@@ -102,7 +102,7 @@ def main():
     subprocess.run(
         ["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(listing),
          "-ss", str(args.start), "-i", str(AUDIO),
-         # the help card runs past the song, so the audio is padded with silence
+         # pad in case the scene runs past the audio
          "-map", "0:v", "-map", "1:a", "-af", "apad", "-t", str(args.end - args.start),
          "-c:v", "copy", "-c:a", "aac", "-b:a", "384k", "-ar", "48000",
          "-movflags", "+faststart", str(out)],

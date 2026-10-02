@@ -684,33 +684,6 @@ function sceneSpoken(ctx, t) {
   ctx.globalAlpha = 1;
 }
 
-// Wording and numbers checked against the services' own sites; see README.
-const HELP = [
-  ["Österreich", "Telefonseelsorge 142"],
-  ["Kinder und Jugendliche", "Rat auf Draht 147"],
-  ["Steiermark", "PsyNot 0800 44 99 33"],
-  ["Deutschland", "TelefonSeelsorge 0800 111 0 111"],
-  ["Schweiz", "Die Dargebotene Hand 143"],
-];
-function sceneHelp(ctx, t) {
-  const a = smooth(span(t, TL.help, TL.help + 0.8));
-  ctx.save(); ctx.globalAlpha = a;
-  lyric(ctx, "Wenn du an Suizid denkst oder in einer Krise bist,", W / 2, 330, 50, 0, C.textHi, "center");
-  lyric(ctx, "ist Hilfe da. Rund um die Uhr und anonym.", W / 2, 396, 50, 0, C.textHi, "center");
-  ctx.font = '400 26px "Space Mono"';
-  const gutter = 36;
-  const left = Math.max(...HELP.map(r => ctx.measureText(r[0]).width));
-  const right = Math.max(...HELP.map(r => ctx.measureText(r[1]).width));
-  const x0 = (W - (left + gutter + right)) / 2;
-  HELP.forEach(([land, num], i) => {
-    const y = 520 + i * 54;
-    ctx.fillStyle = C.text; ctx.textAlign = "right"; ctx.fillText(land, x0 + left, y);
-    ctx.fillStyle = C.textHi; ctx.textAlign = "left"; ctx.fillText(num, x0 + left + gutter, y);
-  });
-  ctx.textAlign = "left";
-  ctx.restore();
-}
-
 function grainAmount(t) {
   if (t < TL.chorus[0].t) return 0.05;
   if (t < TL.bridge) return 0.08;
@@ -722,7 +695,6 @@ function drawScene(ctx, t) {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over"; ctx.filter = "none";
   ctx.fillStyle = C.void; ctx.fillRect(0, 0, W, H);
-  if (t >= TL.help) { sceneHelp(ctx, t); return; }
   if (t >= TL.cut) return;
   if (t < TL.bandIn) sceneCaret(ctx, t);
   else if (t < TL.chorus[3].t) sceneWindow(ctx, t);

@@ -59,13 +59,8 @@
       audio.src = URL.createObjectURL(b);
       audio.addEventListener("loadedmetadata", () => { audio.currentTime = start; }, { once: true });
     });
-    // the help card runs past the end of the song, so the clock keeps going after it
-    let endedAt = null;
-    audio.addEventListener("ended", () => { endedAt = performance.now(); });
-    audio.addEventListener("seeking", () => { endedAt = null; });
     const tick = () => {
-      const t = endedAt === null ? audio.currentTime
-        : Math.min(SCENE_END, audio.duration + (performance.now() - endedAt) / 1000);
+      const t = audio.currentTime;
       drawScene(ctx, t);
       bar.style.width = (t / (audio.duration || SCENE_END) * 100) + "%";
       time.textContent = t.toFixed(2);

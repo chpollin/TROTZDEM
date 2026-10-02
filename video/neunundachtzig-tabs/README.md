@@ -48,10 +48,6 @@ torch is pinned to 2.8 because later torchaudio releases route audio I/O through
 
 The aligner stretches the first word of some lines. The onsets in `timeline.js` were therefore checked against a free transcription of the vocal stem and against its phrase starts; where they disagree, the phrase start was taken.
 
-## Help card
-
-The video ends with crisis numbers for Austria, Styria, Germany and Switzerland, following the WHO resource for filmmakers (2019) and the Austrian guideline for reporting on suicide (Kriseninterventionszentrum Wien, 2025). Numbers and wording were checked on 2 October 2026 against telefonseelsorge.at, rataufdraht.at, psynot-stmk.at, telefonseelsorge.de and 143.ch. "Kostenlos" is left out because Swiss providers may charge for the connection. Check the numbers again before each publication.
-
 ## License
 
 Code in this folder is MIT licensed. The fonts keep their own SIL Open Font License (see `fonts/`). The song and its audio are not covered.

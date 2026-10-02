@@ -38,6 +38,5 @@ const TL = {
   // beat grid of the loud end, fitted to the drum onsets: 106.3 BPM, first downbeat
   endBeat: { downbeat: 87.10, period: 60 / 106.3 },
   cut: 113.2,
-  help: 114.8,
 };
-const SCENE_END = 125;
+const SCENE_END = 114.5;  // end of the audio
