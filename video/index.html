@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TROTZDEM – Musikvideos</title>
+<link rel="stylesheet" href="album.css">
+<script type="module" src="album.js"></script>
+</head>
+<body>
+<header class="masthead">
+  <h1>TROTZDEM</h1>
+</header>
+<main class="album">
+  <section class="stage" aria-labelledby="now-title">
+    <video id="player" controls playsinline preload="metadata"></video>
+    <div class="now">
+      <h2 id="now-title"></h2>
+      <p class="now-meta"><span id="now-track"></span><span id="now-duration"></span></p>
+    </div>
+  </section>
+  <nav class="tracklist" aria-label="Titel">
+    <ol id="tracks" role="list"></ol>
+  </nav>
+  <div id="lyrics" class="lyrics"></div>
+</main>
+</body>
+</html>

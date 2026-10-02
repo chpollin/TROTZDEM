@@ -1,0 +1,123 @@
+@layer reset, base, tokens, layout, components, utilities;
+
+@font-face { font-family: "Space Mono"; src: url("fonts/SpaceMono-Regular.ttf"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Space Mono"; src: url("fonts/SpaceMono-Bold.ttf"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Redaction"; src: url("fonts/Redaction-Regular.ttf"); font-display: swap; }
+@font-face { font-family: "Redaction50"; src: url("fonts/Redaction50-Regular.ttf"); font-display: swap; }
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  body, h1, h2, p, ol { margin: 0; }
+  img, video { display: block; max-inline-size: 100%; }
+}
+
+@layer tokens {
+  /* the album is dark by design, like the videos; there is no light variant */
+  :root {
+    color-scheme: dark;
+    --void: oklch(0 0 0);
+    --surface: oklch(0.17 0.006 285);
+    --surface-hover: oklch(0.22 0.008 285);
+    --text: oklch(0.93 0.004 285);
+    --text-dim: oklch(0.72 0.01 285);
+    --violet: oklch(0.68 0.19 295);
+    --font-type: "Redaction", Georgia, serif;
+    --font-type-worn: "Redaction50", "Redaction", Georgia, serif;
+    --font-ui: "Space Mono", ui-monospace, monospace;
+    --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem);
+    --gap: clamp(1rem, 0.8rem + 1vw, 2rem);
+  }
+}
+
+@layer base {
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--font-type);
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+  :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; }
+  a { color: inherit; }
+}
+
+@layer layout {
+  .masthead { padding-block: var(--gap) 0; padding-inline: var(--gutter); }
+  /* the page is the container, so the album grid can switch columns */
+  body { container-type: inline-size; }
+  .album {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--gap);
+    padding: var(--gap) var(--gutter) calc(var(--gap) * 2);
+    max-inline-size: 110rem;
+    margin-inline: auto;
+  }
+}
+
+@layer components {
+  .masthead h1 {
+    font-family: var(--font-type-worn);
+    font-weight: 400;
+    font-size: clamp(2.5rem, 1.8rem + 3vw, 5rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .stage { display: grid; gap: var(--gap); align-content: start; }
+  #player { inline-size: 100%; aspect-ratio: 16 / 9; background: var(--void); }
+
+  .now h2 { font-weight: 400; font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.75rem); line-height: 1.15; }
+  .now-meta {
+    display: flex; gap: 1.5rem;
+    font-family: var(--font-ui); font-size: 0.9rem; color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+    margin-block-start: 0.4rem;
+  }
+
+  .lyrics { white-space: pre-line; max-inline-size: 60ch; color: var(--text); }
+
+  .tracklist ol { list-style: none; padding: 0; display: grid; gap: 0.25rem; }
+  /* list-style none removes list semantics in Safari; the role restores it */
+  .tracklist a {
+    display: grid;
+    grid-template-columns: 2.25rem 7.5rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+    min-block-size: 3rem;
+    text-decoration: none;
+    background: var(--surface);
+    border-inline-start: 3px solid transparent;
+  }
+  .tracklist a:hover { background: var(--surface-hover); }
+  .tracklist a[aria-current="true"] { border-inline-start-color: var(--violet); background: var(--surface-hover); }
+  .tracklist img { inline-size: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .track-no, .track-duration {
+    font-family: var(--font-ui); font-size: 0.85rem; color: var(--text-dim);
+    font-variant-numeric: tabular-nums;
+  }
+  .track-no { text-align: end; }
+  .track-title { line-height: 1.25; hyphens: auto; overflow-wrap: anywhere; }
+  .tracklist a[aria-current="true"] .track-no { color: var(--violet); }
+}
+
+@layer utilities {
+  /* wide: player and lyrics left, track list right; narrow: stacked */
+  @container (width >= 58rem) {
+    .album {
+      grid-template-columns: minmax(0, 1fr) minmax(20rem, 26rem);
+      grid-template-areas: "stage tracks" "lyrics tracks";
+      align-items: start;
+    }
+    .stage { grid-area: stage; }
+    .lyrics { grid-area: lyrics; }
+    .tracklist { grid-area: tracks; position: sticky; inset-block-start: var(--gap); }
+  }
+  @container (width < 30rem) {
+    .tracklist a { grid-template-columns: 1.75rem 4.5rem minmax(0, 1fr) auto; gap: 0.6rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; }
+  }
+}

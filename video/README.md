@@ -29,6 +29,15 @@ The aligner stretches the first word of some lines. Onsets in a `timeline.js` ar
 
 Suno's terms allow commercial use only of output downloaded through Suno's official download on a paid plan. The audio used here is taken from Suno's public clip video. Before publishing, replace `<folder>/source/audio.wav` with the official download (same length expected) and render again.
 
+## Album page
+
+`index.html` plays every finished video in album order, with the lyrics of the current song; each song is addressable as `#<folder>`, and the next one starts when a video ends. `tools/build_album.py` collects the songs with a rendered `out/<folder>.mp4` into `album.json` and grabs a poster frame per song (time set by `poster` in `songs.json`). Videos and posters stay unversioned, so the page works where the renders are. `tools/serve.py` serves the folder with byte ranges, which seeking in a video needs:
+
+```
+python tools/build_album.py
+python tools/serve.py        # http://127.0.0.1:8089/
+```
+
 ## Preview and render
 
 ```
