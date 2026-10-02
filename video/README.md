@@ -1,6 +1,6 @@
 # TROTZDEM videos
 
-Music videos for the songs of the TROTZDEM playlist, rendered entirely from code. Each song is staged in one interface, without real brands or product UI: "Neunundachtzig Tabs" plays inside a browser window, the others in their own terminal, chat, editor or chart. Lyrics are set in Redaction, whose damage grades carry decay and restoration across the series, with Space Mono for interface text.
+Music videos for the songs of the TROTZDEM playlist, rendered entirely from code. The full production pipeline is described in [../knowledge/video-pipeline-architecture.md](../knowledge/video-pipeline-architecture.md). Each song is staged in one interface, without real brands or product UI: "Neunundachtzig Tabs" plays inside a browser window, the others in their own terminal, chat, editor or chart. Lyrics are set in Redaction, whose damage grades carry decay and restoration across the series, with Space Mono for interface text.
 
 ## Layout
 

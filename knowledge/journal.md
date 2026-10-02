@@ -1,0 +1,29 @@
+---
+title: Journal
+project:
+  name: TROTZDEM
+  repository: https://github.com/chpollin/TROTZDEM
+method:
+  name: Promptotyping
+  url: https://dhcraft.org/Promptotyping/
+status: active
+created: 2026-10-02
+updated: 2026-10-02
+language: en
+authors: [Christopher Pollin]
+generated-with: Claude Code (Claude Opus 5.5)
+---
+
+# Journal
+
+## 2026-10-02
+
+The music videos were built from the Suno playlist "chrisi-trotzdem". The pipeline separates the vocals, aligns the lyrics with Whisper, measures tempo and loudness, and renders a canvas scene per song in a headless browser, described in [video-pipeline-architecture.md](video-pipeline-architecture.md). One build agent writes each scene, the main session checks and publishes it.
+
+Running several render agents in parallel filled the workstation's memory and nearly froze it. Since then one build agent runs at a time with two render workers.
+
+The operator removed the help card with crisis contacts from the end of the first video, because the songs are not meant as suicidal content. No video carries content warnings or end cards.
+
+The album page moved from `video/index.html` to the repository root and is published with GitHub Pages at https://chpollin.github.io/TROTZDEM/. The former chat-style album site stays as `chat.html`, and `video/index.html` redirects. The videos are web encodes attached to the release `videos`, because they are too large for the repository and release assets support seeking.
+
+The page labels the songs as personal and AI-generated (music by Suno, lyrics by Claude Opus, prompted and assembled by the operator with deep-research input) and the videos and site as written by Claude Opus 5.5 in Claude Code, built with context and agentic engineering and entirely vibe coded. It states that every video is code and links each video's `scene.js`. Lyrics and Suno prompt are folded away, and the accent colour follows the playing video.
