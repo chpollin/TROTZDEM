@@ -1,5 +1,5 @@
 /**
- * @typedef {{ slug: string, title: string, duration: number, video: string, poster: string, accent: string, style: string, making: string, lyrics: string }} Song
+ * @typedef {{ slug: string, title: string, duration: number, video: string, poster: string, accent: string, note?: string, style: string, making: string, lyrics: string }} Song
  */
 
 const player = /** @type {HTMLVideoElement} */ (document.getElementById("player"));
@@ -10,6 +10,7 @@ const nowDuration = document.getElementById("now-duration");
 const lyrics = document.getElementById("lyrics");
 const nowStyle = document.getElementById("now-style");
 const nowMaking = document.getElementById("now-making");
+const nowNote = document.getElementById("now-note");
 const nowCode = /** @type {HTMLAnchorElement} */ (document.getElementById("now-code"));
 const CODE_URL = "https://github.com/chpollin/TROTZDEM/blob/main/video/";
 
@@ -60,6 +61,8 @@ function show(songs, play) {
   nowTrack.textContent = `Titel ${pad(i + 1)}`;
   nowDuration.textContent = minutes(song.duration);
   nowStyle.textContent = song.style;
+  nowNote.textContent = song.note ?? "";
+  nowNote.hidden = !song.note;
   nowMaking.textContent = song.making;
   nowCode.href = `${CODE_URL}${song.slug}/scene.js`;
   nowMaking.closest(".making").hidden = !song.making;

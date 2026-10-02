@@ -98,6 +98,8 @@ def main():
             # Suno prompts may span lines; each line is its own clause
             "style": ", ".join(" ".join(l.split()).strip(" ,") for l in meta.get("tags", "").splitlines() if l.strip()),
             "lyrics": lyrics,
+            # context the page shows above the making paragraph, e.g. for a deliberately provocative text
+            "note": s.get("note", ""),
         })
         making = VIDEO / slug / "making.txt"
         songs[-1]["making"] = making.read_text(encoding="utf-8").strip() if making.exists() else ""
