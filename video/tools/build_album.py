@@ -96,7 +96,7 @@ def live_data(song_dir, display):
     cues = []
     align = song_dir / "source" / "align.json"
     if align.exists():
-        lines = [norm(l) for l in display.splitlines()]
+        lines = [norm(line) for line in display.splitlines()]
         i = 0
         for seg in json.loads(align.read_text(encoding="utf-8"))["segments"]:
             key = norm(seg["text"])
@@ -158,7 +158,7 @@ def main():
             # the colour that carries meaning inside this video; the page takes it over
             "accent": s.get("accent", "#a77bff"),
             # Suno prompts may span lines; each line is its own clause
-            "style": ", ".join(" ".join(l.split()).strip(" ,") for l in meta.get("tags", "").splitlines() if l.strip()),
+            "style": ", ".join(" ".join(tag.split()).strip(" ,") for tag in meta.get("tags", "").splitlines() if tag.strip()),
             "lyrics": lyrics,
             # context the page shows above the making paragraph, e.g. for a deliberately provocative text
             "note": s.get("note", ""),
