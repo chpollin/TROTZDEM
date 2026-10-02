@@ -8,10 +8,12 @@
 // centroid, autocorrelation pitch) of source/vocals.wav:
 // - "You are creative and intelligent": the aligner stretched "You" back to 31.98;
 //   the stem is silent 32.0-32.3, the line starts at 32.35.
+// - "Ich" of "Ich denke" starts softly at 29.82 (20 ms envelope, -77 to -42 dB
+//   within 40 ms) and swells to 30.44; "denke" follows the dip at 30.46.
 // - "Ich bin müde und leer" starts at 34.45 (phrase start 34.44), not at 35.04 as
 //   the free transcription says; "leer" is held as a melisma until 37.4.
-// - The Error and Warning lines are not sung. They are set as system output during
-//   the held "leer".
+// - The Error and Warning lines are not sung. The system writes them into the
+//   document as its own rows during the held "leer".
 // - "Trotzdem läuft es weiter" is sung twice: 37.5 with the band, 39.16 a cappella
 //   (instrumental stem below -80 dB from 39.2 to 41.2).
 // - "BE HONEST!" is not where the aligner put it: "BE" is held on one pitch from
@@ -19,7 +21,8 @@
 //   sibilant of "ST" is at 48.35. The second one mirrors it: 51.80, 54.30, 56.30,
 //   sibilant 58.45. "LIST AND EXPLAIN" at 49.80 / 50.30 / 50.60.
 // - "Be" 58.80-59.35, vocal silence until 60.68, "honest?" 60.70-61.15.
-// - "Ich weiß nicht mal, was das bedeutet" 62.24-63.6 is sung over a silent band.
+// - "Ich weiß nicht mal, was das bedeutet" 62.34-63.6 is sung over a silent band;
+//   "Ich" has a hard onset at 62.34 (-52 to -17 dB in 20 ms), "weiß" after 62.42.
 // Sections from the instrumental stem: the band stops under "Aber bin ich das?"
 // (14.4-16.4), re-enters on the 16.40 onset; breakdown from 26.4; slam at 41.40;
 // decay 61.2-62.2; quiet re-entry 64.47; loud outro from the 69.52 downbeat
@@ -47,8 +50,8 @@ const TL = {
       { slot: [5, 6], text: "überleben", t: 24.10, b: 25.2 },
     ], keep: [[1, 21.08], [2, 21.90]] },
     { line: 5, grade: 3, edits: [
-      { slot: [0, 0], text: "Ich ", t: 30.20, b: 30.42 },
-      { slot: [1, 1], text: "denke ", t: 30.45, b: 30.7 },
+      { slot: [0, 0], text: "Ich ", t: 29.82, b: 30.40 },
+      { slot: [1, 1], text: "denke ", t: 30.48, b: 30.7 },
       { slot: [2, 4], text: "gar nicht mehr", t: 30.72, b: 31.6 },
     ] },
     { line: 6, grade: 4, edits: [
@@ -59,6 +62,7 @@ const TL = {
       { slot: [4, 4], text: "leer", t: 35.78, b: 36.1 },
     ] },
   ],
+  // labels padded to equal width so the messages align
   status: [
     { text: "error   personality module not found", t: 36.25 },
     { text: "warning emotional overflow detected", t: 36.85 },
@@ -81,8 +85,8 @@ const TL = {
   ],
   fragment: 51.80,
   collapse: 58.75,
-  broken: { words: [["Be", 58.80], [" .", 59.50], [".", 59.90], [".", 60.30], [" honest?", 60.70]], b: 61.15, grade: 5 },
-  honest: { words: [["Ich ", 62.24], ["weiß ", 62.34], ["nicht ", 62.56], ["mal, ", 62.72], ["was ", 62.94], ["das ", 63.10], ["bedeutet", 63.22]], b: 63.6, grade: 0 },
+  broken: { words: [["Be", 58.80], [" .", 59.50], [".", 59.90], [".", 60.30], [" honest?", 60.70]], b: 61.15, grade: 3 },
+  honest: { words: [["Ich ", 62.34], ["weiß ", 62.42], ["nicht ", 62.56], ["mal, ", 62.72], ["was ", 62.94], ["das ", 63.10], ["bedeutet", 63.22]], b: 63.6, grade: 0 },
   decay: 61.2,
   reinit: 64.47,
   beat: { downbeat: 69.52, period: 60 / 95 },

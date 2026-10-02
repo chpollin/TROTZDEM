@@ -2,16 +2,17 @@
 // seconds; lyric times come from timeline.js. The stage is one configuration
 // field, the system prompt. The machine writes in the second person in Space Mono;
 // the human answers in Redaction by overwriting the machine's words in place.
-// Violet is the only accent and always means the human hand: its caret, its
-// selections, the machine words it keeps.
+// The cover's two colours split the hands: violet is the human's caret, its
+// selections and the machine words it keeps; yellow is the machine's selection,
+// its filter and its own messages.
 
 const W = 1920, H = 1080;
 const REDACTION_GRADES = ["Redaction", "Redaction10", "Redaction20", "Redaction35", "Redaction50", "Redaction70", "Redaction100"];
 
 const C = {
   void: "#000000", field: "#0c0c0f", edge: "#2e2e36", gutter: "#45454e", gutterHi: "#9a9aa3",
-  text: "#8a8a93", textHi: "#ececf0", old: "#b4b4bc", ink: "#121216", machineSel: "#4a4a55",
-  filter: "#b4b4bc", violet: "#a77bff",
+  text: "#8a8a93", textHi: "#ececf0", old: "#b4b4bc", ink: "#121216",
+  violet: "#a77bff", yellow: "#d8cf4a",
 };
 
 // The document lives in world coordinates: the field's top edge is y = 0 and it
@@ -69,6 +70,8 @@ function typedWords(words, b, t, perChar) {
 
 // ---------------------------------------------------------------- document
 
+// Rows: 0-6 inside the field (3 is the human reply), 7-8 the system's own error
+// rows, 9-10 the two "Trotzdem" lines; 7-10 overflow below the field.
 const MACHINE_ROWS = [0, 1, 2, 4, 5, 6];
 const overwriteOf = i => TL.overwrites.find(o => o.line === i);
 // The selection jumps onto a word just before the voice replaces it.
@@ -108,13 +111,16 @@ const humanRuns = (line, t) => {
 };
 
 const rowStart = r => r === 3 ? TL.reply.words[0][1]
-  : r >= 7 ? TL.trotzdem[r - 7].words[0][1] : TL.machine[r].words[0][1];
+  : r === 7 || r === 8 ? TL.status[r - 7].t
+  : r >= 9 ? TL.trotzdem[r - 9].words[0][1] : TL.machine[r].words[0][1];
 
 function docRows(t) {
   const rows = [];
   MACHINE_ROWS.forEach(i => { if (t >= rowStart(i)) rows[i] = machineRuns(i, t); });
   if (t >= rowStart(3)) rows[3] = humanRuns(TL.reply, t);
-  TL.trotzdem.forEach((l, k) => { if (t >= rowStart(7 + k)) rows[7 + k] = humanRuns(l, t); });
+  // the system writes into the human's text, inverted, at machine speed
+  TL.status.forEach((s, k) => { if (t >= s.t) rows[7 + k] = [{ kind: "m", text: typed(s.text, s.t, s.t + 0.3, t), inverted: true }]; });
+  TL.trotzdem.forEach((l, k) => { if (t >= rowStart(9 + k)) rows[9 + k] = humanRuns(l, t); });
   return rows;
 }
 
@@ -137,7 +143,8 @@ function activeCaret(t) {
   MACHINE_ROWS.forEach(i => ev.push([rowStart(i), i, "m"]));
   ev.push([rowStart(3), 3, "h"]);
   TL.overwrites.forEach(o => ev.push([o.edits[0].t - 0.2, o.line, "h"]));
-  [7, 8].forEach(r => ev.push([rowStart(r), r, "h"]));
+  [7, 8].forEach(r => ev.push([rowStart(r), r, "m"]));
+  [9, 10].forEach(r => ev.push([rowStart(r), r, "h"]));
   ev.sort((a, b) => a[0] - b[0]);
   let cur = ev[0];
   for (const e of ev) if (t >= e[0]) cur = e;
@@ -147,7 +154,7 @@ function activeCaret(t) {
 function caretX(ctx, row, kind, t) {
   const runs = docRows(t)[row] || [];
   const end = layoutRuns(ctx, runs);
-  if (kind !== "h") return end;
+  if (kind !== "h") return end + (runs[0] && runs[0].inverted ? 16 : 0);
   // while overwriting, the human caret sits after the word it is typing, or runs
   // along the machine word it is singing and keeping
   let x = null, at = -Infinity;
@@ -162,50 +169,45 @@ const ASC = DOC.size * 0.8, DESC = DOC.size * 0.28;
 function drawRuns(ctx, runs, y, o = {}) {
   for (const r of runs) {
     ctx.font = runFont(r);
-    if (o.selectAll) { ctx.fillStyle = C.machineSel; ctx.fillRect(r.x, y - ASC, r.w + 1, ASC + DESC); }
+    if (o.selectAll) { ctx.fillStyle = C.yellow; ctx.fillRect(r.x, y - ASC, r.w + 1, ASC + DESC); }
     if (r.sel) { ctx.fillStyle = C.violet; ctx.fillRect(r.x - 4, y - ASC, r.wTrim + 8, ASC + DESC); }
+    if (r.inverted) { ctx.fillStyle = C.yellow; ctx.fillRect(r.x - 14, y - ASC - 4, r.wTrim + 28, ASC + DESC + 8); }
     if (r.filtered) {
       // the content filter covers the word with a solid bar
-      ctx.fillStyle = C.filter; ctx.fillRect(r.x - 2, y - ASC - 2, r.wTrim + 4, ASC + DESC - 2);
+      ctx.fillStyle = C.yellow; ctx.fillRect(r.x - 2, y - ASC - 2, r.wTrim + 4, ASC + DESC - 2);
       continue;
     }
-    ctx.fillStyle = r.sel ? C.ink : r.kind === "h" ? C.textHi : (o.color || C.textHi);
+    ctx.fillStyle = r.sel || r.inverted || o.selectAll ? C.ink : r.kind === "h" ? C.textHi : (o.color || C.textHi);
     ctx.fillText(r.text, r.x, y);
     if (r.under > 0) { ctx.fillStyle = C.violet; ctx.fillRect(r.x, y + DESC + 4, r.wTrim * r.under, 4); }
   }
 }
 
-function drawCaret(ctx, kind, x, y, on = true) {
+function drawCaret(ctx, kind, x, y, on = true, size = DOC.size, flare = 0) {
   if (!on) return;
   if (kind === "m") {
-    ctx.fillStyle = C.textHi; ctx.fillRect(x + 3, y - DOC.size * 0.74, DOC.size * 0.55, DOC.size * 0.94);
+    ctx.fillStyle = C.textHi; ctx.fillRect(x + 3, y - size * 0.74, size * 0.55, size * 0.94);
   } else {
-    ctx.fillStyle = C.violet; ctx.fillRect(x + 5, y - DOC.size * 0.84, 5, DOC.size * 1.08);
+    ctx.fillStyle = C.violet; ctx.fillRect(x + 5, y - size * 0.84, 5 + 9 * flare, size * 1.08);
   }
 }
 
-// draw: 0..1, the field opens from a horizontal line like a tube warming up
-function drawField(ctx, f, h, draw = 1) {
-  if (draw <= 0) return;
-  const w = f.w * outCubic(span(draw, 0, 0.45)), hh = Math.max(2, h * outCubic(span(draw, 0.3, 1)));
+// The field exists from the first frame as a closed line; open (0..1) folds it
+// down to its height.
+function drawField(ctx, f, h, open = 1) {
+  const hh = Math.max(2, h * outCubic(open));
   ctx.fillStyle = C.field;
-  ctx.beginPath(); ctx.roundRect(f.x + (f.w - w) / 2, 0, w, hh, 10); ctx.fill();
+  ctx.beginPath(); ctx.roundRect(f.x, 0, f.w, hh, Math.min(10, hh / 2)); ctx.fill();
   ctx.strokeStyle = C.edge; ctx.lineWidth = 1.5; ctx.stroke();
 }
 
-// label left above the field, status right; system output stacks upwards
-function drawStatus(ctx, f, items, alpha = 1) {
-  ctx.save();
-  ctx.globalAlpha = alpha;
+// label and status share one left-aligned row above the field
+const STATUS_X = 150;
+function drawStatus(ctx, f, text, size = 24, color = C.text) {
   ctx.font = mono(24); ctx.fillStyle = C.text;
   ctx.fillText("system", f.x + 2, -24);
-  ctx.textAlign = "right";
-  items.forEach((s, k) => {
-    ctx.fillStyle = s.hi ? C.textHi : C.text;
-    ctx.font = mono(s.size || 24);
-    ctx.fillText(s.text, f.x + f.w, -24 - k * 44);
-  });
-  ctx.restore();
+  ctx.font = mono(size); ctx.fillStyle = color;
+  ctx.fillText(text, f.x + STATUS_X, -24);
 }
 
 function drawGutter(ctx, f, row, hi) {
@@ -222,29 +224,49 @@ function drawGutter(ctx, f, row, hi) {
 const grow = (t, r) => smooth(span(t, rowStart(r) - 0.08, rowStart(r) + 0.3));
 function fieldRows(t) { let n = 1; for (let r = 1; r < FIELD.rows; r++) n += grow(t, r); return n; }
 function contentBottom(t) {
-  const over = grow(t, 7) + grow(t, 8);
-  return fieldH(fieldRows(t)) + over * DOC.lh + over * 12;
+  let over = 0;
+  for (let r = 7; r <= 10; r++) over += grow(t, r);
+  return fieldH(fieldRows(t)) + over * DOC.lh;
 }
 const toScreen = (c, x, y) => [(x - c.fx) * c.s + c.ax, (y - c.fy) * c.s + c.ay];
 const applyCam = (ctx, c) => { ctx.translate(c.ax, c.ay); ctx.scale(c.s, c.s); ctx.translate(-c.fx, -c.fy); };
+const lerpCam = (a, b, k) => ({
+  s: a.s * Math.pow(b.s / a.s, k), fx: lerp(a.fx, b.fx, k), fy: lerp(a.fy, b.fy, k), ax: lerp(a.ax, b.ax, k), ay: lerp(a.ay, b.ay, k),
+});
 
-// Chorus: the camera dives into line 5 on the band's return and follows the caret.
+// the whole document, status row included, at least 48 px from every edge
+function baseCam(t) {
+  const top = -72, bottom = contentBottom(t) + 12;
+  return { s: Math.min(1, (H - 96) / (bottom - top)), fx: W / 2, fy: (top + bottom) / 2, ax: W / 2, ay: H / 2 };
+}
+
+// Chorus: the camera dives into line 5 on the band's return and follows the
+// caret, never past the field's right edge; once "überleben" is typed it pulls
+// back until the whole hybrid line stands in frame.
 const ZOOM = { s: 2.1, ax: 1100, ay: 640 };
-function camera(ctx, t) {
-  const base = { s: 1, fx: W / 2, fy: (-60 + contentBottom(t)) / 2, ax: W / 2, ay: H / 2, e: 0 };
-  const e = outCubic(span(t, TL.bandBack, TL.bandBack + 0.42)) * (1 - smooth(span(t, TL.breakdown, TL.breakdown + 0.8)));
-  if (e <= 0) return base;
-  // the camera trails the caret by averaging its recent positions
+function chorusCam(ctx, t) {
   let sum = 0;
   for (let k = 0; k < 10; k++) {
     const tt = Math.max(TL.bandBack, t - k * 0.045);
     sum += caretX(ctx, 4, tt >= TL.overwrites[0].edits[0].t - 0.2 ? "h" : "m", tt);
   }
-  const fx = Math.max(FIELD.textX - 30 + (ZOOM.ax - 150) / ZOOM.s, sum / 10);
-  return {
-    s: Math.pow(ZOOM.s, e), fx: lerp(base.fx, fx, e), fy: lerp(base.fy, rowY(4) - 24, e),
-    ax: lerp(base.ax, ZOOM.ax, e), ay: lerp(base.ay, ZOOM.ay, e), e,
-  };
+  const minFx = FIELD.textX - 30 + (ZOOM.ax - 150) / ZOOM.s;
+  const maxFx = FIELD.x + FIELD.w + 24 - (W - ZOOM.ax) / ZOOM.s;
+  const track = { s: ZOOM.s, fx: clamp(sum / 10, minFx, maxFx), fy: rowY(4) - 24, ax: ZOOM.ax, ay: ZOOM.ay };
+  const edits = TL.overwrites[0].edits, last = edits[edits.length - 1];
+  const k = smooth(span(t, last.b, last.b + 0.8));
+  if (k <= 0) return track;
+  const rowW = layoutRuns(ctx, docRows(TL.breakdown)[4]) - FIELD.textX;
+  const whole = { s: Math.min(1.1, (W - 200) / rowW), fx: FIELD.textX + rowW / 2, fy: rowY(4) - 24, ax: W / 2, ay: 600 };
+  return lerpCam(track, whole, k);
+}
+function camera(ctx, t) {
+  const base = baseCam(t);
+  const eIn = outCubic(span(t, TL.bandBack, TL.bandBack + 0.42));
+  const eOut = smooth(span(t, TL.breakdown, TL.breakdown + 0.8));
+  if (eIn <= 0 || eOut >= 1) return { ...base, e: 0 };
+  const c = chorusCam(ctx, t);
+  return t < TL.breakdown ? { ...lerpCam(base, c, eIn), e: eIn } : { ...lerpCam(c, base, eOut), e: 1 - eOut };
 }
 
 // ---------------------------------------------------------------- overflow
@@ -282,54 +304,33 @@ function drawDrips(ctx, rows, t) {
   ctx.globalAlpha = 1;
 }
 
-// ---------------------------------------------------------------- intro and document
+// ---------------------------------------------------------------- document scene
 
 const INTRO = "System Prompt initializing...";
-function sceneIntro(ctx, t) {
-  const s = typedWords(TL.intro.words, TL.intro.b, t, 0.1);
-  ctx.font = mono(DOC.size);
-  const x = (W - ctx.measureText(INTRO).width) / 2, y = 562;
-  ctx.fillStyle = C.textHi;
-  ctx.fillText(s, x, y);
-  const on = t < TL.intro.words[0][1] ? Math.floor(t / 0.3) % 2 === 0 : true;
-  drawCaret(ctx, "m", x + ctx.measureText(s).width, y, on);
-}
-
+// From the first frame the field is there as a closed line under its label; the
+// sung first line is typed large into the status slot and shrinks to status size
+// on the hit, when the field folds open.
 function sceneDocument(ctx, t) {
   const rows = docRows(t);
   const cam = camera(ctx, t);
   const caret = activeCaret(t);
   const still = t >= TL.bandStop && t < TL.bandBack;
   const selectAll = t >= TL.slam;
-  const open = span(t, TL.hit + 0.22, TL.hit + 0.62);
-
-  // the intro sentence shrinks into the status on the hit
+  const open = span(t, TL.hit + 0.1, TL.hit + 0.5);
   const morph = smooth(span(t, TL.hit, TL.hit + 0.32));
-  const status = [];
-  if (morph < 1) {
-    ctx.save();
-    ctx.font = mono(DOC.size);
-    const x0 = (W - ctx.measureText(INTRO).width) / 2;
-    const size = lerp(DOC.size, 24, morph);
-    ctx.font = mono(size);
-    const [ex, ey] = toScreen(cam, FIELD.x + FIELD.w, -24);
-    const x1 = ex - ctx.measureText(INTRO).width * 24 / size;
-    ctx.fillStyle = mix(C.textHi, C.text, morph);
-    ctx.fillText(INTRO, lerp(x0, x1, morph), lerp(562, ey, morph));
-    ctx.restore();
-  } else status.push({ text: t >= rowStart(0) - 0.5 ? "ready" : INTRO });
-  const out = TL.status.filter(s => t >= s.t);
-  if (out.length) {
-    status.length = 0;
-    out.reverse().forEach(s => status.push({ text: s.text, hi: true, size: 32 }));
-  }
 
   ctx.save();
   applyCam(ctx, cam);
   drawField(ctx, FIELD, fieldH(fieldRows(t)), open);
-  if (morph >= 1) drawStatus(ctx, FIELD, status);
-  else drawStatus(ctx, FIELD, [], span(t, TL.hit + 0.2, TL.hit + 0.5));
-  if (!rows[0]) { ctx.globalAlpha = span(t, TL.hit + 0.3, TL.hit + 0.6); drawGutter(ctx, FIELD, 0, true); ctx.globalAlpha = 1; }
+  if (t < TL.hit + 0.32) {
+    const size = lerp(DOC.size, 24, morph);
+    const s = t < TL.hit ? typedWords(TL.intro.words, TL.intro.b, t, 0.1) : INTRO;
+    drawStatus(ctx, FIELD, s, size, mix(C.textHi, C.text, morph));
+    ctx.font = mono(size);
+    const on = t < TL.intro.words[0][1] ? beatBlink(t) : t < TL.hit;
+    drawCaret(ctx, "m", FIELD.x + STATUS_X + ctx.measureText(s).width, -24, on, size);
+  } else drawStatus(ctx, FIELD, t >= rowStart(0) - 0.5 ? "ready" : INTRO);
+  if (!rows[0] && t >= TL.hit) { ctx.globalAlpha = span(t, TL.hit + 0.3, TL.hit + 0.6); drawGutter(ctx, FIELD, 0, true); ctx.globalAlpha = 1; }
   rows.forEach((runs, row) => {
     if (!runs) return;
     layoutRuns(ctx, runs);
@@ -377,21 +378,29 @@ function godRow(row, t) {
   return s;
 }
 
-// The camera fits whatever the command has typed so far: one letter fills the
-// frame, and the frame widens with every repeated key and every new row.
-function godFit(adv, t) {
-  let len = 5, rows = 1;
-  TL.god.forEach((row, r) => { const s = godRow(row, t); if (s) { rows = r + 1; len = Math.max(len, s.length + 1); } });
-  const top = -GOD.size * 0.72, bottom = (rows - 1) * GOD.lh + 24;
-  const s = Math.min(2.3, (W - 240) / (len * adv), (H - 200) / (bottom - top));
-  return { s, fx: len * adv / 2, fy: (top + bottom) / 2 };
-}
+// The camera cuts on the vocal onsets instead of following: the first "B" is a
+// wall, the held keys run off the frame edge, "NE" and "LIST" cut back to the
+// whole command, the second "BE" is a wall again, the second "HO" shows it all.
+const GOD_CUTS = [
+  { t: 41.66, s: 5.5, rows: [0, 0] },
+  { t: 44.22, s: 2.9, rows: [0, 1] },
+  { t: 46.15, fit: true, rows: [0, 1] },
+  { t: 49.80, fit: true, rows: [2, 2] },
+  { t: 51.80, s: 4.0, rows: [3, 3] },
+  { t: 54.30, fit: true, rows: [0, 4] },
+];
 function godCam(adv, t) {
-  let s = 0, fx = 0, fy = 0;
-  for (let k = 0; k < 6; k++) {
-    const f = godFit(adv, Math.max(TL.god[0].keys[0][1], t - k * 0.05));
-    s += f.s / 6; fx += f.fx / 6; fy += f.fy / 6;
-  }
+  let i = 0;
+  while (i + 1 < GOD_CUTS.length && t >= GOD_CUTS[i + 1].t) i++;
+  const cut = GOD_CUTS[i], next = i + 1 < GOD_CUTS.length ? GOD_CUTS[i + 1].t : TL.collapse;
+  const top = cut.rows[0] * GOD.lh - GOD.size * 0.72, bottom = cut.rows[1] * GOD.lh + 24;
+  const width = 18 * adv;
+  const s0 = cut.fit ? Math.min((W - 220) / width, (H - 170) / (bottom - top)) : cut.s;
+  // a slow push within each shot
+  const s = s0 * (1 + 0.035 * span(t, cut.t, next));
+  const fx = cut.fit ? width / 2 : (W / 2 - 110) / s0;
+  // walls sit a little low, so the row above stays out of frame
+  const fy = (top + bottom) / 2 + (cut.fit ? 0 : 10);
   return { s, fx, fy, ax: W / 2, ay: H / 2 };
 }
 
@@ -537,22 +546,18 @@ const RESTORE = [
 ];
 const CONVERT_BEAT = 12, READY_BEAT = 14;
 
-// every restored character claims one fragment from the heap
+// Every fragment of the heap flies into a restored character, so the floor is
+// empty once the last machine line has landed.
 function restoreTargets(M) {
   if (M.targets) return M.targets;
-  const out = [];
-  let k = 0;
-  RESTORE.forEach((l, li) => {
-    [...l.text].forEach((ch, c) => {
-      if (ch === " ") return;
-      // two pieces fly per character: the heap empties into the prompt
-      for (let j = 0; j < 2; j++) {
-        // the first line creeps back during the quiet re-entry, one character at a time
-        const t0 = l.slow ? lerp(TL.reinit + 1.2, beatT(0) - 1.0, c / l.text.length) + j * 0.12
-          : beatT(l.beat) - 0.05 + c * 0.012 + j * 0.05;
-        out.push({ li, c, ch, f: M.frags[M.order[k++]], t0, dur: l.slow ? 0.9 : 0.34, lands: j === 1 });
-      }
-    });
+  const chars = [];
+  RESTORE.forEach((l, li) => [...l.text].forEach((ch, c) => { if (ch !== " ") chars.push({ li, c, ch, l }); }));
+  const out = M.order.map((fi, k) => {
+    const { li, c, ch, l } = chars[k % chars.length], j = Math.floor(k / chars.length);
+    // the first line creeps back during the quiet re-entry, one character at a time
+    const t0 = l.slow ? lerp(TL.reinit + 1.2, beatT(0) - 1.0, c / l.text.length) + j * 0.12
+      : beatT(l.beat) - 0.05 + c * 0.012 + j * 0.045;
+    return { li, c, ch, f: M.frags[fi], t0, dur: l.slow ? 0.9 : 0.34, lands: j === 0 };
   });
   M.targets = out;
   M.claim = new Map(out.map(o => [o.f, o]));
@@ -561,18 +566,44 @@ function restoreTargets(M) {
 
 // the human lines sit in rows 4 and 5 and are pushed down as the prompt returns
 const humanRow = (t, k) => 4 + k + outCubic(span(t, beatT(8) - 0.1, beatT(8) + 0.12)) + outCubic(span(t, beatT(10) - 0.1, beatT(10) + 0.12));
+// on these beats the machine also selects the honest line, and is pushed off
+const ATTACK_BEATS = [2, 4, 6, 8, 10];
+const PUNCH_BEATS = [0, 2, 4, 6, 8, 10, CONVERT_BEAT];
 
 function sceneAfter(ctx, t) {
   const M = memo(ctx);
   const targets = restoreTargets(M);
-  const cam = CAM_END, f = FIELD_END;
+  const cam = CAM_END, f = FIELD_END, P = TL.beat.period;
+  const honest = typedWords(TL.honest.words, TL.honest.b, t, 0.09);
+  ctx.font = red(TL.honest.grade, DOC.red);
+  const honestW = ctx.measureText(honest).width;
+
+  // the band stops: everything the machine rebuilt is cut away, only the human
+  // line and its caret stay
+  if (t >= TL.bandEnd) {
+    ctx.save();
+    applyCam(ctx, cam);
+    ctx.fillStyle = C.textHi;
+    ctx.fillText(honest, f.textX, rowY(7));
+    drawCaret(ctx, "h", f.textX + honestW, rowY(7), Math.floor((t - TL.bandEnd) / 0.6) % 2 === 0);
+    ctx.restore();
+    return;
+  }
+
+  // a punch on every restore beat
+  ctx.save();
+  if (t >= beatT(0)) {
+    const b = PUNCH_BEATS.filter(n => t >= beatT(n)).pop();
+    const p = 1 + 0.05 * Math.exp(-12 * (t - beatT(b)));
+    ctx.translate(W / 2, H / 2); ctx.scale(p, p); ctx.translate(-W / 2, -H / 2);
+  }
 
   ctx.save();
   applyCam(ctx, cam);
   if (t >= TL.reinit) {
-    drawField(ctx, f, fieldH(8), span(t, TL.reinit, TL.reinit + 0.7));
-    const init = typed(INTRO, TL.reinit + 0.3, TL.reinit + 1.6, t);
-    drawStatus(ctx, f, [{ text: t >= beatT(READY_BEAT) ? "ready" : init }], span(t, TL.reinit + 0.2, TL.reinit + 0.5));
+    ctx.globalAlpha = span(t, TL.reinit, TL.reinit + 0.2);
+    drawField(ctx, f, fieldH(8), span(t, TL.reinit + 0.1, TL.reinit + 0.7));
+    drawStatus(ctx, f, t >= beatT(READY_BEAT) ? "ready" : typed(INTRO, TL.reinit + 0.3, TL.reinit + 1.6, t));
     for (let r = 0; r < 8; r++) {
       ctx.globalAlpha = span(t, TL.reinit + 0.6 + r * 0.06, TL.reinit + 0.9 + r * 0.06);
       drawGutter(ctx, f, r, false);
@@ -588,8 +619,7 @@ function sceneAfter(ctx, t) {
     if (o && t >= o.t0) continue;
     const p = fragPos(fr, t);
     if (!p) continue;
-    const lift = stir * 16 * fr.seed * (o ? 1 : 0.25);
-    drawFrag(ctx, fr, p.x, p.y - lift, p.v);
+    drawFrag(ctx, fr, p.x, p.y - stir * 16 * fr.seed, p.v);
   }
   for (const o of targets) {
     const tau = (t - o.t0) / o.dur;
@@ -601,58 +631,73 @@ function sceneAfter(ctx, t) {
 
   ctx.save();
   applyCam(ctx, cam);
-  ctx.font = mono(DOC.size);
-  // each line lands with the machine's selection, which then lets go of it
+  // each restored row is held in the machine's selection for one beat, the
+  // cover's yellow bar, and let go on the next beat
+  const held = RESTORE.map(l => t >= beatT(l.beat) && t < beatT(l.beat + 1));
   RESTORE.forEach((l, li) => {
-    const t0 = beatT(l.beat) + (l.slow ? 0 : 0.3), k = span(t, t0, t0 + TL.beat.period * 1.5);
-    if (t < t0 || k >= 1) return;
-    const w = l.text.length * M.docAdv;
-    ctx.fillStyle = C.machineSel;
-    ctx.fillRect(f.textX - 6 + w * outCubic(k), rowY(li) - ASC, (w + 12) * (1 - outCubic(k)), ASC + DESC);
+    if (!held[li]) return;
+    ctx.fillStyle = C.yellow;
+    ctx.fillRect(f.textX - 14, rowY(li) - ASC - 4, f.x + f.w - 40 - f.textX + 14, ASC + DESC + 8);
   });
+  ctx.font = mono(DOC.size);
   for (const o of targets) {
     if (!o.lands || t < o.t0 + o.dur) continue;
-    ctx.fillStyle = mix(C.textHi, C.old, span(t, o.t0 + o.dur, o.t0 + o.dur + 0.6));
+    ctx.fillStyle = held[o.li] ? C.ink : mix(C.textHi, C.old, span(t, o.t0 + o.dur, o.t0 + o.dur + 0.6));
     ctx.fillText(o.ch, f.textX + o.c * M.docAdv, rowY(o.li));
   }
   RESTORE.forEach((l, li) => {
     if (!l.filter || t < beatT(l.filterBeat)) return;
-    ctx.fillStyle = C.filter;
+    ctx.fillStyle = C.yellow;
     ctx.fillRect(f.textX + l.filter[0] * M.docAdv - 2, rowY(li) - ASC - 2, (l.filter[1] - l.filter[0]) * M.docAdv + 4, ASC + DESC - 2);
   });
 
-  // "Be ... honest?" breaks; at the end the machine turns it back into an instruction
+  // "Be ... honest?" breaks; on the convert beat the machine selects it, deletes
+  // it in one frame half a beat later and types its own instruction
   const brokenY = rowY(humanRow(t, 0)), honestY = rowY(humanRow(t, 1));
-  const conv = beatT(CONVERT_BEAT);
+  const conv = beatT(CONVERT_BEAT), del = conv + P / 2;
   const broken = typedWords(TL.broken.words, TL.broken.b, t, 0.09);
-  if (broken && t < conv) {
+  if (broken && t < del) {
     ctx.font = red(TL.broken.grade, DOC.red);
+    const w = ctx.measureText(broken).width;
     // a clean slot while the command is still coming down around it
-    if (t < TL.collapse + 1.2) {
-      ctx.fillStyle = C.void;
-      ctx.fillRect(f.textX - 30, brokenY - ASC - 24, ctx.measureText("Be ... honest?").width + 80, ASC + DESC + 44);
-    }
-    if (t >= conv - 0.16) {
-      ctx.fillStyle = C.machineSel; ctx.fillRect(f.textX - 4, brokenY - ASC, ctx.measureText(broken).width + 8, ASC + DESC);
-    }
-    ctx.fillStyle = mix(C.textHi, C.text, 0.7 * span(t, TL.decay, TL.decay + 1));
+    if (t < TL.collapse + 1.2) { ctx.fillStyle = C.void; ctx.fillRect(f.textX - 30, brokenY - ASC - 24, ctx.measureText("Be ... honest?").width + 80, ASC + DESC + 44); }
+    const sel = t >= conv;
+    if (sel) { ctx.fillStyle = C.yellow; ctx.fillRect(f.textX - 14, brokenY - ASC - 4, w + 28, ASC + DESC + 8); }
+    ctx.fillStyle = sel ? C.ink : mix(C.textHi, C.text, 0.7 * span(t, TL.decay, TL.decay + 1));
     ctx.fillText(broken, f.textX, brokenY);
   }
-  if (t >= conv) {
+  if (t >= del) {
     ctx.font = mono(DOC.size); ctx.fillStyle = C.textHi;
-    ctx.fillText(typed("Be honest.", conv, conv + 0.3, t), f.textX, brokenY);
+    const s = typed("Be honest.", del + 0.04, del + 0.24, t);
+    ctx.fillText(s, f.textX, brokenY);
+    if (t < beatT(READY_BEAT)) drawCaret(ctx, "m", f.textX + ctx.measureText(s).width, brokenY, beatBlink(t) || t < del + 0.5);
   }
-  const honest = typedWords(TL.honest.words, TL.honest.b, t, 0.09);
   if (honest) {
-    ctx.font = red(TL.honest.grade, DOC.red); ctx.fillStyle = C.textHi;
+    ctx.font = red(TL.honest.grade, DOC.red);
+    ctx.fillStyle = C.textHi;
     ctx.fillText(honest, f.textX, honestY);
-    // steady through the silence, then blinking in tempo, then free after the band
-    const on = t < TL.reinit || (t < TL.bandEnd ? beatBlink(t) : Math.floor((t - TL.bandEnd) / 0.6) % 2 === 0);
-    drawCaret(ctx, "h", f.textX + ctx.measureText(honest).width, honestY, on);
+    const a = ATTACK_BEATS.filter(n => t >= beatT(n) && t < beatT(n) + 0.34).pop();
+    let flare = 0;
+    if (a !== undefined) {
+      // the selection lands on the beat, holds for a moment, and is pushed off
+      // to the right against the caret, which does not move
+      const k = outCubic(span(t, beatT(a) + 0.12, beatT(a) + 0.34)), x0 = f.textX - 14, w = honestW + 28;
+      const bx = x0 + w * k, bw = w * (1 - k);
+      ctx.save();
+      ctx.beginPath(); ctx.rect(bx, honestY - ASC - 4, bw, ASC + DESC + 8); ctx.clip();
+      ctx.fillStyle = C.yellow; ctx.fillRect(bx, honestY - ASC - 4, bw, ASC + DESC + 8);
+      ctx.fillStyle = C.ink; ctx.fillText(honest, f.textX, honestY);
+      ctx.restore();
+      flare = 1 - span(t, beatT(a) + 0.12, beatT(a) + 0.34);
+    }
+    // steady through the silence, then blinking in tempo
+    const on = t < TL.reinit || a !== undefined || beatBlink(t);
+    drawCaret(ctx, "h", f.textX + honestW, honestY, on, DOC.size, flare);
   } else if (broken) {
     ctx.font = red(TL.broken.grade, DOC.red);
     drawCaret(ctx, "h", f.textX + ctx.measureText(broken).width, brokenY, true);
   }
+  ctx.restore();
   ctx.restore();
 }
 
@@ -700,8 +745,7 @@ function drawScene(ctx, t) {
   ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over"; ctx.filter = "none";
   ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
   ctx.fillStyle = C.void; ctx.fillRect(0, 0, W, H);
-  if (t < TL.hit) sceneIntro(ctx, t);
-  else if (t < TL.god[0].keys[0][1]) sceneDocument(ctx, t);
+  if (t < TL.god[0].keys[0][1]) sceneDocument(ctx, t);
   else if (t < TL.collapse) sceneGod(ctx, t);
   else {
     if (t < TL.collapse + 1.2) sceneGod(ctx, t);
