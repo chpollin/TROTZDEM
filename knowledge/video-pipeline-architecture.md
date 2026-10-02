@@ -12,7 +12,7 @@ updated: 2026-10-02
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5)
-related: [INDEX.md]
+related: [INDEX.md, project.md]
 ---
 
 # Video Pipeline Architecture
@@ -49,9 +49,9 @@ build_album.py ──► web encode, poster frame, album.json ──► GitHub r
 
 ## Source material
 
-`tools/prepare.py` reads the playlist through Suno's studio API, which answers only with a browser user agent. Audio comes from the public clip video on Suno's CDN, because MP3 and WAV downloads require a logged-in session. Title, Suno style prompt, lyrics and cover are stored in `<slug>/source/`, which is not versioned.
+`tools/prepare.py` reads the playlist through Suno's studio API, which answers only with a browser user agent. Audio comes from the public clip video on Suno's CDN, because MP3 and WAV downloads require a logged-in session. Title, Suno style prompt, lyrics and cover are stored in `<slug>/source/`, which is not versioned. For a song outside the playlist, `tools/prepare_local.py <slug>` starts from `<slug>/source/audio.wav` and an optional `lyrics.txt` and runs the same preparation.
 
-Suno's terms allow public and commercial use only of output downloaded through the official download on a paid plan. Replacing `source/audio.wav` with that download and rendering again is the documented route before any use beyond sharing with friends.
+The rights situation of the Suno audio is described in [project.md](project.md).
 
 ## Preparation
 
@@ -80,7 +80,7 @@ Each song is staged inside one interface of its own (browser window, terminal, c
 
 ## Publishing
 
-`tools/build_album.py` collects every song with a rendered video into `video/album.json` with title, duration, poster, accent, Suno prompt, display lyrics and the paragraph from `<slug>/making.txt`. With `--release videos` it encodes a smaller web version (CRF 28, AAC 192 kbit/s, faststart) into `web/`, which is uploaded to the GitHub release `videos` with `gh release upload`. The videos are too large for the repository, and release assets answer byte-range requests, so the browser can seek.
+`tools/build_album.py` collects every song with a rendered video into `video/album.json` with title, duration, poster, accent, Suno prompt, display lyrics, the paragraph from `<slug>/making.txt` and an optional context note (`note` in `songs.json`). With `--release videos` it encodes a smaller web version (CRF 28, AAC 192 kbit/s, faststart) into `web/`, which is uploaded to the GitHub release `videos` with `gh release upload`. The videos are too large for the repository, and release assets answer byte-range requests, so the browser can seek.
 
 The album page is the repository's `index.html`, served by GitHub Pages from `main` at https://chpollin.github.io/TROTZDEM/. It is a no-build page with an ES module (`video/album.js`) and one stylesheet (`video/album.css`). Each song is addressable as `#<slug>`, the accent colour transitions between songs through a registered custom property, and lyrics and Suno prompt sit in collapsed `details` elements.
 
@@ -88,7 +88,9 @@ The album page is the repository's `index.html`, served by GitHub Pages from `ma
 
 One build agent per song receives a brief with the timing report, the song's lyrics and prompt, the existing scenes as reference, the resource limits and the delivery items (`scene.js`, `timeline.js`, `making.txt`, a poster time and an accent colour). The agent renders stills at chosen moments, inspects them as contact sheets, revises the scene and renders the full video at the end. A second agent reviewed selected drafts against the lyrics and the timing. The main session checks each delivery against the real file state, publishes it and starts the next song.
 
-Resource limits follow from a near freeze of the workstation when several agents rendered at once and filled the memory. Since then one build agent runs at a time with two render workers, stills are rendered in batches of at most eight, contact sheets stay at 320 px per tile, and two heavy commands never run in parallel.
+Rendering runs locally even though the models work in the cloud, and each render worker starts a browser and an ffmpeg process. When about eight agents rendered at once, the workstation's memory filled and it nearly froze. Since then every agent renders with at most two workers, stills in small batches and contact sheets at 320 px per tile, and starts a full render only when no other ffmpeg process is running. Several agents may write code and render stills side by side under these limits.
+
+Whisper hallucinates on sung passages ("Thanks for watching!" where nothing is said) and fails on dialect. Lyrics appear in a video only when they are reliable, from the written lyrics or from the operator. The skill `skill/code-musikvideo/SKILL.md` condenses this workflow for other people.
 
 ## Environment
 
