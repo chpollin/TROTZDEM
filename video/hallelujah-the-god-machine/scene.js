@@ -49,7 +49,6 @@ function keys(t, ks) {
   return ks[ks.length - 1][1];
 }
 
-const audioAt = (arr, t) => (arr[clamp(Math.round(t * AUDIO_RATE), 0, arr.length - 1)] || 0) / 99;
 const beatAt = k => TL.beat.t0 + k * TL.beat.period;
 const beatIndex = t => Math.ceil((t - TL.beat.t0) / TL.beat.period - 1e-6);
 

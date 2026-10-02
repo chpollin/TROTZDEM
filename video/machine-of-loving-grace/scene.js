@@ -263,11 +263,13 @@ function engrave(ctx, strokes, o = {}) {
 
 const CART_CACHE = new Map();
 function cartoucheMemo(r, opt = {}) {
-  const key = r.map(v => v.toFixed(1)).join(",") + JSON.stringify(opt);
+  const q = r.map(v => v.toFixed(1)), key = q.join(",") + JSON.stringify(opt);
   let s = CART_CACHE.get(key);
   if (!s) {
     if (CART_CACHE.size > 300) CART_CACHE.clear();
-    s = cartouche(r[0], r[1], r[2], r[3], opt);
+    // built from the rounded rect, so the result depends only on the key and not on
+    // which frame a parallel worker happened to render first
+    s = cartouche(+q[0], +q[1], +q[2], +q[3], opt);
     CART_CACHE.set(key, s);
   }
   return s;

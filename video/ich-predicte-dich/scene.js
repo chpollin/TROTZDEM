@@ -33,7 +33,6 @@ function mix(h1, h2, k) {
   return "#" + a.map((v, i) => Math.round(lerp(v, b[i], k)).toString(16).padStart(2, "0")).join("");
 }
 
-const audioAt = (arr, t) => (arr[clamp(Math.round(t * AUDIO_RATE), 0, arr.length - 1)] || 0) / 99;
 // onsets of the mix as a list, used as the steps of the sampler
 const ONSETS = AUDIO_ONSETS;
 const lastOnset = t => { let o = -1; for (const x of ONSETS) { if (x > t) break; o = x; } return o; };
@@ -444,8 +443,10 @@ function tailPT(r, T) {
   if (Math.abs(T - 1) < 1e-3) return tailP(r);
   const key = T.toFixed(2);
   if (!(key in TEMP_Z)) {
+    // normalised with the key's T, so the cached value does not depend on the first caller's T
+    const Tk = +key;
     let z = 0;
-    for (let k = 1; k <= VOCAB; k++) z += Math.pow(tailP(k), 1 / T);
+    for (let k = 1; k <= VOCAB; k++) z += Math.pow(tailP(k), 1 / Tk);
     TEMP_Z[key] = z;
   }
   return Math.pow(tailP(r), 1 / T) / TEMP_Z[key];

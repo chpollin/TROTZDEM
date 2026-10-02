@@ -73,7 +73,7 @@ function hopPos(t, sub = 1, snap = 0.3) {
 const V1 = TL.v1, PRE = TL.pre, K1 = TL.chorus1, V2 = TL.v2, BR = TL.bridge, K2 = TL.chorus2, OUT = TL.outro;
 const T_TOOL = wt(V1[0], 4), T_NACHT_WORD = wt(V1[0], 8);
 const T_JAHRE = wt(V1[1], 2), T_GEMACHT = wt(V1[1], 7);
-const T_FAEHIG = wt(V1[2], 6), T_SIND = wt(V1[2], 10);
+const T_FAEHIG = wt(V1[2], 6);
 const T_VATER = wt(V1[3], 4), T_KIND = wt(V1[3], 8);
 const T_CHATBOT = wt(PRE[0], 6), T_FEHLER = wt(PRE[1], 6);
 const T_PLOT = first(PRE[2]) - 0.5;
@@ -84,7 +84,7 @@ const T_SIE = first(V2[0]);
 const T_CASS = first(V2[1]), T_RUH = wt(V2[1], 5);
 const T_WELLE = wt(V2[2], 3), T_BRECHEN = wt(V2[2], 8);
 const T_DISK = wt(V2[3], 2);
-const BR_IN = V2[3].e, BR0 = first(BR[0]);
+const BR_IN = V2[3].e;
 const T_WIR = wt(BR[1], 5), T_FLIP1 = wt(BR[2], 4), T_FLIP2 = wt(BR[3], 3);
 const T_WENN = first(BR[4]), T_UND = first(BR[5]), T_BEGINNT = wt(BR[5], 3);
 const CH2 = first(K2[0]);

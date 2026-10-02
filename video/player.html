@@ -69,11 +69,23 @@
     const bar = document.getElementById("bar");
     const time = document.getElementById("time");
     const start = parseFloat(params.get("t") || "0");
-    // http.server answers without byte ranges, so seeking only works on an in-memory copy
-    fetch(`${song}/source/audio.wav`).then(r => r.blob()).then(b => {
-      audio.src = URL.createObjectURL(b);
+    const useAudio = src => {
       audio.addEventListener("loadedmetadata", () => { audio.currentTime = start; }, { once: true });
+      audio.src = src;
+    };
+    const fetchOk = url => fetch(url).then(r => {
+      if (!r.ok) throw new Error(`${url}: HTTP ${r.status}`);
+      return r;
     });
+    // http.server answers without byte ranges, so seeking only works on an in-memory copy.
+    // source/ is not published, so the public page plays the audio track of the release video.
+    fetchOk(`${song}/source/audio.wav`).then(r => r.blob()).then(b => useAudio(URL.createObjectURL(b)))
+      .catch(() => fetchOk("album.json").then(r => r.json()).then(album => {
+        const entry = album.songs.find(s => s.slug === song);
+        if (!entry || !entry.video) throw new Error(`no release video for ${song}`);
+        useAudio(entry.video);
+      }))
+      .catch(e => console.error(e));
     const tick = () => {
       const t = audio.currentTime;
       drawScene(ctx, t);
