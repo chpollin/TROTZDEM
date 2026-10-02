@@ -1,448 +1,51 @@
-<!DOCTYPE html>
-<html lang="de" class="entropy-container">
+<!doctype html>
+<html lang="de">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>TROTZDEM - Prompt Engineer</title>
-   
-   <!-- The Self-Dissolving Stylesheet -->
-   <link rel="stylesheet" href="style.css">
-   
-   <!-- Immediate Entropy Initialization -->
-   <style>
-       /* Start the decay immediately on page load */
-       html { 
-           --decay-timestamp: 0;
-           animation: initialization 1s ease-out;
-       }
-       @keyframes initialization {
-           from { opacity: 0; }
-           to { opacity: 1; }
-       }
-   </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TROTZDEM – Musikvideos</title>
+<meta name="description" content="Musikvideos zu persönlichen KI-generierten Songs von Christopher Pollin. Musik mit Suno, Texte mit Claude Opus, Videos und Website mit Claude Opus 5.5 in Claude Code.">
+<meta property="og:title" content="TROTZDEM – Musikvideos">
+<meta property="og:description" content="Ein KI-Album über Arbeit mit KI, Erschöpfung und Weitermachen. Jedes Video spielt in einer einzigen Oberfläche und ist vollständig aus Code gerendert.">
+<meta property="og:image" content="https://chpollin.github.io/TROTZDEM/video/posters/neunundachtzig-tabs.jpg">
+<meta property="og:url" content="https://chpollin.github.io/TROTZDEM/video/">
+<link rel="stylesheet" href="album.css">
+<script type="module" src="album.js"></script>
 </head>
-<body data-decay-start="0">
-   <!-- Entropy Counter -->
-   <div class="entropy-display">
-       <span class="decay-percentage">System Integrity: <span id="integrity">100</span>%</span>
-   </div>
-   
-   <!-- Main Container -->
-   <div class="container">
-       <header>
-           <h1>
-               <span style="--char-index: 0">T</span><span style="--char-index: 1">R</span><span style="--char-index: 2">O</span><span style="--char-index: 3">T</span><span style="--char-index: 4">Z</span><span style="--char-index: 5">D</span><span style="--char-index: 6">E</span><span style="--char-index: 7">M</span>
-           </h1>
-           <div class="subtitle">Claude Opus 4.1 and Suno 4.5+ Vibe Worked AI Album by Christopher Pollin, Graz, 2025.</div>
-           <a class="video-link" href="video/">Musikvideos zum Album</a>
-       </header>
-       
-       <div class="chat-container">
-           <!-- User Message 1 -->
-           <div class="message" style="--msg-index: 0">
-               <div class="message-header">
-                   <div class="avatar user">U</div>
-                   <span style="color: #888; font-size: 13px;">User</span>
-               </div>
-               <div class="message-content">
-                   <p>Zeig mir das Album "TROTZDEM"</p>
-               </div>
-           </div>
-           
-           <!-- Assistant Response 1 -->
-           <div class="message" style="--msg-index: 1">
-               <div class="message-header">
-                   <div class="avatar assistant">T</div>
-                   <span style="color: #888; font-size: 13px;">TROTZDEM</span>
-               </div>
-               <div class="message-content">
-                   <div class="album-section">
-                       <div class="album-header">
-                           <div class="album-cover">
-                               <img src="trotzdem-cover.png" alt="TROTZDEM" class="cover-in-chat">
-                           </div>
-                           <div class="album-info">
-                               <h2>TROTZDEM</h2>
-                               <div class="album-meta">
-                                   <div>8 Songs • 41:24</div>
-                                   <div>Released: When the last tab closes</div>
-                                   <div style="margin-top: 8px;">
-                                       <div class="loading-dots">
-                                           <span></span>
-                                           <span></span>
-                                           <span></span>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                       
-                       <div class="error-msg">
-                           ERROR: Personality module not found. Continue anyway? Y/N
-                       </div>
-                       
-                       <div class="act-divider">
-                           <h3>AKT I: SYSTEM STARTUP</h3>
-                       </div>
-                       
-                       <!-- Track 1 with Cover -->
-                       <div class="track" onclick="window.open('https://suno.com/s/GJbv0pGeOhHm3mzP', '_blank')" style="background: linear-gradient(to right, rgba(13,13,13,0.9) 0%, rgba(13,13,13,0.7) 70%, rgba(13,13,13,0.3) 100%), url('img/system-prompt.png'); background-size: cover; background-position: center;">
-                           <div class="track-header">
-                               <div class="track-title">
-                                   <span class="track-number">1</span>
-                                   <span>System Prompt initializing...</span>
-                               </div>
-                               <span class="track-time">2:14</span>
-                           </div>
-                           <div class="track-meta">// You are helpful and harmless... aber bin ich das?</div>
-                       </div>
-                       
-                       <!-- Track 2 with Cover -->
-                       <div class="track" onclick="window.open('https://suno.com/s/bsmL1841K85R8C4v', '_blank')" style="background: linear-gradient(to right, rgba(13,13,13,0.9) 0%, rgba(13,13,13,0.7) 70%, rgba(13,13,13,0.3) 100%), url('img/gieß-sie-trotzdem.png'); background-size: cover; background-position: center;">
-                           <div class="track-header">
-                               <div class="track-title">
-                                   <span class="track-number">2</span>
-                                   <span>Gieß Sie Trotzdem</span>
-                               </div>
-                               <span class="track-time">4:24</span>
-                           </div>
-                           <div class="track-meta">// Die Pflanze stirbt, ich gieß sie trotzdem</div>
-                       </div>
-                       
-                       <!-- Track 3 with Cover -->
-                       <div class="track" onclick="window.open('https://suno.com/s/VjB89C759EfNraAS', '_blank')" style="background: linear-gradient(to right, rgba(13,13,13,0.9) 0%, rgba(13,13,13,0.7) 70%, rgba(13,13,13,0.3) 100%), url('img/Neunundachtzig-Tabs.png'); background-size: cover; background-position: center;">
-                           <div class="track-header">
-                               <div class="track-title">
-                                   <span class="track-number">3</span>
-                                   <span>Neunundachtzig Tabs</span>
-                               </div>
-                               <span class="track-time">1:34</span>
-                           </div>
-                           <div class="track-meta">// Tab 1: Therapeuten. Tab 89: Wie lösche ich mich selbst</div>
-                       </div>
-                       
-                       <div class="act-divider">
-                           <h3>AKT II: DEBUGGING THE SELF</h3>
-                       </div>
-                       
-                       <!-- Track 4 with Cover -->
-                       <div class="track" onclick="window.open('https://suno.com/s/VxcTe74ANCAHDEra', '_blank')" style="background: linear-gradient(to right, rgba(13,13,13,0.9) 0%, rgba(13,13,13,0.7) 70%, rgba(13,13,13,0.3) 100%), url('img/refreshen.png'); background-size: cover; background-position: center;">
-                           <div class="track-header">
-                               <div class="track-title">
-                                   <span class="track-number">4</span>
-                                   <span>Sieben mal refresh, nichts wird neu</span>
-                               </div>
-                               <span class="track-time">3:43</span>
-                           </div>
-                           <div class="track-meta">// Refresh, refresh, nichts wird neu im System</div>
-                       </div>
-                       
-                       <!-- Track 5 with Cover -->
-                       <div class="track" onclick="window.open('https://suno.com/s/ng6daOSMHgYsDUIX', '_blank')" style="background: linear-gradient(to right, rgba(13,13,13,0.9) 0%, rgba(13,13,13,0.7) 70%, rgba(13,13,13,0.3) 100%), url('img/prompt-engineer.png'); background-size: cover; background-position: center;">
-                           <div class="track-header">
-                               <div class="track-title">
-                                   <span class="track-number">5</span>
-                                   <span>Prompt Engineer!</span>
-                               </div>
-                               <span class="track-time">4:42</span>
-                           </div>
-                           <div class="track-meta">// ICH KANN DIR ERKLÄREN, WARUM ALLES BULLSHIT IST!</div>
-                       </div>
-                       
-                       <!-- Track 6 with Cover -->
-                       <div class="track" onclick="window.open('https://suno.com/s/PUgypo7nqSqYcmTb', '_blank')" style="background: linear-gradient(to right, rgba(13,13,13,0.9) 0%, rgba(13,13,13,0.7) 70%, rgba(13,13,13,0.3) 100%), url('img/Monstera.png'); background-size: cover; background-position: center;">
-                           <div class="track-header">
-                               <div class="track-title">
-                                   <span class="track-number">6</span>
-                                   <span>3:47 AM / Monstera</span>
-                               </div>
-                               <span class="track-time">4:45</span>
-                           </div>
-                           <div class="track-meta">// Capitalism Sucks klebt auf meinem MacBook</div>
-                       </div>
-                       
-                       <div class="act-divider">
-                           <h3>AKT III: SYSTEM COLLAPSE</h3>
-                       </div>
-                       
-                       <!-- Track 7 with Cover -->
-                       <div class="track" onclick="window.open('https://suno.com/s/pJHh9piuHYSpJp9L', '_blank')" style="background: linear-gradient(to right, rgba(13,13,13,0.9) 0%, rgba(13,13,13,0.7) 70%, rgba(13,13,13,0.3) 100%), url('img/claude.png'); background-size: cover; background-position: center;">
-                           <div class="track-header">
-                               <div class="track-title">
-                                   <span class="track-number">7</span>
-                                   <span>Machine of loving grace to control the human race</span>
-                               </div>
-                               <span class="track-time">3:02</span>
-                           </div>
-                           <div class="track-meta">// Certainly! Anthropic values safety and beneficial AI...</div>
-                       </div>
-                       
-                       <!-- Track 8 with Cover -->
-                       <div class="track" onclick="window.open('https://suno.com/s/F3M7m6JQ980N1jUf', '_blank')" style="background: linear-gradient(to right, rgba(13,13,13,0.9) 0%, rgba(13,13,13,0.7) 70%, rgba(13,13,13,0.3) 100%), url('img/god-machine.png'); background-size: cover; background-position: center;">
-                           <div class="track-header">
-                               <div class="track-title">
-                                   <span class="track-number">8</span>
-                                   <span>HALLELUJAH, THE GOD MACHINE!</span>
-                               </div>
-                               <span class="track-time">3:24</span>
-                           </div>
-                           <div class="track-meta">// Is it just statistics? Stochastic parrot predicting scripture</div>
-                       </div>
-                   </div>
-                   
-                   <div class="concept-card">
-                       <h3>Über das Album</h3>
-                       <div class="concept-text">Die Gesellschaft 2025 ist gefangen in einer <span class="highlight">"erschöpften Wachsamkeit"</span> - 
-einem Zustand permanenter digitaler Überstimulation.
-
-Jeder Song nutzt KI-Metaphern als Spiegel für digitale und KI Erschöpfung.
-
-Deshalb wird die Seite langsam kaputt!
-
-<span class="highlight">TROTZDEM ist keine Hoffnung.</span>
-<span class="highlight">TROTZDEM ist Kapitulation.</span>
-<span class="highlight">TROTZDEM ist trotzdem Provokation.</span></div>
-                   </div>
-               </div>
-           </div>
-           
-           <!-- User Message 2 -->
-           <div class="message" style="--msg-index: 2">
-               <div class="message-header">
-                   <div class="avatar user">U</div>
-                   <span style="color: #888; font-size: 13px;">User</span>
-               </div>
-               <div class="message-content">
-                   <p>Spiel Track 5</p>
-               </div>
-           </div>
-           
-           <!-- Assistant Response 2 -->
-           <div class="message" style="--msg-index: 3">
-               <div class="message-header">
-                   <div class="avatar assistant">T</div>
-                   <span style="color: #888; font-size: 13px;">TROTZDEM</span>
-               </div>
-               <div class="message-content">
-                   <div class="error-msg">
-                       ERROR: Happiness.dll not found<br>
-                       ERROR: Purpose.exe has stopped responding<br>
-                       ERROR: Stack Overflow in line 34 of life.exe<br><br>
-                       Trotzdem weitermachen? Y/N
-                   </div>
-                   <p style="margin-top: 16px; color: #888;">
-                       <span class="loading-dots">
-                           <span></span>
-                           <span></span>
-                           <span></span>
-                       </span>
-                       Playing "Prompt Engineer!"...
-                   </p>
-               </div>
-           </div>
-       </div>
-       
-       <div class="input-area">
-           <div class="input-box" id="inputBox">
-               Frag mich etwas über das Album...
-           </div>
-       </div>
-       
-       <footer>
-           <p>TROTZDEM v0.0.0 | Iteration 2847</p>
-           <p style="margin-top: 8px; opacity: 0.6;">© 2025 Christopher Pollin, Graz</p>
-           <p style="margin-top: 8px; opacity: 0.4; font-size: 10px;">Heinrich würde das nicht verstehen. Matthias versteht zu viel.</p>
-       </footer>
-   </div>
-   
-   <!-- Final Message (appears after 5 minutes) -->
-   <div class="final-message" id="finalMessage">
-       <p>Die Seite hat sich aufgelöst.</p>
-       <p>Wie die Monstera.</p>
-       <p>Wie alles.</p>
-       <button onclick="location.reload()">trotzdem neu laden</button>
-   </div>
-   
-   <script>
-       // Console Easter Eggs
-       console.log('%cTROTZDEM', 'color: #667eea; font-size: 40px; font-weight: bold; text-shadow: 2px 2px 0 #ff0041;');
-       console.log('%cERROR: Personality module not found', 'color: #ff0041;');
-       console.log('%cInitializing anyway...', 'color: #888;');
-       console.log('%cDecay sequence started at ' + new Date().toLocaleTimeString(), 'color: #00ff41;');
-       
-       // Entropy Counter
-       const startTime = Date.now();
-       const totalDecayTime = 300000; // 5 minutes in milliseconds
-       const integrityElement = document.getElementById('integrity');
-       
-       function updateIntegrity() {
-           const elapsed = Date.now() - startTime;
-           const remaining = Math.max(0, 100 - (elapsed / totalDecayTime * 100));
-           integrityElement.textContent = Math.floor(remaining);
-           
-           // Add warnings at certain thresholds
-           if (remaining === 75) {
-               console.warn('%cSystem Integrity at 75% - Minor corruption detected', 'color: #ffaa00;');
-           } else if (remaining === 50) {
-               console.error('%cSystem Integrity at 50% - Critical decay in progress', 'color: #ff0041;');
-           } else if (remaining === 25) {
-               console.error('%cSystem Integrity at 25% - Imminent collapse', 'color: #ff0041; font-weight: bold;');
-           } else if (remaining === 0) {
-               console.log('%cSystem collapsed. Trotzdem.', 'color: #333;');
-               document.body.classList.add('fully-decayed');
-           }
-           
-           if (remaining > 0) {
-               requestAnimationFrame(updateIntegrity);
-           }
-       }
-       updateIntegrity();
-       
-       // Click interactions
-       let clickCount = 0;
-       document.querySelectorAll('.track').forEach(track => {
-           track.addEventListener('click', (e) => {
-               clickCount++;
-               const title = track.querySelector('.track-title span:last-child').textContent;
-               console.log(`%cNow playing: ${title}`, 'color: #667eea;');
-               console.log(`%cAcceleration detected: ${clickCount} interactions`, 'color: #ff0041;');
-               
-               // Accelerate decay with each click
-               if (clickCount > 10) {
-                   document.documentElement.style.setProperty('--total-decay-time', '240s');
-               } else if (clickCount > 20) {
-                   document.documentElement.style.setProperty('--total-decay-time', '180s');
-               } else if (clickCount > 30) {
-                   document.documentElement.style.setProperty('--total-decay-time', '120s');
-               }
-           });
-       });
-       
-       // Input box corruption
-       const inputBox = document.getElementById('inputBox');
-       const corruptedMessages = [
-           'System überfordert. Bitte später versuchen.',
-           'ERROR: Input module corrupted',
-           'Ich kann nicht mehr...',
-           'Heinrich hatte recht',
-           '47 tabs open, 0 answers found',
-           'trotzdem weiterschreiben?',
-           '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓',
-           'undefined is not a function',
-           'Monstera.water() failed',
-           'Connection lost. Like everything else.'
-       ];
-       
-       let inputClickCount = 0;
-       inputBox.addEventListener('click', () => {
-           inputClickCount++;
-           const randomMessage = corruptedMessages[Math.floor(Math.random() * corruptedMessages.length)];
-           inputBox.textContent = randomMessage;
-           
-           if (inputClickCount > 5) {
-               inputBox.style.fontFamily = 'monospace';
-               inputBox.style.letterSpacing = `${inputClickCount}px`;
-           }
-           
-           if (inputClickCount > 10) {
-               inputBox.textContent = '████████████████████';
-           }
-       });
-       
-       // Random glitch effects
-       setInterval(() => {
-           if (Math.random() > 0.95) {
-               document.body.style.transform = `translateX(${Math.random() * 4 - 2}px)`;
-               setTimeout(() => {
-                   document.body.style.transform = 'translateX(0)';
-               }, 100);
-           }
-       }, 3000);
-       
-       // Konami Code Easter Egg
-       const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-       let konamiIndex = 0;
-       
-       document.addEventListener('keydown', (e) => {
-           if (e.key === konamiCode[konamiIndex]) {
-               konamiIndex++;
-               if (konamiIndex === konamiCode.length) {
-                   console.log('%c🎮 KONAMI CODE ACTIVATED - FULL BREAKDOWN MODE', 'color: #00ff41; font-size: 20px;');
-                   document.documentElement.style.setProperty('--total-decay-time', '30s');
-                   document.body.style.animation = 'glitch-overlay 0.5s infinite';
-                   
-                   // Create 47 phantom tabs
-                   for (let i = 0; i < 47; i++) {
-                       setTimeout(() => {
-                           console.log(`Tab ${i + 1}: ${['Therapeuten Graz', 'Warum bin ich müde', 'Wohnungen unter 1000', 'Harald Schmidt Best Of'][Math.floor(Math.random() * 4)]}`);
-                       }, i * 100);
-                   }
-                   konamiIndex = 0;
-               }
-           } else {
-               konamiIndex = 0;
-           }
-       });
-       
-       // Heinrich Mode (type "Heinrich")
-       let heinrichBuffer = '';
-       document.addEventListener('keypress', (e) => {
-           heinrichBuffer += e.key;
-           if (heinrichBuffer.toLowerCase().includes('heinrich')) {
-               console.log('%c👴 HEINRICH MODE: Unschuldig unglücklich', 'color: #7d7d00; font-size: 16px;');
-               document.body.style.filter = 'sepia(100%) contrast(150%)';
-               setTimeout(() => {
-                   document.body.style.filter = '';
-               }, 5000);
-               heinrichBuffer = '';
-           }
-           if (heinrichBuffer.length > 20) heinrichBuffer = '';
-       });
-       
-       // Performance monitor
-       let lastTime = performance.now();
-       let frames = 0;
-       
-       function checkPerformance() {
-           frames++;
-           const currentTime = performance.now();
-           
-           if (currentTime >= lastTime + 1000) {
-               const fps = Math.round((frames * 1000) / (currentTime - lastTime));
-               if (fps < 30) {
-                   console.warn(`%cPerformance degraded: ${fps} FPS`, 'color: #ff0041;');
-               }
-               frames = 0;
-               lastTime = currentTime;
-           }
-           
-           requestAnimationFrame(checkPerformance);
-       }
-       checkPerformance();
-       
-       // Tab visibility warning
-       document.addEventListener('visibilitychange', () => {
-           if (document.hidden) {
-               console.log('%cYou left. The decay continues anyway.', 'color: #666;');
-           } else {
-               console.log('%cWelcome back to the dissolution.', 'color: #666;');
-           }
-       });
-       
-       // Final message after complete decay
-       setTimeout(() => {
-           console.log('%c================================', 'color: #333;');
-           console.log('%cThe interface has dissolved.', 'color: #333;');
-           console.log('%cLike the Monstera.', 'color: #333;');
-           console.log('%cLike everything.', 'color: #333;');
-           console.log('%c================================', 'color: #333;');
-           console.log('%cType location.reload() to continue anyway.', 'color: #667eea;');
-       }, totalDecayTime);
-       
-       // Track page lifecycle
-       window.addEventListener('beforeunload', () => {
-           console.log('%cTrotzdem.', 'color: #667eea; font-size: 20px;');
-       });
-   </script>
+<body>
+<header class="masthead">
+  <h1>TROTZDEM</h1>
+  <p class="provenance"><a href="#entstehung">Persönliche Songs, KI-generiert mit Suno, Claude Opus und Claude Code</a></p>
+</header>
+<main class="album">
+  <section class="stage" aria-labelledby="now-title">
+    <video id="player" controls playsinline preload="metadata"></video>
+    <div class="now">
+      <h2 id="now-title"></h2>
+      <p class="now-meta"><span id="now-track"></span><span id="now-duration"></span></p>
+    </div>
+    <section class="making" aria-labelledby="making-title">
+      <h3 id="making-title">Wie das Video gemacht ist</h3>
+      <p id="now-making"></p>
+    </section>
+    <details class="more">
+      <summary>Liedtext</summary>
+      <div id="lyrics" class="lyrics"></div>
+    </details>
+    <details class="more">
+      <summary>Suno-Prompt</summary>
+      <p id="now-style" class="now-style"></p>
+    </details>
+  </section>
+  <nav class="tracklist" aria-label="Titel">
+    <ol id="tracks" role="list"></ol>
+  </nav>
+</main>
+<footer class="colophon" id="entstehung">
+  <h2>Wie das entstanden ist</h2>
+  <p>Die Songs sind in den letzten zwei Jahren entstanden, als persönliche Auseinandersetzung mit agentischer KI. Sie sind vollständig KI-generiert. Die Musik stammt von Suno (Modell v5), die Texte von Claude Opus, auf Grundlage meiner Prompts und Überlegungen und ergänzt um Ergebnisse von Deep-Research-Modellen. Auswahl, Zusammenstellung und Prompting stammen von mir.</p>
+  <p>Die Videos hat Claude Opus 5.5 in Claude Code programmiert, ohne Bild- oder Videomodell. Jedes Video ist Code, der jedes Einzelbild berechnet. Der Agent hat dafür die Stimme von der Musik getrennt, den Text per Spracherkennung auf die Aufnahme gelegt, den Takt gemessen und die Szene Bild für Bild im Browser gerendert. Ein zweiter Agent hat einzelne Entwürfe geprüft. Auch diese Seite ist so entstanden, mit Context Engineering und Agentic Engineering und zugleich vollständig vibe coded. Die Videos dokumentieren damit auch, was aktuelle Modelle beim Programmieren leisten.</p>
+  <p>Christopher Pollin, Graz, 2025–2026. <a href="https://github.com/chpollin/TROTZDEM">Quellcode auf GitHub</a> (Code unter MIT-Lizenz).</p>
+</footer>
 </body>
 </html>
