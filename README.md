@@ -8,6 +8,7 @@ The songs are AI-generated. The music comes from Suno (model v5), the lyrics fro
 
 - `index.html` is the album page, carried by `video/album.css`, `video/album.js` and the generated `video/album.json`.
 - `video/` holds one folder per song with its scene, timeline and audio analysis, plus the Python tools for preparation, rendering and publishing. [video/README.md](video/README.md) has the commands.
+- `skill/code-musikvideo/SKILL.md` is a Claude Code skill (German) for building such a video from your own song.
 - `knowledge/` holds the project knowledge, starting at [knowledge/INDEX.md](knowledge/INDEX.md). How the videos are produced is described in [knowledge/video-pipeline-architecture.md](knowledge/video-pipeline-architecture.md).
 - `chat.html` with `style.css` and `img/` is the first version of the album site (2025).
 
