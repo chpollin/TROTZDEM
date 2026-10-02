@@ -15,7 +15,7 @@
 <body>
 <header class="masthead">
   <h1>TROTZDEM</h1>
-  <p class="provenance"><a href="#entstehung">Persönliche Songs, KI-generiert mit Suno, Claude Opus und Claude Code</a></p>
+  <p class="provenance"><a href="#entstehung">Persönliche Songs, KI-generiert. Jedes Video ist reiner Code.</a></p>
 </header>
 <main class="album">
   <section class="stage" aria-labelledby="now-title">
@@ -27,6 +27,7 @@
     <section class="making" aria-labelledby="making-title">
       <h3 id="making-title">Wie das Video gemacht ist</h3>
       <p id="now-making"></p>
+      <p class="code-link"><a id="now-code" href="">Code dieses Videos auf GitHub</a></p>
     </section>
     <details class="more">
       <summary>Liedtext</summary>
@@ -44,7 +45,7 @@
 <footer class="colophon" id="entstehung">
   <h2>Wie das entstanden ist</h2>
   <p>Die Songs sind in den letzten zwei Jahren entstanden, als persönliche Auseinandersetzung mit agentischer KI. Sie sind vollständig KI-generiert. Die Musik stammt von Suno (Modell v5), die Texte von Claude Opus, auf Grundlage meiner Prompts und Überlegungen und ergänzt um Ergebnisse von Deep-Research-Modellen. Auswahl, Zusammenstellung und Prompting stammen von mir.</p>
-  <p>Die Videos hat Claude Opus 5.5 in Claude Code programmiert, ohne Bild- oder Videomodell. Jedes Video ist Code, der jedes Einzelbild berechnet. Der Agent hat dafür die Stimme von der Musik getrennt, den Text per Spracherkennung auf die Aufnahme gelegt, den Takt gemessen und die Szene Bild für Bild im Browser gerendert. Ein zweiter Agent hat einzelne Entwürfe geprüft. Auch diese Seite ist so entstanden, mit Context Engineering und Agentic Engineering und zugleich vollständig vibe coded. Die Videos dokumentieren damit auch, was aktuelle Modelle beim Programmieren leisten.</p>
+  <p>Die Videos sind vollständig aus Code entstanden, ohne Bild- oder Videomodell. Jedes Video ist ein JavaScript-Programm, das jedes Einzelbild als Funktion der Zeit auf eine Zeichenfläche malt. Geschrieben hat es Claude Opus 5.5 in Claude Code, und der Code jedes Videos ist auf GitHub einsehbar. Python übernimmt alles drumherum. Es trennt die Stimme von der Musik, legt den Text per Spracherkennung auf die Aufnahme, misst den Takt und lässt einen Browser das Programm Bild für Bild rendern, ffmpeg setzt die Bilder zum Video zusammen. Ein zweiter Agent hat einzelne Entwürfe geprüft. Auch diese Seite ist so entstanden, mit Context Engineering und Agentic Engineering und zugleich vollständig vibe coded. Die Videos dokumentieren damit auch, was aktuelle Modelle beim Programmieren leisten.</p>
   <p>Christopher Pollin, Graz, 2025–2026. <a href="https://github.com/chpollin/TROTZDEM">Quellcode auf GitHub</a> (Code unter MIT-Lizenz). <a href="chat.html">Erste Fassung der Albumseite (2025)</a>.</p>
 </footer>
 </body>

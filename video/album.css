@@ -93,6 +93,9 @@
   }
   .making h3 { margin: 0 0 0.5rem; }
   .making p { margin: 0; color: var(--text); }
+  .making .code-link { margin-block-start: 0.6rem; font-family: var(--font-ui); font-size: 0.85rem; }
+  .code-link a { color: var(--text-dim); text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
+  .code-link a:hover { color: var(--text); }
 
   .provenance { font-family: var(--font-ui); font-size: 0.85rem; }
   .provenance a { color: var(--text-dim); text-decoration-color: var(--accent); text-underline-offset: 0.2em; }

@@ -10,6 +10,8 @@ const nowDuration = document.getElementById("now-duration");
 const lyrics = document.getElementById("lyrics");
 const nowStyle = document.getElementById("now-style");
 const nowMaking = document.getElementById("now-making");
+const nowCode = /** @type {HTMLAnchorElement} */ (document.getElementById("now-code"));
+const CODE_URL = "https://github.com/chpollin/TROTZDEM/blob/main/video/";
 
 // album.json and the posters live next to this script; the page may sit elsewhere
 const base = new URL("./", import.meta.url);
@@ -59,6 +61,7 @@ function show(songs, play) {
   nowDuration.textContent = minutes(song.duration);
   nowStyle.textContent = song.style;
   nowMaking.textContent = song.making;
+  nowCode.href = `${CODE_URL}${song.slug}/scene.js`;
   nowMaking.closest(".making").hidden = !song.making;
   lyrics.textContent = song.lyrics;
   tracks.querySelectorAll("a").forEach((a, j) => {
