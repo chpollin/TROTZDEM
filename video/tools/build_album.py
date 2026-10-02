@@ -2,11 +2,18 @@
 
 Reads songs.json (order and optional poster times), each song's source/meta.json
 and source/lyrics.txt, probes the rendered MP4 and grabs a poster frame into
-<song>/out/poster.jpg. Songs without a rendered video are left out, so running
+posters/<song>.jpg. Songs without a rendered video are left out, so running
 this again after a new render adds that song.
 
-    python tools/build_album.py
+Videos are too large for the Pages repository, so for publishing they are
+encoded smaller into web/ (unversioned) and attached to a GitHub release; with
+--release the page points at that release instead of the local renders.
+
+    python tools/build_album.py                    # local renders
+    python tools/build_album.py --release videos   # web encodes, release URLs
 """
+
+import argparse
 
 import json
 import re
@@ -14,6 +21,18 @@ import subprocess
 from pathlib import Path
 
 VIDEO = Path(__file__).resolve().parent.parent
+RELEASE_URL = "https://github.com/chpollin/TROTZDEM/releases/download/{tag}/{slug}.mp4"
+
+
+def web_encode(src, dst):
+    if dst.exists() and dst.stat().st_mtime > src.stat().st_mtime:
+        return
+    dst.parent.mkdir(exist_ok=True)
+    subprocess.run(
+        ["ffmpeg", "-v", "error", "-y", "-i", str(src), "-c:v", "libx264", "-preset", "slow", "-crf", "28",
+         "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(dst)],
+        check=True,
+    )
 
 
 def duration(path):
@@ -37,11 +56,14 @@ def display_lyrics(text):
         lines.append(line)
     while lines and lines[-1] == "":
         lines.pop()
-    # drop a leading title line that only repeats the song title in quotes
     return "\n".join(lines)
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--release", metavar="TAG", help="encode web versions and use this release's URLs")
+    args = ap.parse_args()
+    (VIDEO / "posters").mkdir(exist_ok=True)
     cfg = json.loads((VIDEO / "songs.json").read_text(encoding="utf-8"))
     songs = []
     for s in cfg["songs"]:
@@ -52,7 +74,7 @@ def main():
             continue
         meta = json.loads(meta_path.read_text(encoding="utf-8"))
         dur = duration(mp4)
-        poster = mp4.with_name("poster.jpg")
+        poster = VIDEO / "posters" / f"{slug}.jpg"
         subprocess.run(
             ["ffmpeg", "-v", "error", "-y", "-ss", str(s.get("poster", round(dur * 0.45, 2))), "-i", str(mp4),
              "-frames:v", "1", "-vf", "scale=1280:-1", "-q:v", "3", str(poster)],
@@ -68,9 +90,13 @@ def main():
             "title": title,
             "duration": round(dur, 2),
             "video": f"{slug}/out/{slug}.mp4",
-            "poster": f"{slug}/out/poster.jpg",
+            "poster": f"posters/{slug}.jpg",
+            "style": " ".join(meta.get("tags", "").split()),
             "lyrics": lyrics,
         })
+        if args.release:
+            web_encode(mp4, VIDEO / "web" / f"{slug}.mp4")
+            songs[-1]["video"] = RELEASE_URL.format(tag=args.release, slug=slug)
     (VIDEO / "album.json").write_text(json.dumps({"album": "TROTZDEM", "songs": songs}, ensure_ascii=False, indent=2) + "\n",
                                       encoding="utf-8")
     print(f"album.json: {', '.join(s['slug'] for s in songs)}")

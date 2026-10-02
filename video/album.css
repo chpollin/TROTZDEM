@@ -75,6 +75,24 @@
     margin-block-start: 0.4rem;
   }
 
+  .provenance { font-family: var(--font-ui); font-size: 0.85rem; margin-block-start: 0.6rem; }
+  .provenance a { color: var(--text-dim); text-decoration-color: var(--violet); text-underline-offset: 0.2em; }
+
+  .now-style {
+    font-family: var(--font-ui); font-size: 0.85rem; color: var(--text-dim);
+    margin-block-start: 0.75rem; max-inline-size: 70ch;
+  }
+  .now-style .label { color: var(--violet); }
+
+  .colophon {
+    padding: var(--gap) var(--gutter) calc(var(--gap) * 2);
+    max-inline-size: 110rem; margin-inline: auto;
+    color: var(--text-dim);
+  }
+  .colophon h2 { font-weight: 400; font-size: 1.5rem; color: var(--text); margin-block-end: 0.75rem; }
+  .colophon p { max-inline-size: 70ch; margin-block-end: 0.75rem; }
+  .colophon a { color: var(--text); text-decoration-color: var(--violet); text-underline-offset: 0.2em; }
+
   .lyrics { white-space: pre-line; max-inline-size: 60ch; color: var(--text); }
 
   .tracklist ol { list-style: none; padding: 0; display: grid; gap: 0.25rem; }

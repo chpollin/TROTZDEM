@@ -1,5 +1,5 @@
 /**
- * @typedef {{ slug: string, title: string, duration: number, video: string, poster: string, lyrics: string }} Song
+ * @typedef {{ slug: string, title: string, duration: number, video: string, poster: string, style: string, lyrics: string }} Song
  */
 
 const player = /** @type {HTMLVideoElement} */ (document.getElementById("player"));
@@ -8,9 +8,10 @@ const nowTitle = document.getElementById("now-title");
 const nowTrack = document.getElementById("now-track");
 const nowDuration = document.getElementById("now-duration");
 const lyrics = document.getElementById("lyrics");
+const nowStyle = document.getElementById("now-style");
 
 const pad = n => String(n).padStart(2, "0");
-const minutes = s => `${Math.floor(s / 60)}:${pad(Math.round(s % 60))}`;
+const minutes = s => { const r = Math.round(s); return `${Math.floor(r / 60)}:${pad(r % 60)}`; };
 
 /** @param {Song[]} songs */
 function renderList(songs) {
@@ -50,6 +51,7 @@ function show(songs, play) {
   nowTitle.textContent = song.title;
   nowTrack.textContent = `Titel ${pad(i + 1)}`;
   nowDuration.textContent = minutes(song.duration);
+  nowStyle.textContent = song.style;
   lyrics.textContent = song.lyrics;
   tracks.querySelectorAll("a").forEach((a, j) => {
     if (j === i) a.setAttribute("aria-current", "true");

@@ -4,12 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TROTZDEM – Musikvideos</title>
+<meta name="description" content="Musikvideos zum KI-Album TROTZDEM: Songs mit Suno, Texte mit Claude Opus, Videos und Website mit Claude Opus 5.5 in Claude Code.">
+<meta property="og:title" content="TROTZDEM – Musikvideos">
+<meta property="og:description" content="Ein KI-Album über Arbeit mit KI, Erschöpfung und Weitermachen. Jedes Video spielt in einer einzigen Oberfläche und ist vollständig aus Code gerendert.">
+<meta property="og:image" content="https://chpollin.github.io/TROTZDEM/video/posters/neunundachtzig-tabs.jpg">
+<meta property="og:url" content="https://chpollin.github.io/TROTZDEM/video/">
 <link rel="stylesheet" href="album.css">
 <script type="module" src="album.js"></script>
 </head>
 <body>
 <header class="masthead">
   <h1>TROTZDEM</h1>
+  <p class="provenance"><a href="#entstehung">KI-generiert mit Suno, Claude Opus und Claude Code</a></p>
 </header>
 <main class="album">
   <section class="stage" aria-labelledby="now-title">
@@ -17,6 +23,7 @@
     <div class="now">
       <h2 id="now-title"></h2>
       <p class="now-meta"><span id="now-track"></span><span id="now-duration"></span></p>
+      <p class="now-style"><span class="label">Suno-Prompt</span> <span id="now-style"></span></p>
     </div>
   </section>
   <nav class="tracklist" aria-label="Titel">
@@ -24,5 +31,10 @@
   </nav>
   <div id="lyrics" class="lyrics"></div>
 </main>
+<footer class="colophon" id="entstehung">
+  <h2>Wie das entstanden ist</h2>
+  <p>Alles auf dieser Seite ist mit generativer KI entstanden. Die Songs hat Suno erzeugt (Modell v5, 2025). Die Texte hat Claude Opus geschrieben, Christopher Pollin hat sie zusammengesetzt und gepromptet. Die Videos sind vollständig aus Code gerendert, ohne Bild- oder Videomodell. Den Code hat Claude Opus 5.5 in Claude Code geschrieben, ebenso diese Seite.</p>
+  <p>Christopher Pollin, Graz, 2025–2026. <a href="https://github.com/chpollin/TROTZDEM">Quellcode auf GitHub</a> (Code unter MIT-Lizenz).</p>
+</footer>
 </body>
 </html>

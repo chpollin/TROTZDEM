@@ -3,3 +3,5 @@ source/
 out/
 .venv/
 __pycache__/
+# web encodes for the release, see tools/build_album.py
+web/
