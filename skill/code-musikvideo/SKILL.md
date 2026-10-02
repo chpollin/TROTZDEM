@@ -16,14 +16,14 @@ Ein Musikvideo als Programm. Die Funktion `drawScene(ctx, t)` malt zu jedem Zeit
 
 ## Ablauf
 
-1. **Projekt anlegen.** Aus dem TROTZDEM-Repository `video/player.html`, `video/tools/render.py`, `video/tools/analyze.py` und `video/tools/serve.py` übernehmen. Pro Song entsteht ein Ordner `<song>/` mit `source/audio.wav`. `source/` und `out/` kommen in `.gitignore`.
+1. **Projekt anlegen.** Aus dem TROTZDEM-Repository `video/player.html`, `video/fonts/` und aus `video/tools/` die Dateien `render.py`, `analyze.py`, `prepare.py`, `prepare_local.py` und `serve.py` übernehmen. Pro Song entsteht ein Ordner `<song>/` mit `source/audio.wav` und, wenn vorhanden, `source/lyrics.txt` mit einer gesungenen Zeile pro Zeile. `source/` und `out/` kommen in `.gitignore`.
 
-2. **Audio aufbereiten.** In dieser Reihenfolge, alle Ergebnisse in `<song>/source/`:
-   1. Stimme und Instrumente trennen, mit `audio-separator` und dem Modell `model_bs_roformer_ep_317_sdr_12.9755.ckpt`, Ergebnis `vocals.wav` und `instrumental.wav`.
-   2. `python tools/analyze.py <song>` ausführen, Ergebnis `<song>/analysis.js` mit Lautstärke, Anschlagstärke und Anschlägen in 50 Werten pro Sekunde sowie der Lautstärke der Stimme.
-   3. Liegt ein Liedtext vor, ihn mit Whisper large-v3 über `stable-ts` zeilenweise auf `vocals.wav` ausrichten. Zusätzlich frei transkribieren, um zu sehen, was tatsächlich gesungen wird.
-   4. Phrasenanfänge aus der Lautstärke der Stimme und das Tempo in Fenstern von 16 Sekunden aus der Instrumentalspur messen.
-   5. Alles in einen Bericht `source/timing-report.md` schreiben, den der Mensch lesen kann.
+2. **Audio aufbereiten.** `python tools/prepare_local.py <song>` in der Umgebung mit `audio-separator` und `stable-ts` ausführen, bei bekannter Sprache mit `--language de`. Das Skript schreibt alles nach `<song>/source/` und `<song>/analysis.js`:
+   1. Stimme und Instrumente getrennt, mit dem Modell `model_bs_roformer_ep_317_sdr_12.9755.ckpt`, als `vocals.wav` und `instrumental.wav`
+   2. Lautstärke, Anschlagstärke und Anschläge in 50 Werten pro Sekunde sowie die Lautstärke der Stimme in `analysis.js`
+   3. bei vorhandenem Liedtext seine zeilenweise Ausrichtung auf die Stimme mit Whisper large-v3, dazu immer eine freie Transkription
+   4. Phrasenanfänge aus der Lautstärke der Stimme und das Tempo in Fenstern von 16 Sekunden aus der Instrumentalspur
+   5. alles zusammen im Bericht `timing-report.md`
 
 3. **Text prüfen.** Whisper halluziniert bei Gesang, typisch ist „Thanks for watching!“ an Stellen ohne Sprache, und Dialekt erkennt es oft nicht. Ohne verlässlichen Liedtext erscheinen im Video keine Liedzeilen. Dann den Menschen nach dem Text fragen oder das Video ohne Liedtext gestalten, etwa nur mit dem Titel. Der Aligner zieht das erste Wort einer Zeile oft zu früh. Wo Ausrichtung und Phrasenanfang auseinanderliegen, gilt der Phrasenanfang.
 

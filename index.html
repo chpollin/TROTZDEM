@@ -15,7 +15,7 @@
 <body>
 <header class="masthead">
   <h1>TROTZDEM</h1>
-  <p class="provenance"><a href="#entstehung">Persönliche Songs, KI-generiert. Jedes Video ist reiner Code.</a></p>
+  <p class="provenance"><a href="#entstehung">Persönliche Songs, KI-generiert. Jedes Video ist reiner Code.</a> <a href="#selbst-ausprobieren">Selbst ausprobieren</a></p>
 </header>
 <main class="album">
   <section class="stage" aria-labelledby="now-title">
@@ -46,6 +46,12 @@
   <h2>Wie das entstanden ist</h2>
   <p>Die Songs sind in den letzten zwei Jahren entstanden, als persönliche Auseinandersetzung mit agentischer KI. Sie sind vollständig KI-generiert. Die Musik stammt von Suno (Modell v5), die Texte von Claude Opus, auf Grundlage meiner Prompts und Überlegungen und ergänzt um Ergebnisse von Deep-Research-Modellen. Auswahl, Zusammenstellung und Prompting stammen von mir.</p>
   <p>Die Videos sind vollständig aus Code entstanden, ohne Bild- oder Videomodell. Jedes Video ist ein JavaScript-Programm, das jedes Einzelbild als Funktion der Zeit auf eine Zeichenfläche malt. Geschrieben hat es Claude Opus 5.5 in Claude Code, und der Code jedes Videos ist auf GitHub einsehbar. Python übernimmt alles drumherum. Es trennt die Stimme von der Musik, legt den Text per Spracherkennung auf die Aufnahme, misst den Takt und lässt einen Browser das Programm Bild für Bild rendern, ffmpeg setzt die Bilder zum Video zusammen. Ein zweiter Agent hat einzelne Entwürfe geprüft. Auch diese Seite ist so entstanden, mit Context Engineering und Agentic Engineering und zugleich vollständig vibe coded. Die Videos dokumentieren damit auch, was aktuelle Modelle beim Programmieren leisten.</p>
+  <h2 id="selbst-ausprobieren">Selbst ausprobieren</h2>
+  <p><a href="skill/code-musikvideo/SKILL.md" download="SKILL.md">Skill für Claude Code herunterladen (SKILL.md)</a></p>
+  <figure class="prompt">
+    <figcaption>Startprompt für Claude Code</figcaption>
+    <pre>Lies den Skill unter https://chpollin.github.io/TROTZDEM/skill/code-musikvideo/SKILL.md und arbeite danach. Mach aus meinem Song song.wav ein Musikvideo, das vollständig aus Code entsteht. Der Liedtext liegt in lyrics.txt. Prüf zuerst, was auf meinem Rechner installiert ist, und frag mich, bevor du etwas installierst. Leg den Skill zum Schluss unter ~/.claude/skills/code-musikvideo/ ab, damit ich ihn wieder verwenden kann.</pre>
+  </figure>
   <p>Christopher Pollin, Graz, 2025–2026. <a href="https://github.com/chpollin/TROTZDEM">Quellcode auf GitHub</a> (Code unter MIT-Lizenz). <a href="chat.html">Erste Fassung der Albumseite (2025)</a>.</p>
 </footer>
 </body>
