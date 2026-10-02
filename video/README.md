@@ -31,12 +31,16 @@ Suno's terms allow commercial use only of output downloaded through Suno's offic
 
 ## Album page
 
-`index.html` plays every finished video in album order, with the lyrics of the current song; each song is addressable as `#<folder>`, and the next one starts when a video ends. `tools/build_album.py` collects the songs with a rendered `out/<folder>.mp4` into `album.json` and grabs a poster frame per song (time set by `poster` in `songs.json`). Videos and posters stay unversioned, so the page works where the renders are. `tools/serve.py` serves the folder with byte ranges, which seeking in a video needs:
+The album page is the repository's `index.html`, published with GitHub Pages at https://chpollin.github.io/TROTZDEM/. It plays every finished video in album order; each song is addressable as `#<folder>`, and the next one starts when a video ends. Lyrics and the Suno prompt are folded away, and `<folder>/making.txt` holds the paragraph on how the video was made. `video/album.css` and `video/album.js` carry the page, `video/album.json` its data, and `video/index.html` only redirects the former address. The first version of the album site is kept as `chat.html`.
+
+`tools/build_album.py` collects the songs with a rendered `out/<folder>.mp4` into `album.json` and grabs a poster frame per song into `posters/` (time set by `poster` in `songs.json`). The videos are too large for the repository, so for publishing they are encoded smaller into `web/` and attached to the GitHub release `videos`, which the page then plays:
 
 ```
-python tools/build_album.py
-python tools/serve.py        # http://127.0.0.1:8089/
+python tools/build_album.py --release videos
+gh release upload videos web/<folder>.mp4 --clobber
 ```
+
+Without `--release` the page plays the local renders; `tools/serve.py` serves the video folder with byte ranges, which seeking in a local video needs.
 
 ## Preview and render
 

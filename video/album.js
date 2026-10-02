@@ -11,6 +11,10 @@ const lyrics = document.getElementById("lyrics");
 const nowStyle = document.getElementById("now-style");
 const nowMaking = document.getElementById("now-making");
 
+// album.json and the posters live next to this script; the page may sit elsewhere
+const base = new URL("./", import.meta.url);
+const resolve = path => new URL(path, base).href;
+
 const pad = n => String(n).padStart(2, "0");
 const minutes = s => { const r = Math.round(s); return `${Math.floor(r / 60)}:${pad(r % 60)}`; };
 
@@ -24,7 +28,7 @@ function renderList(songs) {
     no.className = "track-no";
     no.textContent = pad(i + 1);
     const img = document.createElement("img");
-    img.src = song.poster;
+    img.src = resolve(song.poster);
     img.alt = "";
     img.loading = "lazy";
     const title = document.createElement("span");
@@ -45,8 +49,8 @@ function show(songs, play) {
   const song = songs[i];
   if (player.dataset.slug !== song.slug) {
     player.dataset.slug = song.slug;
-    player.poster = song.poster;
-    player.src = song.video;
+    player.poster = resolve(song.poster);
+    player.src = resolve(song.video);
   }
   document.title = `${song.title} – TROTZDEM`;
   nowTitle.textContent = song.title;
@@ -65,7 +69,7 @@ function show(songs, play) {
 }
 
 async function main() {
-  const res = await fetch("album.json");
+  const res = await fetch(resolve("album.json"));
   /** @type {{ songs: Song[] }} */
   const album = await res.json();
   const songs = album.songs;
