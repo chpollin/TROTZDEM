@@ -59,7 +59,7 @@
   .masthead h1 {
     font-family: var(--font-type-worn);
     font-weight: 400;
-    font-size: clamp(2.5rem, 1.8rem + 3vw, 5rem);
+    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 3rem);
     letter-spacing: 0.04em;
     line-height: 1;
   }
@@ -84,9 +84,14 @@
 
   .now-style {
     font-family: var(--font-ui); font-size: 0.85rem; color: var(--text-dim);
-    margin-block-start: 0.75rem; max-inline-size: 70ch;
+    max-inline-size: 70ch; margin: 0;
   }
-  .now-style .label { color: var(--violet); }
+
+  .more summary {
+    font-family: var(--font-ui); font-size: 0.85rem; color: var(--violet);
+    cursor: pointer; padding-block: 0.4rem; inline-size: fit-content;
+  }
+  .more[open] summary { margin-block-end: 0.6rem; }
 
   .colophon {
     padding: var(--gap) var(--gutter) calc(var(--gap) * 2);
@@ -103,7 +108,7 @@
   /* list-style none removes list semantics in Safari; the role restores it */
   .tracklist a {
     display: grid;
-    grid-template-columns: 2.25rem 7.5rem minmax(0, 1fr) auto;
+    grid-template-columns: 2rem 5.5rem minmax(0, 1fr) auto;
     align-items: center;
     gap: 0.9rem;
     padding: 0.5rem 0.75rem 0.5rem 0.5rem;
@@ -120,7 +125,7 @@
     font-variant-numeric: tabular-nums;
   }
   .track-no { text-align: end; }
-  .track-title { line-height: 1.25; hyphens: auto; overflow-wrap: anywhere; }
+  .track-title { line-height: 1.25; font-size: 1rem; overflow-wrap: anywhere; }
   .tracklist a[aria-current="true"] .track-no { color: var(--violet); }
 }
 
@@ -128,12 +133,11 @@
   /* wide: player and lyrics left, track list right; narrow: stacked */
   @container (width >= 58rem) {
     .album {
-      grid-template-columns: minmax(0, 1fr) minmax(20rem, 26rem);
-      grid-template-areas: "stage tracks" "lyrics tracks";
+      grid-template-columns: minmax(0, 1fr) minmax(17rem, 21rem);
+      grid-template-areas: "stage tracks";
       align-items: start;
     }
     .stage { grid-area: stage; }
-    .lyrics { grid-area: lyrics; }
     .tracklist { grid-area: tracks; position: sticky; inset-block-start: var(--gap); }
   }
   @container (width < 30rem) {
