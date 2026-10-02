@@ -23,6 +23,8 @@
   #time { position: fixed; right: 12px; bottom: 10px; font: 12px "Space Mono", monospace; color: var(--fg);
           opacity: .5; }
   .render #bar, .render #time { display: none; }
+  .embed canvas { cursor: default; }
+  .embed #bar, .embed #time { display: none; }
 </style>
 </head>
 <body>
@@ -37,6 +39,8 @@
   const params = new URLSearchParams(location.search);
   const song = params.get("song") || "neunundachtzig-tabs";
   const render = params.has("render");
+  // ?embed: a parent page (versions/live) owns the clock and calls drawAt per frame
+  const embed = params.has("embed");
   const SHARED_FONTS = ['400 40px "Space Mono"', '700 40px "Space Mono"', ...[
     "Redaction", "Redaction10", "Redaction20", "Redaction35", "Redaction50", "Redaction70", "Redaction100",
   ].map(f => `40px "${f}"`)];
@@ -62,6 +66,12 @@
     if (render) {
       document.body.classList.add("render");
       window.renderFrame = t => { drawScene(ctx, t); return canvas.toDataURL("image/png"); };
+      window.sceneReady = true;
+      return;
+    }
+    if (embed) {
+      document.body.classList.add("embed");
+      window.drawAt = t => drawScene(ctx, t);
       window.sceneReady = true;
       return;
     }

@@ -1,0 +1,286 @@
+@layer reset, base, tokens, layout, components, utilities;
+
+@font-face { font-family: "Space Mono"; src: url("../../video/fonts/SpaceMono-Regular.ttf"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Space Mono"; src: url("../../video/fonts/SpaceMono-Bold.ttf"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Redaction"; src: url("../../video/fonts/Redaction-Regular.ttf"); font-display: swap; }
+@font-face { font-family: "Redaction50"; src: url("../../video/fonts/Redaction50-Regular.ttf"); font-display: swap; }
+
+/* registered so the accent can glide between songs; unregistered it just switches */
+@property --accent { syntax: "<color>"; inherits: true; initial-value: #a77bff; }
+/* loudness of the playing song, 0 to 1, set on the playing window by oberflaechen.js */
+@property --glow { syntax: "<number>"; inherits: true; initial-value: 0; }
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  body, h1, h2, p, ol, ul { margin: 0; }
+  img, video { display: block; max-inline-size: 100%; }
+  /* windows and the status bar set their own display, which would otherwise override hidden */
+  [hidden] { display: none !important; }
+}
+
+@layer tokens {
+  /* dark by design, like the videos and the album page; there is no light variant */
+  :root {
+    color-scheme: dark;
+    --void: oklch(0 0 0);
+    --desk: oklch(0.12 0.008 285);
+    --desk-dot: oklch(0.2 0.01 285);
+    --surface: oklch(0.17 0.006 285);
+    --surface-hover: oklch(0.22 0.008 285);
+    --line: oklch(0.3 0.01 285);
+    --text: oklch(0.93 0.004 285);
+    --text-dim: oklch(0.72 0.01 285);
+    --shade: oklch(0 0 0);
+    --drop: oklch(0 0 0 / 0.65);
+    --scrim: oklch(0 0 0 / 0.6);
+    --accent: oklch(0.68 0.19 295);
+    --font-type: "Redaction", Georgia, serif;
+    --font-type-worn: "Redaction50", "Redaction", Georgia, serif;
+    --font-ui: "Space Mono", ui-monospace, monospace;
+    --gutter: clamp(1rem, 0.6rem + 2vw, 2rem);
+    --pad: 1rem;
+    --bar: 2.25rem;
+    --side: 15rem;
+  }
+}
+
+@layer base {
+  body {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    min-block-size: 100dvh;
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--font-type);
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    container-type: inline-size;
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  a { color: inherit; }
+}
+
+@layer layout {
+  .topbar {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+    gap: 0.25rem 2rem; padding: 0.6rem var(--gutter);
+    background: var(--void);
+  }
+  .screen { display: grid; grid-template-columns: minmax(0, 1fr); }
+
+  /* narrow: a single window with the earlier ones stacked above it as slivers, the dock below */
+  .desktop {
+    display: flex; flex-direction: column;
+    padding: var(--pad) var(--gutter) calc(var(--pad) * 1.5);
+    background: var(--desk);
+  }
+  .wallpaper { order: -1; margin-block-end: 0.75rem; }
+}
+
+@layer components {
+  .topbar h1 {
+    font-family: var(--font-type-worn); font-weight: 400;
+    font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem); letter-spacing: 0.04em; line-height: 1;
+  }
+  .topbar h1 a { text-decoration: none; }
+  /* list-style none removes list semantics in Safari; the role restores it */
+  .provenance {
+    list-style: none; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 0.15rem 1.5rem;
+    font-family: var(--font-ui); font-size: 0.78rem; color: var(--text-dim);
+  }
+  .provenance a { color: var(--text-dim); text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
+  .provenance a:hover { color: var(--text); }
+
+  .desktop {
+    background-image: radial-gradient(var(--desk-dot) 1px, transparent 1.5px);
+    background-size: 1.5rem 1.5rem;
+  }
+
+  .wallpaper {
+    font-family: var(--font-type-worn);
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 2.25rem);
+    line-height: 1.1;
+    color: color-mix(in oklch, var(--accent) 55%, var(--text-dim));
+    pointer-events: none;
+  }
+  .is-coda .wallpaper { color: var(--text); }
+
+  .win {
+    /* a zero minimum lets long titles truncate instead of widening the window */
+    display: grid; grid-template-columns: minmax(0, 1fr); min-inline-size: 0;
+    background: var(--surface);
+    border: 1px solid color-mix(in oklch, var(--accent) 30%, var(--line));
+    box-shadow: 0 0.75rem 2.5rem var(--drop);
+  }
+  /* windows further back in the album sink under a darker shade */
+  .win::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: var(--shade); opacity: 0;
+  }
+  .win:not(.is-focused) { cursor: pointer; }
+  .win:not(.is-focused)::after { opacity: 0.3; }
+  .win[data-depth="1"]:not(.is-focused)::after { opacity: 0.5; }
+  .win[data-depth="2"]:not(.is-focused)::after { opacity: 0.65; }
+  .win.is-focused {
+    border-color: var(--accent);
+    box-shadow:
+      0 1rem 3rem var(--drop),
+      0 0 calc(0.4rem + var(--glow) * 2.4rem) color-mix(in oklch, var(--accent) calc(12% + var(--glow) * 50%), transparent);
+  }
+
+  .win-bar {
+    display: flex; align-items: center; min-block-size: var(--bar);
+    padding-inline: 0.75rem;
+    background: color-mix(in oklch, var(--accent) 12%, var(--surface));
+    border-block-end: 1px solid color-mix(in oklch, var(--accent) 25%, var(--line));
+  }
+  .is-focused .win-bar { background: color-mix(in oklch, var(--accent) calc(20% + var(--glow) * 30%), var(--surface)); }
+  .win-bar h2 {
+    display: flex; align-items: baseline; gap: 0.75rem; min-inline-size: 0;
+    font-weight: 400; font-size: 0.9rem; line-height: 1.3; white-space: nowrap; overflow: hidden;
+  }
+  .win-ui { font-family: var(--font-ui); font-size: 0.82rem; color: var(--text); }
+  .win-song { font-family: var(--font-type); color: var(--text-dim); overflow: hidden; text-overflow: ellipsis; }
+  .is-focused .win-song { color: var(--text); }
+
+  .win-body { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .win-view { aspect-ratio: 16 / 9; background: var(--void); }
+  .win-view > * { inline-size: 100%; block-size: 100%; object-fit: cover; }
+  .win-view video { object-fit: contain; }
+  .win-side {
+    display: flex; flex-direction: column;
+    block-size: 15rem;
+    border-block-start: 1px solid var(--line);
+  }
+
+  .note {
+    max-inline-size: 80ch; margin: 0.5rem 0.75rem; padding-inline-start: 0.6rem;
+    border-inline-start: 2px solid var(--accent);
+    font-size: 0.85rem; line-height: 1.4; color: var(--text-dim);
+  }
+  .win:not(.is-focused) .note { display: none; }
+
+  .lyrics {
+    flex: 1; min-block-size: 0; overflow: hidden; position: relative;
+    padding: 0.5rem 0.75rem 0.75rem;
+    font-size: 0.95rem; line-height: 1.45; color: var(--text-dim);
+  }
+  .is-focused .lyrics { overflow-y: auto; overscroll-behavior: contain; color: var(--text); }
+  .lyrics .line { display: block; min-block-size: 1lh; }
+  .lyrics.is-live .line { color: color-mix(in oklch, var(--text-dim) 75%, transparent); }
+  .lyrics .cue {
+    font: inherit; color: inherit; text-align: start; background: none; border: 0; cursor: pointer;
+    inline-size: calc(100% + 0.75rem); padding: 0 0 0 0.6rem; margin-inline-start: -0.75rem;
+    border-inline-start: 2px solid transparent;
+  }
+  .lyrics .cue:hover { color: var(--text); }
+  .lyrics .line.is-current { color: var(--text); border-inline-start-color: var(--accent); }
+
+  .win-status {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 1.5rem;
+    padding: 0.35rem 0.75rem;
+    border-block-start: 1px solid var(--line);
+    font-family: var(--font-ui); font-size: 0.78rem; color: var(--text-dim);
+  }
+  .win-status a { text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
+  .win-status a:hover, .win-status summary:hover { color: var(--text); }
+  .win-status summary { cursor: pointer; }
+  .win-status details[open] { flex-basis: 100%; }
+  .win-status details p {
+    max-inline-size: 70ch; max-block-size: 8rem; overflow-y: auto; margin-block: 0.35rem 0.2rem;
+    font-family: var(--font-type); font-size: 0.9rem; line-height: 1.45; color: var(--text);
+  }
+
+  /* narrow: windows the album has passed only show a sliver of their title bar above the playing one */
+  .win { position: relative; }
+  .win.is-focused { order: 1; }
+  .win:not(.is-focused) { margin-block-end: calc(0.55rem - var(--bar)); pointer-events: none; }
+  .win:not(.is-focused) .win-body { display: none; }
+
+  .dock { padding: var(--pad) var(--gutter) calc(var(--pad) * 2); background: var(--void); }
+  .dock-act + .dock-act { margin-block-start: 1rem; }
+  .dock h2 {
+    font-family: var(--font-type-worn); font-weight: 400;
+    font-size: 1.05rem; line-height: 1.2; margin-block-end: 0.3rem;
+  }
+  /* list-style none removes list semantics in Safari; the role restores it */
+  .dock ol { list-style: none; padding: 0; display: grid; gap: 0.1rem; }
+  .dock a {
+    display: grid; align-content: center; min-block-size: 2.75rem;
+    padding: 0.3rem 0.5rem;
+    text-decoration: none;
+    border-inline-start: 2px solid transparent;
+  }
+  .dock a:hover { background: var(--surface-hover); }
+  .dock a[aria-current="true"] { background: var(--surface); border-inline-start-color: var(--accent); }
+  .dock-ui { font-family: var(--font-ui); font-size: 0.8rem; line-height: 1.3; color: var(--text); }
+  .dock-song { font-size: 0.85rem; line-height: 1.25; color: var(--text-dim); overflow-wrap: anywhere; }
+  /* windows the album has not reached yet stay quieter in the dock */
+  .dock a[data-open="false"] .dock-ui { color: var(--text-dim); }
+  .dock-coda { margin-block-start: 1rem; }
+  .dock-coda a { min-block-size: 2.75rem; }
+}
+
+@layer utilities {
+  /* wide: the dock on the left, the desktop as a free surface where windows cascade over each other */
+  @container (width >= 60rem) {
+    .screen { grid-template-columns: 15rem minmax(0, 1fr); }
+    .dock {
+      grid-column: 1; grid-row: 1;
+      /* size containment keeps the long dock from stretching the page; it scrolls instead */
+      contain: size; overflow-y: auto;
+      border-inline-end: 1px solid var(--line);
+      padding-inline: 0.75rem;
+    }
+    .desktop {
+      grid-column: 2; grid-row: 1;
+      display: block; position: relative; overflow: clip;
+      min-block-size: 34rem; padding: 0;
+      --win-w: min(58rem, 76%);
+    }
+    .win {
+      position: absolute;
+      inline-size: var(--win-w);
+      inset-inline-start: calc(var(--pad) + var(--x) * (100% - 2 * var(--pad)));
+      inset-block-start: calc(var(--pad) + var(--y) * (100% - 2 * var(--pad)));
+      translate: calc(var(--x) * -100%) calc(var(--y) * -100%);
+    }
+    .win:not(.is-focused) { margin: 0; pointer-events: auto; }
+    .win:not(.is-focused) .win-body { display: grid; }
+    .win[data-depth="1"]:not(.is-focused) { scale: 0.97; }
+    .win[data-depth="2"]:not(.is-focused) { scale: 0.94; }
+    .win-body { grid-template-columns: minmax(0, 1fr) var(--side); }
+    /* the side column takes the height of the video next to it */
+    .win-side { block-size: auto; contain: size; border-block-start: 0; border-inline-start: 1px solid var(--line); }
+
+    .wallpaper {
+      position: absolute; inset-inline-end: var(--gutter); inset-block-end: var(--gutter);
+      max-inline-size: 14ch; margin: 0; text-align: end;
+      font-size: clamp(2rem, 1rem + 3cqi, 4.5rem); line-height: 1.05;
+    }
+    /* the coda title closes the album in front of every window; an act title passes through the front briefly */
+    :is(.is-coda, .is-switching) .wallpaper {
+      inset: 0; z-index: 100; max-inline-size: none;
+      display: grid; place-items: center; padding: var(--gutter);
+      text-align: center; background: var(--scrim);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .desktop.is-switching:not(.is-coda) .wallpaper { animation: act-switch 2.4s ease forwards; }
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    :root { transition: --accent 0.8s ease; }
+    .win { transition: scale 0.5s ease, border-color 0.3s; }
+    .win::after { transition: opacity 0.4s; }
+    .win.is-focused { transition: --glow 0.12s linear, scale 0.5s ease, border-color 0.3s; }
+    .lyrics .line { transition: color 0.2s, border-color 0.2s; }
+    .dock a { transition: background-color 0.15s; }
+  }
+}
+
+@keyframes act-switch {
+  0% { opacity: 0; }
+  15%, 70% { opacity: 1; }
+  100% { opacity: 0; }
+}

@@ -1,0 +1,202 @@
+@layer reset, base, tokens, layout, components, utilities;
+
+@font-face { font-family: "Space Mono"; src: url("../../video/fonts/SpaceMono-Regular.ttf"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Redaction"; src: url("../../video/fonts/Redaction-Regular.ttf"); font-display: swap; }
+@font-face { font-family: "Redaction50"; src: url("../../video/fonts/Redaction50-Regular.ttf"); font-display: swap; }
+
+/* registered so the accent can glide between songs */
+@property --accent { syntax: "<color>"; inherits: true; initial-value: #a77bff; }
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  body, h1, h2, p, ol, figure, blockquote { margin: 0; }
+  ol { padding: 0; }
+}
+
+@layer tokens {
+  /* dark by design like the videos and the album page; there is no light variant */
+  :root {
+    color-scheme: dark;
+    --void: oklch(0 0 0);
+    --surface: oklch(0.17 0.006 285);
+    --text: oklch(0.93 0.004 285);
+    --text-dim: oklch(0.72 0.01 285);
+    --text-faint: oklch(0.55 0.01 285);
+    --accent: oklch(0.68 0.19 295);
+    /* the caret colour of the scenes, #ececf0 */
+    --caret: oklch(0.944 0.005 286);
+    --font-type: "Redaction", Georgia, serif;
+    --font-type-worn: "Redaction50", "Redaction", Georgia, serif;
+    --font-ui: "Space Mono", ui-monospace, monospace;
+    --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem);
+    --gap: clamp(0.75rem, 0.6rem + 0.8vw, 1.5rem);
+    /* vertical room the stage leaves for masthead, lyrics and transport */
+    --chrome: 18rem;
+  }
+}
+
+@layer base {
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--font-type);
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a { color: inherit; text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
+}
+
+@layer layout {
+  .masthead, .live { max-inline-size: 120rem; margin-inline: auto; padding-inline: var(--gutter); }
+  .masthead {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+    gap: 0.5rem 2rem; padding-block: var(--gap) 0;
+  }
+  body { container-type: inline-size; }
+  .live {
+    display: grid; grid-template-columns: minmax(0, 1fr);
+    gap: calc(var(--gap) * 2); padding-block: var(--gap) calc(var(--gap) * 3);
+  }
+  /* screen, lyrics and transport share one width so they read as one surface */
+  .stage {
+    inline-size: min(100%, max(18rem, calc((100svh - var(--chrome)) * 16 / 9)));
+    margin-inline: auto;
+    display: grid; gap: 0.6rem; align-content: start;
+  }
+}
+
+@layer components {
+  .masthead h1 {
+    font-family: var(--font-type-worn); font-weight: 400;
+    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 3rem); letter-spacing: 0.04em; line-height: 1;
+  }
+  /* list-style none removes list semantics in Safari; the role restores it */
+  .provenance {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 0.25rem 2rem;
+    font-family: var(--font-ui); font-size: 0.85rem; color: var(--text-dim);
+  }
+
+  .screen {
+    position: relative; aspect-ratio: 16 / 9; inline-size: 100%;
+    background: var(--void); overflow: hidden; cursor: pointer;
+    isolation: isolate; container-type: inline-size;
+  }
+  .deck { position: absolute; inset: 0; opacity: 0; }
+  .deck iframe, .deck video {
+    position: absolute; inset: 0; inline-size: 100%; block-size: 100%;
+    border: 0; display: block; background: var(--void);
+  }
+  /* the scene takes no input; clicks belong to the stage */
+  .deck iframe { pointer-events: none; visibility: hidden; }
+  .deck video { object-fit: contain; }
+  /* while a scene draws, the video only keeps time and plays the sound */
+  .deck.is-live iframe { visibility: visible; }
+  .deck.is-live video { opacity: 0; }
+
+  .card {
+    position: absolute; inset: 0; z-index: 1; opacity: 0; pointer-events: none;
+    display: grid; place-content: center; gap: 1rem; padding: var(--gutter);
+    background: var(--void); text-align: center;
+  }
+  /* the closing line stands over the opening frame of the first song */
+  .card.is-over {
+    background: none; align-content: end; padding-block-end: 12cqi;
+    text-shadow: 0 0 1.5rem var(--void), 0 0 0.4rem var(--void);
+  }
+  .atom { position: absolute; inset-block-start: 0; inset-inline-start: 0; z-index: 2; pointer-events: none; }
+  .atom-fade { opacity: 0; }
+  /* 4 x 60 px in scene space, centred on the anchor */
+  .atom-caret {
+    inline-size: max(2px, calc(100cqi * 4 / 1920)); block-size: calc(100cqi * 60 / 1920);
+    translate: -50% -50%; background: var(--caret);
+  }
+  .card blockquote {
+    font-family: var(--font-type-worn); font-size: clamp(1.5rem, 1rem + 3.2cqi, 3.5rem);
+    line-height: 1.15; color: var(--text);
+  }
+  .card figcaption { font-family: var(--font-ui); font-size: clamp(0.75rem, 0.7rem + 0.5cqi, 0.95rem); color: var(--text-dim); }
+
+  .rail {
+    --line-gap: 0.15rem;
+    position: relative; overflow: hidden; block-size: 3.9lh;
+    font-size: clamp(1rem, 0.9rem + 0.5vw, 1.35rem); line-height: 1.35;
+    /* the lines fade towards the edges of the rail; only the alpha of the mask counts */
+    mask-image: linear-gradient(to bottom, transparent, var(--void) 32% 68%, transparent);
+  }
+  .lines { list-style: none; display: grid; gap: var(--line-gap); text-align: center; }
+  .lines .line {
+    display: block; inline-size: 100%; padding: 0 0.5rem; border: 0; background: none;
+    font: inherit; color: var(--text-faint); text-align: center;
+  }
+  .lines .cue { cursor: pointer; }
+  .lines .cue:hover { color: var(--text-dim); }
+  .lines .is-current { color: var(--text); }
+  .lines .is-current::after {
+    content: ""; display: block; inline-size: 2.5rem; block-size: 2px; margin: 0.15rem auto 0;
+    background: var(--accent);
+  }
+
+  .transport {
+    display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center;
+    gap: 0.4rem 1rem;
+  }
+  .seek { grid-column: 1 / -1; inline-size: 100%; margin: 0; accent-color: var(--accent); cursor: pointer; }
+  .play {
+    inline-size: 3rem; block-size: 3rem; display: grid; place-items: center;
+    border: 1px solid var(--text-faint); border-radius: 50%; background: var(--surface);
+    color: var(--text); cursor: pointer;
+  }
+  .play:hover { border-color: var(--accent); }
+  .play svg { inline-size: 1.25rem; block-size: 1.25rem; fill: currentColor; }
+  .play .icon-pause, .play[aria-pressed="true"] .icon-play { display: none; }
+  .play[aria-pressed="true"] .icon-pause { display: block; }
+  .now-title { font-weight: 400; font-size: clamp(1.25rem, 1rem + 1vw, 2rem); line-height: 1.15; overflow-wrap: anywhere; }
+  .time { font-family: var(--font-ui); font-size: 0.85rem; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+
+  .mode { font-family: var(--font-ui); font-size: 0.8rem; color: var(--text-dim); }
+  .mode a { margin-inline-start: 1rem; }
+  .note {
+    max-inline-size: 70ch; padding-inline-start: 1rem;
+    border-inline-start: 2px solid var(--accent); color: var(--text-dim);
+  }
+
+  /* list-style none removes list semantics in Safari; the role restores it */
+  .acts, .tracks { list-style: none; }
+  .acts { display: grid; gap: 1.25rem; }
+  .act-line { font-family: var(--font-type-worn); font-weight: 400; font-size: 1.15rem; line-height: 1.3; margin-block-end: 0.35rem; }
+  .act-line.coda { color: var(--text-dim); }
+  .tracks { display: grid; gap: 0.1rem; }
+  .tracks a {
+    position: relative; display: grid; grid-template-columns: 1.75rem minmax(0, 1fr) auto;
+    align-items: baseline; gap: 0.75rem; padding: 0.4rem 0.6rem 0.4rem 0.4rem; min-block-size: 2.75rem;
+    text-decoration: none; color: var(--text-dim); border-inline-start: 2px solid transparent;
+  }
+  .tracks a:hover { background: var(--surface); color: var(--text); }
+  .tracks a[aria-current="true"] { background: var(--surface); color: var(--text); border-inline-start-color: var(--accent); }
+  /* playback progress of the current title, set by live.js */
+  .tracks a[aria-current="true"]::after {
+    content: ""; position: absolute; inset-inline-start: 0; inset-block-end: 0;
+    block-size: 2px; inline-size: calc(var(--progress, 0) * 100%); background: var(--accent);
+  }
+  .track-no, .track-duration { font-family: var(--font-ui); font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+  .track-no { text-align: end; color: var(--text-faint); }
+  .tracks a[aria-current="true"] .track-no { color: var(--accent); }
+  .track-title { font-size: 1rem; line-height: 1.25; overflow-wrap: anywhere; }
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+@layer utilities {
+  @container (width >= 68rem) {
+    .live { grid-template-columns: minmax(0, 1fr) minmax(16rem, 20rem); align-items: start; }
+    .program { position: sticky; inset-block-start: var(--gap); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    :root { transition: --accent 0.8s ease; }
+    .atom-caret { animation: blink 1.06s steps(1) infinite; }
+    .lines { transition: transform 0.35s ease; }
+    .lines .line { transition: color 0.2s; }
+  }
+}

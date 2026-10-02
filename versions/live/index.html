@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TROTZDEM – Live-Bühne</title>
+<meta name="description" content="Ein Experiment mit generativer KI. Die Musikvideos zu KI-generierten Songs sind Programme und laufen hier live im Browser.">
+<link rel="stylesheet" href="live.css">
+<script type="module" src="live.js"></script>
+</head>
+<body>
+<header class="masthead">
+  <h1>TROTZDEM</h1>
+  <ul class="provenance" role="list">
+    <li>Ein Experiment mit generativer KI</li>
+    <li>Musik KI-generiert mit Suno</li>
+    <li>Texte KI-generiert mit Claude Opus</li>
+    <li>Videos und diese Seite reiner Code, geschrieben von Claude Opus 5.5 in Claude Code</li>
+    <li><a href="../../index.html#entstehung">Wie das entstanden ist</a></li>
+    <li><a href="../../index.html">Albumseite</a></li>
+  </ul>
+</header>
+<main class="live">
+  <section class="stage" aria-labelledby="now-title">
+    <div class="screen" id="screen">
+      <div class="atom" id="atom"><div class="atom-fade" id="atom-fade"><div class="atom-caret"></div></div></div>
+      <figure class="card" id="card">
+        <blockquote><p id="card-line"></p></blockquote>
+        <figcaption id="card-source"></figcaption>
+      </figure>
+    </div>
+    <div class="rail" id="rail" hidden>
+      <ol class="lines" id="lines" role="list" aria-label="Liedtext"></ol>
+    </div>
+    <div class="transport">
+      <input class="seek" id="seek" type="range" min="0" max="1" step="0.1" value="0" aria-label="Position im Song">
+      <button class="play" id="play" type="button" aria-label="Abspielen">
+        <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z"/></svg>
+      </button>
+      <h2 class="now-title" id="now-title"></h2>
+      <p class="time" id="time"></p>
+    </div>
+    <p class="mode" id="mode" aria-live="polite"><span id="mode-text"></span> <a id="code" href="">Code dieses Videos</a></p>
+    <p class="note" id="note" hidden></p>
+  </section>
+  <nav class="program" aria-label="Ablauf">
+    <ol class="acts" id="acts" role="list"></ol>
+  </nav>
+</main>
+</body>
+</html>

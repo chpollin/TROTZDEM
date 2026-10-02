@@ -1,0 +1,29 @@
+{
+  "acts": [
+    {
+      "title": "Am Anfang war der Prompt",
+      "from": "hallelujah-the-god-machine",
+      "songs": ["system-prompt", "im-addicted-to-claude-code", "empire-of-ai", "hallelujah-the-god-machine", "lost-in-the-vault"]
+    },
+    {
+      "title": "Maschinen prompten mich",
+      "from": "prompt-engineer",
+      "songs": ["good-morning-claude", "machine-of-loving-grace", "ich-predicte-dich", "sycophancy", "prompt-engineer"]
+    },
+    {
+      "title": "Ich bin noch im Loop",
+      "from": "bin-ich-noch-der-expert",
+      "songs": ["neunundachtzig-tabs", "bin-ich-noch-der-expert", "the-bitter-lesson"]
+    },
+    {
+      "title": "Die Geister die ich rief",
+      "from": "the-bitter-lesson-remix",
+      "songs": ["the-bitter-lesson-remix"]
+    }
+  ],
+  "coda": {
+    "title": "Trotzdem läuft es weiter",
+    "from": "system-prompt",
+    "songs": []
+  }
+}
