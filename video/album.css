@@ -75,6 +75,10 @@
     margin-block-start: 0.4rem;
   }
 
+  .making { max-inline-size: 70ch; }
+  .making h3 { font-family: var(--font-ui); font-weight: 400; font-size: 0.85rem; color: var(--violet); margin: 0 0 0.4rem; }
+  .making p { margin: 0; color: var(--text); }
+
   .provenance { font-family: var(--font-ui); font-size: 0.85rem; margin-block-start: 0.6rem; }
   .provenance a { color: var(--text-dim); text-decoration-color: var(--violet); text-underline-offset: 0.2em; }
 

@@ -1,0 +1,1 @@
+Bühne ist ein Eingabefeld, über dem sich der Verlauf staut. Jede Zeile wird getippt, während sie gesungen wird, und der Refrain füllt als Schrei das ganze Bild. Der Countdown „Dreizehn Tokens! Acht! Fünf! Drei!“ läuft als Fibonacci-Folge in einer goldenen Spirale ab. Am Rand klebt der Sticker „Tech-Bros suck“, am Schluss bleibt nur noch die Taste F5.

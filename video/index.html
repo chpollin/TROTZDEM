@@ -25,6 +25,10 @@
       <p class="now-meta"><span id="now-track"></span><span id="now-duration"></span></p>
       <p class="now-style"><span class="label">Suno-Prompt</span> <span id="now-style"></span></p>
     </div>
+    <section class="making" aria-labelledby="making-title">
+      <h3 id="making-title">Wie das Video gemacht ist</h3>
+      <p id="now-making"></p>
+    </section>
   </section>
   <nav class="tracklist" aria-label="Titel">
     <ol id="tracks" role="list"></ol>
@@ -34,6 +38,8 @@
 <footer class="colophon" id="entstehung">
   <h2>Wie das entstanden ist</h2>
   <p>Alles auf dieser Seite ist mit generativer KI entstanden. Die Songs hat Suno erzeugt (Modell v5, 2025). Die Texte hat Claude Opus geschrieben, Christopher Pollin hat sie zusammengesetzt und gepromptet. Die Videos sind vollständig aus Code gerendert, ohne Bild- oder Videomodell. Den Code hat Claude Opus 5.5 in Claude Code geschrieben, ebenso diese Seite.</p>
+  <p>Für jedes Video hat Claude Opus 5.5 als Agent in Claude Code zuerst die Stimme von der Musik getrennt, den Text mit einem Spracherkennungsmodell auf die Aufnahme gelegt und den Takt gemessen. Dann entstand die Szene als Programm, das jedes Einzelbild aus der Zeit berechnet, und ein Browser hat sie Bild für Bild gerendert. Einzelne Entwürfe hat ein zweiter, unabhängiger Agent geprüft, seine Kritik floss in die Überarbeitung.</p>
+  <p>Umgesetzt wurde das mit Context Engineering und Agentic Engineering, und trotzdem ist alles zu 100 Prozent vibe coded.</p>
   <p>Christopher Pollin, Graz, 2025–2026. <a href="https://github.com/chpollin/TROTZDEM">Quellcode auf GitHub</a> (Code unter MIT-Lizenz).</p>
 </footer>
 </body>

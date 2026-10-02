@@ -1492,3 +1492,18 @@ body.fully-decayed > *:not(.final-message) {
     97% { transform: translateX(2px); filter: hue-rotate(-90deg); }
     98% { transform: translateX(0); filter: hue-rotate(0deg); }
 }
+
+/* link to the music video page in video/ */
+.video-link {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 10px 18px;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--claude-purple);
+    border: 1px solid var(--claude-purple);
+    border-radius: 4px;
+    text-decoration: none;
+}
+.video-link:hover,
+.video-link:focus-visible { background: var(--claude-purple); color: var(--void); }

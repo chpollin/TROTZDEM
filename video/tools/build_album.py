@@ -29,7 +29,8 @@ def web_encode(src, dst):
         return
     dst.parent.mkdir(exist_ok=True)
     subprocess.run(
-        ["ffmpeg", "-v", "error", "-y", "-i", str(src), "-c:v", "libx264", "-preset", "slow", "-crf", "28",
+        # four threads, so encoding leaves room for renders running alongside
+        ["ffmpeg", "-v", "error", "-y", "-i", str(src), "-c:v", "libx264", "-threads", "4", "-preset", "slow", "-crf", "28",
          "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(dst)],
         check=True,
     )
@@ -62,6 +63,7 @@ def display_lyrics(text):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--release", metavar="TAG", help="encode web versions and use this release's URLs")
+    ap.add_argument("--skip", nargs="*", default=[], help="songs whose render is still a draft")
     args = ap.parse_args()
     (VIDEO / "posters").mkdir(exist_ok=True)
     cfg = json.loads((VIDEO / "songs.json").read_text(encoding="utf-8"))
@@ -70,7 +72,7 @@ def main():
         slug = s["slug"]
         mp4 = VIDEO / slug / "out" / f"{slug}.mp4"
         meta_path = VIDEO / slug / "source" / "meta.json"
-        if not mp4.exists() or not meta_path.exists():
+        if slug in args.skip or not mp4.exists() or not meta_path.exists():
             continue
         meta = json.loads(meta_path.read_text(encoding="utf-8"))
         dur = duration(mp4)
@@ -94,6 +96,8 @@ def main():
             "style": " ".join(meta.get("tags", "").split()),
             "lyrics": lyrics,
         })
+        making = VIDEO / slug / "making.txt"
+        songs[-1]["making"] = making.read_text(encoding="utf-8").strip() if making.exists() else ""
         if args.release:
             web_encode(mp4, VIDEO / "web" / f"{slug}.mp4")
             songs[-1]["video"] = RELEASE_URL.format(tag=args.release, slug=slug)
