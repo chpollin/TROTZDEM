@@ -103,7 +103,7 @@ function recede(F, f) {
   return { cx: F.cx, cy: ya - (130 - H / 2) / (F.ky * f), kx: F.kx * f, ky: F.ky * f };
 }
 const FE1 = recede(FE, 0.88), FE2a = recede(FE, 0.94), FE2b = recede(FE, 0.93);
-const H_CX = nodeX(D_H, G_H) + spanAt(D_H) / 2, H_CY = YD[D_H] + BHF * gapAt(D_H) / 2;
+const H_CX = nodeX(D_H, G_H) + spanAt(D_H) / 2;
 
 // Zoom about the one world point that has the same screen position in both
 // framings, in log scale, so a pull-back reads as a pure zoom, not a pan.

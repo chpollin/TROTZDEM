@@ -14,9 +14,10 @@ Output goes to <song>/out/.
 import argparse
 import base64
 import math
+import queue
 import subprocess
 import sys
-from concurrent.futures import ProcessPoolExecutor
+from multiprocessing import Pool
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
@@ -71,7 +72,8 @@ def main():
     ap.add_argument("--fps", type=int, default=30)
     ap.add_argument("--from", dest="start", type=float, default=0.0)
     ap.add_argument("--to", dest="end", type=float, default=None)
-    ap.add_argument("--workers", type=int, default=6)
+    # two per agent: each worker runs a browser and an ffmpeg, and more parallel renders nearly froze the workstation
+    ap.add_argument("--workers", type=int, default=2)
     ap.add_argument("--name", default=None, help="output file stem, default: the song")
     ap.add_argument("--still", type=float, nargs="+", default=None)
     ap.add_argument("--phone", action="store_true", help="also write a 720p copy")
@@ -99,28 +101,43 @@ def main():
     if args.end is None:
         args.end = scene_end
 
-    out = out_dir / f"{args.name or args.song}.mp4"
+    stem = args.name or args.song
+    out = out_dir / f"{stem}.mp4"
     first, last = round(args.start * args.fps), math.ceil(args.end * args.fps)
+    if last <= first or args.workers < 1:
+        sys.exit(f"nothing to render: frames {first}..{last} with {args.workers} workers, check --from, --to and --workers")
     step = math.ceil((last - first) / args.workers)
-    tmp = out_dir / "segments"
+    # one segment folder per output name, so two renders of the same song do not overwrite each other's segments
+    tmp = out_dir / f"segments-{stem}"
     tmp.mkdir(exist_ok=True)
     jobs = [(a, min(a + step, last), tmp / f"seg{k:02d}.mp4")
             for k, a in enumerate(range(first, last, step))]
-    with ProcessPoolExecutor(len(jobs)) as pool:
-        for f in [pool.submit(render_segment, args.song, args.fps, *j) for j in jobs]:
-            f.result()
+    # multiprocessing.Pool rather than ProcessPoolExecutor: on the first failed segment, leaving the
+    # with block terminates the workers still rendering instead of waiting for them to finish
+    outcomes = queue.SimpleQueue()
+    with Pool(len(jobs)) as pool:
+        for j in jobs:
+            pool.apply_async(render_segment, (args.song, args.fps, *j),
+                             callback=outcomes.put, error_callback=outcomes.put)
+        for _ in jobs:
+            outcome = outcomes.get()
+            if isinstance(outcome, BaseException):
+                raise outcome
 
     listing = tmp / "list.txt"
-    listing.write_text("".join(f"file '{j[2].name}'\n" for j in jobs))
+    listing.write_text("".join(f"file '{j[2].name}'\n" for j in jobs), encoding="utf-8")
+    # mux into a temporary sibling and replace on success, so a failed mux keeps the last good render
+    part = out.with_name(out.name + ".part")
     subprocess.run(
         ["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(listing),
          "-ss", str(args.start), "-i", str(audio),
          # pad in case the scene runs past the audio
          "-map", "0:v", "-map", "1:a", "-af", "apad", "-t", str(args.end - args.start),
          "-c:v", "copy", "-c:a", "aac", "-b:a", "384k", "-ar", "48000",
-         "-movflags", "+faststart", str(out)],
+         "-movflags", "+faststart", "-f", "mp4", str(part)],
         check=True,
     )
+    part.replace(out)
     print(out)
     if args.phone:
         phone = out.with_name(out.stem + "-handy.mp4")

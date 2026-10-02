@@ -28,7 +28,6 @@ const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const lerp = (a, b, k) => a + (b - a) * k;
 const smooth = k => { k = clamp(k); return k * k * (3 - 2 * k); };
 const outCubic = k => 1 - Math.pow(1 - clamp(k), 3);
-const inCubic = k => Math.pow(clamp(k), 3);
 const span = (t, a, b) => clamp((t - a) / (b - a));
 // rises over `attack`, holds `hold`, falls over `release`
 const envelope = (t, a, attack, hold, release) =>
@@ -40,7 +39,6 @@ function mix(h1, h2, k) {
   return "#" + a.map((v, i) => Math.round(lerp(v, b[i], clamp(k))).toString(16).padStart(2, "0")).join("");
 }
 const rgba = (h, a) => { const [r, g, b] = hexRgb(h); return `rgba(${r},${g},${b},${clamp(a)})`; };
-const audioAt = (arr, t) => (arr[clamp(Math.round(t * AUDIO_RATE), 0, arr.length - 1)] || 0) / 99;
 const BEAT = TL.beat.period;
 const beatsSince = (t, t0) => (t - t0) / BEAT;
 const S = TL.s;
@@ -275,7 +273,6 @@ function simPos(id, t) {
 // "Für einen Moment macht alles Sinn": the same notes in perfect order, one
 // thread wound into a spiral, every note in the order it was thought, the seed
 // at the centre. The links fall away; only the sequence remains.
-const GOLDEN = Math.PI * (3 - Math.sqrt(5));
 const BYRANK = NODES.map(n => n.id).sort((a, b) => NODES[a].born - NODES[b].born);
 const RANK = (() => { const r = new Int32Array(N); BYRANK.forEach((id, i) => { r[id] = i; }); return r; })();
 const SPIRAL = { gap: 26, step: 13 };

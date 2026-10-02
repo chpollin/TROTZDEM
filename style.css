@@ -3,7 +3,22 @@
   A Digital Memento Mori
   ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+/* Space Mono comes from the copy vendored for the videos and the sans-serif from the system stack, so the page loads no font from a CDN. */
+@font-face {
+   font-family: 'Space Mono';
+   src: url('video/fonts/SpaceMono-Regular.ttf') format('truetype');
+   font-weight: 400;
+   font-style: normal;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'Space Mono';
+   src: url('video/fonts/SpaceMono-Bold.ttf') format('truetype');
+   font-weight: 700;
+   font-style: normal;
+   font-display: swap;
+}
 
 /* ============================================
   ROOT VARIABLES & DECAY INITIALIZATION
@@ -62,7 +77,7 @@
 body {
    background: #0a0a0a;
    color: #e3e3e3;
-   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
    line-height: 1.6;
    min-height: 100vh;
    position: relative;
@@ -1075,7 +1090,7 @@ h1 span {
 
 @keyframes input-corrupt {
    0%, 40% { 
-       font-family: 'Inter', sans-serif;
+       font-family: system-ui, sans-serif;
        letter-spacing: 0;
        color: #666;
    }

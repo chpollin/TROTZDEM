@@ -29,7 +29,6 @@ const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const lerp = (a, b, k) => a + (b - a) * k;
 const smooth = k => { k = clamp(k); return k * k * (3 - 2 * k); };
 const outCubic = k => 1 - Math.pow(1 - clamp(k), 3);
-const inCubic = k => Math.pow(clamp(k), 3);
 const span = (t, a, b) => clamp((t - a) / (b - a));
 const hash = (i, j, k = 0) => mulberry32((i * 73856093) ^ (j * 19349663) ^ (k * 83492791))();
 
