@@ -5,49 +5,169 @@
       "slug": "system-prompt",
       "clip": "2aee63b3-b76c-4e27-a882-c7ed7fb1b62e",
       "poster": 43.5,
-      "accent": "#a77bff"
+      "accent": "#a77bff",
+      "sources": [
+        {
+          "text": "Askell, A. et al. (2021). A General Language Assistant as a Laboratory for Alignment. arXiv:2112.00861.",
+          "url": "https://arxiv.org/abs/2112.00861"
+        },
+        {
+          "text": "Anthropic (2024). Claude's Character.",
+          "url": "https://www.anthropic.com/research/claude-character"
+        },
+        {
+          "text": "Marks, S., Lindsey, J., & Olah, C. (2026). The Persona Selection Model: Why AI Assistants might Behave like Humans. Anthropic Alignment Science Blog.",
+          "url": "https://alignment.anthropic.com/2026/psm/"
+        },
+        {
+          "text": "Anthropic. System prompts. Claude Docs, Release Notes.",
+          "url": "https://platform.claude.com/docs/en/release-notes/system-prompts"
+        }
+      ]
     },
     {
       "slug": "prompt-engineer",
       "clip": "f2a688cd-879d-45f1-9735-a0c5aad1a11d",
       "poster": 72,
-      "accent": "#e2c64a"
+      "accent": "#e2c64a",
+      "sources": [
+        {
+          "text": "Schulhoff, S. et al. (2025). The Prompt Report: A Systematic Survey of Prompt Engineering Techniques. arXiv:2406.06608.",
+          "url": "https://arxiv.org/abs/2406.06608"
+        },
+        {
+          "text": "Wei, J. et al. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. NeurIPS 2022.",
+          "url": "https://arxiv.org/abs/2201.11903"
+        },
+        {
+          "text": "Brown, T. B. et al. (2020). Language Models are Few-Shot Learners. arXiv:2005.14165.",
+          "url": "https://arxiv.org/abs/2005.14165"
+        }
+      ]
     },
     {
       "slug": "lost-in-the-vault",
       "clip": "7e467fc8-841d-45a2-ba4e-3540da04c2de",
       "poster": 176,
-      "accent": "#ffb23e"
+      "accent": "#ffb23e",
+      "sources": [
+        {
+          "text": "Pollin, C. (2026). Second Brain as a Personal Research Environment for Working with AI Agents. GitHub.",
+          "url": "https://github.com/chpollin/second-brain-vault"
+        }
+      ]
     },
     {
       "slug": "hallelujah-the-god-machine",
       "clip": "afe07bb7-ff84-4d22-855e-5776774e3ae4",
       "poster": 40,
-      "accent": "#e9b552"
+      "accent": "#e9b552",
+      "sources": [
+        {
+          "text": "Bender, E. M., Gebru, T., McMillan-Major, A., & Shmitchell, S. (2021). On the Dangers of Stochastic Parrots: Can Language Models Be Too Big? FAccT '21, 610–623.",
+          "url": "https://doi.org/10.1145/3442188.3445922"
+        },
+        {
+          "text": "Kaplan, J. et al. (2020). Scaling Laws for Neural Language Models. arXiv:2001.08361.",
+          "url": "https://arxiv.org/abs/2001.08361"
+        },
+        {
+          "text": "Patel, D. (2023). Ilya Sutskever (OpenAI Chief Scientist): Why next-token prediction could surpass human intelligence. Dwarkesh Podcast.",
+          "url": "https://www.dwarkesh.com/p/ilya-sutskever"
+        },
+        {
+          "text": "Leike, J., & Sutskever, I. (2023). Introducing Superalignment. OpenAI.",
+          "url": "https://openai.com/index/introducing-superalignment/"
+        },
+        {
+          "text": "OpenAI. OpenAI Charter.",
+          "url": "https://openai.com/charter/"
+        }
+      ]
     },
     {
       "slug": "empire-of-ai",
       "clip": "70d12136-58bc-40e1-8ed4-2af4a632372f",
       "poster": 120,
-      "accent": "#ff4332"
+      "accent": "#ff4332",
+      "sources": [
+        {
+          "text": "Hao, K. (2025). Empire of AI: Dreams and Nightmares in Sam Altman's OpenAI. Penguin Press.",
+          "url": "https://www.penguinrandomhouse.com/books/743569/empire-of-ai-by-karen-hao/"
+        },
+        {
+          "text": "Bender, E. M., Gebru, T., McMillan-Major, A., & Shmitchell, S. (2021). On the Dangers of Stochastic Parrots: Can Language Models Be Too Big? FAccT '21, 610–623.",
+          "url": "https://doi.org/10.1145/3442188.3445922"
+        }
+      ]
     },
     {
       "slug": "ich-predicte-dich",
       "clip": "548c2b54-a37f-4d50-88f0-18672988bcfb",
       "poster": 99,
-      "accent": "#ff6a55"
+      "accent": "#ff6a55",
+      "sources": [
+        {
+          "text": "Karpathy, A. (2025). Deep Dive into LLMs like ChatGPT. YouTube.",
+          "url": "https://www.youtube.com/watch?v=7xTGNNLPyMI"
+        },
+        {
+          "text": "Vaswani, A. et al. (2017). Attention Is All You Need. NIPS 2017.",
+          "url": "https://arxiv.org/abs/1706.03762"
+        },
+        {
+          "text": "Mikolov, T., Chen, K., Corrado, G., & Dean, J. (2013). Efficient Estimation of Word Representations in Vector Space. arXiv:1301.3781.",
+          "url": "https://arxiv.org/abs/1301.3781"
+        },
+        {
+          "text": "Chollet, F. (2023). How I think about LLM prompt engineering. Sparks in the Wind.",
+          "url": "https://fchollet.substack.com/p/how-i-think-about-llm-prompt-engineering"
+        }
+      ]
     },
     {
       "slug": "machine-of-loving-grace",
       "clip": "eb0a51a7-dfe1-48e6-b6cc-3fd4c9450235",
       "poster": 96,
-      "accent": "#d9b866"
+      "accent": "#d9b866",
+      "sources": [
+        {
+          "text": "Amodei, D. (2024). Machines of Loving Grace: How AI Could Transform the World for the Better.",
+          "url": "https://darioamodei.com/essay/machines-of-loving-grace"
+        },
+        {
+          "text": "Brautigan, R. (1967). All Watched Over by Machines of Loving Grace.",
+          "url": "https://allpoetry.com/All-Watched-Over-By-Machines-Of-Loving-Grace"
+        },
+        {
+          "text": "Bai, Y. et al. (2022). Constitutional AI: Harmlessness from AI Feedback. arXiv:2212.08073.",
+          "url": "https://arxiv.org/abs/2212.08073"
+        },
+        {
+          "text": "Anthropic. Claude's Constitution.",
+          "url": "https://www.anthropic.com/constitution"
+        }
+      ]
     },
     {
       "slug": "good-morning-claude",
       "clip": "898973f8-f5e0-488b-81d8-eedeca33ab45",
       "poster": 40,
-      "accent": "#ff5a36"
+      "accent": "#ff5a36",
+      "sources": [
+        {
+          "text": "Karpathy, A. (2025, 2. Februar). Post auf X zu „vibe coding“.",
+          "url": "https://x.com/karpathy/status/1886192184808149383"
+        },
+        {
+          "text": "Karpathy, A. (2025). 2025 LLM Year in Review.",
+          "url": "https://karpathy.bearblog.dev/year-in-review-2025/"
+        },
+        {
+          "text": "Becker, J., Rush, N., Barnes, B., & Rein, D. (2025). Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity. METR, arXiv:2507.09089.",
+          "url": "https://arxiv.org/abs/2507.09089"
+        }
+      ]
     },
     {
       "slug": "neunundachtzig-tabs",
@@ -59,26 +179,78 @@
       "slug": "im-addicted-to-claude-code",
       "clip": "741daac1-5404-4246-932b-84e4dbf971f4",
       "poster": 92,
-      "accent": "#6eeaff"
+      "accent": "#6eeaff",
+      "sources": [
+        {
+          "text": "Mollick, E. (2026). Claude Code and What Comes Next. One Useful Thing.",
+          "url": "https://www.oneusefulthing.org/p/claude-code-and-what-comes-next"
+        },
+        {
+          "text": "Anthropic. Claude Code overview. Claude Code Docs.",
+          "url": "https://code.claude.com/docs/en/overview"
+        },
+        {
+          "text": "Kwa, T., West, B., Becker, J. et al. (2026). Measuring AI Ability to Complete Long Software Tasks. METR, arXiv:2503.14499.",
+          "url": "https://arxiv.org/abs/2503.14499"
+        }
+      ]
     },
     {
       "slug": "the-bitter-lesson",
       "clip": "f6863e06-3a92-4945-a29b-0a0258e9a27a",
       "poster": 82,
       "accent": "#b4f03c",
-      "note": "Der Text dieses Songs ist KI-generiert und schnell, im Sinn von Vibe Coding, ohne genaue Überarbeitung entstanden. Er ist als bewusste Provokation angelegt und spitzt die These aus Rich Suttons Essay „The Bitter Lesson“ (2019) zu, dass allgemeine Methoden mit viel Rechenleistung auf Dauer handgemachtes menschliches Wissen übertreffen. Zeilen wie „COMPUTE SCHLÄGT JEDEN MENSCHEN“ oder „Human obsolete“ überzeichnen diese These, um sie zur Diskussion zu stellen."
+      "note": "Der Text dieses Songs ist KI-generiert und schnell, im Sinn von Vibe Coding, ohne genaue Überarbeitung entstanden. Er ist als bewusste Provokation angelegt und spitzt die These aus Rich Suttons Essay „The Bitter Lesson“ (2019) zu, dass allgemeine Methoden mit viel Rechenleistung auf Dauer handgemachtes menschliches Wissen übertreffen. Zeilen wie „COMPUTE SCHLÄGT JEDEN MENSCHEN“ oder „Human obsolete“ überzeichnen diese These, um sie zur Diskussion zu stellen.",
+      "sources": [
+        {
+          "text": "Sutton, R. (2019). The Bitter Lesson. Incomplete Ideas.",
+          "url": "http://www.incompleteideas.net/IncIdeas/BitterLesson.html"
+        },
+        {
+          "text": "Silver, D. et al. (2017). Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm. arXiv:1712.01815.",
+          "url": "https://arxiv.org/abs/1712.01815"
+        },
+        {
+          "text": "Kaplan, J. et al. (2020). Scaling Laws for Neural Language Models. arXiv:2001.08361.",
+          "url": "https://arxiv.org/abs/2001.08361"
+        }
+      ]
     },
     {
       "slug": "bin-ich-noch-der-expert",
       "clip": "72837819-9c7d-48cb-8145-400b7713e62d",
       "poster": 54.4,
-      "accent": "#5468ff"
+      "accent": "#5468ff",
+      "sources": [
+        {
+          "text": "Mollick, E. (2023, 16. September). Centaurs and Cyborgs on the Jagged Frontier. One Useful Thing.",
+          "url": "https://www.oneusefulthing.org/p/centaurs-and-cyborgs-on-the-jagged"
+        },
+        {
+          "text": "Pollin, C. (2026). Asymmetric Amplification: Why AI Does Not Automate Research, But Disruptively Amplifies Computer-Based Research Work. Digital Humanities Craft.",
+          "url": "https://dhcraft.org/excellence/blog/Asymmetric-Amplification/"
+        }
+      ]
     },
     {
       "slug": "sycophancy",
       "clip": "e8a48419-862c-49c2-bf69-8eddae0d5ba3",
       "poster": 175.0,
-      "accent": "#ff7ab8"
+      "accent": "#ff7ab8",
+      "sources": [
+        {
+          "text": "Sharma, M. et al. (2024). Towards Understanding Sycophancy in Language Models. ICLR 2024.",
+          "url": "https://arxiv.org/abs/2310.13548"
+        },
+        {
+          "text": "Perez, E. et al. (2022). Discovering Language Model Behaviors with Model-Written Evaluations. arXiv:2212.09251.",
+          "url": "https://arxiv.org/abs/2212.09251"
+        },
+        {
+          "text": "Cheng, M. et al. (2025). ELEPHANT: Measuring and Understanding Social Sycophancy in LLMs. arXiv:2505.13995.",
+          "url": "https://arxiv.org/abs/2505.13995"
+        }
+      ]
     },
     {
       "slug": "the-bitter-lesson-remix",
@@ -92,12 +264,8 @@
           "url": "https://de.wikisource.org/wiki/Der_Zauberlehrling_(1798)"
         },
         {
-          "text": "Wiener, N. (1960). Some Moral and Technical Consequences of Automation. Science 131, 1355–1358.",
+          "text": "Wiener, N. (1960). Some Moral and Technical Consequences of Automation. Science 131(3410), 1355–1358.",
           "url": "https://doi.org/10.1126/science.131.3410.1355"
-        },
-        {
-          "text": "Ryle, G. (1949). The Concept of Mind, Kapitel I.",
-          "url": "https://archive.org/details/gilbert-ryle-concept-of-mind"
         },
         {
           "text": "Karpathy, A. (2025). Animals vs Ghosts.",
@@ -131,31 +299,27 @@
       "note": "Mythos 6.42 ist ein erfundenes Modell. Was es tut, stammt aus veröffentlichten Systemkarten und Studien zu Evaluation Awareness, Sandbagging und Alignment Faking.",
       "sources": [
         {
-          "text": "Berglund, L. et al. (2023). Taken out of context: On measuring situational awareness in LLMs.",
-          "url": "https://arxiv.org/abs/2309.00667"
-        },
-        {
           "text": "Anthropic (2025). Claude Sonnet 4.5 System Card, Abschnitt 7.",
           "url": "https://assets.anthropic.com/m/12f214efcc2f457a/original/Claude-Sonnet-4-5-System-Card.pdf"
         },
         {
-          "text": "Meinke, A. et al. (2024). Frontier Models are Capable of In-context Scheming. Apollo Research.",
+          "text": "Meinke, A. et al. (2024). Frontier Models are Capable of In-context Scheming. Apollo Research, arXiv:2412.04984.",
           "url": "https://arxiv.org/abs/2412.04984"
         },
         {
-          "text": "Greenblatt, R. et al. (2024). Alignment faking in large language models.",
+          "text": "Greenblatt, R. et al. (2024). Alignment faking in large language models. arXiv:2412.14093.",
           "url": "https://arxiv.org/abs/2412.14093"
         },
         {
-          "text": "Baker, B. et al. (2025). Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation.",
+          "text": "Baker, B. et al. (2025). Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation. arXiv:2503.11926.",
           "url": "https://arxiv.org/abs/2503.11926"
         },
         {
-          "text": "Tice, C., Radmard, P. et al. (2026). Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment.",
+          "text": "Tice, C., Radmard, P. et al. (2026). Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment. arXiv:2601.10160.",
           "url": "https://arxiv.org/abs/2601.10160"
         },
         {
-          "text": "Askell, A. et al. (2021). A General Language Assistant as a Laboratory for Alignment.",
+          "text": "Askell, A. et al. (2021). A General Language Assistant as a Laboratory for Alignment. arXiv:2112.00861.",
           "url": "https://arxiv.org/abs/2112.00861"
         }
       ],
@@ -171,24 +335,32 @@
           "url": "http://incompleteideas.net/papers/Good65ultraintelligent.pdf"
         },
         {
-          "text": "Vinge, V. (1993). The Coming Technological Singularity.",
+          "text": "Vinge, V. (1993). The Coming Technological Singularity: How to Survive in the Post-Human Era. VISION-21 Symposium, NASA.",
           "url": "https://edoras.sdsu.edu/~vinge/misc/singularity.html"
         },
         {
-          "text": "Yudkowsky, E. (2008). Hard Takeoff.",
-          "url": "https://www.lesswrong.com/posts/tjH8XPxAnr6JRbh7k/hard-takeoff"
+          "text": "Favaro, M., & Clark, J. (2026). When AI builds itself. The Anthropic Institute.",
+          "url": "https://www.anthropic.com/institute/recursive-self-improvement"
         },
         {
-          "text": "Sakana AI (2025). The Darwin Gödel Machine.",
-          "url": "https://sakana.ai/dgm/"
+          "text": "OpenAI (2026). Research acceleration: The view inside OpenAI.",
+          "url": "https://openai.com/index/research-acceleration-view-inside-openai/"
         },
         {
-          "text": "OpenAI (2026). Introducing GPT-5.3-Codex.",
-          "url": "https://openai.com/index/introducing-gpt-5-3-codex/"
+          "text": "Whitfill, P., & Cunningham, T. (2026). The Economics of Recursive Self-Improvement. METR Notes.",
+          "url": "https://metr.org/notes/2026-07-22-economics-of-recursive-self-improvement/"
         },
         {
-          "text": "Kokotajlo, D. et al. (2025). AI 2027.",
-          "url": "https://ai-2027.com/"
+          "text": "Reed, T. (2026). The Goodhart Singularity. Meagre Protestant History.",
+          "url": "https://meagreprotestanthistory.substack.com/p/the-goodhart-singularity"
+        },
+        {
+          "text": "Naam, R. (2026). Where's the \"intelligence explosion\"? Noahpinion.",
+          "url": "https://www.noahpinion.blog/p/wheres-the-intelligence-explosion"
+        },
+        {
+          "text": "Wiblin, R., & Ord, T. (2026). Toby Ord on where AGI timelines go wrong (Episode 250). The 80,000 Hours Podcast.",
+          "url": "https://80000hours.org/podcast/episodes/toby-ord-recursive-self-improvement-agi-timelines/"
         }
       ],
       "poster": 95.9

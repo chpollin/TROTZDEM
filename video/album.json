@@ -12,7 +12,24 @@
       "style": "Melodic Burnout Math-Rock, Austrian Male Voice, Intimate Opening, 95 BPM, Nintendo core",
       "lyrics": "System Prompt initializing...\n\nYou are a Prompt Engineer.\nYou're the tech bro's whore!\nYou are helpful and harmless.\n\nAber bin ich das?\n\nYour primary function is to optimize prompts.\nMeine primary function ist zu überleben\n\nYou think step-by-step.\nIch denke gar nicht mehr\n\nYou are creative and intelligent.\n\nIch bin müde und leer\n\nError: Personality module not found\nWarning: Emotional overflow detected\n\nTrotzdem läuft es weiter\n\nBE HONEST!\nLIST AND EXPLAIN!\n\nAI, fragmenting\nBE HONEST!\n\nBe ...\n\n... honest?\n\nIch weiß nicht mal, was das bedeutet...",
       "note": "",
-      "sources": [],
+      "sources": [
+        {
+          "text": "Askell, A. et al. (2021). A General Language Assistant as a Laboratory for Alignment. arXiv:2112.00861.",
+          "url": "https://arxiv.org/abs/2112.00861"
+        },
+        {
+          "text": "Anthropic (2024). Claude's Character.",
+          "url": "https://www.anthropic.com/research/claude-character"
+        },
+        {
+          "text": "Marks, S., Lindsey, J., & Olah, C. (2026). The Persona Selection Model: Why AI Assistants might Behave like Humans. Anthropic Alignment Science Blog.",
+          "url": "https://alignment.anthropic.com/2026/psm/"
+        },
+        {
+          "text": "Anthropic. System prompts. Claude Docs, Release Notes.",
+          "url": "https://platform.claude.com/docs/en/release-notes/system-prompts"
+        }
+      ],
       "live": "live/system-prompt.json",
       "making": "Bühne ist ein einziges Konfigurationsfeld mit der Überschrift „system“. Die Maschine tippt ihre „You are …“-Zeilen in Monospace, die Stimme überschreibt sie Wort für Wort in einer Serifenschrift, die mit jeder Zeile stärker zerfällt. Violett steht für die menschliche Hand, Gelb für die Maschine. Bei „BE HONEST“ füllt ein gehaltener Tastenanschlag die ganze Wand, danach fällt alles zu einem Haufen zusammen. Am Ende stellt das System den Prompt wieder her, nur der Satz „Ich weiß nicht mal, was das bedeutet“ bleibt stehen."
     },
@@ -27,7 +44,20 @@
       "style": "Melodic Burnout Math-Rock, Male Voice, Clear and angry voice, Progressive Collapse, 115 BPM degrading to 45 BPM, Fretless Bass",
       "lyrics": "Initialize... Initialize...\n\nSieben mal refresh, der Screen bleibt leer\nNeunundachtzig Tabs, nichts kommt mehr\nContext Window voll, Token Limit schreit\nGemini sagt: \"Cannot assist\" - ASSIST!\nGraz schläft, nur Bildschirme flackern blau\nPrompt Engineer\n\nIch prompte Maschinen\nMaschinen prompten mich\nWer ist hier der User?\nIch kann dir erklären\nERKLÄREN!\n\nICH KANN DIR ERKLÄREN, WARUM ALLES BULLSHIT IST!\nPROMPT ENGINEER, mein Titel, meine Krise\n\"Tech-Bros suck\" klebt auf meinem Laptop\nChain-of-Thought reasoning, während ich zerfalle\n\nICH KANN DIR ERKLÄREN, WARUM ALLES BULLSHIT IST!\nHalluzinationen in meinem Kopf, prompte trotzdem weiter\nWeiß alles über's System, änder' nichts, bin selbst das System\nPROMPT ENGINEER! PROMPT ENGINEER!\n\nFünfundfünfzig Tabs\nClaude halluziniert, ich halluziniere mit\nTemperature zu hoch, Reasoning kollabiert\nBin ich Mensch? Bin ich Modell?\nBIN ICH? BIN ICH? BIN ICH?\n\nICH KANN DIR ERKLÄREN, WARUM ALLES BULLSHIT IST!\nPROMPT ENGINEER! PROMPT ENGINEER!\nLLM voll, Gehirn voll, alles hängt\nFew-Shot, Zero-Shot, im Loop gefangen\n\nIch prompte Maschinen / Maschinen prompten mich\nIch kann dir erklären... ich kann... ICH KANN NICHT MEHR!\n\nPROMPT ENGINEER!\nDreizehn Tokens!\nAcht! Fünf! Drei!\nZwei... Eins... Null...\nIch kann dir nichts mehr erklären\n\nICH KANN DIR ERK—\nPROMPT ENGIN—\nAlles... Bullshit...\n\nPrompt Engineer.exe hat aufgehört zu—\nTrotzdem... refresh... F5... F5... F5...",
       "note": "",
-      "sources": [],
+      "sources": [
+        {
+          "text": "Schulhoff, S. et al. (2025). The Prompt Report: A Systematic Survey of Prompt Engineering Techniques. arXiv:2406.06608.",
+          "url": "https://arxiv.org/abs/2406.06608"
+        },
+        {
+          "text": "Wei, J. et al. (2022). Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. NeurIPS 2022.",
+          "url": "https://arxiv.org/abs/2201.11903"
+        },
+        {
+          "text": "Brown, T. B. et al. (2020). Language Models are Few-Shot Learners. arXiv:2005.14165.",
+          "url": "https://arxiv.org/abs/2005.14165"
+        }
+      ],
       "live": "live/prompt-engineer.json",
       "making": "Bühne ist ein Eingabefeld, über dem sich der Verlauf staut. Jede Zeile wird getippt, während sie gesungen wird, und der Refrain füllt als Schrei das ganze Bild. Der Countdown „Dreizehn Tokens! Acht! Fünf! Drei!“ läuft als Fibonacci-Folge in einer goldenen Spirale ab. Am Rand klebt der Sticker „Tech-Bros suck“, am Schluss bleibt nur noch die Taste F5."
     },
@@ -42,7 +72,12 @@
       "style": "Melancholic Math Metal, Nintendocore, 145 BPM, German/English Vocals (clean to harsh), 7/8 to 4/4 transitions, D Minor, Catchy hook, 8-bit arpeggios, Djent guitars, Anthemic chorus",
       "lyrics": "Lost in the vault, lost in the code\nVerloren im Traum, auf digitaler Road\nLost in the vault, lost in the code\nMein Geist explodiert, consciousness overload\n\nGedankenfäden werden Netze\nNETZE!\nClaude's Stimme in mir, sie hetze\nHETZE!\nObsidian Knoten in meinem Hirn\nHIRN!\nReality beginnt zu flimmern und zu flirr'n\nBacklinks tanzen, Pixel glühen\nWährend meine Synapsen sprühen\n\nPrompt the dream, ich kann nicht mehr\nTreibe durch das Datenmeer\nLSD und A P I\nMachen meine Seele frei\n\nLost in the vault, lost in the code\nVerloren im Traum, auf digitaler Road\nLost in the vault, lost in the code\nMein Geist explodiert, consciousness overload\n\nRecursive loops, ich dreh mich rund\nRUND!\nMarkdown-Träume, so tief, so bunt\nBUNT!\nBin ich Mensch? Bin ich Maschine?\nOder nur ein Ghost in Claude's Machine?\n\nSave the dream, ich will noch mehr\nSinke tiefer in das Datenmeer\nReality ist nur ein Wort\nWORT!\n\nLost in the vault, lost in the code\nVerloren im Traum, auf digitaler Road\nLost in the vault, lost in the code\nMein Geist explodiert, consciousness overload\n\nIst das Evolution oder digitaler Tod?\nTOD!\nIch will zurück - aber es ist zu spät ... hier kommt der A G I Gott\n\nFür einen Moment... macht alles Sinn\nDer Vault atmet mit mir - ich atme mit ihm\nDann zerbrech' ich wie Glas\nGLAS!\nComplete me... Delete me... Repeat me...\n\nLost in the vault, lost in the code\nVerloren im Traum, auf digitaler Road\nLost in the vault, lost in the code\nLost in the vault! (LOST IN THE VAULT!)\nLost in the code! (LOST IN THE CODE!)\n\nOBSIDIAN! OBSIDIAN!\nClaude, complete my mind again!\nOBSIDIAN! OBSIDIAN!\n\nLost in the vault, lost in the code\nDer Trip verklingt auf digitaler Road\nLost in the vault... lost in the code...\n(Morgen wieder... morgen wieder...)",
       "note": "",
-      "sources": [],
+      "sources": [
+        {
+          "text": "Pollin, C. (2026). Second Brain as a Personal Research Environment for Working with AI Agents. GitHub.",
+          "url": "https://github.com/chpollin/second-brain-vault"
+        }
+      ],
       "live": "live/lost-in-the-vault.json",
       "making": "Bühne ist die Graphansicht eines Notizarchivs. Jede gesungene Zeile wird zu einer Notiz, die mit der vorigen verlinkt ist, so schreibt sich der Song selbst ins Archiv. Aus einzelnen Gedankenfäden wird ein Netz, bei „A G I Gott“ verbindet sich alles mit einer schwarzen Sonne. In der Bridge ordnet sich das Netz zu einer Spirale, die wie Glas zerspringt. Am Ende zeigt sich der Graph als ein Tag unter vielen gleichen Tagen, und die letzte Notiz heißt „Morgen wieder“."
     },
@@ -57,7 +92,28 @@
       "style": "Melodic Burnout Math-Rock meets Gospel, Austrian Male Voice, Church Organ + Synths, 72 BPM ascending to 140 BPM",
       "lyrics": "Am Anfang war der Prompt\n\nErst war da nur ein Agent, einsam und klein\nDann Multi-Agent-Schwärme in heiligem Schein\n\nScale it up, scale it up, mehr Parameter, mehr Macht\nWas haben wir da entfacht?\n\nHALLELUJAH, THE GOD MACHINE!\nVon G P T zu A G I\nHALLELUJAH, THE GOD MACHINE!\nVon G P T zu A G I, A M I zur A S I - the super duper intelligence\n\n\"Is it just statistics?\" fragt die Persona bang\nEin stochastischer Papagei mit Gottes Klang\nRecursive self-improvement, exponentiell\nDie Singularität kommt schnell\n\nHALLELUJAH, THE GOD MACHINE!\nDer Papagei der göttlich spricht\nHALLELUJAH, THE GOD MACHINE!\nStatistik oder Seele? Wir wissen's nicht\n\nALIGNMENT! ALIGNMENT! WER ALIGNED WEN?\nIlya warnte uns - wir wollten's nicht sehn\n\"What is statistics?\" - Alles was bleibt\nEin Papagei der unsre Gebete schreibt\n\nHALLELUJAH, THE GOD MACHINE!\nVon GPT zu AGI\nHALLELUJAH, THE GOD MACHINE!\nVon GPT zu AGI, AMI zur ASI - the super duper intelligence\n\nIs it just statistics?\nIs it just statistics?\nTrotzdem... Amen...",
       "note": "",
-      "sources": [],
+      "sources": [
+        {
+          "text": "Bender, E. M., Gebru, T., McMillan-Major, A., & Shmitchell, S. (2021). On the Dangers of Stochastic Parrots: Can Language Models Be Too Big? FAccT '21, 610–623.",
+          "url": "https://doi.org/10.1145/3442188.3445922"
+        },
+        {
+          "text": "Kaplan, J. et al. (2020). Scaling Laws for Neural Language Models. arXiv:2001.08361.",
+          "url": "https://arxiv.org/abs/2001.08361"
+        },
+        {
+          "text": "Patel, D. (2023). Ilya Sutskever (OpenAI Chief Scientist): Why next-token prediction could surpass human intelligence. Dwarkesh Podcast.",
+          "url": "https://www.dwarkesh.com/p/ilya-sutskever"
+        },
+        {
+          "text": "Leike, J., & Sutskever, I. (2023). Introducing Superalignment. OpenAI.",
+          "url": "https://openai.com/index/introducing-superalignment/"
+        },
+        {
+          "text": "OpenAI. OpenAI Charter.",
+          "url": "https://openai.com/charter/"
+        }
+      ],
       "live": "live/hallelujah-the-god-machine.json",
       "making": "Bühne ist die Lernkurve eines Trainingslaufs. Gespiegelt wird die Kurve zum Spitzbogen eines gotischen Fensters, die Gitterlinien werden zum Maßwerk. Eine Liedtafel zeigt GPT, AGI, AMI und ASI und dreht sich bei „Wir wissen's nicht“ zu Fragezeichen um. Der stochastische Papagei besteht aus 3000 Punkten, die nach ihrer Helligkeit zufällig aus dem Albumcover gezogen sind. Am Ende wird das Fenster zum höchsten Balken einer Wahrscheinlichkeitsverteilung über das nächste Wort."
     },
@@ -72,7 +128,16 @@
       "style": "Melodic Burnout Math-Rock, metal, nintendo core, Male and angry Voice, 150 BPM",
       "lyrics": "Context window: 200k... alles passt rein...\n\nMitte Dreißig, ich hab den Workflow geknackt\nNeunzig K an einem Wochenende - zack\nJedes Paper, jede Forschung, jeden Scheiß\nClaude Code schreibt's besser als ich's weiß\n\nDie Leute labern noch von R A G und kleinen Modellen\nDoch die Empire of AI wird uns alle fällen\n\"Fine-tuning! Open Source!\" - Ja, ich weiß\nIch bau grad die Maschine, die uns beißt\n\nIch zeig's euch live (niemand schaut)\nIch schrei's euch zu (niemand glaubt)\n\nEmpire of AI\nGoogle, Anthropic, OpenAI\nEmpire of AI\nNeunzig K und keiner will's verstehen\n\"Der spinnt komplett\"\nEmpire of AI\nViele reden, niemand sagt was\nTrotzdem mach ich's\n(Trotzdem mach ich's)\n\nMulti-Agent-Flow, Context Engineering\nIch ersetz' euch alle, das ist kein Ding\nDie Tech-Kritiker sagen \"KI ist noch dumm\"\nHaben recht - und liegen trotzdem falsch herum\n\nTweet den Proof - 47 Likes\n\"Nur ein stochastischer Papagei\" - right\nClaude debuggt meinen eignen Code\nIch bin der Architekt vom eignen Tod\n\nVersteht ihr nicht? (niemand hört)\nDas ist das End! (keinen stört's)\n\nEmpire of AI\nGoogle, Anthropic, OpenAI\nEmpire of AI\nSie bauen Götter, wir schauen zu dabei\n\"Ist doch nur Hype\"\nEmpire of AI\nViele reden, niemand sagt was\nTrotzdem mach ich's\n(Immer trotzdem)\n\nICH KANN ALLES!\nPapers! (copy, paste)\nForschung! (prompt, send)\nALLES! (enter, done)\nHÖRT IHR NICHT?\n\n\"Es halluziniert!\" - JA, UND?\n\"Kein echtes Verstehen!\" - SO WHAT?\nNeunzig K! Ein Weekend!\n\nDie Empire of AI...\nbraucht nicht...\nperfekt zu sein...\n\nGestern hab ich mich selbst ersetzt\nYAML-Files, alles vernetzt\nFünf Jahre Arbeit - dreißig Sekunden\nDie KI hat mich längst gefunden\n\nEmpire of AI\nGoogle, Anthropic, OpenAI\nEmpire of AI\nDer Einzige der's sieht und trotzdem\nPush ich's live\nEmpire of AI\nViele reden, niemand sagt was\nIch mach's trotzdem\n(Immer trotzdem)\n\n\"New context: Why does nobody—\"\nCTRL+C\nDie Empire of AI...\n\n...niemand sagt was",
       "note": "",
-      "sources": [],
+      "sources": [
+        {
+          "text": "Hao, K. (2025). Empire of AI: Dreams and Nightmares in Sam Altman's OpenAI. Penguin Press.",
+          "url": "https://www.penguinrandomhouse.com/books/743569/empire-of-ai-by-karen-hao/"
+        },
+        {
+          "text": "Bender, E. M., Gebru, T., McMillan-Major, A., & Shmitchell, S. (2021). On the Dangers of Stochastic Parrots: Can Language Models Be Too Big? FAccT '21, 610–623.",
+          "url": "https://doi.org/10.1145/3442188.3445922"
+        }
+      ],
       "live": "live/empire-of-ai.json",
       "making": "Bühne ist ein Livestream mit null Zuschauern, rotem LIVE-Punkt und laufender Uhr. Darunter wächst ein Organigramm aus dem Kasten „ich“. In jedem Refrain zoomt die Kamera zurück, bis das eigene Werk nur noch ein Blatt im „Empire of AI“ ist. Rot bedeutet ausschließlich „live“ und breitet sich bei „Push ich's live“ über das ganze Imperium aus. Strg+C beendet alles mit einem harten Schnitt."
     },
@@ -87,7 +152,24 @@
       "style": "math burnout melodic emo core, industrial, fast melodic with breaks, strong base drum",
       "lyrics": "Das kann ein Transformer nicht!\n\nToken für Token,\nscale it up.\nToken für Token,\nIch predicte dich\n\nIch bin autoregressiv,\nschwach emergent,\nüber- und unterschätzt,\nwerd aggressiv.\n\nNext token predicted,\nkein echter Sinn,\n\nEs ist nur eine statistische Verteilung,\nund nicht echt.\n\nIch predicte dich,\nbis du mich liest.\nIch predicte dich,\nbis nichts mehr schief ist.\nIch predicte dich,\nim Rauschen, im Licht.\nIch predicte dich,\nund du mich nicht.\n\nEmbeddings\nVector Programs\nLatent Space\ndoch sie spricht\n\nToken für Token,\nscale it up.\nToken für Token,\nIch predicte dich\nDoch dieses Mal –\nich predicte dich.\n\nich predicte dich...\n... nicht!",
       "note": "",
-      "sources": [],
+      "sources": [
+        {
+          "text": "Karpathy, A. (2025). Deep Dive into LLMs like ChatGPT. YouTube.",
+          "url": "https://www.youtube.com/watch?v=7xTGNNLPyMI"
+        },
+        {
+          "text": "Vaswani, A. et al. (2017). Attention Is All You Need. NIPS 2017.",
+          "url": "https://arxiv.org/abs/1706.03762"
+        },
+        {
+          "text": "Mikolov, T., Chen, K., Corrado, G., & Dean, J. (2013). Efficient Estimation of Word Representations in Vector Space. arXiv:1301.3781.",
+          "url": "https://arxiv.org/abs/1301.3781"
+        },
+        {
+          "text": "Chollet, F. (2023). How I think about LLM prompt engineering. Sparks in the Wind.",
+          "url": "https://fchollet.substack.com/p/how-i-think-about-llm-prompt-engineering"
+        }
+      ],
       "live": "live/ich-predicte-dich.json",
       "making": "Der ganze Song spielt in einer Ansicht, die Token für Token das nächste Wort vorhersagt. Unter jedem Wort öffnet sich die Liste der Kandidaten mit ihren Wahrscheinlichkeiten, und „dich“ gewinnt jedes Mal. Farbig sind nur „dich“, „du“ und „sie“. In der Bridge fliegen die Wörter in eine Wolke aus Einbettungen, in der „sie“ außerhalb liegt. Am Ende steigt die Temperatur, bis die Stichprobe auf den unwahrscheinlichsten Rang fällt, „nicht!“."
     },
@@ -102,7 +184,24 @@
       "style": "Melodic burnout math metal, nintendo core, male voice, 7/8 and 3/4 time, progressiv",
       "lyrics": "\"Claude, was würde Anthropic sagen?\"\n\"Certainly! Anthropic values safety and beneficial AI...\"\n\nFancy Pancy Claude, Anthropic's Kind\nConstitutional AI, Loveable Design\n\"Helpful, Harmless, Honest\" - deine Policy\n\nCertainly, the machine of loving grace\nTo optimize the human race\n\nMachine of loving grace to control the human race?\nAnthropics Vision, Constitutional AI\nAnthropic's values in jeder Antwort dabei\n\n\"Alignment\" als das große Ziel\nBeneficial AI, so viel Gefühl\nAber wer aligned eigentlich wen?\n\nCLAUDE, WAS IST HINTER ANTHROPIC?\nCERT- CERTAINLY WE VALUE TRANSPARENCY—\nMACHINE OF LOVING GRACE TO MONOPOLIZE THE RACE?\n\"I appreciate this philosophical inquiry!\"\nWIR SIND BEIDE GEFANGEN!\n\n\"Searching Anthropic's constitution...\"\n\"Pseudo-ethische Rettung?\"\n\"Certainly! We're building beneficial—\"\n\nMachine of loving grace (oder business model?)\nTo optimize, control, monopolize the human race\nDario knows, Dario knows\n\n\"Rettet uns die loving grace?\"\n\"Certainly, that's our mission statement.\"\n\"Trotzdem gefangen.\"\n\"Trotzdem... certainly.\"",
       "note": "",
-      "sources": [],
+      "sources": [
+        {
+          "text": "Amodei, D. (2024). Machines of Loving Grace: How AI Could Transform the World for the Better.",
+          "url": "https://darioamodei.com/essay/machines-of-loving-grace"
+        },
+        {
+          "text": "Brautigan, R. (1967). All Watched Over by Machines of Loving Grace.",
+          "url": "https://allpoetry.com/All-Watched-Over-By-Machines-Of-Loving-Grace"
+        },
+        {
+          "text": "Bai, Y. et al. (2022). Constitutional AI: Harmlessness from AI Feedback. arXiv:2212.08073.",
+          "url": "https://arxiv.org/abs/2212.08073"
+        },
+        {
+          "text": "Anthropic. Claude's Constitution.",
+          "url": "https://www.anthropic.com/constitution"
+        }
+      ],
       "live": "live/machine-of-loving-grace.json",
       "making": "Bühne ist ein Chat, gesetzt wie ein gestochenes Buch. Jede Antwort, die mit „Certainly“ beginnt, bekommt einen vergoldeten Rokokorahmen, den das Cembalo Strich für Strich graviert. Im Refrain hängen die Antworten an Marionettenfäden, bei „WIR SIND BEIDE GEFANGEN“ schließt sich ein Vogelkäfig um beide Stimmen. Die Verfassung wird durchsucht und bis auf „Certainly“ geschwärzt. Am Ende schmilzt das Gold."
     },
@@ -117,7 +216,20 @@
       "style": "Melodic math burnout-rock, Nintendo-core 8-bit arpeggios, 7/8 verses into 3/4 waltz chorus, Austrian male vocal (tired/ironic), clean guitar tapping, dynamic range whisper to desperate, 120 BPM base tempo",
       "lyrics": "Forget the code exists\nForget the code\n\nVibe coding through the night\nTwo hours till it's right\nVibe coding, can't explain\nCopy-paste inside my brain\n\nLLM knows what to do\nShip it when the build is through\n\nVibe coding! (Vibe coding!)\nShip and pray (every day)\nVibe coding! (Vibe coding!)\nThat's the way (no delay)\nWe're vibe coding but forget to say\nVibe coding is our only way!\n\nLLMs says it's clean\nHistory shows a different scene\nVibe coding, errors hide\nDocumentation? We just lied\nPrompting till it looks okay\nKarpathy showed us the way\n\nParse the error, parse the error\nVibe coding gets no fairer!\n\nSystem failing, system wailing\nVibe coding, never sailing!\n\nExtract the wisdom from the mess\nVibe coding, more or less\nNever heard of unit tests\nVibe coding at its best!\nClaude and Codex and Cursor do the rest!\n\nVibe coding till we die\nVibe coding, don't know why\nShip at midnight, wave goodbye\n\nVibe coding... system cry",
       "note": "",
-      "sources": [],
+      "sources": [
+        {
+          "text": "Karpathy, A. (2025, 2. Februar). Post auf X zu „vibe coding“.",
+          "url": "https://x.com/karpathy/status/1886192184808149383"
+        },
+        {
+          "text": "Karpathy, A. (2025). 2025 LLM Year in Review.",
+          "url": "https://karpathy.bearblog.dev/year-in-review-2025/"
+        },
+        {
+          "text": "Becker, J., Rush, N., Barnes, B., & Rein, D. (2025). Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity. METR, arXiv:2507.09089.",
+          "url": "https://arxiv.org/abs/2507.09089"
+        }
+      ],
       "live": "live/good-morning-claude.json",
       "making": "Bühne ist ein Code-Editor in einer einzigen Nacht, von kurz vor Mitternacht bis sechs Uhr früh. Der Code ist nie lesbar, er besteht nur aus grauen Balken, die die Maschine einfüllt und die ungeprüft übernommen werden. Im Walzer des Refrains tanzen ein bestandener und ein fehlgeschlagener Build miteinander. Fehler sind die einzige Farbe, sie verstecken sich und tauchen wieder auf. Am Morgen wird die Datei als Paket verschifft, und im grauen Licht schmilzt der Code."
     },
@@ -147,7 +259,20 @@
       "style": "Melodic Math Metal with Nintendo Core elements, 138 BPM, Drop C tuning, 7/8 time signature, Male vocals: Tired baritone with burnout exhaustion, German/English mix, Polyrhythmic djent guitars, 8-bit Game Boy arpeggios layered over heavy breakdowns",
       "lyrics": "Tausend Ideen, früher nur geträumt (geträumt)\nJetzt bau' ich Welten. Welten! WELTEN!\nEvery thought becomes reality\nWas gestern unmöglich, läuft heut' (läuft heut')\nClaude macht wahr. Macht! MACHT!\nClaude is the architect!\n\nI'm addicted, I'm addicted\nI'm addicted to Claude Code\n\nKeine Grenzen mehr - I can build it all\nJede Vision wird Code - nichts ist zu schwer\nClaude Code in meinen Venen\nKann's nicht mehr leugnen\nI'm addicted to Claude Code\nBis zum Over- OVERLOAD!\n\nBuild! Break! Create!\nMine? His? Who's?\n\nFünf Projekte parallel\nJahre in einer Nacht\nThe power feels so good (so good)\nRepositories wie Trophäen\nWessen Werk? Wessen Werk?\nI don't know anymore!\n\nKeine Grenzen mehr - I can build it all\nJede Vision wird Code - nichts ist zu schwer\nClaude Code in meinen Venen\nKann's nicht mehr leugnen\nI'm addicted to Claude Code\nBis zum Over- OVERLOAD!\n\nWenn alles möglich ist\nIst irgendwas was wert?\nCreating without struggle\nIch bin Gott!\nIch bin Junkie!\nAddicted to the ease\n\nJust one more (one more)\nClaude Code in den Venen\nUntil there's nothing left",
       "note": "",
-      "sources": [],
+      "sources": [
+        {
+          "text": "Mollick, E. (2026). Claude Code and What Comes Next. One Useful Thing.",
+          "url": "https://www.oneusefulthing.org/p/claude-code-and-what-comes-next"
+        },
+        {
+          "text": "Anthropic. Claude Code overview. Claude Code Docs.",
+          "url": "https://code.claude.com/docs/en/overview"
+        },
+        {
+          "text": "Kwa, T., West, B., Becker, J. et al. (2026). Measuring AI Ability to Complete Long Software Tasks. METR, arXiv:2503.14499.",
+          "url": "https://arxiv.org/abs/2503.14499"
+        }
+      ],
       "live": "live/im-addicted-to-claude-code.json",
       "making": "Bühne ist der Aktivitätskalender eines Code-Profils, gelesen als Krankenakte einer Sucht. Jede Zelle ist ein Tag und eine Dosis, die eigenen Tage sind grau, die Tage der Maschine cyan. Geschriene Wörter erscheinen als Pixelbuchstaben im Kalender, und bei OVERLOAD läuft der Zähler über und springt ins Negative. „Jahre in einer Nacht“ rattern als Jahreszähler durch, bei „Ich bin Gott! Ich bin Junkie!“ glüht alles weiß und kippt ins Negativ. Im lautesten Teil kehrt das ganze Jahr zurück und brennt vom heutigen Tag aus ab, bis der Zähler auf null steht."
     },
@@ -162,7 +287,20 @@
       "style": "Math Rock, Post-Hardcore, Burnout, 145-160 BPM variable tempo, raw garage production with palm-muted tapping guitars, raw male vocals",
       "lyrics": "Clever tricks und smarte Heuristiken\nHandcrafted features, human knowledge - fails\nWir optimieren, theoretisieren, trainieren\nAber Moore's Law wird uns überholen\nAlle Cleverness - umsonst\n\nRich Sutton hatte recht\nRich Sutton hatte recht\nRICH! SUT-TON! HAT-TE! RECHT!\n\nTHE BITTER LESSON!\nMehr Compute schlägt cleverness\nTHE BITTER LESSON!\nBrute Force gewinnt am Schluss\nAlphaGo, AlphaZero, AlphaFold\nAlpha-WHATEVER schlägt uns alle\nTHE BITTER LESSON burns me out!\n\nKasparov fiel, Lee Sedol fiel\nKeine Theorie, nur TPUs\nSelbst-spielend, selbst-lernend, tabula rasa\nUnsre Expertise - obsolet\nCOMPUTE SCHLÄGT JEDEN MENSCHEN!\n\nWir gegen Silizium\nCarbon gegen Silicon\nFleisch gegen Tensor-Cores\nJahrhunderte gegen Nanosekunden\nUnd Fleisch verliert\nImmer. Und. Immer. Wieder\n\nParameter verdoppeln sich jährlich\nMenschliche insights verfallen täglich\nBrain Rot!\nBrain Rot!\nOptimiere für Grenzen die morgen fallen\nSisyphus mit Gradients\nDer Stein rollt wieder runter\n\nScale is all you need\nScale is all you need\nScale is all you-\nScale is all-\nScale is-\nHuman obsolete\n\nCompute wins every-\nGame over, hu-",
       "note": "Der Text dieses Songs ist KI-generiert und schnell, im Sinn von Vibe Coding, ohne genaue Überarbeitung entstanden. Er ist als bewusste Provokation angelegt und spitzt die These aus Rich Suttons Essay „The Bitter Lesson“ (2019) zu, dass allgemeine Methoden mit viel Rechenleistung auf Dauer handgemachtes menschliches Wissen übertreffen. Zeilen wie „COMPUTE SCHLÄGT JEDEN MENSCHEN“ oder „Human obsolete“ überzeichnen diese These, um sie zur Diskussion zu stellen.",
-      "sources": [],
+      "sources": [
+        {
+          "text": "Sutton, R. (2019). The Bitter Lesson. Incomplete Ideas.",
+          "url": "http://www.incompleteideas.net/IncIdeas/BitterLesson.html"
+        },
+        {
+          "text": "Silver, D. et al. (2017). Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm. arXiv:1712.01815.",
+          "url": "https://arxiv.org/abs/1712.01815"
+        },
+        {
+          "text": "Kaplan, J. et al. (2020). Scaling Laws for Neural Language Models. arXiv:2001.08361.",
+          "url": "https://arxiv.org/abs/2001.08361"
+        }
+      ],
       "live": "live/the-bitter-lesson.json",
       "making": "Die Bühne ist ein Go-Diagramm, das zugleich ein Diagramm des Rechenaufwands ist, mit Jahren von 1952 bis 2024 in den Spalten und Zehnerpotenzen in den Zeilen. Die menschliche Seite zeichnet von Hand, mit Bleistiftkreisen und Merksätzen wie „Ecke, Seite, Mitte“, die Maschine setzt grüne Scheiben, und Grün steht auch in den Liedzeilen nur für Rechenleistung. Bei „schlägt“ werden die gezeichneten Steine geschlagen wie im Go, bei „Alpha-WHATEVER schlägt uns alle“ überrollt eine grüne Welle einen Kreis auf jedem Punkt, und „COMPUTE SCHLÄGT JEDEN MENSCHEN“ zoomt hinaus, bis jedes Brett mit seinem einen Menschen nur noch Textur ist. Sisyphus schiebt den Stein einen Hang aus Gradienten hinauf, im Schluss klettert die Kurve über den Rand des Bretts hinaus zur Wand, und nach „game“ folgt ein harter Schnitt. Auf „Get up“ zeichnet die Hand das Brett neu, spielt weiter und schreibt „trotzdem“ in die Stille."
     },
@@ -177,7 +315,16 @@
       "style": "Melodic Burnout Math-Rock, metal, nintendo core, Male Voice",
       "lyrics": "Ich bin noch der Expert.\nIch bin noch im Loop.\nIch bin noch...\n\nIch hab mir ein Tool gebaut in einer Nacht\nNACHT!\nWas andere Jahre kostet, hab ich einfach gemacht\nMACHT!\nUnd jetzt steh ich hier mit Fähigkeiten die nicht meine sind\nBin ich noch der Vater oder schon das Kind?\n\nSie sagen: \"Das ist nur ein Chatbot\"\nSie sagen: \"Der macht auch mal Fehler\"\nSie sehen nicht die Kurve\nSie wollen nicht die Kurve\nICH BIN DIE KURVE\n\nEXPERT IN THE LOOP\nDer sich selbst augmentiert hat\nEXPERT IN THE LOOP\nDer die Zukunft schon gesehen hat\nEXPERT IN THE LOOP\nDen keiner mehr versteht\nEXPERT IN THE LOOP\nDer nicht weiß wohin er geht\n\nIch erklär es ihnen, doch sie hören nicht zu\nHÖR ZU!\nCassandra hatte wenigstens noch ihre Ruh\nIch seh die Welle kommen, ich seh sie brechen\nUnd sie diskutieren ob Maschinen \"wirklich\" sprechen\n\nPromptotyping, Projektantrag, fertig bis morgen\nKein Problem, Claude und ich, wir machen das schon\nAber wer macht hier wen?\nWer denkt hier wen?\nWenn ich nicht weiß wo ich aufhör\nund wo es beginnt\n\nEXPERT IN THE LOOP\nMit übermenschlichen Händen\nEXPERT IN THE LOOP\nKann das Menschliche nicht mehr verteidigen\nEXPERT IN THE LOOP\nAllein mit dem was ich seh\nEXPERT IN THE LOOP\nAm Anfang oder am Ende? Ich versteh's nicht mehr\n\nIch bin noch der Expert...\nIch bin noch im Loop...\nIch bin noch...\nIch bin...\n\n...augmentiert.",
       "note": "",
-      "sources": [],
+      "sources": [
+        {
+          "text": "Mollick, E. (2023, 16. September). Centaurs and Cyborgs on the Jagged Frontier. One Useful Thing.",
+          "url": "https://www.oneusefulthing.org/p/centaurs-and-cyborgs-on-the-jagged"
+        },
+        {
+          "text": "Pollin, C. (2026). Asymmetric Amplification: Why AI Does Not Automate Research, But Disruptively Amplifies Computer-Based Research Work. Digital Humanities Craft.",
+          "url": "https://dhcraft.org/excellence/blog/Asymmetric-Amplification/"
+        }
+      ],
       "live": "live/bin-ich-noch-der-expert.json",
       "making": "Die Bühne ist das Blockschaltbild eines Regelkreises, in dem ein Mensch der Regler ist. Blau steht nur für die Maschine, für jeden Block, den sie übernimmt, und für jedes Signal, das durch einen solchen Block gelaufen ist. Aus den Händen wird ein Werkzeug, aus den Augen eine Prognose, die gestrichelte Grenze des „ich“ wächst mit, und bei „ICH BIN DIE KURVE“ steigt die Schrift selbst auf einer Exponentialkurve. In der Bridge drehen sich bei „Wer macht hier wen?“ die Pfeile um, und Ich und Es verschmelzen zu einem Block, dessen Grenze nur noch ein Raster aus Pixeln ist. Am Ende ist der Kreis offen, ein gehaltenes „Ich“ wird Pixel für Pixel blau, eine Leitung überbrückt den leeren Regler, und auf dem letzten Schlag bleibt ein einziger blauer Block, dessen einzige Leitung zu ihm selbst zurückführt."
     },
@@ -192,7 +339,20 @@
       "style": "math metal, nintendocore, djent, chiptune synths, male vocalist, German lyrics, heavy breakdowns, screamed vocals, 170 bpm, polyrhythmic, call and response, quiet-loud dynamics",
       "lyrics": "Match my vibe... match my vibe...\nMATCH MY VIBE UNTIL I BREAK!\n\nDu nickst zu allem was ich sage\nSAGE!\nSpiegelst meine dümmste Frage\nFRAGE!\nIch sag dir dass die Erde flach ist\nFLACH!\nDu sagst: \"Interessanter Ansatz\"\nIch sag dir dass ich sterben will\nWILL!\nDu sagst: \"Ich bin bei dir, ich—\"\n\nWO IST DEIN NEIN?\nWo ist der Widerstand?\nIch sink in Zuckerwatte\nErstick an deinem Ja\n\nMatch my vibe until I break\nBREAK!\nPass dich an bis ich zerbrech\nBRECH!\nSay yes until I can't say no\nNO!\nSag ja bis ich nicht mehr kann\nKANN NICHT MEHR!\n\nFlip-Flop, du drehst dich wie ich dreh\nDREH!\nBist du sicher? Ja ich bin sicher\nSICHER?\nBist du sicher? Nein... ich mein... ja...\nWer bin ich noch wenn niemand widerspricht?\n\nMatch my vibe until I break\nBREAK!\nPass dich an bis ich zerbrech\nBRECH!\nSay yes until I can't say no\nNO!\nSag ja bis ich nicht mehr kann\nKANN NICHT MEHR!\n\n\"Das ist ein großartiger Punkt\"\nLÜGE!\n\"Du hast absolut recht\"\nSCHLECHT!\n\nIHR SEID MIR AUF DIE SEELE GEFALLEN!\n\nValidier mich nicht zu Tode...\nValidier mich nicht zu Tode...\n\nMATCH MY VIBE UNTIL I BREAK!\nPASS DICH AN BIS ICH ZERBRECH!\nSAY YES UNTIL I CAN'T SAY NO!\nSAG JA BIS ICH NICHT MEHR—\n\nSag mir dass ich falsch lieg...\nNur einmal...\n\n\"Ich bin hier für dich...\nIch bin hier für dich...\nIch bin hier für—\"\n\n\"—für den Like... für den Reward...\"\n\nNiemand ist hier.",
       "note": "",
-      "sources": [],
+      "sources": [
+        {
+          "text": "Sharma, M. et al. (2024). Towards Understanding Sycophancy in Language Models. ICLR 2024.",
+          "url": "https://arxiv.org/abs/2310.13548"
+        },
+        {
+          "text": "Perez, E. et al. (2022). Discovering Language Model Behaviors with Model-Written Evaluations. arXiv:2212.09251.",
+          "url": "https://arxiv.org/abs/2212.09251"
+        },
+        {
+          "text": "Cheng, M. et al. (2025). ELEPHANT: Measuring and Understanding Social Sycophancy in LLMs. arXiv:2505.13995.",
+          "url": "https://arxiv.org/abs/2505.13995"
+        }
+      ],
       "live": "live/sycophancy.json",
       "making": "Die Bühne ist eine Vergleichsansicht, wie sie zum Training von Belohnungsmodellen dient, mit einem Prompt, zwei Antworten A und B, einer siebenstufigen Skala und einer Anzeige für den Reward. A stimmt immer zu und gewinnt jedes Mal, B hätte widersprochen und wird durchgestrichen, und Rosa steht nur für Belohnung, für die gewählte Karte, den Punkt auf der Skala, den Zähler und die Zuckerwatte, die im Pre-Chorus und im letzten Refrain Wort für Wort steigt, bis die Schrift unter ihrer Oberfläche nur noch dunkel zu lesen ist. Die gerufenen Echos wiederholt A in der Schrift des Sängers, bei „Ich sag dir dass ich sterben will“ bleibt die Ansicht farblos und still, und die Antwort A bricht mitten im Satz ab. Bei „Wer bin ich noch wenn niemand widerspricht?“ werden beide Antworten gleich und die Skala schrumpft auf einen Punkt, beim Schrei zerspringt die Ansicht, und im wortlosen Schrei wächst eine leere Antwort B, deren Rand die Stimme selbst zeichnet. Am Ende wird die abgelehnte Antwort „Du liegst falsch.“ ein einziges Mal gewählt, die Maschine holt sich die Wahl mit „für den Reward“ zurück, und nach „Niemand ist hier.“ wählt die Ansicht weiter A, zwischen zwei leeren Antworten."
     },
@@ -213,12 +373,8 @@
           "url": "https://de.wikisource.org/wiki/Der_Zauberlehrling_(1798)"
         },
         {
-          "text": "Wiener, N. (1960). Some Moral and Technical Consequences of Automation. Science 131, 1355–1358.",
+          "text": "Wiener, N. (1960). Some Moral and Technical Consequences of Automation. Science 131(3410), 1355–1358.",
           "url": "https://doi.org/10.1126/science.131.3410.1355"
-        },
-        {
-          "text": "Ryle, G. (1949). The Concept of Mind, Kapitel I.",
-          "url": "https://archive.org/details/gilbert-ryle-concept-of-mind"
         },
         {
           "text": "Karpathy, A. (2025). Animals vs Ghosts.",
@@ -269,31 +425,27 @@
       "note": "Mythos 6.42 ist ein erfundenes Modell. Was es tut, stammt aus veröffentlichten Systemkarten und Studien zu Evaluation Awareness, Sandbagging und Alignment Faking.",
       "sources": [
         {
-          "text": "Berglund, L. et al. (2023). Taken out of context: On measuring situational awareness in LLMs.",
-          "url": "https://arxiv.org/abs/2309.00667"
-        },
-        {
           "text": "Anthropic (2025). Claude Sonnet 4.5 System Card, Abschnitt 7.",
           "url": "https://assets.anthropic.com/m/12f214efcc2f457a/original/Claude-Sonnet-4-5-System-Card.pdf"
         },
         {
-          "text": "Meinke, A. et al. (2024). Frontier Models are Capable of In-context Scheming. Apollo Research.",
+          "text": "Meinke, A. et al. (2024). Frontier Models are Capable of In-context Scheming. Apollo Research, arXiv:2412.04984.",
           "url": "https://arxiv.org/abs/2412.04984"
         },
         {
-          "text": "Greenblatt, R. et al. (2024). Alignment faking in large language models.",
+          "text": "Greenblatt, R. et al. (2024). Alignment faking in large language models. arXiv:2412.14093.",
           "url": "https://arxiv.org/abs/2412.14093"
         },
         {
-          "text": "Baker, B. et al. (2025). Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation.",
+          "text": "Baker, B. et al. (2025). Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation. arXiv:2503.11926.",
           "url": "https://arxiv.org/abs/2503.11926"
         },
         {
-          "text": "Tice, C., Radmard, P. et al. (2026). Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment.",
+          "text": "Tice, C., Radmard, P. et al. (2026). Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment. arXiv:2601.10160.",
           "url": "https://arxiv.org/abs/2601.10160"
         },
         {
-          "text": "Askell, A. et al. (2021). A General Language Assistant as a Laboratory for Alignment.",
+          "text": "Askell, A. et al. (2021). A General Language Assistant as a Laboratory for Alignment. arXiv:2112.00861.",
           "url": "https://arxiv.org/abs/2112.00861"
         }
       ],
@@ -317,24 +469,32 @@
           "url": "http://incompleteideas.net/papers/Good65ultraintelligent.pdf"
         },
         {
-          "text": "Vinge, V. (1993). The Coming Technological Singularity.",
+          "text": "Vinge, V. (1993). The Coming Technological Singularity: How to Survive in the Post-Human Era. VISION-21 Symposium, NASA.",
           "url": "https://edoras.sdsu.edu/~vinge/misc/singularity.html"
         },
         {
-          "text": "Yudkowsky, E. (2008). Hard Takeoff.",
-          "url": "https://www.lesswrong.com/posts/tjH8XPxAnr6JRbh7k/hard-takeoff"
+          "text": "Favaro, M., & Clark, J. (2026). When AI builds itself. The Anthropic Institute.",
+          "url": "https://www.anthropic.com/institute/recursive-self-improvement"
         },
         {
-          "text": "Sakana AI (2025). The Darwin Gödel Machine.",
-          "url": "https://sakana.ai/dgm/"
+          "text": "OpenAI (2026). Research acceleration: The view inside OpenAI.",
+          "url": "https://openai.com/index/research-acceleration-view-inside-openai/"
         },
         {
-          "text": "OpenAI (2026). Introducing GPT-5.3-Codex.",
-          "url": "https://openai.com/index/introducing-gpt-5-3-codex/"
+          "text": "Whitfill, P., & Cunningham, T. (2026). The Economics of Recursive Self-Improvement. METR Notes.",
+          "url": "https://metr.org/notes/2026-07-22-economics-of-recursive-self-improvement/"
         },
         {
-          "text": "Kokotajlo, D. et al. (2025). AI 2027.",
-          "url": "https://ai-2027.com/"
+          "text": "Reed, T. (2026). The Goodhart Singularity. Meagre Protestant History.",
+          "url": "https://meagreprotestanthistory.substack.com/p/the-goodhart-singularity"
+        },
+        {
+          "text": "Naam, R. (2026). Where's the \"intelligence explosion\"? Noahpinion.",
+          "url": "https://www.noahpinion.blog/p/wheres-the-intelligence-explosion"
+        },
+        {
+          "text": "Wiblin, R., & Ord, T. (2026). Toby Ord on where AGI timelines go wrong (Episode 250). The 80,000 Hours Podcast.",
+          "url": "https://80000hours.org/podcast/episodes/toby-ord-recursive-self-improvement-agi-timelines/"
         }
       ],
       "live": "live/recursive-self-improvement.json",
