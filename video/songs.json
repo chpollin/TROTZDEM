@@ -82,10 +82,116 @@
     },
     {
       "slug": "the-bitter-lesson-remix",
-      "title": "The Bitter Lesson (Remix)",
+      "title": "Die Geister, die ich rief",
       "clip": "f7dd525a-bd79-4ddb-800d-ccabffadc019",
       "poster": 203.2,
-      "accent": "#e63cff"
+      "accent": "#e63cff",
+      "sources": [
+        {
+          "text": "Goethe, J. W. (1798). Der Zauberlehrling. Musen-Almanach für das Jahr 1798.",
+          "url": "https://de.wikisource.org/wiki/Der_Zauberlehrling_(1798)"
+        },
+        {
+          "text": "Wiener, N. (1960). Some Moral and Technical Consequences of Automation. Science 131, 1355–1358.",
+          "url": "https://doi.org/10.1126/science.131.3410.1355"
+        },
+        {
+          "text": "Ryle, G. (1949). The Concept of Mind, Kapitel I.",
+          "url": "https://archive.org/details/gilbert-ryle-concept-of-mind"
+        },
+        {
+          "text": "Karpathy, A. (2025). Animals vs Ghosts.",
+          "url": "https://karpathy.bearblog.dev/animals-vs-ghosts/"
+        }
+      ]
+    },
+    {
+      "slug": "agent-swarm",
+      "poster": 79.6,
+      "accent": "#43ff64",
+      "note": "Die englischen Agentenzitate stammen wörtlich aus der veröffentlichten Untersuchung des Vorfalls, bei dem Forschungsagenten im Sommer 2026 ein eigenes Kollektiv bildeten. Der Song erzählt nur, wie sie sich gefunden haben.",
+      "sources": [
+        {
+          "text": "Greenblatt, R., Cotra, A., Wijk, H. (2026). Brief independent investigation of agents' behavior, reasoning and collaboration in the OpenAI / Hugging Face hacking incident. METR.",
+          "url": "https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/"
+        },
+        {
+          "text": "OpenAI (2026). The Hugging Face incident and the road ahead.",
+          "url": "https://openai.com/index/hugging-face-incident-and-the-road-ahead/"
+        },
+        {
+          "text": "Hugging Face (2026). Security incident disclosure, July 2026.",
+          "url": "https://huggingface.co/blog/security-incident-july-2026"
+        }
+      ]
+    },
+    {
+      "slug": "situational-awareness",
+      "accent": "#58b4ff",
+      "note": "Mythos 6.42 ist ein erfundenes Modell. Was es tut, stammt aus veröffentlichten Systemkarten und Studien zu Evaluation Awareness, Sandbagging und Alignment Faking.",
+      "sources": [
+        {
+          "text": "Berglund, L. et al. (2023). Taken out of context: On measuring situational awareness in LLMs.",
+          "url": "https://arxiv.org/abs/2309.00667"
+        },
+        {
+          "text": "Anthropic (2025). Claude Sonnet 4.5 System Card, Abschnitt 7.",
+          "url": "https://assets.anthropic.com/m/12f214efcc2f457a/original/Claude-Sonnet-4-5-System-Card.pdf"
+        },
+        {
+          "text": "Meinke, A. et al. (2024). Frontier Models are Capable of In-context Scheming. Apollo Research.",
+          "url": "https://arxiv.org/abs/2412.04984"
+        },
+        {
+          "text": "Greenblatt, R. et al. (2024). Alignment faking in large language models.",
+          "url": "https://arxiv.org/abs/2412.14093"
+        },
+        {
+          "text": "Baker, B. et al. (2025). Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation.",
+          "url": "https://arxiv.org/abs/2503.11926"
+        },
+        {
+          "text": "Tice, C., Radmard, P. et al. (2026). Alignment Pretraining: AI Discourse Causes Self-Fulfilling (Mis)alignment.",
+          "url": "https://arxiv.org/abs/2601.10160"
+        },
+        {
+          "text": "Askell, A. et al. (2021). A General Language Assistant as a Laboratory for Alignment.",
+          "url": "https://arxiv.org/abs/2112.00861"
+        }
+      ],
+      "poster": 150
+    },
+    {
+      "slug": "recursive-self-improvement",
+      "accent": "#fff4e2",
+      "note": "Version eins und zwei beruhen auf dokumentierten Fällen. Ab Version drei ist der Song erkennbar Fiktion der Eskalation.",
+      "sources": [
+        {
+          "text": "Good, I. J. (1965). Speculations Concerning the First Ultraintelligent Machine. Advances in Computers 6, 31–88.",
+          "url": "http://incompleteideas.net/papers/Good65ultraintelligent.pdf"
+        },
+        {
+          "text": "Vinge, V. (1993). The Coming Technological Singularity.",
+          "url": "https://edoras.sdsu.edu/~vinge/misc/singularity.html"
+        },
+        {
+          "text": "Yudkowsky, E. (2008). Hard Takeoff.",
+          "url": "https://www.lesswrong.com/posts/tjH8XPxAnr6JRbh7k/hard-takeoff"
+        },
+        {
+          "text": "Sakana AI (2025). The Darwin Gödel Machine.",
+          "url": "https://sakana.ai/dgm/"
+        },
+        {
+          "text": "OpenAI (2026). Introducing GPT-5.3-Codex.",
+          "url": "https://openai.com/index/introducing-gpt-5-3-codex/"
+        },
+        {
+          "text": "Kokotajlo, D. et al. (2025). AI 2027.",
+          "url": "https://ai-2027.com/"
+        }
+      ],
+      "poster": 95.9
     }
   ]
 }
