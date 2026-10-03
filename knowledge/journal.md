@@ -8,7 +8,7 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: active
 created: 2026-10-02
-updated: 2026-10-02
+updated: 2026-10-03
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5)
@@ -33,3 +33,12 @@ Later the same day the operator decided to frame TROTZDEM as an experiment with 
 An audit of the repository led to a round of optimisation without re-rendering any video. `render.py` now defaults to two workers as the resource rule demands, keeps segments per output name and stops at the first failed segment. Renders, web encodes and downloads write to `*.part` files, so an interrupted run no longer leaves a truncated file that later runs would trust. `build_album.py` writes release URLs by default, takes a `title` override from `songs.json` and generates small track list thumbnails. Two scene caches whose result depended on which frame a worker rendered first now depend only on their key, and dead scene code is gone. The preview player falls back to the release audio where `source/` is missing. The archived chat page loads no font CDN and its images shrank to WebP sized for display.
 
 Three experimental page variants that tell the album as one narrative in acts titled with lyric lines (a live stage drawing the scenes in the browser, a session transcript, a desktop of interface windows) were built on the branch `album-versions`, which also holds their description in `knowledge/album-versions.md`. The operator preferred the existing album page and decided to refine it instead, so the variants stay on that branch as an experiment and the refinements went live on `main`. A read of all scenes found that the videos already share a visual grammar (black ground, Redaction and Space Mono, one accent colour as the signal of the system, an achromatic human), which new scenes should keep.
+
+## 2026-10-03
+
+Three new songs were written, fact-checked and published with videos, Agent Swarm, Situational Awareness and Recursive Self-Improvement. Each lyric was checked against primary sources read in full by research agents (system cards, papers, incident reports), and lines were corrected where they overstated a finding, for example the sandbagging threshold, the direction of alignment faking and the request rate of an agentic attack. The rules that emerged are in [songwriting-guidelines.md](songwriting-guidelines.md). Agent Swarm was first planned around the 2025 espionage report and then rebuilt on the 2026 OpenAI and Hugging Face incident, telling only the social story of the agents, because drafts that followed the attack sequence were blocked by a safety classifier. A fourth song, We Do Not Yet Know, was written and then dropped by the operator. Jagged Alien Intelligence is written and checked and waits for its Suno generation.
+
+Treatment agents designed all four videos before any audio existed, the main session built Agent Swarm and two build agents built the other two. Two lessons for scenes followed. An offscreen canvas that uses fonts must be built on first use, because `scene.js` loads before the player has resolved the fonts. Every new song measured a different tempo and meter than its style prompt claimed, so the videos show measured values only. The Recursive Self-Improvement build first used red and green for its diff and status lines, which was changed to grey to keep the one-accent rule.
+
+"The Bitter Lesson (Remix)" is titled "Die Geister, die ich rief" on the page through the `title` override, while its slug and release URL stay. The album page gained a sources list per video, the track list right after the player on phones, contrast-safe accent text, the Media Session API, a viewport-bound glow and a masthead that switches between Redaction damage grades with the loudness. The new videos use official Suno downloads.
+

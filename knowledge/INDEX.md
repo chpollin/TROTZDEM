@@ -8,7 +8,7 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: draft
 created: 2026-10-02
-updated: 2026-10-02
+updated: 2026-10-03
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5)
@@ -22,6 +22,7 @@ TROTZDEM is an experiment with generative AI, an album of songs generated with S
 
 - [project.md](project.md) describes what the project is, how it is framed as an experiment, what the page labels as AI-generated, the rules on context notes and warnings, and the rights situation.
 - [video-pipeline-architecture.md](video-pipeline-architecture.md) describes how the videos are produced, from the Suno source through vocal separation, lyric alignment and audio analysis to the canvas scenes, the frame renderer, the album page and the agentic build workflow.
+- [songwriting-guidelines.md](songwriting-guidelines.md) describes how new songs are written so that they sound like the album and hold up factually, from language and lyric features to the Suno prompt and the sources field.
 - [handoff.md](handoff.md) holds the open items waiting for a decision or for integration.
 - [journal.md](journal.md) records what changed and what was decided per session.
 
@@ -38,3 +39,7 @@ Timing report
 Build agent
 
 The coding agent that writes, reviews and renders the scene of one song.
+
+Sources
+
+The `sources` field of a song in `video/songs.json`, a list of works read in full that the song draws on, shown under the video on the album page.

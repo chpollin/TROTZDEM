@@ -8,7 +8,7 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: draft
 created: 2026-10-02
-updated: 2026-10-02
+updated: 2026-10-03
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5)
@@ -36,9 +36,13 @@ The videos carry no content warnings, help cards or end cards. The operator remo
 
 A song whose text is deliberately provocative gets a short context note on the page, held as `note` in `video/songs.json` and shown above the paragraph on how the video is made. "The Bitter Lesson" carries one, because its AI-generated lyrics exaggerate the thesis of Sutton's essay (2019) into lines such as "COMPUTE SCHLÄGT JEDEN MENSCHEN".
 
+## Sources
+
+A song that draws on research or a documented incident lists the works it relies on in the `sources` field of `video/songs.json`, and the page shows them under the video. Only works read in full are listed. How songs are checked is described in [songwriting-guidelines.md](songwriting-guidelines.md).
+
 ## Material and rights
 
-The songs come from the Suno playlist "chrisi-trotzdem", https://suno.com/playlist/6c2e6236-5308-4e05-ba6b-97db23604473. Suno's terms allow public and commercial use only of audio downloaded through the official download on a paid plan. The videos currently use the audio of the public clip videos. Replacing `source/audio.wav` with the official download and rendering again is the route before use beyond sharing with friends.
+The songs come from the Suno playlist "chrisi-trotzdem", https://suno.com/playlist/6c2e6236-5308-4e05-ba6b-97db23604473. Suno's terms allow public and commercial use only of audio downloaded through the official download on a paid plan. The first album videos use the audio of the public clip videos, while the songs added from October 2026 on use the official download. For the older songs, replacing `source/audio.wav` with the official download and rendering again is the route before use beyond sharing with friends.
 
 Code is MIT licensed, text and documentation CC BY 4.0. The vendored fonts keep the SIL Open Font License. The songs, their audio and lyrics are not covered.
 

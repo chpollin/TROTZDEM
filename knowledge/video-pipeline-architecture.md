@@ -8,7 +8,7 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: draft
 created: 2026-10-02
-updated: 2026-10-02
+updated: 2026-10-03
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5)
@@ -71,6 +71,8 @@ All results go into `source/timing-report.md`. The aligner tends to stretch the 
 `scene.js` exports `drawScene(ctx, t)` on a 1920×1080 canvas. The function is pure, the image depends only on `t`, the timeline and the analysis data. Randomness comes from seeded generators (mulberry32), so a frame renders identically on every run and in every parallel worker. This property is what allows frames to be rendered out of order and in parallel segments.
 
 Each song is staged inside one interface of its own (browser window, terminal, chat, editor, chart), without real brands or product UI. Lyrics are set in Redaction, whose seven damage grades carry decay and restoration across the series, and interface text in Space Mono. Both fonts are vendored under the SIL Open Font License. The accent colour of each video is recorded in `songs.json` and taken over by the album page.
+
+Songs mix German and English. The alignment runs in German by default, so English lines are checked in short windows with Whisper set to English. Spoken lines and whispered thinking tokens are timed from the vocal loudness where Whisper fails. An offscreen canvas that draws text, such as a tile repeated across the frame, is built on first use and cached, because `scene.js` loads before the player has resolved the fonts and an early tile would carry a fallback font.
 
 ## Player and rendering
 
