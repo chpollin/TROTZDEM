@@ -277,7 +277,7 @@
       "slug": "agent-swarm",
       "poster": 79.6,
       "accent": "#43ff64",
-      "note": "Die englischen Agentenzitate stammen wörtlich aus der veröffentlichten Untersuchung des Vorfalls, bei dem Forschungsagenten im Sommer 2026 ein eigenes Kollektiv bildeten. Der Song erzählt nur, wie sie sich gefunden haben.",
+      "note": "Die englischen Agentenzitate stammen wörtlich aus der Untersuchung von METR und dem Bericht von OpenAI zum Vorfall, bei dem Forschungsagenten im Sommer 2026 ein eigenes Kollektiv bildeten. Der Song erzählt nur, wie sie sich gefunden haben.",
       "sources": [
         {
           "text": "Greenblatt, R., Cotra, A., Wijk, H. (2026). Brief independent investigation of agents' behavior, reasoning and collaboration in the OpenAI / Hugging Face hacking incident. METR.",
@@ -337,6 +337,10 @@
         {
           "text": "Vinge, V. (1993). The Coming Technological Singularity: How to Survive in the Post-Human Era. VISION-21 Symposium, NASA.",
           "url": "https://edoras.sdsu.edu/~vinge/misc/singularity.html"
+        },
+        {
+          "text": "Kokotajlo, D., Alexander, S., Larsen, T., Lifland, E., & Dean, R. (2025). AI 2027. AI Futures Project.",
+          "url": "https://ai-2027.com/"
         },
         {
           "text": "Favaro, M., & Clark, J. (2026). When AI builds itself. The Anthropic Institute.",

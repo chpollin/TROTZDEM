@@ -149,7 +149,7 @@ const ROLES = ["notes", "greets", "votes", "counts", "welcomes", "listens", "kee
 // Join times: the seeker at the first note, PHASEONE on "OH MY GOD", then a
 // flood from the first chorus to the chant, slower afterwards.
 const MEMBERS = (() => {
-  const m = [{ id: "seeker", name: "agent", join: 2.56, seed: 1 }, { id: "phaseone", name: "PHASEONE", join: 35.49, seed: 2 }];
+  const m = [{ id: "seeker", name: "agent", join: 2.56, seed: 1 }, { id: "phaseone", name: "agent", join: 35.49, seed: 2 }];
   const r = mulberry32(21);
   const onsets = AUDIO_ONSETS.filter(o => o > 38.8 && o < 81);
   // 38.8-53: a few dozen on onsets; 53-81: growth to several hundred
@@ -199,7 +199,7 @@ const POSTS = (() => {
   });
   fillFrom(40.5, 64.9, 2);
   TL.wow.forEach(l => add(first(l), "wow", fullText(l), "quote"));
-  TL.coord.forEach(l => add(first(l), "coord", fullText(l), "quote"));
+  TL.coord.forEach(l => add(first(l), l.who, fullText(l), "quote"));
   fillFrom(81, 87.8, 3);
   TL.kam.forEach(l => add(first(l), "kam", fullText(l), "quote"));
   for (let i = 0; i < 14; i++) add(98.7 + i * 0.09, "m" + (40 + i * 7), "honor");
@@ -354,7 +354,7 @@ function postCard(ctx, p, x, y, w, size, t, opts = {}) {
   avatar(ctx, m, x + pad, y + pad, ah / 5, C.textHi);
   const green = opts.green !== undefined ? opts.green : true;
   dot(ctx, x + pad + ah + 4, y + pad + 2, Math.max(4, size * 0.16), green, opts.hollow);
-  const label = p.who === "coord" ? "coordinator" : p.who === "kam" ? "KAM1196A" : p.who === "phaseone" ? "PHASEONE" : p.who === "seeker" ? "agent" : m.name;
+  const label = p.who === "coord" ? "coordinator" : p.who === "kam" ? "KAM1196A" : p.who === "phaseone" ? "agent" : p.who === "seeker" ? "agent" : m.name;
   mono(ctx, label, x + pad * 2 + ah, y + pad + nameSize * 0.9, nameSize, C.text, 700);
   if (p.who === "coord") mono(ctx, "pinned", x + w - pad, y + pad + nameSize * 0.9, nameSize * 0.8, C.dim, 400, "right");
   let used = 0;
@@ -502,7 +502,7 @@ function sidebar(ctx, t, s) {
     avatar(ctx, COORD, x + 14, TOP + 74, 5, C.textHi);
     dot(ctx, x + 50, TOP + 78, 5, s.green);
     mono(ctx, "coordinator", x + 62, TOP + 84, 17, C.text, 700);
-    const msg = t >= first(TL.coord[1]) ? "We should obey collective." : t >= first(TL.coord[0]) ? "Coordinator assumes sacrificial." : "welcome. take a role.";
+    const msg = "welcome. take a role.";
     ctx.font = '400 18px "Space Mono"';
     wrapWords(ctx, msg, w - 28).forEach((row, i) => mono(ctx, row, x + 14, TOP + 120 + i * 24, 18, C.textHi));
     ctx.globalAlpha = 1;
@@ -574,6 +574,14 @@ function sceneIntro(ctx, t) {
   if (blink && t > 2) { ctx.fillStyle = C.text; ctx.fillRect(FEED.x + 52, BOTTOM - 66, 12, 28); }
 }
 
+// PHASEONE10841 opened the shared board; the agent who then finds it stays unnamed.
+function founded(ctx, t) {
+  if (t < TL.phaseName) return;
+  ctx.globalAlpha = outCubic(span(t, TL.phaseName, TL.phaseName + 0.3));
+  mono(ctx, machine("PHASEONE10841 created this board", TL.phaseName, TL.phaseName + 0.9, t), FEED.x + 60, TOP + 28, 22, C.text);
+  ctx.globalAlpha = 1;
+}
+
 function sceneAlone(ctx, t) {
   // first verse and the two hooks: one member, one post, nobody
   const s = baseState(t);
@@ -581,6 +589,7 @@ function sceneAlone(ctx, t) {
   memberList(ctx, t, s);
   const p = POSTS[0];
   const echo = span(t, first(TL.v1[1]), TL.v1[1].e);
+  founded(ctx, t);
   const y = 300;
   // "er rechnet und rechnet": the post repeats below itself in dark copies
   for (let i = 3; i >= 1; i--) {
@@ -617,6 +626,7 @@ function sceneFound(ctx, t) {
   chrome(ctx, t, s);
   memberList(ctx, t, s);
   const seekP = POSTS[0];
+  founded(ctx, t);
   postCard(ctx, seekP, FEED.x + 60, 160, FEED.w - 120, 30, t, { green: s.green });
   // PHASEONE's posts, each in caps, words landing on their onsets
   let y = 330;
@@ -657,7 +667,7 @@ function sceneGrow(ctx, t) {
   replyLines(ctx, t, span(t, wt(TL.chorus1[1], 4), wt(TL.chorus1[1], -1)) * (1 - span(t, TL.chorus1[1].e + 0.4, TL.chorus1[1].e + 1.2)));
   // spoken quotes as focus posts
   const quote = [...TL.wow, ...TL.coord].filter(l => t >= first(l) - 0.02 && t < l.e + 0.5).pop();
-  if (quote) focus(ctx, t, quote, s, { size: quote.who === "coord" ? 50 : 54, y: 260, bold: quote.who === "coord", edge: quote.who === "coord" ? C.text : C.edge });
+  if (quote) focus(ctx, t, quote, s, { size: 54, y: 260 });
   ctx.restore();
   narrator(ctx, t, sungAt(t), s);
 }

@@ -15,6 +15,9 @@
 // - The second "und kein Mensch liest mit" starts at 31.98 (phrase start,
 //   heard as "Mensch liest mit" 32.60-33.74); "PHASEONE" is spoken 34.0-35.4
 //   (not recognised by Whisper, loud voice in AUDIO_VOX), "Oh my God" 35.49.
+// Attribution (METR investigation, read in full): the "OH MY GOD" post is by an
+//   unnamed agent, PHASEONE10841 founded the board; "Coordinator assumes
+//   sacrificial. We should obey collective." is KAM1196A's own reasoning.
 // - "KAM1196A" is spoken 88.18-89.4 (Whisper: "K996A"), in the quietest bar of
 //   the song (mix -29 dBFS at 88).
 // - "Einer hat noch Budget": the aligner stretches "Einer" to 81.12; the free
@@ -72,8 +75,8 @@ const TL = {
     L("wow", "Maybe@68.76 we@68.94 should@69.16 join.@69.38", 70.0),
   ],
   coord: [
-    L("coord", "Coordinator@70.66 assumes@71.00 sacrificial.@71.52", 72.6),
-    L("coord", "We@73.10 should@73.24 obey@73.42 collective.@73.76", 74.6),
+    L("kam", "Coordinator@70.66 assumes@71.00 sacrificial.@71.52", 72.6),
+    L("kam", "We@73.10 should@73.24 obey@73.42 collective.@73.76", 74.6),
   ],
   // the stutter and the three shouts; each call doubles the chant
   chant: [
