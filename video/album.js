@@ -1,5 +1,5 @@
 /**
- * @typedef {{ slug: string, title: string, duration: number, video: string, poster: string, thumb?: string, accent: string, note?: string, style: string, making: string, lyrics: string, live?: string }} Song
+ * @typedef {{ slug: string, title: string, duration: number, video: string, poster: string, thumb?: string, accent: string, note?: string, sources?: { text: string, url: string }[], style: string, making: string, lyrics: string, live?: string }} Song
  * @typedef {{ rate: number, envelope: number[], cues: [number, number][] }} Live
  */
 
@@ -14,6 +14,10 @@ const nowStyle = document.getElementById("now-style");
 const nowMaking = document.getElementById("now-making");
 const nowNote = document.getElementById("now-note");
 const nowCode = /** @type {HTMLAnchorElement} */ (document.getElementById("now-code"));
+const nowSources = document.getElementById("now-sources");
+const sourcesTitle = document.getElementById("sources-title");
+const masthead = document.querySelector(".masthead h1");
+const glowLayer = /** @type {HTMLElement} */ (document.querySelector(".glow"));
 const CODE_URL = "https://github.com/chpollin/TROTZDEM/blob/main/video/";
 
 // album.json and the posters live next to this script; the page may sit elsewhere
@@ -21,6 +25,14 @@ const base = new URL("./", import.meta.url);
 const resolve = path => new URL(path, base).href;
 
 const calm = matchMedia("(prefers-reduced-motion: reduce)");
+// matches the container query in album.css that puts the info beside the track list
+const wide = matchMedia("(min-width: 58rem)");
+
+// smoothed loudness at which the masthead moves to the next, more worn cut; it moves back only
+// WEAR_HYSTERESIS below, so a level hovering at a threshold does not flicker
+const WEAR_UP = [0.3, 0.5, 0.65];
+const WEAR_HYSTERESIS = 0.06;
+const WEAR_FONTS = ["Redaction", "Redaction35", "Redaction70", "Redaction100"];
 
 /** @type {Map<string, Live>} */
 const liveCache = new Map();
@@ -35,6 +47,10 @@ let lastPaint = 0;
 let ticking = false;
 /** @type {HTMLAnchorElement | null} */
 let currentLink = null;
+let wear = -1;
+let wearReady = false;
+// once the viewer opens or closes the lyrics, their choice outlasts the default
+let lyricsChosen = false;
 
 // lyrics as a native captions track for fullscreen and assistive technology; most scenes draw
 // the sung line themselves, so the track starts hidden and the viewer switches it on in the controls
@@ -84,11 +100,19 @@ function renderLyrics(text) {
   currentLine = -1;
 }
 
+/** @param {boolean} hasCues */
+function defaultLyricsOpen(hasCues) {
+  if (!lyricsChosen) lyricsPanel.open = hasCues && wide.matches;
+}
+
 /** @param {Song} song */
 async function loadLive(song) {
   live = null;
   for (const cue of [...(captions.cues ?? [])]) captions.removeCue(cue);
-  if (!song.live) return;
+  if (!song.live) {
+    defaultLyricsOpen(false);
+    return;
+  }
   let data = liveCache.get(song.slug);
   if (!data) {
     try {
@@ -98,6 +122,7 @@ async function loadLive(song) {
     } catch (error) {
       // without live data the lyrics stay plain text, which is enough to read along
       console.warn("live data unavailable", error);
+      defaultLyricsOpen(false);
       return;
     }
     liveCache.set(song.slug, data);
@@ -118,6 +143,7 @@ async function loadLive(song) {
     lineEls[index] = button;
   }
   lyrics.classList.toggle("is-live", data.cues.length > 0);
+  defaultLyricsOpen(data.cues.length > 0);
   data.cues.forEach(([time, index], k) => {
     const text = lineEls[index]?.textContent.trim();
     if (!text) return;
@@ -133,6 +159,21 @@ function scrollToLine() {
   lyrics.scrollTo({ top: el.offsetTop - lyrics.clientHeight / 2, behavior: calm.matches ? "auto" : "smooth" });
 }
 
+/** @param {number} level */
+function weather(level) {
+  let next = -1;
+  if (wearReady && !player.paused && !calm.matches) {
+    next = Math.max(wear, 0);
+    while (next < WEAR_UP.length && level >= WEAR_UP[next]) next++;
+    while (next > 0 && level < WEAR_UP[next - 1] - WEAR_HYSTERESIS) next--;
+  }
+  if (next === wear) return;
+  wear = next;
+  // without the attribute the stylesheet's resting cut applies
+  if (wear < 0) masthead.removeAttribute("data-wear");
+  else masthead.setAttribute("data-wear", String(wear));
+}
+
 function update() {
   const t = player.currentTime;
   if (currentLink && player.duration) currentLink.style.setProperty("--progress", (t / player.duration).toFixed(4));
@@ -143,8 +184,9 @@ function update() {
   const text = glow.toFixed(3);
   if (text !== glowText) {
     glowText = text;
-    document.body.style.setProperty("--glow", text);
+    glowLayer.style.setProperty("--glow", text);
   }
+  weather(glow);
   let index = -1;
   for (const [time, line] of live.cues) {
     if (time > t + 0.1) break;
@@ -189,8 +231,18 @@ function show(songs, play) {
   nowNote.textContent = song.note ?? "";
   nowNote.hidden = !song.note;
   nowMaking.textContent = song.making;
+  const sources = song.sources ?? [];
+  nowSources.replaceChildren(...sources.map(source => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = source.url;
+    a.textContent = source.text;
+    li.append(a);
+    return li;
+  }));
+  nowSources.hidden = sourcesTitle.hidden = !sources.length;
   nowCode.href = `${CODE_URL}${song.slug}/scene.js`;
-  nowMaking.closest(".making").hidden = !song.making;
+  nowMaking.closest(".making").hidden = !song.making && !sources.length;
   renderLyrics(song.lyrics);
   loadLive(song);
   tracks.querySelectorAll("a").forEach((a, j) => {
@@ -202,8 +254,21 @@ function show(songs, play) {
       a.style.removeProperty("--progress");
     }
   });
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: song.title,
+      album: "TROTZDEM",
+      artwork: [{ src: resolve(song.poster), sizes: "1280x720", type: "image/jpeg" }],
+    });
+  }
   // a browser may refuse playback without a gesture; the controls stay usable either way
   if (play) player.play().catch(() => {});
+}
+
+/** @param {Song[]} songs @param {number} delta */
+function step(songs, delta) {
+  const i = songs.findIndex(s => s.slug === player.dataset.slug) + delta;
+  if (i >= 0 && i < songs.length) location.hash = songs[i].slug;
 }
 
 /** @returns {Promise<Song[]>} */
@@ -227,6 +292,7 @@ function showLoadError(error) {
   stage.removeAttribute("aria-labelledby");
   stage.replaceChildren(message);
   /** @type {HTMLElement} */ (tracks.closest("nav")).hidden = true;
+  /** @type {HTMLElement} */ (document.querySelector(".info")).hidden = true;
 }
 
 /** on a phone the list sits below the player, so a chosen title would otherwise play out of view */
@@ -254,6 +320,12 @@ async function main() {
   });
   // play can fire twice within one frame, and a second loop would double the work
   player.addEventListener("play", () => {
+    // the worn cuts load on first playback; until then the masthead keeps its resting cut
+    if (!wearReady) {
+      Promise.all(WEAR_FONTS.map(font => document.fonts.load(`1em "${font}"`, "TROTZDEM")))
+        .then(() => { wearReady = true; })
+        .catch(() => {});
+    }
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(tick);
@@ -261,16 +333,22 @@ async function main() {
   player.addEventListener("seeked", update);
   player.addEventListener("pause", update);
   lyricsPanel.addEventListener("toggle", scrollToLine);
+  lyricsPanel.querySelector("summary").addEventListener("click", () => { lyricsChosen = true; });
   lyrics.addEventListener("click", event => {
     const cue = /** @type {HTMLElement} */ (event.target).closest(".cue");
     if (!cue) return;
     player.currentTime = Number(cue.dataset.time);
     player.play().catch(() => {});
   });
-  player.addEventListener("ended", () => {
-    const i = songs.findIndex(s => s.slug === player.dataset.slug);
-    if (i < songs.length - 1) location.hash = songs[i + 1].slug;
-  });
+  player.addEventListener("ended", () => step(songs, 1));
+  if ("mediaSession" in navigator) {
+    // an action the browser does not support throws; the remaining ones still work
+    for (const [action, delta] of /** @type {const} */ ([["previoustrack", -1], ["nexttrack", 1]])) {
+      try {
+        navigator.mediaSession.setActionHandler(action, () => step(songs, delta));
+      } catch {}
+    }
+  }
 }
 
 main();

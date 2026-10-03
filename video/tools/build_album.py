@@ -29,6 +29,19 @@ VIDEO = Path(__file__).resolve().parent.parent
 RELEASE_URL = "https://github.com/chpollin/TROTZDEM/releases/download/{tag}/{slug}.mp4"
 # the track list shows posters about 96 px wide; four times that stays sharp on high-density screens
 THUMB_WIDTH = 384
+# --surface in album.css, oklch(0.17 0.006 285), in sRGB
+SURFACE = "#0f0f12"
+
+
+def luminance(hex_colour: str) -> float:
+    channels = [int(hex_colour.lstrip("#")[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+    r, g, b = (c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in channels)
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
+def contrast(a: str, b: str) -> float:
+    hi, lo = sorted((luminance(a), luminance(b)), reverse=True)
+    return (hi + 0.05) / (lo + 0.05)
 
 
 def web_encode(src: Path, dst: Path) -> None:
@@ -162,7 +175,11 @@ def main():
             "lyrics": lyrics,
             # context the page shows above the making paragraph, e.g. for a deliberately provocative text
             "note": s.get("note", ""),
+            "sources": s.get("sources", []),
         })
+        # the page lifts dark accents for text itself, but lines and surfaces show them as they are
+        if contrast(songs[-1]["accent"], SURFACE) < 4.5:
+            print(f"{slug}: accent {songs[-1]['accent']} reaches only {contrast(songs[-1]['accent'], SURFACE):.1f}:1 against the surface")
         (VIDEO / "live").mkdir(exist_ok=True)
         (VIDEO / "live" / f"{slug}.json").write_text(json.dumps(live_data(VIDEO / slug, lyrics), separators=(",", ":")), encoding="utf-8")
         songs[-1]["live"] = f"live/{slug}.json"

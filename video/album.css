@@ -4,16 +4,20 @@
 @font-face { font-family: "Space Mono"; src: url("fonts/SpaceMono-Regular.woff2") format("woff2"), url("fonts/SpaceMono-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Redaction"; src: url("fonts/Redaction-Regular.woff2") format("woff2"), url("fonts/Redaction-Regular.ttf") format("truetype"); font-display: swap; }
 @font-face { font-family: "Redaction50"; src: url("fonts/Redaction50-Regular.woff2") format("woff2"), url("fonts/Redaction50-Regular.ttf") format("truetype"); font-display: swap; }
+/* the masthead weathers with the music; these cuts only ever set its eight letters, so they are subsets */
+@font-face { font-family: "Redaction35"; src: url("fonts/Redaction35-masthead.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "Redaction70"; src: url("fonts/Redaction70-masthead.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "Redaction100"; src: url("fonts/Redaction100-masthead.woff2") format("woff2"); font-display: swap; }
 
 /* registered so the accent can glide between songs; unregistered it just switches */
 @property --accent { syntax: "<color>"; inherits: true; initial-value: #a77bff; }
-/* loudness of the playing song, 0 to 1, set on body by album.js; only body's background reads it,
-   so it does not inherit and a change restyles body alone */
+/* loudness of the playing song, 0 to 1, set on the glow layer by album.js; only that layer reads it,
+   so it does not inherit and a change restyles that layer alone */
 @property --glow { syntax: "<number>"; inherits: false; initial-value: 0; }
 
 @layer reset {
   *, *::before, *::after { box-sizing: border-box; }
-  body, h1, h2, p, ol { margin: 0; }
+  body, h1, h2, p, ol, ul { margin: 0; }
   img, video { display: block; max-inline-size: 100%; }
 }
 
@@ -26,29 +30,33 @@
     --surface-hover: oklch(0.22 0.008 285);
     --text: oklch(0.93 0.004 285);
     --text-dim: oklch(0.72 0.01 285);
+    /* lyric lines not being sung; solid so the contrast holds on black and on the surface */
+    --text-faint: oklch(0.62 0.01 285);
     --accent: oklch(0.68 0.19 295);
+    /* the accent wherever it is read as text or marks focus; dark accents are lifted so text keeps
+       its contrast, surfaces and lines keep the pure accent */
+    --accent-ink: var(--accent);
     --font-type: "Redaction", Georgia, serif;
     --font-type-worn: "Redaction50", "Redaction", Georgia, serif;
     --font-ui: "Space Mono", ui-monospace, monospace;
     --gutter: clamp(1rem, 0.6rem + 2vw, 2.5rem);
     --gap: clamp(1rem, 0.8rem + 1vw, 2rem);
   }
+  @supports (color: oklch(from red l c h)) {
+    :root { --accent-ink: oklch(from var(--accent) max(l, 0.7) c h); }
+  }
 }
 
 @layer base {
+  /* the ground sits on the root so the fixed glow layer can paint between it and the content */
+  html { background: var(--void); }
   body {
-    /* a faint glow of the current song's accent behind the player */
-    background:
-      radial-gradient(ellipse calc(70% + var(--glow) * 25%) calc(45% + var(--glow) * 30%) at 30% 0%,
-        color-mix(in oklch, var(--accent) calc(10% + var(--glow) * 16%), transparent), transparent 70%)
-      no-repeat,
-      var(--void);
     color: var(--text);
     font-family: var(--font-type);
     font-size: 1.125rem;
     line-height: 1.5;
   }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
   a { color: inherit; }
 }
 
@@ -61,15 +69,24 @@
   }
   /* the page is the container, so the album grid can switch columns */
   body { container-type: inline-size; }
+  /* narrow: player, track list, then the info; wide: the info moves under the player */
   .album {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "stage" "tracks" "info";
     gap: var(--gap);
     padding-block: var(--gap) calc(var(--gap) * 2);
   }
 }
 
 @layer components {
+  /* a faint glow of the current song's accent behind the player, bound to the viewport */
+  .glow {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(ellipse calc(70% + var(--glow) * 25%) calc(45% + var(--glow) * 30%) at 30% 0%,
+      color-mix(in oklch, var(--accent) calc(10% + var(--glow) * 16%), transparent), transparent 70%);
+  }
+
   .masthead h1 {
     font-family: var(--font-type-worn);
     font-weight: 400;
@@ -77,8 +94,14 @@
     letter-spacing: 0.04em;
     line-height: 1;
   }
+  .masthead h1[data-wear="0"] { font-family: var(--font-type); }
+  .masthead h1[data-wear="1"] { font-family: "Redaction35", var(--font-type); }
+  .masthead h1[data-wear="2"] { font-family: "Redaction70", var(--font-type); }
+  .masthead h1[data-wear="3"] { font-family: "Redaction100", var(--font-type); }
 
-  .stage { display: grid; gap: var(--gap); align-content: start; }
+  .stage { grid-area: stage; display: grid; gap: var(--gap); align-content: start; }
+  .tracklist { grid-area: tracks; }
+  .info { grid-area: info; display: grid; gap: var(--gap); align-content: start; }
   .stage > .now { margin-block-start: calc(var(--gap) * -0.4); }
   #player { inline-size: 100%; aspect-ratio: 16 / 9; background: var(--void); }
   /* takes the player's place when album.json cannot be loaded */
@@ -103,12 +126,20 @@
   .making h3, .more summary, .prompt figcaption {
     font-family: var(--font-type); font-weight: 400; font-size: 1.25rem; line-height: 1.3; color: var(--text);
   }
-  .more summary::marker { color: var(--accent); }
+  .more summary::marker { color: var(--accent-ink); }
   .making h3 { margin: 0 0 0.5rem; }
+  .making p + h3 { margin-block-start: 1rem; }
   .making p { margin: 0; color: var(--text); }
   .making .code-link { margin-block-start: 0.6rem; font-family: var(--font-ui); font-size: 0.85rem; }
   .code-link a { color: var(--text-dim); text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
   .code-link a:hover { color: var(--text); }
+  .sources {
+    padding-inline-start: 1.25rem;
+    font-family: var(--font-ui); font-size: 0.85rem; color: var(--text-dim);
+  }
+  .sources li + li { margin-block-start: 0.3rem; }
+  .sources a { color: var(--text-dim); text-decoration-color: var(--accent); text-underline-offset: 0.2em; overflow-wrap: anywhere; }
+  .sources a:hover { color: var(--text); }
 
   /* list-style none removes list semantics in Safari; the role restores it */
   .provenance {
@@ -145,7 +176,7 @@
   .lyrics .line { display: block; min-block-size: 1lh; }
   /* with cues the panel scrolls itself, so the sung line stays in view without moving the page */
   .lyrics.is-live { position: relative; max-block-size: 24rem; overflow-y: auto; overscroll-behavior: contain; padding-inline: 0.75rem 1rem; }
-  .lyrics.is-live .line { color: color-mix(in oklch, var(--text-dim) 70%, transparent); }
+  .lyrics.is-live .line { color: var(--text-faint); }
   .lyrics .cue {
     font: inherit; color: inherit; text-align: start; background: none; border: 0; cursor: pointer;
     inline-size: 100%; padding: 0 0 0 0.75rem; margin-inline-start: -0.75rem;
@@ -173,7 +204,7 @@
     content: ""; position: absolute; inset-inline-start: 0; inset-block-end: 0;
     block-size: 2px; inline-size: calc(var(--progress, 0) * 100%); background: var(--accent);
   }
-  .tracklist img { inline-size: 100%; aspect-ratio: 16 / 9; object-fit: cover; opacity: 0.6; }
+  .tracklist img { inline-size: 100%; aspect-ratio: 16 / 9; object-fit: cover; opacity: 0.85; }
   .tracklist a:hover { background: var(--surface); }
   .tracklist a:hover img, .tracklist a[aria-current="true"] img { opacity: 1; }
   .tracklist a[aria-current="true"] { border-inline-start-color: var(--accent); background: var(--surface); }
@@ -184,26 +215,27 @@
   .track-no { text-align: end; }
   .track-title { line-height: 1.25; font-size: 1rem; overflow-wrap: anywhere; color: var(--text-dim); }
   .tracklist a:hover .track-title, .tracklist a[aria-current="true"] .track-title { color: var(--text); }
-  .tracklist a[aria-current="true"] .track-no { color: var(--accent); }
+  .tracklist a[aria-current="true"] .track-no { color: var(--accent-ink); }
 }
 
 @layer utilities {
-  /* wide: player and lyrics left, track list right; narrow: stacked */
+  /* wide: player and info left, track list right; the flexible second row takes the list's
+     extra height, so the info stays directly under the player */
   @container (width >= 58rem) {
     .album {
       grid-template-columns: minmax(0, 1fr) minmax(17rem, 21rem);
-      grid-template-areas: "stage tracks";
+      grid-template-rows: auto 1fr;
+      grid-template-areas: "stage tracks" "info tracks";
       align-items: start;
     }
-    .stage { grid-area: stage; }
-    .tracklist { grid-area: tracks; position: sticky; inset-block-start: var(--gap); }
+    .tracklist { position: sticky; inset-block-start: var(--gap); }
   }
   @container (width < 30rem) {
     .tracklist a { grid-template-columns: 1.75rem 4.5rem minmax(0, 1fr) auto; gap: 0.6rem; }
   }
   @media (prefers-reduced-motion: no-preference) {
     :root { transition: --accent 0.8s ease; }
-    body { transition: --glow 0.12s linear; }
+    .glow { transition: --glow 0.12s linear; }
     .lyrics .line { transition: color 0.2s, border-color 0.2s; }
     .tracklist a, .tracklist img, .track-title { transition: background-color 0.15s, opacity 0.15s, color 0.15s; }
   }

@@ -15,6 +15,7 @@
 <script type="module" src="video/album.js"></script>
 </head>
 <body>
+<div class="glow" aria-hidden="true"></div>
 <header class="masthead">
   <h1>TROTZDEM</h1>
   <ul class="provenance" role="list">
@@ -30,13 +31,20 @@
   <section class="stage" aria-labelledby="now-title">
     <video id="player" controls playsinline preload="metadata"></video>
     <div class="now">
-      <h2 id="now-title"></h2>
+      <h2 id="now-title">Musikvideos</h2>
       <p class="now-meta"><span id="now-track"></span><span id="now-duration"></span></p>
     </div>
     <p class="now-note" id="now-note" hidden></p>
+  </section>
+  <nav class="tracklist" aria-label="Titel">
+    <ol id="tracks" role="list"></ol>
+  </nav>
+  <div class="info">
     <section class="making" aria-labelledby="making-title">
       <h3 id="making-title">Wie das Video gemacht ist</h3>
       <p id="now-making"></p>
+      <h3 id="sources-title" hidden>Quellen</h3>
+      <ul id="now-sources" class="sources" aria-labelledby="sources-title" hidden></ul>
       <p class="code-link"><a id="now-code" href="">Code dieses Videos auf GitHub</a></p>
     </section>
     <details class="more">
@@ -47,10 +55,7 @@
       <summary>Suno-Prompt</summary>
       <p id="now-style" class="now-style"></p>
     </details>
-  </section>
-  <nav class="tracklist" aria-label="Titel">
-    <ol id="tracks" role="list"></ol>
-  </nav>
+  </div>
 </main>
 <footer class="colophon" id="entstehung">
   <h2>Wie das entstanden ist</h2>
