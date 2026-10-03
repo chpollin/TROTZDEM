@@ -22,8 +22,8 @@ const C = {
   dim: "#454b53", ui: "#8a929b", uiHi: "#c3cad1",
   ink: "#d4c8b3", inkPast: "#9d9382",
   mach: "#a9b8c6", machDim: "#5f6b76", machPast: "#77838e",
-  ghost: "#565e68", comment: "#76846f",
-  add: "#2f5a43", del: "#5a2c2e", pass: "#8fae8c", fail: "#b9786a",
+  ghost: "#565e68", comment: "#7b8088",
+  add: "#2b2f35", del: "#1c1e22", pass: "#8a929b", fail: "#c3cad1",
   acc: "#fff4e2",
 };
 
