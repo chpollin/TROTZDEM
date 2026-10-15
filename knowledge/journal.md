@@ -8,13 +8,19 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: active
 created: 2026-10-02
-updated: 2026-10-03
+updated: 2026-10-15
 language: en
 authors: [Christopher Pollin]
-generated-with: Claude Code (Claude Opus 5.5)
+generated-with: Claude Code (Claude Opus 5.5), Codex
 ---
 
 # Journal
+
+## 2026-10-15
+
+The operator commissioned the reusable video method and skill revision while preserving video acceptance and rights gates. The main session compared the existing procedure with the text-free music, silent charter and brand advertising projects, separated transferable method from album-specific design, and added conditional format guidance and saved cases. The source remains `skill/code-musikvideo/`, with the method in [video-pipeline-architecture.md](video-pipeline-architecture.md#transfer-to-other-video-projects). No scene or audio was changed.
+
+Browser frame execution, JavaScript syntax checks, existing-export probes and manual before/after reading checks are recorded in [video-method-verification.md](video-method-verification.md). The charter failed the same-browser frame-repeat check, and the Python render environments could not import Playwright. These remain explicit limits, rather than acceptance claims. Publication and the completed album's status are unaffected.
 
 ## 2026-10-02
 

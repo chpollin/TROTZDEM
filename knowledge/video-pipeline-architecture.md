@@ -8,10 +8,10 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: draft
 created: 2026-10-02
-updated: 2026-10-03
+updated: 2026-10-15
 language: en
 authors: [Christopher Pollin]
-generated-with: Claude Code (Claude Opus 5.5)
+generated-with: Claude Code (Claude Opus 5.5), Codex
 related: [INDEX.md, project.md]
 ---
 
@@ -93,6 +93,16 @@ One build agent per song receives a brief with the timing report, the song's lyr
 Rendering runs locally even though the models work in the cloud, and each render worker starts a browser and an ffmpeg process. When about eight agents rendered at once, the workstation's memory filled and it nearly froze. Since then every agent renders with at most two workers, stills in small batches and contact sheets at 320 px per tile, and starts a full render only when no other ffmpeg process is running. Several agents may write code and render stills side by side under these limits.
 
 Whisper hallucinates on sung passages ("Thanks for watching!" where nothing is said) and fails on dialect. Lyrics appear in a video only when they are reliable, from the written lyrics or from the operator. The skill `skill/code-musikvideo/SKILL.md` condenses this workflow for other people.
+
+## Transfer to other video projects
+
+The transferable method binds a recoverable source to an evidenced timeline, a deterministic frame function and inspected exports. Music uses measured audio anchors, a silent explainer uses readable editorial durations, and advertising binds its claims and design to an accepted offer and brand. The executable procedure is maintained in [code-musikvideo](../skill/code-musikvideo/SKILL.md), with conditional [format guidance](../skill/code-musikvideo/references/video-formats.md). Album-specific interface staging, typography and the exclusion of real brands apply to TROTZDEM itself.
+
+Timing evidence distinguishes measured onsets, word readings, metrical anchors and editorial decisions. Changing the audio take or cut requires renewed timing checks. Retiming data and copy belong in the timeline. Inputs and their provenance need recoverable storage even when excluded from Git, while generated measurements and exports have a regeneration path. A remote is independent of local knowledge maintenance and does not by itself establish a backup of ignored source material.
+
+Technical checks cover executable prerequisites, script syntax, image and font readiness, frame-order independence, stream durations and inspected delivery crops. Repeat a frame after another time and in a fresh browser context. A deterministic frame test can fail even when the player loads without errors. Editorial acceptance, source-reading judgement, rights clearance and publication remain separate gates. Observed checks and limits are recorded in [video-method-verification.md](video-method-verification.md).
+
+The skill keeps its published name and canonical source under `skill/code-musikvideo/`. The vault register links this repository as an external maintenance source. On the operator's Windows setup, distribute this directory through the existing vault `scripts/sync-skills.ps1`, passing this repository's `skill/` as `-SourceSkillRoot` and the intended personal skill roots as `-TargetSkillRoots`. Run `-DryRun` first and verify it again afterwards. This scoped rollout does not synchronise unrelated vault skills or change the album's publication state. Automatic selection must be observed in a fresh agent session separately from the file comparison.
 
 ## Environment
 

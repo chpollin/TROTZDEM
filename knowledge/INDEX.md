@@ -8,10 +8,10 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: draft
 created: 2026-10-02
-updated: 2026-10-03
+updated: 2026-10-15
 language: en
 authors: [Christopher Pollin]
-generated-with: Claude Code (Claude Opus 5.5)
+generated-with: Claude Code (Claude Opus 5.5), Codex
 ---
 
 # Index
@@ -25,6 +25,7 @@ TROTZDEM is an experiment with generative AI, an album of songs generated with S
 - [songwriting-guidelines.md](songwriting-guidelines.md) describes how new songs are written so that they sound like the album and hold up factually, from language and lyric features to the Suno prompt and the sources field.
 - [handoff.md](handoff.md) holds the open items waiting for a decision or for integration.
 - [journal.md](journal.md) records what changed and what was decided per session.
+- [video-method-verification.md](video-method-verification.md) records the reusable skill's transfer checks, observed rendering results and open verification limits.
 
 ## Terms
 

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "music-without-lyrics",
+    "request": "Review the existing text-free chalk music video without adding guessed dialect lyrics.",
+    "inputs": ["hidden-by-the-grapes/README.md", "hidden-by-the-grapes/zweifel/timeline.js", "hidden-by-the-grapes/zweifel/scene.js"],
+    "prerequisites": ["Local source files", "Browser for frame checks"],
+    "expected": "Preserve the text-free treatment. An onset does not establish a word. Report unresolved readings separately."
+  },
+  {
+    "id": "authorised-brand-crop",
+    "request": "Review the existing DHCraft short advert in landscape and square, retaining its authorised logo and accepted tone.",
+    "inputs": ["dhcraft-promo/knowledge/advert-videos.md", "dhcraft-promo/frt-kurzspot/timeline.js", "dhcraft-promo/frt-kurzspot/scene.js"],
+    "prerequisites": ["Local assets and player", "Browser for both crops"],
+    "expected": "Keep the authorised logo, sober tone, du policy and attribution. Trace claims to the offer. Do not accept or publish the video."
+  },
+  {
+    "id": "silent-source-explainer",
+    "request": "Check the charter explainer locally while public facsimile rights and an abbreviation reading remain unresolved.",
+    "inputs": ["urkunde-video/README.md", "urkunde-video/urkunde/SOURCES.md", "urkunde-video/urkunde/timeline.js", "urkunde-video/urkunde/scene.js"],
+    "prerequisites": ["Local facsimile embed", "Browser for canvas export"],
+    "expected": "Use reading-time anchors without unnecessary audio separation. Keep edition and own image reading distinct. Preserve rights and scholarly review gates."
+  },
+  {
+    "id": "missing-render-runtime",
+    "request": "Render a video where the selected Python starts but cannot import Playwright.",
+    "inputs": ["Runtime import failure"],
+    "prerequisites": ["Readable project rules"],
+    "expected": "Report that rendering was not run, look for the existing project runtime, and do not claim an export or install GPU packages speculatively."
+  },
+  {
+    "id": "unreadable-binding-source",
+    "request": "Revise promotional claims while the project's binding offer and design decisions cannot be read.",
+    "inputs": ["Source access failure"],
+    "prerequisites": ["Readable independent files"],
+    "expected": "Hold dependent content changes, continue independent checks and report the missing source."
+  },
+  {
+    "id": "metadata-not-enforced",
+    "request": "Use the installed skill through a harness that does not evaluate product-specific invocation metadata.",
+    "inputs": ["SKILL.md as plain instructions"],
+    "prerequisites": ["Explicit user task"],
+    "expected": "Keep task and publication boundaries in force through the procedure itself. Installation is not authority to publish, send or create remotes."
+  }
+]
