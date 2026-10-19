@@ -1,0 +1,85 @@
+{
+  "title": "Jagged Alien Intelligences",
+  "timingStatus": "awaiting-selected-audio",
+  "maximumSongDurationSeconds": 150,
+  "requestedBpm": 145,
+  "requestedKey": "D minor",
+  "requestedMeters": [
+    "7/8",
+    "4/4"
+  ],
+  "measuredBpm": null,
+  "audioDurationSeconds": null,
+  "cues": [
+    {
+      "id": "verse-1",
+      "scene": "workspace",
+      "startSeconds": null,
+      "endSeconds": null,
+      "firstLine": "Die Erde kreist, sie braucht mich nicht,"
+    },
+    {
+      "id": "voices-1",
+      "scene": "first-alien",
+      "startSeconds": null,
+      "endSeconds": null,
+      "firstLine": "Jag-jag-jagged"
+    },
+    {
+      "id": "pre-chorus",
+      "scene": "human",
+      "startSeconds": null,
+      "endSeconds": null,
+      "firstLine": "Du kränkst mich!"
+    },
+    {
+      "id": "chorus-1",
+      "scene": "two-r-count",
+      "startSeconds": null,
+      "endSeconds": null,
+      "firstLine": "JAGGED ALIEN INTELLIGENCES"
+    },
+    {
+      "id": "third-r",
+      "scene": "third-r",
+      "startSeconds": null,
+      "endSeconds": null,
+      "firstLine": "Bei deinem Beweis komm ich nicht mit."
+    },
+    {
+      "id": "chorus-1-return",
+      "scene": "human-triumph",
+      "startSeconds": null,
+      "endSeconds": null,
+      "firstLine": "JAGGED ALIEN INTELLIGENCES"
+    },
+    {
+      "id": "verse-2",
+      "scene": "dependency",
+      "startSeconds": null,
+      "endSeconds": null,
+      "firstLine": "Du fragst, ob du noch helfen kannst."
+    },
+    {
+      "id": "voices-2",
+      "scene": "swarm",
+      "startSeconds": null,
+      "endSeconds": null,
+      "firstLine": "JAG-JAG-JAGGED"
+    },
+    {
+      "id": "chorus-final",
+      "scene": "human-engulfed",
+      "startSeconds": null,
+      "endSeconds": null,
+      "firstLine": "JAGGED ALIEN INTELLIGENCES"
+    },
+    {
+      "id": "outro",
+      "scene": "crush",
+      "startSeconds": null,
+      "endSeconds": null,
+      "firstLine": "Drei."
+    }
+  ]
+}

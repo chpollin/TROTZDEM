@@ -1,0 +1,31 @@
+@font-face { font-family: 'Space Mono'; src: url('../fonts/SpaceMono-Regular.ttf'); font-display: swap; }
+:root {
+  color-scheme: dark;
+  --bg: #101211;
+  --fg: #eee8d8;
+  --muted: #b7bfb9;
+  --accent: #ffbd55;
+  --surface: #222a27;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: 'Space Mono', monospace; }
+main { max-inline-size: 90rem; margin-inline: auto; padding: clamp(1rem, 3vw, 3rem); }
+h1 { font-size: clamp(1.4rem, 1rem + 2vw, 2.6rem); font-weight: 400; margin-block: 0 0.8rem; }
+h2 { font-size: clamp(1.15rem, 1rem + 0.5vw, 1.5rem); font-weight: 400; }
+p, figcaption { max-inline-size: 72ch; line-height: 1.65; }
+.status { color: var(--muted); }
+canvas, img { display: block; inline-size: 100%; block-size: auto; }
+canvas { aspect-ratio: 16 / 9; }
+.controls, nav { display: flex; flex-wrap: wrap; gap: 0.65rem; align-items: center; margin-block: 1rem; }
+button, a { color: var(--fg); }
+button { font: inherit; background: var(--surface); border: 1px solid var(--muted); min-block-size: 44px; padding: 0.6rem 0.85rem; cursor: pointer; }
+a { text-underline-offset: 0.2em; }
+nav a { padding-block: 0.65rem; }
+button:hover { border-color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+input[type='range'] { inline-size: min(100%, 30rem); min-block-size: 44px; accent-color: var(--accent); }
+output { min-inline-size: 12ch; }
+figure { margin: 2.5rem 0; }
+figcaption { margin-block-start: 0.8rem; }
+section { margin-block-start: 3rem; }
+@media print { .controls { display: none; } }

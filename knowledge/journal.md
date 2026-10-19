@@ -8,13 +8,19 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: active
 created: 2026-10-02
-updated: 2026-10-15
+updated: 2026-10-19
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5), Codex
 ---
 
 # Journal
+
+## 2026-10-19
+
+The operator reopened song development for Jagged Alien Intelligences and commissioned video preparation. The current conversation replaces the older unavailable draft as the working lyric source. The human third-r correction follows the first explicit Strawberry passage, rolled R delivery is requested, and the proposed korrigiert / dressiert close stages imagined subjugation. The source text, style prompt, null-timed cue sheet, three concept references with hashes and local silent scene study are linked through [the production treatment](jagged-alien-intelligences-production.md). It records the reference-specific palette and the distinction between illustrated flow and a future numerical simulation.
+
+Source and lyric-order checks, JavaScript syntax, actual browser controls, narrow reflow and decoded frame repeatability passed. A read-only review identified the initial swarm as scattered; the main session changed it into converging glyph ribbons and rechecked the frames. A silent motion study was encoded, fully decoded and inspected through an extracted frame. The missing Playwright dependency was installed in the existing video environment, and both existing Python CLI help commands now run. Source audio, the complete music-synchronised scene and final scientific/context review remain pending. No album registration or publication was made.
 
 ## 2026-10-15
 

@@ -1,0 +1,35 @@
+{
+  "audio": null,
+  "references": [
+    {
+      "path": "source/concepts/workspace.png",
+      "title": "Das Arbeitsfenster",
+      "description": "Die Strömung umgibt eine Erdbeere. Schrift und menschliche Eingabemarke stehen noch unter Kontrolle.",
+      "originalPath": "C:\\Users\\Chrisi\\.codex\\generated_images\\01a155ab-7445-7bb3-906d-f047240fc559\\exec-9d173cda-1517-414a-ba22-2be6e6a8c74e.png",
+      "sha256": "d4fb15cbfe17c2999d17ffd918729b2eaa60b0e67b4bb78df0457911f55dd0bc",
+      "origin": "Built-in image_gen, this conversation, 2026-10-19",
+      "purpose": "Storyboard reference only; not used as final video pixels",
+      "readingLimit": "Illustrated equations and streamlines are not a scientific result or numerical simulation."
+    },
+    {
+      "path": "source/concepts/third-r.png",
+      "title": "Der Triumph über das dritte R",
+      "description": "Die Maschine markiert das erste und zweite R. Der Mensch kreist das dritte übergroß ein.",
+      "originalPath": "C:\\Users\\Chrisi\\.codex\\generated_images\\01a155ab-7445-7bb3-906d-f047240fc559\\exec-23f07bba-21ca-4a2f-af92-0a3ef80d7f6b.png",
+      "sha256": "9814ef181952bdc37066afcd66a56a64428ffbeff9433bc203c0a75098523c92",
+      "origin": "Built-in image_gen, this conversation, 2026-10-19",
+      "purpose": "Storyboard reference only; not used as final video pixels",
+      "readingLimit": "Illustrated equations and streamlines are not a scientific result or numerical simulation."
+    },
+    {
+      "path": "source/concepts/swarm.png",
+      "title": "Die Übernahme durch den Schwarm",
+      "description": "Vertraute Schriftzeichen übernehmen den Raum. Die Erdbeere wird zusammengedrückt.",
+      "originalPath": "C:\\Users\\Chrisi\\.codex\\generated_images\\01a155ab-7445-7bb3-906d-f047240fc559\\exec-43eb7cd9-623a-41f6-91dc-d9a26a90c431.png",
+      "sha256": "67152bed4bd368147c072a99984405dd401e1a5c1a242ec13d663d7fb4b43f90",
+      "origin": "Built-in image_gen, this conversation, 2026-10-19",
+      "purpose": "Storyboard reference only; not used as final video pixels",
+      "readingLimit": "Illustrated equations and streamlines are not a scientific result or numerical simulation."
+    }
+  ]
+}
