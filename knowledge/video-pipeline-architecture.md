@@ -8,7 +8,7 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: draft
 created: 2026-10-02
-updated: 2026-10-15
+updated: 2026-10-20
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5), Codex
@@ -96,7 +96,7 @@ Whisper hallucinates on sung passages ("Thanks for watching!" where nothing is s
 
 ## Transfer to other video projects
 
-The transferable method binds a recoverable source to an evidenced timeline, a deterministic frame function and inspected exports. Music uses measured audio anchors, a silent explainer uses readable editorial durations, and advertising binds its claims and design to an accepted offer and brand. The executable procedure is maintained in [code-musikvideo](../skill/code-musikvideo/SKILL.md), with conditional [format guidance](../skill/code-musikvideo/references/video-formats.md). Album-specific interface staging, typography and the exclusion of real brands apply to TROTZDEM itself.
+The transferable method binds a recoverable source to an evidenced timeline, a deterministic frame function and inspected exports. Music uses measured audio anchors, a silent explainer uses readable editorial durations, and advertising binds its claims and design to an accepted offer and brand. The executable procedure is maintained in [code-musikvideo](../skill/code-musikvideo/SKILL.md), with conditional [format guidance](../skill/code-musikvideo/references/video-formats.md), [visual direction](../skill/code-musikvideo/references/visual-direction.md), [hybrid asset preparation](../skill/code-musikvideo/references/hybrid-assets.md) and [timing/text guidance](../skill/code-musikvideo/references/timing-and-text.md). Album-specific interface staging, typography and the exclusion of real brands apply to TROTZDEM itself.
 
 Timing evidence distinguishes measured onsets, word readings, metrical anchors and editorial decisions. Changing the audio take or cut requires renewed timing checks. Retiming data and copy belong in the timeline. Inputs and their provenance need recoverable storage even when excluded from Git, while generated measurements and exports have a regeneration path. A remote is independent of local knowledge maintenance and does not by itself establish a backup of ignored source material.
 
@@ -107,3 +107,9 @@ The skill keeps its published name and canonical source under `skill/code-musikv
 ## Environment
 
 Preparation runs in a separate venv `video/.venv` with CUDA torch, pinned to 2.8 because later torchaudio releases route audio I/O through TorchCodec, which breaks the separation tools on Windows. Installing stable-ts replaces CUDA torch with a CPU build, so torch is reinstalled with `--force-reinstall --no-deps` afterwards. Rendering needs Python with Playwright and Chromium plus ffmpeg on the path. `tools/serve.py` serves `video/` locally with byte ranges, which seeking in a local video requires.
+
+### Hybrid production and module scenes
+
+Jagged Alien Intelligences extends the earlier code-only workflow with supplied or generated source image layers. Image material and exact code typography have separate roles. Its renderer uses explicit --module mode and one shared loopback server, awaiting decoded assets and fonts before exposing renderFrame. Existing classic scenes retain their loading path. The rupture image is prepared as an immutable raster source after a first-use pixel mismatch was reproduced and resolved. Its actual browser regression lives beside the scene. See [the production record](jagged-alien-intelligences-production.md).
+
+The revised method calls for downstream captions and page cues to consume maintained timing. The older album builder still reads raw forced alignment, so it does not yet satisfy that shared-source instruction for corrected Jagged cues. Method maintenance does not silently migrate existing consumers.

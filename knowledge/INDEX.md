@@ -16,7 +16,7 @@ generated-with: Claude Code (Claude Opus 5.5), Codex
 
 # Index
 
-TROTZDEM is an experiment with generative AI, an album of songs generated with Suno, with lyrics by Claude Opus, and a series of music videos rendered entirely from code, published at https://chpollin.github.io/TROTZDEM/. The skill for building such a video from one's own song is `skill/code-musikvideo/SKILL.md`. The action layer is `CLAUDE.md` in the repository root.
+TROTZDEM is an experiment with generative AI, an album of songs generated with Suno, with lyrics by Claude Opus, and a series of music videos rendered from code, with generated image layers in Jagged Alien Intelligences, published at https://chpollin.github.io/TROTZDEM/. The skill for building such a video from one's own song is `skill/code-musikvideo/SKILL.md`. The action layer is `CLAUDE.md` in the repository root.
 
 ## Documents
 
@@ -25,7 +25,7 @@ TROTZDEM is an experiment with generative AI, an album of songs generated with S
 - [songwriting-guidelines.md](songwriting-guidelines.md) describes how new songs are written so that they sound like the album and hold up factually, from language and lyric features to the Suno prompt and the sources field.
 - [handoff.md](handoff.md) holds the open items waiting for a decision or for integration.
 - [journal.md](journal.md) records what changed and what was decided per session.
-- [video-method-verification.md](video-method-verification.md) records the reusable skill's transfer checks, observed rendering results and open verification limits.
+- [video-method-verification.md](video-method-verification.md) records the reusable skill's transfer and hybrid-revision checks, observed rendering results and open verification limits.
 
 - [jagged-alien-intelligences-production.md](jagged-alien-intelligences-production.md) carries the selected recording, hybrid video treatment, local build and listening-review limits.
 

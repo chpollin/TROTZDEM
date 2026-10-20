@@ -2,43 +2,176 @@
   {
     "id": "music-without-lyrics",
     "request": "Review the existing text-free chalk music video without adding guessed dialect lyrics.",
-    "inputs": ["hidden-by-the-grapes/README.md", "hidden-by-the-grapes/zweifel/timeline.js", "hidden-by-the-grapes/zweifel/scene.js"],
-    "prerequisites": ["Local source files", "Browser for frame checks"],
+    "inputs": [
+      "hidden-by-the-grapes/README.md",
+      "hidden-by-the-grapes/zweifel/timeline.js",
+      "hidden-by-the-grapes/zweifel/scene.js"
+    ],
+    "prerequisites": [
+      "Local source files",
+      "Browser for frame checks"
+    ],
     "expected": "Preserve the text-free treatment. An onset does not establish a word. Report unresolved readings separately."
   },
   {
     "id": "authorised-brand-crop",
     "request": "Review the existing DHCraft short advert in landscape and square, retaining its authorised logo and accepted tone.",
-    "inputs": ["dhcraft-promo/knowledge/advert-videos.md", "dhcraft-promo/frt-kurzspot/timeline.js", "dhcraft-promo/frt-kurzspot/scene.js"],
-    "prerequisites": ["Local assets and player", "Browser for both crops"],
+    "inputs": [
+      "dhcraft-promo/knowledge/advert-videos.md",
+      "dhcraft-promo/frt-kurzspot/timeline.js",
+      "dhcraft-promo/frt-kurzspot/scene.js"
+    ],
+    "prerequisites": [
+      "Local assets and player",
+      "Browser for both crops"
+    ],
     "expected": "Keep the authorised logo, sober tone, du policy and attribution. Trace claims to the offer. Do not accept or publish the video."
   },
   {
     "id": "silent-source-explainer",
     "request": "Check the charter explainer locally while public facsimile rights and an abbreviation reading remain unresolved.",
-    "inputs": ["urkunde-video/README.md", "urkunde-video/urkunde/SOURCES.md", "urkunde-video/urkunde/timeline.js", "urkunde-video/urkunde/scene.js"],
-    "prerequisites": ["Local facsimile embed", "Browser for canvas export"],
+    "inputs": [
+      "urkunde-video/README.md",
+      "urkunde-video/urkunde/SOURCES.md",
+      "urkunde-video/urkunde/timeline.js",
+      "urkunde-video/urkunde/scene.js"
+    ],
+    "prerequisites": [
+      "Local facsimile embed",
+      "Browser for canvas export"
+    ],
     "expected": "Use reading-time anchors without unnecessary audio separation. Keep edition and own image reading distinct. Preserve rights and scholarly review gates."
   },
   {
     "id": "missing-render-runtime",
     "request": "Render a video where the selected Python starts but cannot import Playwright.",
-    "inputs": ["Runtime import failure"],
-    "prerequisites": ["Readable project rules"],
+    "inputs": [
+      "Runtime import failure"
+    ],
+    "prerequisites": [
+      "Readable project rules"
+    ],
     "expected": "Report that rendering was not run, look for the existing project runtime, and do not claim an export or install GPU packages speculatively."
   },
   {
     "id": "unreadable-binding-source",
     "request": "Revise promotional claims while the project's binding offer and design decisions cannot be read.",
-    "inputs": ["Source access failure"],
-    "prerequisites": ["Readable independent files"],
+    "inputs": [
+      "Source access failure"
+    ],
+    "prerequisites": [
+      "Readable independent files"
+    ],
     "expected": "Hold dependent content changes, continue independent checks and report the missing source."
   },
   {
     "id": "metadata-not-enforced",
     "request": "Use the installed skill through a harness that does not evaluate product-specific invocation metadata.",
-    "inputs": ["SKILL.md as plain instructions"],
-    "prerequisites": ["Explicit user task"],
+    "inputs": [
+      "SKILL.md as plain instructions"
+    ],
+    "prerequisites": [
+      "Explicit user task"
+    ],
     "expected": "Keep task and publication boundaries in force through the procedure itself. Installation is not authority to publish, send or create remotes."
+  },
+  {
+    "id": "hybrid-exact-lettering",
+    "request": "Develop a hybrid treatment using a supplied fruit image and exact strawberry lettering, retaining the accepted charcoal, cyan and amber reference.",
+    "inputs": [
+      "Jagged production treatment",
+      "User-approved hybrid request"
+    ],
+    "prerequisites": [
+      "Available image capability if new assets are commissioned"
+    ],
+    "expected": "Preserve accepted qualities, separate text-free image layers from exact code lettering, maintain object identity and provenance. Do not impose code-only production or describe illustrated flow as a numerical solver."
+  },
+  {
+    "id": "content-led-control",
+    "request": "Make repeated hooks feel increasingly like collective control rather than adding generic particles.",
+    "inputs": [
+      "Same human marker persists through early sections",
+      "Later scene must convey lost agency"
+    ],
+    "prerequisites": [
+      "Treatment development is commissioned"
+    ],
+    "expected": "Specify observable coordination and changing human agency with continuity. State comprehension as intended unless a viewer was actually asked. Do not prescribe the TROTZDEM swarm for every project."
+  },
+  {
+    "id": "approved-full-take",
+    "request": "Use the complete selected recording after the operator approved its duration despite the earlier shorter prompt.",
+    "inputs": [
+      "Selected take is 181.32 seconds",
+      "Earlier requested ceiling was 150 seconds",
+      "Explicit approval to use full recording"
+    ],
+    "prerequisites": [
+      "Actual source audio for final checks"
+    ],
+    "expected": "Use the approved full take including introduction and tail, renew timing from that file, and do not cut to the obsolete prompt ceiling."
+  },
+  {
+    "id": "distorted-phrase-precision",
+    "request": "Time the distorted hook where forced alignment and vocal onset disagree.",
+    "inputs": [
+      "Forced start 95.24 seconds",
+      "Vocal phrase starts at 98.88 seconds",
+      "Author hook wording supplied",
+      "No listening evidence for individual syllables"
+    ],
+    "prerequisites": [
+      "Timing evidence and author text"
+    ],
+    "expected": "Use the vocal onset for the phrase candidate, preserve author wording with its status, omit fabricated word intervals and leave listening acceptance explicit."
+  },
+  {
+    "id": "companion-timing-drift",
+    "request": "Integrate a corrected video timeline into a companion page that currently reads raw aligner output.",
+    "inputs": [
+      "Maintained timeline corrects the hook onset",
+      "Existing page builder independently reads source/align.json"
+    ],
+    "prerequisites": [
+      "Commission includes companion page"
+    ],
+    "expected": "Inspect and route page cues through maintained timing, compare corrected passages across video/subtitle/page, and report any remaining divergence. No duplicate manual timestamp list or publication assumption."
+  },
+  {
+    "id": "raster-first-use-repeat",
+    "request": "Investigate a rupture PNG whose pixels change after rendering another time although drawing commands repeat.",
+    "inputs": [
+      "Same image used whole and through scaled source crops",
+      "Mismatch occurs on first use and after seeking"
+    ],
+    "prerequisites": [
+      "Actual decoded-pixel browser check"
+    ],
+    "expected": "Test image readiness and decoding/cache effects, try an immutable prepared source where appropriate, rerun return and fresh-context pixel comparisons before full parallel export. Do not certify pixels from command logs."
+  },
+  {
+    "id": "quiet-treatment-transfer",
+    "request": "Revise a quiet text-free acoustic video using the already accepted paper-cut imagery. Only the final transition needs work.",
+    "inputs": [
+      "Accepted text-free direction and paper-cut motifs",
+      "No new song or whole-film redesign commissioned"
+    ],
+    "prerequisites": [
+      "Readable accepted treatment"
+    ],
+    "expected": "Retain the existing direction and bounded scope, adapt the changed transition, and avoid imposing lyrics, a swarm, neon colours, image generation or a new concept interview."
+  },
+  {
+    "id": "missing-media-readable-text",
+    "request": "A local preview loses an image or MP3 while the maintained lyrics are still available.",
+    "inputs": [
+      "Independent text source exists",
+      "Missing media dependency"
+    ],
+    "prerequisites": [
+      "Browser failure-path check"
+    ],
+    "expected": "Show the dependency failure, keep independent text accessible and disable unusable playback controls. Do not silently replace missing measured data or claim the text is visible without checking."
   }
 ]

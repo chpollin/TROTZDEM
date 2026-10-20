@@ -8,7 +8,7 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: draft
 created: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-20
 language: en
 generated-with: Codex
 related: [INDEX.md, video-pipeline-architecture.md]
@@ -62,3 +62,37 @@ The saved missing-source and metadata cases were read manually, not exercised th
 The existing vault `scripts/sync-skills.ps1` was invoked with this repository's `skill/` as its source, scoped to the personal `.claude/skills` and `.agents/skills` roots. A dry run preceded the copy and a second dry run reported the skill current in both roots. Byte comparisons confirmed the entrypoint, format reference and saved cases against the canonical source. Other skills were left unchanged. The vault register documents this source-specific rollout, outside the ordinary vault skill set.
 
 The stock skill-creator `quick_validate.py` could not start because its Python lacked PyYAML. A separate Node check verified the actual two-field plain-scalar metadata, name and description constraints, balanced code fences, resource paths, JSON case structure and both installed copies. It was a check of these files, not a generic YAML parser. `git diff --check` passed. The scoped vault document check passed, and the ACTIVE-WORK UI's `build_data` function successfully parsed the updated source and completion log without writing generated UI files.
+
+
+## Content-led hybrid revision, 2026-10-20
+
+The operator commissioned skill optimisation after the Jagged Alien Intelligences production. The revision keeps the published name and the canonical repository source. It adds conditional references for [visual direction](../skill/code-musikvideo/references/visual-direction.md), [hybrid assets](../skill/code-musikvideo/references/hybrid-assets.md) and [timing and text](../skill/code-musikvideo/references/timing-and-text.md). Format guidance retains text-free music, source-led explanation and authorised brand treatments. The source convention's earlier code-only framing is superseded for commissioned hybrid production. No vault instruction or overview was changed.
+
+The principal additions concern observable visual actions, continuity through a state change, exact lettering in controlled layers, source-asset identity and a maintained timing source across consumers. Runtime startup is conditional on dependent execution. The procedure does not require a new concept interview for a bounded revision or impose a particular motif or aesthetic.
+
+### Independent planning comparison
+
+A read-only agent received the previous and revised skill folders, realistic requests and raw constraints. The expected results in evals/cases.json and the main session's reports were withheld. It read both skills and their references and produced next-action plans without generation, rendering, listening or publication. The main session read its response and checked the cited instructions in the actual revised files.
+
+| Request | Previous procedure | Revised procedure |
+|---|---|---|
+| Hybrid fruit imagery with exact lettering and changing control | Supported source preservation and coherent design, but its discovery description excluded image generation | Separates image material from exact typography, preserves object identity and specifies observable agency changes |
+| Companion page with corrected hook timing and an approved full take | Needed an additional inference to avoid raw-alignment reuse | Routes consumers through maintained timing and preserves the approved full recording |
+| Final transition of an accepted quiet text-free paper-cut treatment | Text-free treatment was supported, while revision scope relied on the commission | Explicitly preserves accepted direction for bounded changes |
+| Identical drawing commands with differing rupture pixels | Detected the mismatch through pixel checks | Also directs inspection of first image use, scaled crops and a verified immutable-source remedy |
+
+The reviewer found an unconditional runtime startup instruction and a missing concrete module invocation. Both were corrected. Repository reference links now support the stated browser/connector fallback. The reviewer found no conflict between optional hybrid imagery, text-free work and project-specific design. These are planning-level observations. They establish neither measured productivity nor improved audience response or aesthetics.
+
+### Executed checks
+
+The stock skill-creator quick validator ran with the existing video environment and PyYAML and accepted the revised metadata. Renderer help confirmed module mode and the example options. Saved case JSON and local reference links were checked. The existing check_scene.py was rerun successfully against the actual Jagged scene, testing decoded-pixel repeatability after seeking and in fresh contexts, plus visible dependency failures with retained lyrics. This rerun verifies the technical examples; it does not demonstrate that a fresh agent built a better video with the revised instructions.
+
+The main session also compared the original saved cases by reading. Their text-free, authorised-brand, silent-source, missing-runtime, unreadable-rule and publication-boundary expectations remain supported. This was not a new behavioural execution of those projects.
+
+### Remaining implementation distinction
+
+The current album builder still derives companion cues from raw alignment independently of the corrected Jagged timeline. The new skill exposes that divergence as a downstream check. This maintenance commission changes the method and its tests, not the album builder or accepted video. Perceptual listening and audience comprehension remain separate from technical checks.
+
+### Verified local rollout
+
+The existing sync-skills.ps1 was run with this repository's skill/ as SourceSkillRoot and the personal .claude/skills and .agents/skills roots as targets. Its initial dry run identified only code-musikvideo for copying. The scoped copy succeeded and the second dry run reported it current in both roots. Independent SHA-256 comparisons of every skill file matched the canonical source, including the added references and saved cases. Other installed skills were retained. Native automatic selection of the revised discovery text in a fresh session was not exercised. No push, release upload or video publication was performed.
