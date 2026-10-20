@@ -25,7 +25,7 @@ The operator decided on 2026-10-02 that the project is presented as an experimen
 
 The page states exactly what is AI-generated.
 
-- Music by Suno, model v5.
+- Music by Suno, v5 and later.
 - The earlier lyrics are by Claude Opus, from the operator's prompts and reflections and supplemented by deep-research results. Jagged Alien Intelligences was developed in dialogue with Codex. Selection, assembly and prompting are the operator's.
 - The earlier videos and website were written by Claude Opus 5.5 in Claude Code. Jagged Alien Intelligences was developed in dialogue with Codex, with gpt-6.1-sol subagents, and combines generated image textures with code animation. Its exact image provenance is in the song source manifest. Each video remains a program, linked through its `scene.js`.
 - The work was done with context and agentic engineering and is at the same time entirely vibe coded.
