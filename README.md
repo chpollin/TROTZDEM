@@ -2,7 +2,7 @@
 
 TROTZDEM is an experiment with generative and agentic AI from the last two years, an album of AI-generated songs that deliberately exaggerate experiences of working with AI agents, together with a series of music videos rendered from code. Jagged Alien Intelligences adds generated image layers to that process. The album page is published at https://chpollin.github.io/TROTZDEM/.
 
-The songs are AI-generated. The music comes from Suno (v5 and later), the lyrics from Claude Opus, based on prompts, reflections and deep-research results selected and assembled by Christopher Pollin. The videos and the website were written by Claude Opus 5.5 in Claude Code. Each video is a JavaScript program that draws every frame as a function of time. Jagged Alien Intelligences was developed with Codex and gpt-6.1-sol subagents and combines generated image layers with code animation; its lyrics were developed in dialogue with Codex.
+The songs are AI-generated. The music comes from Suno (v5 and later), the lyrics from Claude Opus, based on prompts, reflections and deep-research results selected and assembled by Christopher Pollin. The videos and the website were written by Claude Opus 5.5 in Claude Code. Each video is a JavaScript program that draws every frame as a function of time. Jagged Alien Intelligences was developed with Codex and gpt-6.1-sol subagents and uses the integrated image generation in Codex for its image layers and code for animation; its lyrics were developed in dialogue with Codex.
 
 ## Repository
 
