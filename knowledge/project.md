@@ -8,7 +8,7 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: draft
 created: 2026-10-02
-updated: 2026-10-03
+updated: 2026-10-20
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5)
@@ -17,7 +17,7 @@ related: [INDEX.md, video-pipeline-architecture.md]
 
 # Project
 
-TROTZDEM is an experiment with generative and agentic AI. It consists of an album of AI-generated songs from the last two years, a music video for each song that is rendered entirely from code, and an album page at https://chpollin.github.io/TROTZDEM/. The experiment shows how far current models carry a creative production when the operator only prompts, selects and decides. How the videos are produced is described in [video-pipeline-architecture.md](video-pipeline-architecture.md).
+TROTZDEM is an experiment with generative and agentic AI. It consists of an album of AI-generated songs from the last two years, a music video for each song rendered from code, and an album page at https://chpollin.github.io/TROTZDEM/. The experiment shows how far current models carry a creative production when the operator only prompts, selects and decides. How the videos are produced is described in [video-pipeline-architecture.md](video-pipeline-architecture.md).
 
 ## Framing
 
@@ -26,8 +26,8 @@ The operator decided on 2026-10-02 that the project is presented as an experimen
 The page states exactly what is AI-generated.
 
 - Music by Suno, model v5.
-- Lyrics by Claude Opus, from the operator's prompts and reflections and supplemented by deep-research results. Selection, assembly and prompting are the operator's.
-- Videos and website by Claude Opus 5.5 in Claude Code. Every video is a program, without any image or video model. The page links each video's `scene.js`.
+- The earlier lyrics are by Claude Opus, from the operator's prompts and reflections and supplemented by deep-research results. Jagged Alien Intelligences was developed in dialogue with Codex. Selection, assembly and prompting are the operator's.
+- The earlier videos and website were written by Claude Opus 5.5 in Claude Code. Jagged Alien Intelligences was developed in dialogue with Codex, with gpt-6.1-sol subagents, and combines generated image textures with code animation. Its exact image provenance is in the song source manifest. Each video remains a program, linked through its `scene.js`.
 - The work was done with context and agentic engineering and is at the same time entirely vibe coded.
 
 ## Context notes and warnings

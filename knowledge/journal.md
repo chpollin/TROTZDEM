@@ -18,6 +18,8 @@ generated-with: Claude Code (Claude Opus 5.5), Codex
 
 ## 2026-10-20
 
+After reviewing the exported video, the operator commissioned album integration. The standard builder now includes Jagged Alien Intelligences, with poster, context note, making paragraph and a prepared web encode. The public-facing provenance describes its hybrid image/code production. Existing album entries were compared unchanged, and local browser playback, seeking, metadata, keyboard switching and narrow reflow passed. Release upload and push remain pending the operator’s authorization.
+
 The operator supplied the selected recording and explicitly approved its full duration. Vocal separation, large-v3 transcription and alignment completed. The working timeline preserves author wording and records disputed variants and failed alignment spans. Requested gpt-6.1-sol subagents implemented the bounded timeline, full scene and explicit module renderer adapter. Generated fruit and backplate layers combine with exact code lettering and a coordinated swarm. The fruit ruptures at the elimination cue. The full preview follows the audio playback position. See [the production treatment](jagged-alien-intelligences-production.md) for verification and remaining listening acceptance. No publication or album registration was made.
 
 ## 2026-10-19

@@ -235,7 +235,7 @@
     {
       "slug": "sycophancy",
       "clip": "e8a48419-862c-49c2-bf69-8eddae0d5ba3",
-      "poster": 175.0,
+      "poster": 175,
       "accent": "#ff7ab8",
       "sources": [
         {
@@ -368,6 +368,23 @@
         }
       ],
       "poster": 95.9
+    },
+    {
+      "slug": "jagged-alien-intelligences",
+      "title": "Jagged Alien Intelligences",
+      "poster": 69.4,
+      "accent": "#ffbd55",
+      "note": "Der Song überzeichnet die Kränkung durch KI. Beweis und Zählfehler bilden ein Gedankenexperiment. Die Unterwerfung der Menschen im Schluss ist Fiktion.",
+      "sources": [
+        {
+          "text": "Freud, S. (1917). Eine Schwierigkeit der Psychoanalyse.",
+          "url": "https://www.gutenberg.org/files/29097/29097-h/29097-h.htm"
+        },
+        {
+          "text": "Mollick, E. (2023). Centaurs and Cyborgs on the Jagged Frontier.",
+          "url": "https://www.oneusefulthing.org/p/centaurs-and-cyborgs-on-the-jagged"
+        }
+      ]
     }
   ]
 }

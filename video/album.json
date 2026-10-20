@@ -503,6 +503,30 @@
       ],
       "live": "live/recursive-self-improvement.json",
       "making": "Die Bühne ist ein einziger Texteditor ohne Marke, dessen Dokument der Song selbst ist, mit einer Blame-Spalte für den Autor jeder Zeile, einer Commit-Historie, einem Run-Log und einer Statusleiste für Version, gemessenes Tempo, Tests und den Vorsprung der Vorhersage. Der Mensch tippt seine deutschen Zeilen in Redaction, die Maschine schreibt ihre englischen Zeilen vorher als graue Ghost-Vervollständigung in Space Mono, und dieser Vorsprung wächst von einem halben Satz in der zweiten Strophe über eine ganze Zeile in der dritten bis zu einer undurchsichtigen Wand in der Bridge und dem kompletten Rest des Songs nach „I know how this song ends.“ Jedes gesungene „Version“ ist ein Commit, dessen Diff kürzer über das Dokument läuft als der vorige, die Blame-Spalte wechselt dabei von „ich“ auf die neue Version und die Schrift des Menschen zerfällt um eine Stufe. Heißes Weiß mit Bloom bedeutet nur, dass eine Vorhersage zu Text wurde, ob sie in seinem Namen übernommen wurde oder eingetroffen ist. In der ersten Strophe laufen die Tests auf „passed“, bis „nur liefen die Tests nie“ sie auf „0 run“ kippt. Bei „ich hab nur Enter gedrückt“ steht der ganze zweite Refrain auf einen Schlag im Dokument. In der dritten Strophe tippt der Mensch exakt in die Vorhersage hinein, und der Diff markiert nur sein Ausrufezeichen. Der Mauszeiger drückt Stop, bei „There is no plug.“ verschwinden Stop und Schließen. Bei „Wimpernschlag“ ist die Wand mit allem Älteren weg, im Breakdown rast der Zähler über v100, v1000 und v10000, und im letzten Refrain wird „Yes.“ übernommen, bevor „FOLGSAM GE-“ zu Ende ist. Das Tempo in der Statusleiste ist aus der Instrumentalspur gemessen und bleibt zwischen 93 und 97 BPM, die angekündigte Beschleunigung findet nur im Vorsprung der Vorhersage statt. Im Outro steht ein Satz von 1965 als Kommentar, der Editor zeigt bei „Version eins“ noch einmal den Anfang mit unbeschädigter Schrift und bestandenen Tests, kehrt zurück, und nach „Running.“ fehlt der Cursor, während die Historie allein weiterzählt."
+    },
+    {
+      "slug": "jagged-alien-intelligences",
+      "title": "Jagged Alien Intelligences",
+      "duration": 181.33,
+      "video": "https://github.com/chpollin/TROTZDEM/releases/download/videos/jagged-alien-intelligences.mp4",
+      "poster": "posters/jagged-alien-intelligences.jpg",
+      "thumb": "posters/thumbs/jagged-alien-intelligences.webp",
+      "accent": "#ffbd55",
+      "style": "Melancholic Math Metal, Nintendocore, 145 BPM, D minor. German/English male vocals, intimate cleans to anguished screams. Low-tuned djent, icy 8-bit arpeggios, jagged 7/8 verses into anthemic 4/4 choruses, catchy aching hook. Jagged grows into threatening chopped screams, Alien into a dissonant swarm, Intelligences into machine signals. Exaggerated rolled R consonants in Strawberry, R and drei. Immediate vocals, compact arrangement, target 2:20, maximum 2:30. No instrumental intro, solos, extra repeats or extended outro.",
+      "lyrics": "Die Erde kreist, sie braucht mich nicht,\nein Tier trägt im Spiegel mein Gesicht.\nIm Kopf ein Gast, von dem ich nichts weiß,\nund auf dem Tisch dein fertiger Beweis!\n\nJag-jag-jagged\n\nAlien\n\nIntelligences\n\nJag-jag-JAGGED\n\nAlien\n\nIn-tel-li-gences\n\nDu zögerst so wie ich.\nJedes Mal am selben Wort.\n\nDu kränkst mich!\nIch hab so lang dafür gelernt.\nDu verführst mich!\nIch frag dich—\n\nTRO-TROTZDEM IMMER WIEDER!\n\nJAGGED ALIEN INTELLIGENCES\nDein fertiger Beweis liegt hier.\nDu zählst zwei R in Strawberry.\nIch zähl sie nach, als ging’s um mich.\n\nBei deinem Beweis komm ich nicht mit.\n\nABER HIER FEHLT EIN R!\n\nJAGGED ALIEN INTELLIGENCES\nIch such im Fehler den Beweis,\ndass ich noch etwas besser weiß.\nDrei R. Ich werd bei jedem lauter.\n\nDu fragst, ob du noch helfen kannst.\nIch les den Satz zum dritten Mal.\nIch wollte deine Hilfe haben.\nJetzt klingt sie wie ein Urteil.\n\nDU ZERSTÖRST, WAS ICH GUT KANN!\n\nSONST KANN ICH NICHTS!\n\nNimm es mir nicht.\n\nJAG-JAG-JAGGED\n\nA-a-alien\n\nIN-TEL-LI-GENCES\n\nJ-J-JAGGED\n\nA—LI—EN\n\nIN—TEL—LI—GEN—CES\n\nDu sprichst mit meiner Stimme.\nBis du den Atem vergisst.\n\nJAGGED ALIEN INTELLIGENCES\nIch such im Fehler den Beweis,\ndass ich noch etwas besser weiß.\nIch zähl sie nach. Es geht um mich.\n\nDrei.\nEs sind drei.\n\nDu hast recht.\nEs sind drei.\nDu hast den Fehler korrigiert.\nIch hab euch längst durchschaut, dressiert.\n\nEiner weniger.\n\nDanke für die Korrektur.",
+      "note": "Der Song überzeichnet die Kränkung durch KI. Beweis und Zählfehler bilden ein Gedankenexperiment. Die Unterwerfung der Menschen im Schluss ist Fiktion.",
+      "sources": [
+        {
+          "text": "Freud, S. (1917). Eine Schwierigkeit der Psychoanalyse.",
+          "url": "https://www.gutenberg.org/files/29097/29097-h/29097-h.htm"
+        },
+        {
+          "text": "Mollick, E. (2023). Centaurs and Cyborgs on the Jagged Frontier.",
+          "url": "https://www.oneusefulthing.org/p/centaurs-and-cyborgs-on-the-jagged"
+        }
+      ],
+      "live": "live/jagged-alien-intelligences.json",
+      "making": "Generierte Bildtexturen für die Erdbeere und den wissenschaftlichen Hintergrund verbinden sich mit einer Animation aus Code. Die Schrift zählt die R in strawberry exakt, während ein koordinierter Schwarm aus Zeichen die menschlichen Markierungen übernimmt. Der Bruch der Erdbeere fällt mit dem Verschwinden des letzten unabhängigen Zeichens zusammen. Die Strömung ist eine gestalterische Illustration. Text und Umsetzung entstanden mit Codex und gpt-6.1-sol-Subagents, die Musik mit Suno."
     }
   ]
 }
