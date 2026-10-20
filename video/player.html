@@ -37,6 +37,10 @@
   const params = new URLSearchParams(location.search);
   const song = params.get("song") || "neunundachtzig-tabs";
   const render = params.has("render");
+  const moduleMode = params.get("module") === "1";
+  const failScene = error => { window.sceneError = String(error); console.error(error); };
+  addEventListener("error", event => failScene(event.error || event.message));
+  addEventListener("unhandledrejection", event => failScene(event.reason));
   const SHARED_FONTS = ['400 40px "Space Mono"', '700 40px "Space Mono"', ...[
     "Redaction", "Redaction10", "Redaction20", "Redaction35", "Redaction50", "Redaction70", "Redaction100",
   ].map(f => `40px "${f}"`)];
@@ -48,20 +52,43 @@
   });
 
   (async () => {
-    for (const f of ["analysis.js", "timeline.js", "scene.js"]) await loadScript(`${song}/${f}`);
-    const faces = (typeof SCENE_FONT_FACES === "undefined" ? [] : SCENE_FONT_FACES)
+    // Existing songs keep their classic globals; module scenes opt in explicitly.
+    const scene = moduleMode ? await import(`./${song}/scene.js`) : null;
+    if (!moduleMode) {
+      for (const f of ["analysis.js", "timeline.js", "scene.js"]) await loadScript(`${song}/${f}`);
+    }
+    const draw = scene ? scene.drawScene : drawScene;
+    const sceneEnd = scene ? scene.SCENE_END : SCENE_END;
+    const sceneTitle = scene ? scene.SCENE_TITLE : (typeof SCENE_TITLE === "undefined" ? song : SCENE_TITLE);
+    if (scene) {
+      if (typeof draw !== "function" || typeof scene.prepareScene !== "function" ||
+          !Number.isFinite(sceneEnd) || sceneEnd <= 0 || typeof sceneTitle !== "string") {
+        throw new Error("module scene must export drawScene, prepareScene, SCENE_END and SCENE_TITLE");
+      }
+      // Preparation owns loading and decoding all images used by drawScene.
+      await scene.prepareScene();
+      window.SCENE_END = sceneEnd;
+    }
+    const fontFaces = scene ? (scene.SCENE_FONT_FACES || []) :
+      (typeof SCENE_FONT_FACES === "undefined" ? [] : SCENE_FONT_FACES);
+    const faces = fontFaces
       .map(f => new FontFace(f.family, `url("${song}/${f.url}")`, f.descriptors || {}));
     for (const f of faces) document.fonts.add(f);
     // fonts must be resolved before the first frame, otherwise text metrics differ between frames
     await Promise.all([...SHARED_FONTS.map(f => document.fonts.load(f)), ...faces.map(f => f.load())]);
+    await document.fonts.ready;
 
     const canvas = document.getElementById("c");
     const ctx = canvas.getContext("2d");
-    document.title = typeof SCENE_TITLE === "undefined" ? song : SCENE_TITLE;
+    document.title = sceneTitle;
+    const drawFrame = t => {
+      try { draw(ctx, t); }
+      catch (error) { failScene(error); throw error; }
+    };
 
     if (render) {
       document.body.classList.add("render");
-      window.renderFrame = t => { drawScene(ctx, t); return canvas.toDataURL("image/png"); };
+      window.renderFrame = t => { drawFrame(t); return canvas.toDataURL("image/png"); };
       window.sceneReady = true;
       return;
     }
@@ -85,11 +112,11 @@
         if (!entry || !entry.video) throw new Error(`no release video for ${song}`);
         useAudio(entry.video);
       }))
-      .catch(e => console.error(e));
+      .catch(failScene);
     const tick = () => {
       const t = audio.currentTime;
-      drawScene(ctx, t);
-      bar.style.width = (t / (audio.duration || SCENE_END) * 100) + "%";
+      drawFrame(t);
+      bar.style.width = (t / (audio.duration || sceneEnd) * 100) + "%";
       time.textContent = t.toFixed(2);
       requestAnimationFrame(tick);
     };
@@ -101,7 +128,7 @@
       if (e.code === "ArrowRight") audio.currentTime += e.shiftKey ? 0.1 : 2;
     });
     requestAnimationFrame(tick);
-  })().catch(e => { window.sceneError = String(e); console.error(e); });
+  })().catch(failScene);
 </script>
 </body>
 </html>

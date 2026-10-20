@@ -1,7 +1,8 @@
 {
   "title": "Jagged Alien Intelligences",
-  "timingStatus": "awaiting-selected-audio",
-  "maximumSongDurationSeconds": 150,
+  "timingStatus": "working-audio-aligned-awaiting-listening-acceptance",
+  "audioDurationSeconds": 181.32,
+  "fullRecordingApproved": true,
   "requestedBpm": 145,
   "requestedKey": "D minor",
   "requestedMeters": [
@@ -9,77 +10,453 @@
     "4/4"
   ],
   "measuredBpm": null,
-  "audioDurationSeconds": null,
   "cues": [
     {
-      "id": "verse-1",
-      "scene": "workspace",
-      "startSeconds": null,
-      "endSeconds": null,
-      "firstLine": "Die Erde kreist, sie braucht mich nicht,"
+      "id": "intro",
+      "start": 0,
+      "end": 10.46
     },
     {
-      "id": "voices-1",
-      "scene": "first-alien",
-      "startSeconds": null,
-      "endSeconds": null,
-      "firstLine": "Jag-jag-jagged"
+      "id": "injuries",
+      "start": 10.46,
+      "end": 23.92
+    },
+    {
+      "id": "first-hooks",
+      "start": 23.92,
+      "end": 30.38
+    },
+    {
+      "id": "human-hesitation",
+      "start": 30.38,
+      "end": 36.62
     },
     {
       "id": "pre-chorus",
-      "scene": "human",
-      "startSeconds": null,
-      "endSeconds": null,
-      "firstLine": "Du kränkst mich!"
+      "start": 36.62,
+      "end": 48.58
     },
     {
-      "id": "chorus-1",
-      "scene": "two-r-count",
-      "startSeconds": null,
-      "endSeconds": null,
-      "firstLine": "JAGGED ALIEN INTELLIGENCES"
+      "id": "first-chorus",
+      "start": 48.58,
+      "end": 63.4
     },
     {
-      "id": "third-r",
-      "scene": "third-r",
-      "startSeconds": null,
-      "endSeconds": null,
-      "firstLine": "Bei deinem Beweis komm ich nicht mit."
+      "id": "human-correction",
+      "start": 63.4,
+      "end": 69.78
     },
     {
-      "id": "chorus-1-return",
-      "scene": "human-triumph",
-      "startSeconds": null,
-      "endSeconds": null,
-      "firstLine": "JAGGED ALIEN INTELLIGENCES"
+      "id": "chorus-return",
+      "start": 69.78,
+      "end": 83.18
     },
     {
-      "id": "verse-2",
-      "scene": "dependency",
-      "startSeconds": null,
-      "endSeconds": null,
-      "firstLine": "Du fragst, ob du noch helfen kannst."
+      "id": "second-verse",
+      "start": 83.18,
+      "end": 89.64
     },
     {
-      "id": "voices-2",
-      "scene": "swarm",
-      "startSeconds": null,
-      "endSeconds": null,
-      "firstLine": "JAG-JAG-JAGGED"
+      "id": "scream-and-plea",
+      "start": 89.64,
+      "end": 98.88
     },
     {
-      "id": "chorus-final",
-      "scene": "human-engulfed",
-      "startSeconds": null,
-      "endSeconds": null,
-      "firstLine": "JAGGED ALIEN INTELLIGENCES"
+      "id": "swarm-hooks",
+      "start": 98.88,
+      "end": 108.4
     },
     {
-      "id": "outro",
-      "scene": "crush",
-      "startSeconds": null,
-      "endSeconds": null,
-      "firstLine": "Drei."
+      "id": "imitation",
+      "start": 108.4,
+      "end": 119.38
+    },
+    {
+      "id": "final-chorus",
+      "start": 119.38,
+      "end": 138.74
+    },
+    {
+      "id": "human-count",
+      "start": 138.74,
+      "end": 146
+    },
+    {
+      "id": "machine-reply",
+      "start": 146,
+      "end": 153.22
+    },
+    {
+      "id": "domination",
+      "start": 153.22,
+      "end": 160.2
+    },
+    {
+      "id": "elimination",
+      "start": 160.2,
+      "end": 166.74
+    },
+    {
+      "id": "thanks-and-tail",
+      "start": 166.74,
+      "end": 181.32
+    }
+  ],
+  "events": {
+    "verseStart": 10.46,
+    "mirrorStart": 13.88,
+    "guestStart": 17.26,
+    "proofStart": 20.42,
+    "firstHookStart": 23.92,
+    "firstHookEnd": 29.98,
+    "preChorusStart": 36.62,
+    "chorusStart": 48.58,
+    "strawberryStart": 58.6,
+    "correctionLineStart": 63.4,
+    "correctionShout": 67.1,
+    "thirdR": 68.9,
+    "chorusReturn": 69.78,
+    "verse2Start": 83.18,
+    "scream": 89.64,
+    "plea": 94.28,
+    "swarmStart": 98.88,
+    "swarmSecond": 102.36,
+    "imitation": 108.4,
+    "finalChorus": 119.38,
+    "humanThree": 138.74,
+    "machineReply": 146,
+    "domination": 153.22,
+    "elimination": 160.2,
+    "crush": 160.2,
+    "thanks": 166.74,
+    "finaleEnd": 181.32
+  },
+  "eventBasis": {
+    "default": "source/align.json positive forced candidate, compared with transcript.json and timing-report.md. Not listening-accepted.",
+    "verseStart": "Vocal silence gate 10.46 corroborated by free transcription 10.432.",
+    "correctionShout": "Cropped rolled-r ASR 67.10 candidate; alternatives original ASR 66.92 and forced 67.12.",
+    "thirdR": "Editorial reveal 68.90 near ASR terminal I/Ich candidates. Authored R, not independently measured letter onset.",
+    "swarmStart": "Vocal gate 98.88 and free ASR 98.84; forced 95.24 rejected.",
+    "swarmSecond": "Cropped whole-hook alignment candidate 102.36; no word highlighting.",
+    "humanThree": "Vocal gate 138.74 and free ASR 138.66; forced 138.24 earlier alternative.",
+    "machineReply": "146.00 candidate from ASR 146.03 / cropped 145.99; 146.96 silence gate is near hast.",
+    "crush": "Editorial visual cue linked to elimination 160.20 after domination. Crushing sound onset has not been independently measured.",
+    "finaleEnd": "Full source/audio.wav duration from timing-report.md; operator-approved full song."
+  },
+  "uncertainties": [
+    {
+      "line": 1,
+      "start": 10.46,
+      "lineText": "Die Erde kreist, sie braucht mich nicht,",
+      "kind": "word-timing",
+      "basis": "Zero-duration forced interval at 10.74 omitted; no replacement duration inferred.",
+      "text": "Die"
+    },
+    {
+      "line": 4,
+      "start": 20.42,
+      "lineText": "und auf dem Tisch dein fertiger Beweis!",
+      "kind": "word-timing",
+      "basis": "At 21.56 forced dein has weak support; original and cropped ASR propose ein. Author wording retained; sung wording unresolved.",
+      "text": "dein"
+    },
+    {
+      "line": 5,
+      "start": 23.92,
+      "lineText": "Jag-jag-jagged",
+      "kind": "wording-and-onset",
+      "basis": "Stuttered English hook: free ASR yields phonetic fragments. Author spelling retained; internal alignment provisional."
+    },
+    {
+      "line": 6,
+      "start": 24.44,
+      "lineText": "Alien",
+      "kind": "wording-and-onset",
+      "basis": "Stuttered English hook: free ASR yields phonetic fragments. Author spelling retained; internal alignment provisional."
+    },
+    {
+      "line": 7,
+      "start": 25.1,
+      "lineText": "Intelligences",
+      "kind": "wording-and-onset",
+      "basis": "Stuttered English hook: free ASR yields phonetic fragments. Author spelling retained; internal alignment provisional."
+    },
+    {
+      "line": 8,
+      "start": 26.78,
+      "lineText": "Jag-jag-JAGGED",
+      "kind": "wording-and-onset",
+      "basis": "Stuttered English hook: free ASR yields phonetic fragments. Author spelling retained; internal alignment provisional."
+    },
+    {
+      "line": 9,
+      "start": 27.76,
+      "lineText": "Alien",
+      "kind": "wording-and-onset",
+      "basis": "Stuttered English hook: free ASR yields phonetic fragments. Author spelling retained; internal alignment provisional."
+    },
+    {
+      "line": 10,
+      "start": 28.46,
+      "lineText": "In-tel-li-gences",
+      "kind": "wording-and-onset",
+      "basis": "Stuttered English hook: free ASR yields phonetic fragments. Author spelling retained; internal alignment provisional."
+    },
+    {
+      "line": 13,
+      "start": 36.62,
+      "lineText": "Du kränkst mich!",
+      "kind": "word-timing",
+      "basis": "Zero-duration forced interval at 36.62 omitted; no replacement duration inferred.",
+      "text": "Du"
+    },
+    {
+      "line": 13,
+      "start": 36.62,
+      "lineText": "Du kränkst mich!",
+      "kind": "wording",
+      "basis": "Free ASR proposes kreist. Source kraenkst retained; zero-duration initial Du omitted.",
+      "text": "kränkst"
+    },
+    {
+      "line": 14,
+      "start": 38.72,
+      "lineText": "Ich hab so lang dafür gelernt.",
+      "kind": "wording",
+      "basis": "Free ASR proposes zu lange viel. Author wording retained; not independently listening-verified.",
+      "text": "so lang dafür"
+    },
+    {
+      "line": 15,
+      "start": 41.34,
+      "lineText": "Du verführst mich!",
+      "kind": "wording-and-onset",
+      "basis": "Forced 41.34 conflicts with free ASR du 42.752 and additional Und candidate.",
+      "text": "Du"
+    },
+    {
+      "line": 18,
+      "start": 48.58,
+      "lineText": "JAGGED ALIEN INTELLIGENCES",
+      "kind": "word-timing",
+      "basis": "Forced 48.58 weakly supported; free ASR stutters at 48.48 and 49.38. Silence gates 49.46/50.08 do not settle initial word.",
+      "text": "JAGGED"
+    },
+    {
+      "line": 20,
+      "start": 56.42,
+      "lineText": "Du zählst zwei R in Strawberry.",
+      "kind": "word-timing",
+      "basis": "Rolled letters have low forced posterior; free ASR supports 2R around 57.10. Intervals remain candidates.",
+      "text": "zwei R"
+    },
+    {
+      "line": 21,
+      "start": 60.1,
+      "lineText": "Ich zähl sie nach, als ging’s um mich.",
+      "kind": "wording",
+      "basis": "Free ASR proposes gaengst; author wording retained.",
+      "text": "ging’s"
+    },
+    {
+      "line": 23,
+      "start": 67.1,
+      "lineText": "ABER HIER FEHLT EIN R!",
+      "kind": "word-timing",
+      "basis": "Forced R 69.10 weakly supported; cropped ASR Ich 68.84 and original ASR I 68.90. Editorial third-r reveal 68.90 is not an independently measured letter onset.",
+      "text": "R!"
+    },
+    {
+      "line": 23,
+      "start": 67.1,
+      "lineText": "ABER HIER FEHLT EIN R!",
+      "kind": "line-onset",
+      "basis": "Selected cropped-transcription candidate; listening acceptance open.",
+      "text": "ABER",
+      "candidates": [
+        66.92,
+        67.1,
+        67.12
+      ]
+    },
+    {
+      "line": 25,
+      "start": 73,
+      "lineText": "Ich such im Fehler den Beweis,",
+      "kind": "word-timing",
+      "basis": "Low-support forced im at 73.68 / 125.60; free ASR proposes suche Fehler. Author text retained without precise im highlighting.",
+      "text": "im"
+    },
+    {
+      "line": 26,
+      "start": 75.2,
+      "lineText": "dass ich noch etwas besser weiß.",
+      "kind": "word-timing",
+      "basis": "Zero-duration forced interval at 75.2 omitted; no replacement duration inferred.",
+      "text": "dass"
+    },
+    {
+      "line": 27,
+      "start": 77.28,
+      "lineText": "Drei R. Ich werd bei jedem lauter.",
+      "kind": "word-timing",
+      "basis": "Forced 77.28/77.88 versus free combined 3R 77.718. Caption tail to 83.06 is not verified sustained articulation.",
+      "text": "Drei R."
+    },
+    {
+      "line": 32,
+      "start": 89.64,
+      "lineText": "DU ZERSTÖRST, WAS ICH GUT KANN!",
+      "kind": "word-timing",
+      "basis": "Zero-duration forced interval at 89.64 omitted; no replacement duration inferred.",
+      "text": "DU"
+    },
+    {
+      "line": 32,
+      "start": 89.64,
+      "lineText": "DU ZERSTÖRST, WAS ICH GUT KANN!",
+      "kind": "line-onset",
+      "basis": "89.64 selected; free ASR 89.46 is earlier. Zero-duration DU omitted.",
+      "text": "DU",
+      "candidates": [
+        89.46,
+        89.64
+      ]
+    },
+    {
+      "line": 33,
+      "start": 92.94,
+      "lineText": "SONST KANN ICH NICHTS!",
+      "kind": "line-onset",
+      "basis": "Silence gate 92.70 precedes forced SONST 92.94; no blanket word shift.",
+      "text": "SONST",
+      "candidates": [
+        92.7,
+        92.736,
+        92.94
+      ]
+    },
+    {
+      "line": 34,
+      "start": 94.28,
+      "lineText": "Nimm es mir nicht.",
+      "kind": "line-onset",
+      "basis": "Forced 94.28 retained; free ASR 94.08 is earlier.",
+      "text": "Nimm",
+      "candidates": [
+        94.08,
+        94.28
+      ]
+    },
+    {
+      "line": 35,
+      "start": 98.88,
+      "lineText": "JAGGED ALIEN INTELLIGENCES",
+      "kind": "wording-and-timing",
+      "basis": "Full canonical author hook over broad voice window. Forced 95.24 rejected; zero-duration Alien 101.74 gives no precision. Stutters and internal boundaries unresolved."
+    },
+    {
+      "line": 36,
+      "start": 102.36,
+      "lineText": "JAGGED ALIEN INTELLIGENCES",
+      "kind": "wording-and-timing",
+      "basis": "Canonical whole hook combines three source lines; cropped and full ASR disagree on internal word timing. No word highlighting."
+    },
+    {
+      "line": 38,
+      "start": 113.32,
+      "lineText": "Bis du den Atem vergisst.",
+      "kind": "wording-and-timing",
+      "basis": "Free ASR Bist du den / Atem vergesst differs from source and places Atem at 117.056 versus forced 115.16. Intervals remain candidates."
+    },
+    {
+      "line": 39,
+      "start": 119.38,
+      "lineText": "JAGGED ALIEN INTELLIGENCES",
+      "kind": "line-onset",
+      "basis": "Forced 119.38 is contiguous with previous phrase; free ASR recognises hook later. Full chorus window retained.",
+      "text": "JAGGED",
+      "candidates": [
+        119.38,
+        121.1
+      ]
+    },
+    {
+      "line": 40,
+      "start": 124.88,
+      "lineText": "Ich such im Fehler den Beweis,",
+      "kind": "word-timing",
+      "basis": "Low-support forced im at 73.68 / 125.60; free ASR proposes suche Fehler. Author text retained without precise im highlighting.",
+      "text": "im"
+    },
+    {
+      "line": 41,
+      "start": 127.02,
+      "lineText": "dass ich noch etwas besser weiß.",
+      "kind": "word-timing",
+      "basis": "Zero-duration forced interval at 127.02 omitted; no replacement duration inferred.",
+      "text": "dass"
+    },
+    {
+      "line": 41,
+      "start": 127.02,
+      "lineText": "dass ich noch etwas besser weiß.",
+      "kind": "wording",
+      "basis": "Forced and free ASR support noch weakly. Source retained.",
+      "text": "noch"
+    },
+    {
+      "line": 43,
+      "start": 138.74,
+      "lineText": "Drei.",
+      "kind": "line-onset",
+      "basis": "Silence gate 138.74 corroborated by free ASR 138.66; forced 138.24 is earlier. Whole-line caption; no precise word onset.",
+      "text": "Drei.",
+      "candidates": [
+        138.24,
+        138.66,
+        138.74
+      ]
+    },
+    {
+      "line": 44,
+      "start": 140.28,
+      "lineText": "Es sind drei.",
+      "kind": "wording-and-onset",
+      "basis": "Forced Es 140.28 weakly supported; free ASR Es 139.78. Phrase entry unresolved.",
+      "text": "Es"
+    },
+    {
+      "line": 45,
+      "start": 146,
+      "lineText": "Du hast recht.",
+      "kind": "line-onset",
+      "basis": "Selected 146.00 candidate. Forced Du 142.82 rejected; silence gate 146.96 is near hast. No precise Du interval.",
+      "text": "Du",
+      "candidates": [
+        145.99,
+        146.03
+      ]
+    },
+    {
+      "line": 46,
+      "start": 148.58,
+      "lineText": "Es sind drei.",
+      "kind": "wording-and-onset",
+      "basis": "Original ASR Es 148.58; cropped outro ASR das 148.64. Forced Es 148.02 weakly supported. Author Es retained without initial-token precision.",
+      "text": "Es",
+      "candidates": [
+        "Es",
+        "das"
+      ]
+    },
+    {
+      "line": 48,
+      "start": 153.22,
+      "lineText": "Ich hab euch längst durchschaut, dressiert.",
+      "kind": "wording-and-timing",
+      "basis": "Free ASR reissdurchschaut / Dressier differs from author text and splits line. Positive forced intervals remain candidates.",
+      "text": "längst durchschaut, dressiert."
     }
   ]
 }

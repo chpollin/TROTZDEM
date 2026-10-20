@@ -1,5 +1,14 @@
 {
-  "audio": null,
+  "audio": {
+    "path": "source/original.mp3",
+    "convertedPath": "source/audio.wav",
+    "sha256": "f860999c556e03a77461c9091eee246fad83850d7bfe07829ecd5f6e6f147d8a",
+    "durationSeconds": 181.32,
+    "originalPath": "C:/Users/Chrisi/Downloads/Jagged Alien Intelligences.mp3",
+    "origin": "MP3 supplied by the operator in this conversation",
+    "scope": "Full selected recording explicitly approved for the local music video; earlier duration ceiling superseded",
+    "rightsEvidence": "Operator-supplied source for commissioned local work; no public-release clearance assessed"
+  },
   "references": [
     {
       "path": "source/concepts/workspace.png",
@@ -30,6 +39,44 @@
       "origin": "Built-in image_gen, this conversation, 2026-10-19",
       "purpose": "Storyboard reference only; not used as final video pixels",
       "readingLimit": "Illustrated equations and streamlines are not a scientific result or numerical simulation."
+    }
+  ],
+  "productionAssets": [
+    {
+      "name": "strawberry.png",
+      "prompt": "Use case: stylized-concept. Production compositing asset for a hybrid ImageGen plus code music video. ONE isolated ripe strawberry, complete silhouette with all green leaves and a short stem visible, on genuinely transparent background. Front three-quarter view, strawberry upright with tip down, slightly asymmetrical natural shape, luscious dark crimson red skin, extremely detailed golden seeds in tiny dimples, real organic irregularity, matte dark green crown. Lighting from upper left, low-key dramatic photographic materiality with delicate antique scientific engraving grain, inspired by a dark mathematical workbench. Realistic tactile fruit, not cartoon, not plastic, not candy, no glossy 3D game render. Entire fruit fits within generous transparent margins, crown near top, tip near bottom. No floor, no shadow on background, no reflected surface, no text, no equations, no lines, no extra fruit, no gore, no backdrop. This must be a clean alpha cutout suitable for moving over a charcoal diagram background. Preserve fine leaf edges.",
+      "transparentBackground": true,
+      "originalPath": "C:/Users/Chrisi/.codex/generated_images/01a155ab-7445-7bb3-906d-f047240fc559/exec-61e073a5-08c9-48f3-8cbe-3a0e0c6424b2.png",
+      "path": "assets/strawberry.png",
+      "sha256": "0cf4a686c92f81aebe09ffee12253eb95d1555ff8552970d4375ca0dab564073",
+      "width": 1225,
+      "height": 1284,
+      "origin": "Built-in image_gen, current conversation, 2026-10-19",
+      "purpose": "Production compositing layer, separate from exact code-drawn text and motion",
+      "scientificStatus": "Illustrative artwork, not scientific evidence"
+    },
+    {
+      "name": "backplate.png",
+      "prompt": "Use case: stylized-concept. A widescreen 16:9 textless background plate for a melancholic experimental mathematical music video. Extremely dark charcoal aged scientific paper / blackboard with subtle dry grain, finely scratched ivory geometric construction arcs, ghostly contour-map-like etchings and faint blue-black depth. Sparse intricate engraved diagrams near far left and upper corners only; central and lower-right two thirds are mostly empty dark negative space for a separately composited strawberry, exact typography and moving cyan flow. A softly lit slightly lighter region behind centre-bottom gives cinematic depth. Looks like an old scientific engraving becoming an alien computational environment, familiar and unsettling simultaneously. Rich restrained tonal texture, elegant academic atmosphere. Flat frontal plane, no perspective room, no objects, no fruit, no text, no letters, no numerals, no equations, no interface boxes, no logos, no stars, no planets, no neon spaceship, no borders, no title. Dark enough to keep white type and cyan linework clearly readable.",
+      "transparentBackground": false,
+      "originalPath": "C:/Users/Chrisi/.codex/generated_images/01a155ab-7445-7bb3-906d-f047240fc559/exec-1fb25e23-eb73-4e4b-9b43-ec684151ba2e.png",
+      "path": "assets/backplate.png",
+      "sha256": "164f5ef6c8bab8b76613aa09107ea888a6e866704802cb9e44e17c4bb1fd9206",
+      "width": 1672,
+      "height": 941,
+      "origin": "Built-in image_gen, current conversation, 2026-10-19",
+      "purpose": "Production compositing layer, separate from exact code-drawn text and motion",
+      "scientificStatus": "Illustrative artwork, not scientific evidence"
+    },
+    {
+      "name": "strawberry-crushed.png",
+      "path": "assets/strawberry-crushed.png",
+      "originalPath": "C:/Users/Chrisi/.codex/generated_images/01a155ab-7445-7bb3-906d-f047240fc559/exec-8169e831-95be-473d-9bb1-1f36e128b1d8.png",
+      "sha256": "45c0b2fc3f05f1349d5fd9df1ae64445ee849d4c1afaff4ed3d5db5d60f1d6aa",
+      "transparentBackground": true,
+      "origin": "Built-in image_gen edit of the maintained strawberry layer, current conversation, 2026-10-20",
+      "prompt": "Use case: precise-object-edit. Image 1 is the edit target and identity reference for the strawberry production asset. Create the final physically crushed state of this same ripe red strawberry, on genuinely transparent background. Preserve its photographic/engraved tactile material, dark green leaves, rich crimson skin and golden seeds. The fruit has been compressed and ruptured, slumped into a low irregular mound of torn red skin and wet red flesh. Several recognisable skin folds still carry seeds, the green crown lies partly sideways, and a small realistic dark-red strawberry-juice puddle and two small pulp fragments stay close to the fruit. Natural irregular fracture, depth and organic texture, not a flat stretched pancake, not a horizontal slice, no plate, no hands, no tools, no mechanical press, no background, no shadows on a floor, no text, no symbols. Fruit only, no body parts or gore. Entire ruptured fruit with modest puddle fits within generous transparent margins. Front three-quarter camera, upper-left lighting matching the reference. This is one isolated compositing asset to animate after the song's elimination moment.",
+      "purpose": "Physical fruit rupture after the elimination cue; visual fiction"
     }
   ]
 }

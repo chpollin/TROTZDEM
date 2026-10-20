@@ -8,13 +8,17 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: active
 created: 2026-10-02
-updated: 2026-10-19
+updated: 2026-10-20
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5), Codex
 ---
 
 # Journal
+
+## 2026-10-20
+
+The operator supplied the selected recording and explicitly approved its full duration. Vocal separation, large-v3 transcription and alignment completed. The working timeline preserves author wording and records disputed variants and failed alignment spans. Requested gpt-6.1-sol subagents implemented the bounded timeline, full scene and explicit module renderer adapter. Generated fruit and backplate layers combine with exact code lettering and a coordinated swarm. The fruit ruptures at the elimination cue. The full preview follows the audio playback position. See [the production treatment](jagged-alien-intelligences-production.md) for verification and remaining listening acceptance. No publication or album registration was made.
 
 ## 2026-10-19
 

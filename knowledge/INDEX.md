@@ -8,7 +8,7 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: draft
 created: 2026-10-02
-updated: 2026-10-19
+updated: 2026-10-20
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5), Codex
@@ -27,7 +27,7 @@ TROTZDEM is an experiment with generative AI, an album of songs generated with S
 - [journal.md](journal.md) records what changed and what was decided per session.
 - [video-method-verification.md](video-method-verification.md) records the reusable skill's transfer checks, observed rendering results and open verification limits.
 
-- [jagged-alien-intelligences-production.md](jagged-alien-intelligences-production.md) carries the new song source, visual treatment, audio handoff and evidence limits.
+- [jagged-alien-intelligences-production.md](jagged-alien-intelligences-production.md) carries the selected recording, hybrid video treatment, local build and listening-review limits.
 
 ## Terms
 

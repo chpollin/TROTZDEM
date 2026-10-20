@@ -8,7 +8,7 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: active
 created: 2026-10-02
-updated: 2026-10-19
+updated: 2026-10-20
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5)
@@ -20,7 +20,7 @@ generated-with: Claude Code (Claude Opus 5.5)
 - The build agent for "The Bitter Lesson" suggested 52.5 s as poster time instead of the current 82 s. The operator's decision is open.
 - A compact technical paragraph on how the videos are made was offered as a replacement for the second colophon paragraph on the album page. The operator's decision is open.
 - Replacing the Suno clip audio with the official download before use beyond sharing, see [project.md](project.md).
-- Jagged Alien Intelligences was newly developed on 2026-10-19. Maintained lyrics, style prompt, concept references and the silent scene study are in video/jagged-alien-intelligences/. The selected official Suno audio is pending. The new text has not inherited the older draft's fact-checked status. Follow [the production treatment](jagged-alien-intelligences-production.md).
+- Jagged Alien Intelligences now has the supplied full recording, audio-derived working captions and a complete hybrid scene. The local video remains a working version pending listening acceptance of marked variants and audiovisual timing. The newer text has not inherited the older draft’s fact-checked status. See [the production treatment](jagged-alien-intelligences-production.md).
 - The accent #5468ff of "Bin ich noch der Expert?" reaches 4.4:1 against the page surface. The page lifts it for text where relative colour syntax is supported.
 - Known weaknesses of the Recursive Self-Improvement video reported by its build agent, a short overlap when a line becomes active and the barely legible damage grade 6 in the final chorus.
 - The posts announcing the album (LinkedIn, Mastodon, Bluesky, Patreon) are written and wait for the operator to publish them.

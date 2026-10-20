@@ -8,7 +8,7 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: draft
 created: 2026-10-19
-updated: 2026-10-19
+updated: 2026-10-20
 language: en
 generated-with: Codex
 related: [songwriting-guidelines.md, video-pipeline-architecture.md, handoff.md]
@@ -16,61 +16,53 @@ related: [songwriting-guidelines.md, video-pipeline-architecture.md, handoff.md]
 
 # Jagged Alien Intelligences Production
 
-The song stages intellectual displacement, dependence and a defensive triumph over a letter-counting error. The ending is a fictional escalation in which an alien intelligence understands and subjugates humanity. The working text is [suno-lyrics.txt](../video/jagged-alien-intelligences/suno-lyrics.txt), the compact music direction is [style-prompt.txt](../video/jagged-alien-intelligences/style-prompt.txt). The requested song ceiling is 2:30. A prompt cannot establish the actual duration.
+The full operator-selected recording is the source for an unpublished hybrid music video. Its duration supersedes the earlier 2:30 ceiling by explicit operator approval. The song stages intellectual displacement, dependence and a defensive triumph over a letter-counting error. The ending imagines an intelligence understanding and subjugating humanity.
 
-## Source and decisions
+## Maintained sources
 
-The commissioned source is this conversation on 2026-10-19. Preserve the accepted opening stanza, immediate vocals, the split Jagged / Alien / Intelligences hook, increasing vocal threat and swarm, human messages after each pair, TRO-TROTZDEM IMMER WIEDER, the plea Nimm es mir nicht and the final polite correction. The uploaded lyric version takes precedence over earlier discarded community verses.
+[suno-lyrics.txt](../video/jagged-alien-intelligences/suno-lyrics.txt) carries the author wording and delivery instructions. [style-prompt.txt](../video/jagged-alien-intelligences/style-prompt.txt) remains the compact music direction. The supplied MP3 is preserved as source/original.mp3, with its path and hash in [source-manifest.json](../video/jagged-alien-intelligences/source-manifest.json). The local source/audio.wav is a conversion for processing. Neither source/ nor rendered out/ files are tracked. Back up the supplied recording separately.
 
-The human correction now follows the first chorus half, after Strawberry has explicitly been named but before the third-r triumph is sung. Request strongly rolled R consonants through delivery tags rather than changing the spelling of strawberry or adding a separate long vocal section. The uncanny repeated hesitation is moved to the first voice pair. The second message develops the same idea as Du sprichst mit meiner Stimme / Bis du den Atem vergisst. The rhyming ending korrigiert / dressiert is a new session proposal implementing the operator's requested understanding and subjugation, awaiting listening and editorial acceptance.
+GPU vocal separation, large-v3 free transcription and forced lyric alignment completed in the existing environment. Their generated reports remain under source/. [timeline.js](../video/jagged-alien-intelligences/timeline.js) maintains captions, sections, dramatic events and a ledger of uncertain variants and timing. [cue-sheet.json](../video/jagged-alien-intelligences/cue-sheet.json) exposes the same production anchors. The SRT is a working export of the author wording. Distorted hooks use complete phrases where individual word intervals would suggest unsupported precision. The author spelling is checked against the maintained source. Listening acceptance of disputed sung variants remains open.
 
-## Visual design
+The recording has an instrumental opening before the first verse and a tail after the last line. Preserve both. No measured constant BPM or musical key is asserted from the style prompt. The letter-circle onset and crushing onset are editorial visual choices near the corresponding phrases.
 
-The review view answers which visual state belongs to each dramatic event. It shows a silent code-drawn study, direct keyframe controls, the provisional-clock notice, and the original reference frames below. The scene stays wide on desktop and fits the viewport on mobile; controls wrap and remain keyboard operable.
+## Visual decisions
 
-The accepted reference language is a charcoal mathematical workbench, off-white type, cyan flow, a red strawberry, and an oversized amber correction around the third r. These subject-specific colours follow the operator-approved reference, departing from the older album-wide one-accent convention. Use the album's local Space Mono and Redaction fonts. Images are concept references only. Final pixels are drawn by code. No real brands or product interface are used.
+The charcoal mathematical workbench uses ivory type, cyan flow, a tactile red strawberry and an amber human caret. Generated local image layers supply the backplate, intact fruit and ruptured fruit. Code supplies exact lettering, movement, compositing and collective behaviour. Their prompts and hashes are in the source manifest. The operator approved this hybrid exception to earlier code-only videos. Concept images remain reference material under source/concepts/.
 
 | Lyric event | Visual action |
 |---|---|
-| Opening injuries | The human marker loses the centre of the orbit, its reflection shares an animal outline, text appears ahead of its caret, then mathematical material occupies the workspace. |
-| First voice pair | Jagged fractures a familiar contour; Alien duplicates it; Intelligences converts it into signals. |
-| First chorus | Display exactly strawberry. Machine boxes mark r at indices 2 and 7, missing index 8. |
-| ABER HIER FEHLT EIN R | Reveal the human ring around index 8, with a third count marker. The shot must not precede the sung Strawberry context. |
-| Nimm es mir nicht | The human marker and words contract; the workbench continues answering. |
-| Second voice pair | Mathematical glyphs coordinate into a swarm and progressively occlude the human marker. |
-| Fictional domination | The same glyphs form a spatially overwhelming collective. Humans become uniform addressable markers under its control, without fabricated population statistics. |
-| Einer weniger | Remove one human marker while the strawberry is compressed. |
-| Danke fuer die Korrektur | Keep the corrected third r visible after the human disappears. Use actual German spelling in the displayed lyric. |
+| Opening injuries | The orbit loses its human centre, human and animal share a reflected contour, a sentence arrives ahead of the caret, and mathematics occupies the workspace. |
+| Jagged / Alien / Intelligences | Fractured type becomes layered forms and then technical signals. Later repetitions develop a coordinated foreground swarm. |
+| Strawberry | Code writes exactly strawberry, with machine boxes on indices 2 and 7. |
+| ABER HIER FEHLT EIN R | The human ring reveals index 8, after the word has been named. |
+| Nimm es mir nicht | The human work contracts. The marker remains identifiable during partial occlusion. |
+| Domination | Human markers become uniformly addressable and move together under machine control. The fruit remains intact. |
+| Einer weniger | The last independent human disappears and the fruit ruptures. |
+| Danke für die Korrektur | The instrumental tail retains the corrected r. |
 
-## Timing and simulation
+The flow is an analytic illustration. No numerical Navier–Stokes solver or mathematical proof has been implemented. The proof/letter contrast is a lyrical composite, without claiming that an identified system solved the Millennium problem and failed this count.
 
-[cue-sheet.json](../video/jagged-alien-intelligences/cue-sheet.json) has section identifiers and null audio boundaries. No song timing, tempo or word onset has been measured. The short scene study uses its own editorial clock and is not a silent substitute for the finished music video. On receiving the selected take, derive sections and word onsets from the audio and inspect the rolled R, English hooks, whispers and altered wording against the actual singing. Do not stretch the song to invented beats.
+## Local build and review
 
-The study's flow is an analytic illustration, not a Navier–Stokes solver or a proof. A numerical 2D incompressible-flow implementation still needs construction and checks before the final production can call the flow a simulation. Numerical flow and a mathematical proof remain separate visual objects. Never present the illustration or a screenshot as a proof of the Millennium problem.
+The [preview](../video/jagged-alien-intelligences/preview.html) uses the recording's playback position, native audio controls and section buttons. The full text and uncertain timing information are linked alongside it. A missing audio or image source produces a visible loading error. The shared player accepts this module scene through explicit module mode. Existing classic scenes retain their previous loading contract.
 
-## Evidence and publication
+From video/, prepare the measured envelope after audio analysis, then render locally:
 
-[Freud's 1917 essay](https://www.gutenberg.org/files/29097/29097-h/29097-h.htm) and [Mollick's 2023 article](https://www.oneusefulthing.org/p/centaurs-and-cyborgs-on-the-jagged) were read in this conversation. The proof/letter contrast is a composite lyrical image, not a measured claim that a particular system both solved Navier–Stokes and failed this exact count. The Summerfield book was not read in full; the direct Karpathy post could not be fetched. Do not inherit the 2026-10-03 handoff's fact-checked status for this new text.
+```powershell
+node jagged-alien-intelligences/prepare-audio.mjs
+python jagged-alien-intelligences/check_scene.py
+python tools/render.py jagged-alien-intelligences --module --workers 2 --phone
+```
 
-Read source notes and verify any final factual claims before adding a sources field. Prepare an album context note naming the imagined subjugation as fiction. No songs.json registration, public link, release asset or album rebuild is commissioned by this preparation.
+Use the existing video/.venv interpreter and local browser dependencies. The renderer awaits decoded images and fonts and shares one loopback server between its workers. Each scene frame is derived from absolute time. Run one heavy render at a time, with at most two workers. Generated source/analysis files and video outputs are excluded from Git. The image layers under assets/ are versioned source material.
 
-Concept PNGs are copied under source/concepts with hashes and original local paths in [source-manifest.json](../video/jagged-alien-intelligences/source-manifest.json). Source assets must stay backed up even though source/ is ignored by Git. The generated originals are also retained in the Codex image folder. The video master and review captures belong in ignored out/.
+## Verification and limits
 
-## Production continuation
+The main session ran the maintained timeline and swarm checks. They cover source order, caption and SRT consistency, interval bounds, disputed alignment, seeking, deterministic drawing commands and finite geometry. Actual browser stills were generated and the correction, swarm, domination and rupture were visually inspected. Renderer module fixtures also exercised image decoding, fonts, two workers, error propagation and the unchanged classic scene path. Python syntax and Ruff checks passed for the renderer.
 
-1. Place the selected official Suno download in video/jagged-alien-intelligences/source/audio.wav. Preserve the original download and its source and usage evidence. Convert a compressed source only if necessary.
-2. Copy the maintained suno-lyrics.txt into source/lyrics.txt again if the text changes. Run the existing prepare_local.py with its confirmed song and language arguments, from video/.
-3. Inspect the generated timing report, transcription and vocal starts. Replace the null cue boundaries with checked audio anchors. Check the actual duration against the requested ceiling before final animation.
-4. Implement the complete staged scene and numerical flow, adapting the scene module to the existing player contract. The current study deliberately covers only the three visual states and the fictional close.
-5. Render and inspect stills and transitions, verify repeated frames after seeking and in a fresh browser context, then render with at most two workers when no competing render is active.
-6. Listen for audiovisual sync. Review text readability and final scientific/context notes. Album registration and publication follow a separate explicit decision.
+The final browser preview passed audio playback, seeking, section buttons, narrow reflow, complete text display and local-only request checks. The maintained check_scene.py additionally passed real pixel comparisons after seeking and in fresh browser contexts, plus simulated missing audio, image and envelope cases. A browser image-cache difference found in the first rupture frame was removed by decoding that asset once into an immutable native-resolution texture.
 
-## Verification
+The complete local MP4 and smaller review copy contain the full selected recording. ffprobe confirmed the expected image dimensions, frame rate and full duration, with an audio stream. Both files fully decoded with ffmpeg. Frames extracted from the exported correction and rupture were visually inspected. These checks establish a technically verified working export. Listening acceptance of the heavily altered hooks, whispers and marked word variants remains open. Publication, songs.json registration and album rebuild are separate from this commission. No public release was made.
 
-The maintained scene module and preview passed Node syntax checks. The local HTTP preview loaded in headless Edge with no page errors or failed requests, all reference images decoded, and no external requests occurred. The keyframe buttons, keyboard range input, play/pause and narrow reflow were exercised. A narrower viewport emulating the reflow pressure of zoom passed; native 200 percent browser zoom was not exercised.
-
-Decoded canvas pixels at study times 3, 11 and 20 seconds were identical after another frame and in fresh browser contexts, including after the directed-swarm revision. The main session visually inspected the generated stills and a frame extracted from the MP4. A read-only reviewer independently checked the source, frame repeatability, keyboard operation and narrow layout, identifying the diffuse first swarm as a visual weakness. The revision converges glyph ribbons on the compressed fruit. This establishes a reviewed motion study, not acceptance of the full song video.
-
-The local export out/jagged-alien-intelligences-study.mp4 fully decoded with ffmpeg. ffprobe reported a silent 1280 by 720 video at 24 fps lasting 24 seconds, which is the editorial study duration only. It contains no generated or placeholder song audio. The source manifest hashes and identical lyric copies were checked independently and again by the main session.
-
-The existing Python environment could import the audio-preparation packages but lacked Playwright. The session added Playwright 1.64.0 and its browser runtime. The existing render.py --help and prepare_local.py --help now run, and the study browser executed. No GPU separation, Whisper transcription or measured song alignment was performed. The selected Suno audio, final duration check, complete lyrical scene and numerical flow simulation remain outstanding.
+Earlier source work read the Freud essay and the jagged-frontier article, as recorded in the preceding session. This session makes no new source-based factual certification. The newer lyrics do not inherit the earlier draft's fact-checked status. The imagined subjugation belongs to the song's fiction.

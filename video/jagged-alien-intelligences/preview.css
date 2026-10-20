@@ -1,3 +1,4 @@
+@font-face { font-family: 'Redaction'; src: url('../fonts/Redaction-Regular.ttf'); font-display: swap; }
 @font-face { font-family: 'Space Mono'; src: url('../fonts/SpaceMono-Regular.ttf'); font-display: swap; }
 :root {
   color-scheme: dark;
@@ -29,3 +30,10 @@ figure { margin: 2.5rem 0; }
 figcaption { margin-block-start: 0.8rem; }
 section { margin-block-start: 3rem; }
 @media print { .controls { display: none; } }
+
+[hidden] { display: none !important; }
+#lyrics { max-inline-size: 72ch; padding-inline-start: 3rem; line-height: 1.75; }
+#lyrics li { padding-inline-start: 0.6rem; overflow-wrap: anywhere; }
+#lyrics li::marker { color: var(--muted); }
+
+audio { display:block; inline-size:100%; margin-block:1rem; }

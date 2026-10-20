@@ -1,0 +1,4 @@
+# Derived from source/audio.wav; regenerate with prepare_local.py then node prepare-audio.mjs.
+analysis.js
+audio-envelope.json
+audio-envelope.json.part
