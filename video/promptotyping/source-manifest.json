@@ -1,0 +1,14 @@
+{
+  "audio": {
+    "path": "source/original.mp3",
+    "convertedPath": "source/audio.wav",
+    "sha256": "D201ED65004E3B399F7377CFEA35E9AB4F279C7322B62A46F8E6EFAAD275DF68",
+    "durationSeconds": 170.68,
+    "originalPath": "C:/Users/Chrisi/Downloads/Promptotyping.mp3",
+    "origin": "MP3 supplied by the operator in this conversation, 2026-10-29",
+    "scope": "Selected recording for the local music video",
+    "rightsEvidence": "Operator-supplied source for commissioned local work; whether it is the official paid-plan download, as project.md requires for public use, is not confirmed"
+  },
+  "images": [],
+  "fonts": ["../fonts/Redaction*.ttf", "../fonts/SpaceMono-*.ttf"]
+}

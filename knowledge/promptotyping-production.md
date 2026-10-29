@@ -16,7 +16,7 @@ related: [songwriting-guidelines.md, video-pipeline-architecture.md, handoff.md]
 
 # Promptotyping Production
 
-Treatment and production plan for the song Promptotyping, a companion to the operator's paper on Promptotyping. The operator accepted the core reading on 2026-10-29: it is intoxicating that one can now build everything oneself, and the real work is no longer building but checking, which stays with oneself. The treatment below is a plan. No recording exists yet, so every timing statement is an intention until the timing report replaces it.
+Treatment and production plan for the song Promptotyping, a companion to the operator's paper on Promptotyping. The operator accepted the core reading on 2026-10-29: it is intoxicating that one can now build everything oneself, and the real work is no longer building but checking, which stays with oneself. The treatment below is implemented as a code-only classic scene in [video/promptotyping/](../video/promptotyping/) and rendered locally against the operator's recording.
 
 ## Maintained sources
 
@@ -83,3 +83,13 @@ The emotional movement runs from a lonely, quiet start through a growing rush of
 - Text density during the rush must stay readable at phone size. The rush may show fragments, but every sung line must be legible somewhere at its onset.
 - The paper title page is a mirror of the operator's real paper. Whether it shows the real title and name or a stylised version is the operator's decision.
 - The album already has a song about addiction to the coding tool. This video shows addiction to building artefacts and borrows only the tab counter from that earlier staging.
+
+## Build and verification
+
+The operator supplied the recording as an MP3 on 2026-10-29. Its path, hash and duration (170.68 s) are in [source-manifest.json](../video/promptotyping/source-manifest.json). `source/` and `out/` are not versioned, so the MP3 needs a backup outside the repository. Whether it is the official paid-plan download that [project.md](project.md) requires for public use is not confirmed.
+
+`tools/prepare_local.py promptotyping --language de` separated the vocals, aligned the written lyrics and wrote the timing report, and `tools/analyze.py` wrote `analysis.js`. [timeline.js](../video/promptotyping/timeline.js) records every onset and each editorial decision where aligner, free transcription and vocal loudness disagreed. Four findings changed the treatment. "Updating specification dot M D." is not sung and is not shown as a sung line. "Nein." and "Fast." sit earlier than the aligner placed them. The band plays alone for about ten seconds between "Ich." and the reprise, and this gap carries a new visual action: the unvalidated artefacts disappear one by one until only the validated one remains. No steady pulse confirms the prompted 145 BPM, so spawns follow lyric onsets and the 77.5 BPM fit of the rush window.
+
+Checks run on 2026-10-29: `node --check` on scene, timeline and analysis; stills at fifteen moments across every section, inspected as contact sheets, which led to fixes for overflowing map labels, overlapping timeline rows, the profile covering the handwriting, the diff colliding with the commit line and an overlong scream line; identical PNG hashes for the same times rendered in different orders and in a fresh browser context; a full render with two workers plus the 720p copy; ffprobe of the export (1920×1080, 30 fps, video 170.70 s, audio 170.68 s); a full ffmpeg decode without errors; and frames extracted from the export at 49, 88.6, 134, 146 and 161 s that match the stills. Perceptual sync has not been checked by listening. The lines marked in timeline.js need a listening pass.
+
+Accent `#3fe0a8` and the paper title page with the real title and name are implemented as proposed and remain the operator's decision. The video is not integrated into the album page.
