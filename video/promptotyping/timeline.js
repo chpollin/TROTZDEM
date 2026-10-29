@@ -108,6 +108,30 @@ const EV = {
   fadeOut: 168.4,
 };
 
+// The forms of work of the paper's Figure 1, as the video enacts them. prep,
+// expl, dist and impl are the four forms; val is the researcher's validation,
+// cur knowledge curation back into the documents, ctx a new session reading
+// them, loop the rush that only implements, all the closing pass.
+const PHASES = [
+  { t: 0, p: "prep" },
+  { t: 16.0, p: "expl" },
+  { t: 26.54, p: "dist" },
+  { t: 33.92, p: "impl" },
+  { t: 48.08, p: "val" },
+  { t: 54.96, p: "cur" },
+  { t: 57.2, p: "dist" },
+  { t: 69.56, p: "impl" },
+  { t: 84.02, p: "val" },
+  { t: 90.4, p: "cur" },
+  { t: 93.47, p: "ctx" },
+  { t: 102.32, p: "dist" },
+  { t: 108.83, p: "impl" },
+  { t: 111.94, p: "loop" },
+  { t: 137.26, p: "val" },
+  { t: 150.84, p: "cur" },
+  { t: 162.2, p: "all" },
+];
+
 // The paper's title page shown on the "Methode" lines (operator decision open).
 const PAPER = {
   title: "Promptotyping",
