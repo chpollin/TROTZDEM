@@ -385,6 +385,19 @@
           "url": "https://www.oneusefulthing.org/p/centaurs-and-cyborgs-on-the-jagged"
         }
       ]
+    },
+    {
+      "slug": "promptotyping",
+      "title": "Promptotyping",
+      "poster": 141.6,
+      "accent": "#ff8770",
+      "note": "Der Song begleitet ein Paper über Promptotyping und erzählt seinen eigenen Bau als Promptotyping-Workflow. Er überzeichnet den Rausch, alles selbst bauen zu können. Die Uhrzeiten, Zähler und Kaffeetassen im Video gehören zur Inszenierung.",
+      "sources": [
+        {
+          "text": "Pollin, C. Promptotyping. Digital Humanities Craft.",
+          "url": "https://dhcraft.org/Promptotyping/"
+        }
+      ]
     }
   ]
 }

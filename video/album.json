@@ -527,6 +527,26 @@
       ],
       "live": "live/jagged-alien-intelligences.json",
       "making": "Die Erdbeere und der wissenschaftliche Hintergrund wurden mit der integrierten Bildgenerierung von Codex erzeugt und anschließend durch Code animiert. Die Schrift zählt die R in strawberry exakt, während ein koordinierter Schwarm aus Zeichen die menschlichen Markierungen übernimmt. Der Bruch der Erdbeere fällt mit dem Verschwinden des letzten unabhängigen Zeichens zusammen. Die Strömung ist eine gestalterische Illustration. Text und Umsetzung entstanden mit Codex und gpt-6.1-sol-Subagents, die Musik mit Suno."
+    },
+    {
+      "slug": "promptotyping",
+      "title": "Promptotyping",
+      "duration": 170.7,
+      "video": "https://github.com/chpollin/TROTZDEM/releases/download/videos/promptotyping.mp4",
+      "poster": "posters/promptotyping.jpg",
+      "thumb": "posters/thumbs/promptotyping.webp",
+      "accent": "#ff8770",
+      "style": "Melancholic to euphoric Math Metal, Nintendocore, 145 BPM, D minor, raw German/English male vocals (spoken to harsh), cold vocoder machine voice, arrangement builds itself from a cappella to full band, 8-bit arpeggios, djent guitars, stiff robotic first chorus, manic rush in the final chorus, hard stops before spoken verdicts, 7/8 to 4/4 transitions, target 2:50",
+      "lyrics": "Ich hab kein Lied, nur eine Idee\nund alles, was ich versteh.\nKein Geld und kein Developer,\nnur Markdown und Kaffee.\n\nReading source material.\n\nThinking…\nexploring: one voice, German, angry, tired.\n\nThought for twelve seconds. Hook missing.\n\ndata dot M D.\nWas ich hab.\nspecification dot M D.\nWas ich will.\njournal dot M D.\nWas ich weiß.\nCLAUDE dot M D.\nWas du sollst.\n\nBuilding promptotype. Version one.\n\nPrompto. Typing.\nDeveloper. Not required.\nPrompto. Typing.\nOutput generated.\n\nNein.\n\nStopp. Das bin nicht ich.\nDu singst mein Lied, doch du kennst mich nicht.\n\nUpdating journal dot M D.\n\nIch destillier, ich koch es ein,\nbis nur die Unterscheidung bleibt:\nwas wahr ist und was unsicher,\nund was nur ein Modell mir schreibt.\n\nBuilding promptotype. Version two.\n\nPROMPTOTYPING,\nich brauch keinen Developer mehr.\nPROMPTOTYPING,\nich schreib's in Markdown, ist nicht schwer.\n\nFast.\n\nAber lauter.\nFast. Aber gut.\nUnd wo ist meine Wut?\n\nUpdating specification dot M D.\n\nContext window full. New session.\n\nDu hast vergessen, was wir waren,\ndoch nichts davon ist fort.\nEs steht im Journal und in data,\ndu liest es, Wort für Wort.\n\nIch nenn es Promptotyping,\ndamit es nach Methode klingt.\n\nBuilding promptotype. Version three.\n\nMARKDOWN! MARKDOWN!\n\nICH BRAUCH KEINEN DEVELOPER MEHR!\n\nMARKDOWN! MARKDOWN!\n\nICH BAU MIR ALLES SELBST!\n\nPROMPTOTYPING!\nIch brauch keinen Developer mehr!\nPROMPTOTYPING!\nIch brauch keinen Develo—\n\nWho validates this?\n\nIch.\n\nIch hab ein Lied und eine Idee\nund alles, was ich versteh.\nHundert gebaut, geprüft erst eins.\nIch bin jetzt selber einer.",
+      "note": "Der Song begleitet ein Paper über Promptotyping und erzählt seinen eigenen Bau als Promptotyping-Workflow. Er überzeichnet den Rausch, alles selbst bauen zu können. Die Uhrzeiten, Zähler und Kaffeetassen im Video gehören zur Inszenierung.",
+      "sources": [
+        {
+          "text": "Pollin, C. Promptotyping. Digital Humanities Craft.",
+          "url": "https://dhcraft.org/Promptotyping/"
+        }
+      ],
+      "live": "live/promptotyping.json",
+      "making": "Der Liedtext ist das Forschungsmaterial, und die Bildsprache folgt dem Begriff, gelesen mit Hegel. Die Maschine ist kühles Licht aus hohlen Konstruktionslinien, der Mensch ist Rotstift: das Caret als Einfügezeichen des Editors, das Deleatur, Randnotizen und jede gesungene menschliche Zeile. Oben links steht der Zyklus aus der Abbildung des Papers, Preparation, Exploration, Distillation und Implementation, und zeigt, welche Arbeitsform gerade geschieht; jeder Durchlauf hinterlässt einen Ring, sodass der Zyklus als Spirale steigt. Die Idee wird in idee.md getippt, wird Handschrift auf einem Faksimile, wird profiliert und in die Markdown-Dateien links geschrieben. Version eins ist eine 8-Bit-Karte, deren Ortsnamen der Refrain der Maschine sind, bis „Nein.“ sie als bestimmte Negation durchstreicht und die Kritik ins Journal wandert. Beim Destillieren streicht der Rotstift die Füllwörter eines aufgeblähten Entwurfs, bis die gesungene Zeile bleibt. Abgelehnte Versionen verschwinden nicht, sie werden aufgehoben und liegen angehoben hinter der nächsten. Im Rausch bricht der Ring auf, Implementation läuft als gestrichelte Linie ins Unendliche, und die Statusleiste zählt die gebauten Artefakte gegen die geprüften. Auf „Who validates this?“ fährt das Bild zurück auf hundert hohle Pläne, „Ich.“ ist der größte Moment, eine rote Linie trifft einen einzigen Plan, und erst diese Anerkennung gibt ihm Substanz als Papier. Im Instrumental verschwinden die ungeprüften Pläne in umgekehrter Reihenfolge, der Ring schließt sich, die Reprise ist ein Diff gegen den Anfang, und bei „selber einer“ schließt sich die Spiegelachse zwischen Wissen und Artefakt. Alle Zeiten stammen aus der Ausrichtung des Liedtexts auf die Gesangsspur; wo sie unsicher waren, steht die Entscheidung in timeline.js."
     }
   ]
 }
