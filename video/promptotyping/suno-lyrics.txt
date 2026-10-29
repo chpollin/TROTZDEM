@@ -102,6 +102,6 @@ Ich.
 [A cappella, single human voice, like the intro]
 Ich hab ein Lied und eine Idee
 und alles, was ich versteh.
-Kein Geld und kein Developer.
+Hundert gebaut, geprüft erst eins.
 Ich bin jetzt selber einer.
 [End]

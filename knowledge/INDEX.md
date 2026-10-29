@@ -28,6 +28,7 @@ TROTZDEM is an experiment with generative AI, an album of songs generated with S
 - [video-method-verification.md](video-method-verification.md) records the reusable skill's transfer and hybrid-revision checks, observed rendering results and open verification limits.
 
 - [jagged-alien-intelligences-production.md](jagged-alien-intelligences-production.md) carries the selected recording, hybrid video treatment, local build and listening-review limits.
+- [promptotyping-production.md](promptotyping-production.md) carries the treatment and production plan for Promptotyping, in which the song's own lyrics become the research material of the artefacts.
 
 ## Terms
 
