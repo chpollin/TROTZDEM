@@ -1,8 +1,8 @@
 [Intro – a cappella, single raw human voice, no band]
-Ich hab kein Lied, nur einen Satz,
-kein Geld und keine Band.
-Ich weiß nur, was ich sagen will,
-und dass es keiner kennt.
+Ich hab kein Lied, nur eine Idee
+und alles, was ich versteh.
+Kein Geld und kein Developer,
+nur Markdown und Kaffee.
 
 [Cold synthetic voice]
 Reading source material.
@@ -15,13 +15,13 @@ Thought for twelve seconds. Hook missing.
 
 [Spoken machine roll-call, bass enters]
 data dot M D.
-[Human] Was mein Material ist.
+[Human] Was ich hab.
 specification dot M D.
-[Human] Was dieses Lied mal kann.
+[Human] Was ich will.
 journal dot M D.
-[Human] Was wir bisher versucht.
+[Human] Was ich weiß.
 CLAUDE dot M D.
-[Human] Wie du mit mir baust.
+[Human] Was du sollst.
 
 [Cold synthetic voice]
 Building promptotype. Version one.
@@ -32,9 +32,11 @@ Developer. Not required.
 Prompto. Typing.
 Output generated.
 
-[Band stops – human, interrupting]
-Nein. Stopp. Das bin nicht ich.
-Das klingt nach dir, nicht nach meinem Satz.
+[Music cuts – human, alone, spoken]
+Nein.
+[Human, interrupting]
+Stopp. Das bin nicht ich.
+Du singst mein Lied, doch du kennst mich nicht.
 [Cold synthetic voice]
 Updating journal dot M D.
 
@@ -51,10 +53,13 @@ Building promptotype. Version two.
 PROMPTOTYPING,
 ich brauch keinen Developer mehr.
 PROMPTOTYPING,
-ein Markdown-File, und das Lied ist hier.
+ich schreib's in Markdown, ist nicht schwer.
 
+[Music cuts – human, alone, spoken]
+Fast.
 [Human, almost satisfied]
-Fast. Aber lauter.
+Aber lauter.
+Fast. Aber gut.
 Und wo ist meine Wut?
 [Cold synthetic voice]
 Updating specification dot M D.
@@ -91,8 +96,12 @@ Ich brauch keinen Develo—
 
 [Music cuts – cold synthetic voice]
 Who validates this?
-[Human, quiet]
+[Human, alone, spoken]
 Ich.
-[Human, alone, almost laughing]
+
+[A cappella, single human voice, like the intro]
+Ich hab ein Lied und eine Idee
+und alles, was ich versteh.
+Kein Geld und kein Developer.
 Ich bin jetzt selber einer.
 [End]
