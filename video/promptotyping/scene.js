@@ -389,7 +389,7 @@ function drawCycle(ctx, t) {
     ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = lw;
     ctx.beginPath(); ctx.ellipse(ox + 191, oy + 92 + dy, 158, 80, 0, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * k); ctx.stroke(); ctx.restore();
   };
-  for (let j = 0; j < pass; j++) ring((pass - j) * 10, rgba(C.pale, (allK >= 0 ? 0.6 : 0.22) / (pass - j)), 1.5);
+  for (let j = 0; j < pass; j++) ring((pass - j) * 16, rgba(C.pale, (allK >= 0 ? 0.7 : 0.4) / (pass - j)), 1.5);
   const closing = span(t, EV.enter, EV.enter + 0.9);
   if (closing > 0) ring(0, closing < 1 ? C.mark : rgba(C.line, allK >= 0 ? 0.9 : 0.5), closing < 1 ? 3 : 2, closing);
   // arrows of the cycle
@@ -422,7 +422,7 @@ function drawCycle(ctx, t) {
     ctx.save(); ctx.strokeStyle = C.line; ctx.lineWidth = 2.5; ctx.setLineDash([16, 12]); ctx.lineDashOffset = -off;
     ctx.beginPath(); ctx.moveTo(x0, yy); ctx.lineTo(x1, yy); ctx.stroke(); ctx.setLineDash([]);
     font(ctx, 22, "Space Mono", 700); ctx.fillStyle = C.line; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
-    ctx.fillText(`×${Math.max(1, spawned(frozenT(t)) - 2)}`, x0 + 6, yy + 34);
+    ctx.fillText(`×${built(t)}`, x0 + 6, yy + 34);
     ctx.restore();
   }
   // the researcher, above the cycle as in the figure
@@ -450,7 +450,7 @@ function drawStamp(ctx, t) {
   ctx.fillStyle = human ? C.mark : C.line;
   const gap = lerp(26, 10, smooth(span(t, ph.t, ph.t + 0.5)));
   let text = s;
-  if (ph.p === "loop") text = s + Math.max(1, spawned(frozenT(t)) - 2);
+  if (ph.p === "loop") text = s + built(t);
   spaced(ctx, text, STAGE.x, BAND_Y, gap);
   ctx.restore();
 }
@@ -458,7 +458,6 @@ function drawStamp(ctx, t) {
 // Five quiet glosses name what happens in Hegel's terms, set at the right end of the band.
 const GLOSS = [
   { t: LN.nein.t, s: "bestimmte Negation" },
-  { t: LN.upd1.t, s: "Er-innerung" },
   { t: EV.rushStart, s: "schlechte Unendlichkeit" },
   { t: LN.ich.t, s: "Anerkennung" },
   { t: EV.axisOff - 0.6, s: "aufgehoben" },
@@ -573,8 +572,9 @@ function introText(id, t) {
 function drawMaterial(ctx, t) {
   const gone = smooth(span(t, LN.v1.t, LN.v1.t + 0.7));
   if (gone >= 1) return;
-  const ed = 1 - smooth(span(t, LN.read.t - 0.6, LN.read.t + 0.5));
-  const fx = smooth(span(t, LN.read.t - 0.5, LN.read.t + 0.7));
+  // the typed idea fades out before the hand fades in, so the two cuts never blur into each other
+  const ed = 1 - smooth(span(t, LN.read.t - 0.6, LN.read.t - 0.1));
+  const fx = smooth(span(t, LN.read.t, LN.read.t + 0.5));
   const { x, y, w, h } = IDEA;
   ctx.save(); ctx.globalAlpha = 1 - gone;
   if (ed > 0) {
@@ -661,8 +661,8 @@ function drawV1(ctx, t, boxes) {
   if (t >= LN.nein.t) {
     const fade = 1 - smooth(span(t, LN.upd1.t + 0.4, LN.upd1.t + 1.2));
     ctx.save(); ctx.globalAlpha = fade;
-    pencil(ctx, deleaturPts(x + 80, y + h - 70, x + w - 260, y + 100), span(t, LN.nein.t, LN.nein.t + 0.6), C.mark, 12);
-    hand(ctx, "Nein.", x + 60, y + 180, 150, C.mark);
+    pencil(ctx, deleaturPts(x + 380, y + h - 70, x + w - 260, y + 100), span(t, LN.nein.t, LN.nein.t + 0.6), C.mark, 12);
+    hand(ctx, "Nein.", x + 50, y + h - 30, 150, C.mark);
     ctx.restore();
     drawVerdict(ctx, t, x + 40, y + h + 80, boxes["journal.md"]);
   }
@@ -753,10 +753,10 @@ const V2 = {
 const lerpRect = (a, b, k) => ({ x: lerp(a.x, b.x, k), y: lerp(a.y, b.y, k), w: lerp(a.w, b.w, k), h: lerp(a.h, b.h, k) });
 // Earlier versions behind a plan, each lifted up and to the right, v1 with its red cross.
 function drawSheets(ctx, r, count, alpha = 1) {
-  const step = Math.max(8, Math.min(22, r.w * 0.035));
+  const step = Math.max(8, Math.min(30, r.w * 0.05));
   for (let j = count; j >= 1; j--) {
     const x = r.x + step * j, y = r.y - step * j;
-    ctx.save(); ctx.globalAlpha *= alpha * (0.55 - 0.15 * (j - 1));
+    ctx.save(); ctx.globalAlpha *= alpha * (0.75 - 0.2 * (j - 1));
     ctx.fillStyle = C.bg; ctx.fillRect(x, y, r.w, r.h);
     const v1 = j === count;
     drawPlan(ctx, x, y, r.w, r.h, { type: "map", pixel: v1, col: C.pale, state: v1 ? "rejected" : "open", fill: false });
@@ -868,8 +868,10 @@ function drawPaper(ctx, t) {
   if (!a) return;
   const pw = 680, ph = 800, x = STAGE.x + (STAGE.w - pw) / 2, y = STAGE.y + 15;
   ctx.save(); ctx.globalAlpha = a;
-  ctx.fillStyle = C.paper; ctx.fillRect(x, y, pw, ph);
-  ctx.fillStyle = C.paperInk; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+  // a dark sheet like the facsimile: warm paper is reserved for what has been recognised
+  ctx.fillStyle = C.sheet; ctx.fillRect(x, y, pw, ph);
+  ctx.strokeStyle = C.hand; ctx.lineWidth = 2; ctx.strokeRect(x, y, pw, ph);
+  ctx.fillStyle = C.hand; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
   font(ctx, 15); ctx.fillText("Working Paper | 2026", x + 60, y + 66);
   font(ctx, 72, "Redaction"); ctx.fillText(PAPER.title, x + 60, y + 160);
   font(ctx, 28, "Redaction");
@@ -879,15 +881,15 @@ function drawPaper(ctx, t) {
   font(ctx, 16, "Space Mono", 700); ctx.fillText("Abstract", x + 60, y + 366);
   let caret = null;
   ["m1", "m2"].forEach((id, i) => {
-    font(ctx, 38, "Redaction"); ctx.fillStyle = "#c2332a";
+    font(ctx, 38, "Redaction"); ctx.fillStyle = C.ink;
     const ls = wrap(ctx, typed(id, t), pw - 120);
     ls.forEach((l, j) => ctx.fillText(l, x + 60, y + 426 + i * 96 + j * 44));
     if (t >= LN[id].t && !done(id, t) && ls.length) caret = [x + 60 + ctx.measureText(ls[ls.length - 1]).width, y + 426 + i * 96 + (ls.length - 1) * 44];
   });
   if (caret) drawCaret(ctx, caret[0], caret[1], 38, t, null);
-  ctx.fillStyle = C.paperInk;
+  ctx.fillStyle = rgba(C.hand, 0.5);
   for (let i = 0; i < 6; i++) ctx.fillRect(x + 60, y + 620 + i * 22, (pw - 120) * (i === 5 ? 0.5 : 1), 6);
-  if (t >= LN.m2.t + 1.6) { font(ctx, 14); ctx.fillText("¹ Eine Arbeitspraxis, keine evaluierte Methode.", x + 60, y + ph - 34); }
+  if (t >= LN.m2.t + 1.6) { font(ctx, 20); ctx.fillStyle = C.hand; ctx.fillText("¹ Eine Arbeitspraxis, keine evaluierte Methode.", x + 60, y + ph - 34); }
   ctx.restore();
 }
 
@@ -906,7 +908,7 @@ function camera(t) {
   const nf = n - 1 + (n < MAXN ? span(tf, SPAWN[n - 1], SPAWN[n]) : 0);
   let sx = 0, sy = 0, sw = 0;
   for (let i = 0; i < n; i++) { const wgt = Math.exp(-(nf - i) / 3); sx += SPIRAL[i][0] * wgt; sy += SPIRAL[i][1] * wgt; sw += wgt; }
-  const s = lerp(1.0, 0.55, smooth(span(tf, EV.rushStart, LN.f1.t)));
+  const s = lerp(1.5, 0.55, smooth(span(tf, EV.rushStart, LN.f1.t)));
   const pb = smooth(span(t, LN.who.t, LN.who.t + 2.4));
   return { cx: lerp(sx / sw, BBOX.cx, pb), cy: lerp(sy / sw, BBOX.cy, pb), s: lerp(s, S_ALL, pb) };
 }
@@ -932,7 +934,7 @@ function drawRush(ctx, t) {
     const w = r.w * pop, h = r.h * pop;
     // unvalidated plans fade like unfixed prints in the light
     drawPlan(ctx, r.x + (r.w - w) / 2, r.y + (r.h - h) / 2, w, h, {
-      type: TYPES[CELL_TYPE[i]], col: gone > 0 ? C.paper : frozen ? C.pale : C.line,
+      type: TYPES[CELL_TYPE[i]], col: gone > 0 ? C.faint : frozen ? C.pale : C.line,
       alpha: a0 * dimIch * (1 - gone) * (t >= EV.enter ? 0.6 : 1), state: "open",
       title: r.s > 0.7 ? TYPES[CELL_TYPE[i]] : null,
     });
@@ -950,11 +952,15 @@ function drawChosen(ctx, t) {
   x = lerp(x, CHOSEN_END.x, mv); y = lerp(y, CHOSEN_END.y, mv); w = lerp(w, CHOSEN_END.w, mv); h = lerp(h, CHOSEN_END.h, mv);
   const ok = t >= EV.enter + 0.6;
   const a0 = smooth(span(t, LN.v3.t, LN.v3.t + 0.4)) * (t >= LN.ich.t && t < EV.enter + 0.6 ? 0.5 : 1);
+  // during the rush the camera rides away from it, so it stays inside the stage like every other plan
+  ctx.save();
+  if (t < LN.who.t) { ctx.beginPath(); ctx.rect(STAGE.x - 16, STAGE.y - 16, STAGE.w + 32, STAGE.h + 32); ctx.clip(); }
   if (w > 120) drawSheets(ctx, { x, y, w, h }, 2, a0);
   drawPlan(ctx, x, y, w, h, {
     type: "map", title: w > 240 ? "promptotype v3 | map" : null, alpha: a0, expose: up,
     col: t >= EV.cut ? C.pale : C.line, state: ok ? "valid" : "open",
   });
+  ctx.restore();
   return { x: x + w / 2, y: y + h / 2 };
 }
 
@@ -1055,7 +1061,6 @@ function drawValidation(ctx, t, chosen) {
   const a = smooth(span(t, LN.who.t + 1.0, LN.who.t + 1.5)) * (1 - smooth(span(t, LN.r1.t - 0.8, LN.r1.t)));
   const v = validated(t);
   ctx.save(); ctx.globalAlpha = a;
-  ctx.fillStyle = C.bg; ctx.fillRect(STAGE.x - 4, 62, STAGE.w + 8, 70);
   font(ctx, 46, "Space Mono", 700); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
   ctx.fillStyle = C.line; let xx = spaced(ctx, `built ${built(t)}`, STAGE.x, BAND_Y, 2);
   ctx.fillStyle = C.faint; xx = spaced(ctx, "  |  ", xx, BAND_Y, 2);
@@ -1079,9 +1084,12 @@ function drawValidation(ctx, t, chosen) {
       ctx.fillText("Ich.", settle > 0.5 ? px : cx, cy);
       ctx.restore();
     }
+    // the red line leaves "Ich." to the right first, so it never crosses the question above it
     if (chosen && t >= EV.enter + 0.2) {
-      const k = span(t, EV.enter + 0.2, EV.enter + 0.7);
-      pencil(ctx, [[px + 30, py - 30], [lerp(px + 30, chosen.x, k), lerp(py - 30, chosen.y, k)]], 1, C.mark, 4);
+      const a = [px + 70, py - 10], b = [px + 420, py - 10], pts = [];
+      for (let i = 0; i <= 10; i++) pts.push([lerp(a[0], b[0], i / 10), a[1]]);
+      for (let i = 1; i <= 30; i++) pts.push([lerp(b[0], chosen.x, i / 30), lerp(b[1], chosen.y, i / 30)]);
+      pencil(ctx, pts, span(t, EV.enter + 0.2, EV.enter + 0.8), C.mark, 4);
     }
     if (t < EV.enter) drawCaret(ctx, px + 2, py, 28, t, null);
   } else if (t >= LN.ich.t - 0.4) drawCaret(ctx, px, py, 28, t, "researcher");
@@ -1128,11 +1136,9 @@ function drawDiff(ctx, t) {
   ctx.restore();
   if (t >= LN.r4.t + 2.2) {
     const k = smooth(span(t, LN.r4.t + 2.2, LN.r4.t + 2.8));
-    font(ctx, 20); ctx.fillStyle = rgba(C.pale, k); ctx.textAlign = "left";
-    ctx.fillText("commit e1n5a1d", STAGE.x + 20, 900);
-    ctx.fillText("Author: researcher | developer", STAGE.x + 20, 930);
-    font(ctx, 30, "Redaction"); ctx.fillStyle = rgba(C.ink, k);
-    ctx.fillText("Ich bin jetzt selber einer.", STAGE.x + 20, 970);
+    font(ctx, 24); ctx.fillStyle = rgba(C.pale, k); ctx.textAlign = "left";
+    ctx.fillText("commit e1n5a1d", STAGE.x + 20, 912);
+    ctx.fillText("Author: researcher | developer", STAGE.x + 20, 946);
     drawCup(ctx, STAGE.x + STAGE.w - 70, 940, 1.2, rgba(C.pale, k), k, t);
   }
 }
