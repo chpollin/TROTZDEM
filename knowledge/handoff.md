@@ -8,7 +8,7 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: active
 created: 2026-10-02
-updated: 2026-10-20
+updated: 2026-10-29
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5)
@@ -20,9 +20,9 @@ generated-with: Claude Code (Claude Opus 5.5)
 - The build agent for "The Bitter Lesson" suggested 52.5 s as poster time instead of the current 82 s. The operator's decision is open.
 - A compact technical paragraph on how the videos are made was offered as a replacement for the second colophon paragraph on the album page. The operator's decision is open.
 - Replacing the Suno clip audio with the official download before use beyond sharing, see [project.md](project.md).
-- Jagged Alien Intelligences is accepted for album integration and built locally with release-addressed data and a prepared web encode. Browser integration checks passed. The release upload and push remain pending authorization under the standing Git rule. See [the production treatment](jagged-alien-intelligences-production.md).
+- Jagged Alien Intelligences is accepted for album integration and built locally with release-addressed data and a prepared web encode. Browser integration checks passed. The operator authorized publication on 2026-10-29; the video is uploaded to the release and pushed. See [the production treatment](jagged-alien-intelligences-production.md).
 - The accent #5468ff of "Bin ich noch der Expert?" reaches 4.4:1 against the page surface. The page lifts it for text where relative colour syntax is supported.
 - Known weaknesses of the Recursive Self-Improvement video reported by its build agent, a short overlap when a line becomes active and the barely legible damage grade 6 in the final chorus.
-- Promptotyping is a new song whose lyrics and style prompt the operator accepted on 2026-10-29, in [video/promptotyping/](../video/promptotyping/). The song stages its own making as a Promptotyping workflow, with three chorus versions as promptotypes, and makes almost no factual claims beyond the unfunded start. The Suno generation with the official download is with the operator. The video is rendered locally from the operator's recording, see [promptotyping-production.md](promptotyping-production.md). The operator accepted the second version for the album on 2026-10-29; it is integrated locally. Open are a listening pass on the lines marked in timeline.js, confirmation that the MP3 is the official download, and the release upload and push, which also carry Jagged Alien Intelligences.
+- Promptotyping is a new song whose lyrics and style prompt the operator accepted on 2026-10-29, in [video/promptotyping/](../video/promptotyping/). The song stages its own making as a Promptotyping workflow, with three chorus versions as promptotypes, and makes almost no factual claims beyond the unfunded start. The Suno generation with the official download is with the operator. The video is rendered locally from the operator's recording, see [promptotyping-production.md](promptotyping-production.md). The operator accepted the second version for the album on 2026-10-29; it is integrated locally. The operator authorized publication on 2026-10-29; the video is uploaded to the release and pushed together with Jagged Alien Intelligences. Open are a listening pass on the lines marked in timeline.js and confirmation that the MP3 is the official download.
 - The posts announcing the album (LinkedIn, Mastodon, Bluesky, Patreon) are written and wait for the operator to publish them.
 - Corrections found in the operator's teaching materials during the source work and not yet applied there: the Data Librarian materials cite Wiener's Cybernetics (1961) for the sorcerer's apprentice warning, while the read source is Wiener (1960) in Science, and the vault's Repo-Verzeichnis lists Second Brain without a remote although chpollin/second-brain-vault is public.
