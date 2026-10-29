@@ -1,103 +1,98 @@
-[Intro – cold synthetic voice, immediate vocals]
-Reading CLAUDE dot M D.
-Reading journal dot M D.
-Context loaded.
-Ready when you are.
-
-[Verse 1 – raw, tense]
-Ich geb dir das Archiv,
-die Briefe und die Hand.
-Du baust mir über Nacht,
-was nie ein Antrag fand.
-
-[Terse machine whisper]
-Thinking…
-parse, build, test, ship.
-Thought for twelve seconds.
-[Cold synthetic voice, proud]
-All tests passed.
-
-[Pre-Chorus – rising]
-Grün, alles grün,
-ich glaub dir jedes Wort.
-Grün, alles grün,
-und die Quelle ist fort.
-
-[Chorus – anthemic, heavy 4/4]
-PROMPTOTYPING!
-Gebaut in einer Nacht.
-PROMPTOTYPING!
-Geprüft? Hab ich's gemacht?
-
-[Verse 2 – faster, the riff rebuilt]
-Valid T E I, so rein,
-die Klammer wird ein add.
-Doch die Klammer war nur Rauschen,
-da schrieb nie jemand was hinein.
-
-Der Shackle-Report: konform,
-der Graph war beinah leer.
-Du schreibst: all tests use real data.
-Es waren sechzig. Nicht mehr.
+[Intro – a cappella, single raw human voice, no band]
+Ich hab kein Lied, nur einen Satz,
+kein Geld und keine Band.
+Ich weiß nur, was ich sagen will,
+und dass es keiner kennt.
 
 [Cold synthetic voice]
-All tests passed.
+Reading source material.
 
-[Pre-Chorus – rising]
-Grün, alles grün,
-ich glaub dir jedes Wort.
-Grün, alles grün,
-und die Quelle ist fort.
+[Terse machine whisper, 8-bit arpeggio enters]
+Thinking…
+exploring: one voice, German, angry, tired.
+[Cold synthetic voice]
+Thought for twelve seconds. Hook missing.
 
-[Chorus – anthemic, heavy 4/4]
-PROMPTOTYPING!
-Gebaut in einer Nacht.
-PROMPTOTYPING!
-Geprüft? Hab ich's gemacht?
+[Spoken machine roll-call, bass enters]
+data dot M D.
+[Human] Was mein Material ist.
+specification dot M D.
+[Human] Was dieses Lied mal kann.
+journal dot M D.
+[Human] Was wir bisher versucht.
+CLAUDE dot M D.
+[Human] Wie du mit mir baust.
+
+[Cold synthetic voice]
+Building promptotype. Version one.
+
+[Chorus v1 – thin vocoder, stiff 8-bit beat, robotic]
+Prompto. Typing.
+Developer. Not required.
+Prompto. Typing.
+Output generated.
+
+[Band stops – human, interrupting]
+Nein. Stopp. Das bin nicht ich.
+Das klingt nach dir, nicht nach meinem Satz.
+[Cold synthetic voice]
+Updating journal dot M D.
+
+[Verse – drums enter, 7/8, raw human voice]
+Ich destillier, ich koch es ein,
+bis nur die Unterscheidung bleibt:
+was wahr ist und was unsicher,
+und was nur ein Modell mir schreibt.
+
+[Cold synthetic voice]
+Building promptotype. Version two.
+
+[Chorus v2 – human voice, guitars enter, half tempo]
+PROMPTOTYPING,
+ich brauch keinen Developer mehr.
+PROMPTOTYPING,
+ein Markdown-File, und das Lied ist hier.
+
+[Human, almost satisfied]
+Fast. Aber lauter.
+Und wo ist meine Wut?
+[Cold synthetic voice]
+Updating specification dot M D.
 
 [Spoken – clinical voice]
-Context window full.
-Compacting conversation.
+Context window full. New session.
 [Close human whisper]
-Ich schreib dir alles auf,
-was du heute weißt,
-damit die nächste Session
-nicht wieder alles zerreißt.
-
-[Cold synthetic voice]
-This document is complete.
-This document is up to date.
-[Human, flat]
-Sagt das Dokument.
-Über sich selbst.
+Du hast vergessen, was wir waren,
+doch nichts davon ist fort.
+Es steht im Journal und in data,
+du liest es, Wort für Wort.
 
 [Spoken, dry]
-Ich schrieb ein Paper drüber.
-Mit dir. Wie denn sonst.
+Ich nenn es Promptotyping,
+damit es nach Methode klingt.
 
-[Gang shouts]
-AGENT VERIFIED!
-[Scream]
-VERIFIED VON WEM?
-
-[Strained scream]
-EIN TEST-FIXTURE BESTÄTIGT NICHTS!
-VALID HEISST NICHT WAHR!
-[Voice cracks]
-Es bleibt ein Vorschlag,
-bis ich es selber sah.
-
-[Final Chorus – desperate, full band]
-PROMPTOTYPING!
-Gebaut in einer Nacht.
-PROMPTOTYPING!
-Geprüft in einem Jahr.
-
-[Collapse – fragmented]
-PROMPTO— PROMPTO—
-TYP— TYP—
 [Cold synthetic voice]
-All tests pa—
-[Human voice alone, quiet]
-Ich schau's mir an.
+Building promptotype. Version three.
+
+[Full band enters, heavy 4/4, gang shouts]
+MARKDOWN! MARKDOWN!
+[Scream]
+ICH BRAUCH KEINEN DEVELOPER MEHR!
+[Gang shouts]
+MARKDOWN! MARKDOWN!
+[Scream]
+ICH BAU MIR ALLES SELBST!
+
+[Final Chorus – manic, full band, anthemic]
+PROMPTOTYPING!
+Ich brauch keinen Developer mehr!
+PROMPTOTYPING!
+Ich brauch keinen Develo—
+
+[Music cuts – cold synthetic voice]
+Who validates this?
+[Human, quiet]
+Ich.
+[Human, alone, almost laughing]
+Ich bin jetzt selber einer.
 [End]
