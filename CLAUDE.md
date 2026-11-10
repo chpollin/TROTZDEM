@@ -16,3 +16,4 @@ Project knowledge starts at `knowledge/INDEX.md`, the framing of the project is 
 - Resource limits on the operator's workstation are `--workers 2` per agent, stills in small batches, contact sheets at most 320 px per tile, a full render only when no other ffmpeg process runs, and never two heavy commands in parallel. About eight parallel renders once nearly froze the machine.
 - Page text is German and follows the operator's writing style. Code, comments, commit messages and `knowledge/` are English.
 - `source/`, `out/`, `web/` and `.venv/` are not versioned.
+- The public site is the tree that `.github/workflows/pages.yml` assembles. Knowledge, instructions, scripts and production working files stay out of it; a new file the page loads at runtime must pass that workflow's filter.

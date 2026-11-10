@@ -18,6 +18,8 @@ generated-with: Claude Code (Claude Opus 5.5), Codex
 
 ## 2026-11-10
 
+The public site no longer serves the knowledge base, `CLAUDE.md`, the READMEs, the production scripts or the local Jagged Alien Intelligences preview with its working files. A new workflow, `.github/workflows/pages.yml`, copies only the remaining tracked files into the Pages artifact; a raw `.md` such as `skill/code-musikvideo/SKILL.md` stays reachable, which a Jekyll exclusion would have broken. Locally the assembled tree held none of the excluded files, its link check found only the two script-string false positives the full tree has as well, and the album page and the player loaded without a failed request apart from the intended fallback from the untracked `source/audio.wav` to the release encode. The workflow takes effect once the Pages source is set to GitHub Actions; until then the legacy build keeps serving the whole root. The commit was not pushed. GitHub's legacy build API reports the two pushes of this day as errored, while their Pages runs completed; the live site was not changed by this entry.
+
 A maintenance pass compared the knowledge with Git and the release. The working tree was clean and main matched origin. Jagged Alien Intelligences and Promptotyping were published on 2026-10-29 by commits on main, and both web encodes are assets of the release `videos`. The handoff item on Jagged Alien Intelligences was closed and removed, and the Promptotyping item keeps only its open listening pass and the confirmation of the official download. The branch `album-versions` with its two album-page variant commits of 2026-10-02 is not merged into main and was left unchanged.
 
 ## 2026-10-20
