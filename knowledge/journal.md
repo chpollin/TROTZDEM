@@ -16,6 +16,10 @@ generated-with: Claude Code (Claude Opus 5.5), Codex
 
 # Journal
 
+## 2026-11-10
+
+A maintenance pass compared the knowledge with Git and the release. The working tree was clean and main matched origin. Jagged Alien Intelligences and Promptotyping were published on 2026-10-29 by commits on main, and both web encodes are assets of the release `videos`. The handoff item on Jagged Alien Intelligences was closed and removed, and the Promptotyping item keeps only its open listening pass and the confirmation of the official download. The branch `album-versions` with its two album-page variant commits of 2026-10-02 is not merged into main and was left unchanged.
+
 ## 2026-10-20
 
 The operator commissioned a revision of code-musikvideo after the hybrid production. The canonical skill now supports content-led visual actions, hybrid image layers, shared timing consumers and first-use raster checks through conditional references. An independent before/after planning comparison and an actual browser-regression rerun informed the changes. Validation and installation evidence are in [the method verification record](video-method-verification.md#content-led-hybrid-revision-2026-10-20). The album builder’s independent raw-alignment cues remain an explicit implementation difference.
