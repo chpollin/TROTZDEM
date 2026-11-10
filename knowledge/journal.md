@@ -8,7 +8,7 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: active
 created: 2026-10-02
-updated: 2026-10-20
+updated: 2026-11-10
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5), Codex
