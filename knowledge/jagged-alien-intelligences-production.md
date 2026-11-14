@@ -11,7 +11,7 @@ created: 2026-10-19
 updated: 2026-10-20
 language: en
 generated-with: Codex
-related: [songwriting-guidelines.md, video-pipeline-architecture.md, handoff.md]
+related: [songwriting-guidelines.md, video-pipeline-architecture.md, journal.md]
 ---
 
 # Jagged Alien Intelligences Production

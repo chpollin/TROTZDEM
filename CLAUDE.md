@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Project knowledge starts at `knowledge/INDEX.md`, the framing of the project is in `knowledge/project.md`, open items are in `knowledge/handoff.md`, and the video production is described in `knowledge/video-pipeline-architecture.md`. Commands are in `video/README.md`.
+Project knowledge starts at `knowledge/INDEX.md`, the framing of the project is in `knowledge/project.md`, open items are at the beginning of `knowledge/journal.md` under `## Open`, and the video production is described in `knowledge/video-pipeline-architecture.md`. Commands are in `video/README.md`.
 
 ## Rules
 

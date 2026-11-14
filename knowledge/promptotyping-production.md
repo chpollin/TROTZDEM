@@ -11,7 +11,7 @@ created: 2026-10-29
 updated: 2026-10-29
 language: en
 generated-with: Claude Code (Claude Opus 5.5)
-related: [songwriting-guidelines.md, video-pipeline-architecture.md, handoff.md]
+related: [songwriting-guidelines.md, video-pipeline-architecture.md, journal.md]
 ---
 
 # Promptotyping Production

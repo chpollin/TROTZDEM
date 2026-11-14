@@ -8,13 +8,29 @@ method:
   url: https://dhcraft.org/Promptotyping/
 status: active
 created: 2026-10-02
-updated: 2026-11-10
+updated: 2026-11-14
 language: en
 authors: [Christopher Pollin]
 generated-with: Claude Code (Claude Opus 5.5), Codex
 ---
 
 # Journal
+
+## Open
+
+- In "Ich predicte dich" at 1:38 the video shows "Doch sie spricht!", where the sung line may be "Doch dieses Mal". The operator's confirmation is open.
+- The build agent for "The Bitter Lesson" suggested 52.5 s as poster time instead of the current 82 s. The operator's decision is open.
+- A compact technical paragraph on how the videos are made was offered as a replacement for the second colophon paragraph on the album page. The operator's decision is open.
+- The older songs use the Suno clip audio. Replacing it with the official download and rendering again is open before any use beyond sharing, see [project.md](project.md).
+- Promptotyping was published on 2026-10-29 with its video in the release and on the album page, see [promptotyping-production.md](promptotyping-production.md). Open are a listening pass on the lines marked in [video/promptotyping/](../video/promptotyping/) `timeline.js` and confirmation that the MP3 is the official Suno download.
+- The Recursive Self-Improvement video has two known weaknesses reported by its build agent, a short overlap when a line becomes active and the barely legible damage grade 6 in the final chorus. Whether to fix them is open.
+- The posts announcing the album (LinkedIn, Mastodon, Bluesky, Patreon) are written and wait for the operator to publish them.
+- Two corrections found during the source work wait to be applied in the vault. The Data Librarian materials cite Wiener's Cybernetics (1961) for the sorcerer's apprentice warning, while the read source is Wiener (1960) in Science, and the vault's Repo-Verzeichnis lists Second Brain without a remote although chpollin/second-brain-vault is public.
+- The accent #5468ff of "Bin ich noch der Expert?" reaches 4.4:1 against the page surface, and the page lifts it for text where relative colour syntax is supported. This note is to be placed in the album page section of [video-pipeline-architecture.md](video-pipeline-architecture.md).
+
+## 2026-11-14
+
+By the operator's decision of 2026-11-14 a Promptotyping repository no longer keeps `knowledge/handoff.md`, and the journal opens with what is open. All nine items of the handoff file went into Open above. The note on the contrast of the "Bin ich noch der Expert?" accent is durable knowledge rather than an open item, and it stays there marked for placement in the pipeline architecture, because this change was limited to the files that referenced the handoff. `CLAUDE.md`, the index and the `related` lists of the two production documents now point to the journal, and the entry of 2026-10-03 keeps its link as a historical record.
 
 ## 2026-11-10
 

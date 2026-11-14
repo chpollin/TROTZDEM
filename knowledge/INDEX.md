@@ -23,8 +23,7 @@ TROTZDEM is an experiment with generative AI, an album of songs generated with S
 - [project.md](project.md) describes what the project is, how it is framed as an experiment, what the page labels as AI-generated, the rules on context notes and warnings, and the rights situation.
 - [video-pipeline-architecture.md](video-pipeline-architecture.md) describes how the videos are produced, from the Suno source through vocal separation, lyric alignment and audio analysis to the canvas scenes, the frame renderer, the album page and the agentic build workflow.
 - [songwriting-guidelines.md](songwriting-guidelines.md) describes how new songs are written so that they sound like the album and hold up factually, from language and lyric features to the Suno prompt and the sources field.
-- [handoff.md](handoff.md) holds the open items waiting for a decision or for integration.
-- [journal.md](journal.md) records what changed and what was decided per session.
+- [journal.md](journal.md) opens with the items waiting for a decision or for integration and records what changed and what was decided per session.
 - [video-method-verification.md](video-method-verification.md) records the reusable skill's transfer and hybrid-revision checks, observed rendering results and open verification limits.
 
 - [jagged-alien-intelligences-production.md](jagged-alien-intelligences-production.md) carries the selected recording, hybrid video treatment, local build and listening-review limits.
